@@ -14,22 +14,15 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    async function checkUser() {
+    if (localStorage.getItem('auth_token')) {
 
-      const response = await fetch('/api/checkUser', {
-        method: 'POST',
-        credentials: 'include'
-      }).then(data => data.json())
-        .catch(console.error)
-
-      switch (response.message) {
-        case 'authorized':
-          return dispatch(authUser())
-        default:
-          return dispatch(unAuthUser())
-      }
+      fetch('/api/checkUser', {
+        headers: {
+          'authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        },
+      })
+        .then(response => (response.ok) ? dispatch(authUser()) : dispatch(unAuthUser()))
     }
-    checkUser()
   }, [dispatch])
 
 

@@ -28,6 +28,7 @@ function Login(props) {
 
     switch (response.message) {
       case 'authorized':
+        localStorage.setItem('auth_token', response.token);
         dispatch(authUser())
         return navigate('/');
       case 'incorrectPassword':

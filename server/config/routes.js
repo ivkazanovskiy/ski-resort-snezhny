@@ -1,13 +1,12 @@
 const loginRouter = require('../routes/loginRouter');
-const logoutRouter = require('../routes/logoutRouter');
 const registrationRouter = require('../routes/registrationRouter');
 const checkUserRouter = require('../routes/checkUserRouter');
+const authUser = require('../middleware/authUser');
 
 function routes(app) {
   app.use('/api/login', loginRouter);
-  app.use('/api/logout', logoutRouter);
   app.use('/api/registration', registrationRouter);
-  app.use('/api/checkUser', checkUserRouter);
+  app.use('/api/checkUser', authUser, checkUserRouter);
 }
 
 module.exports = routes;

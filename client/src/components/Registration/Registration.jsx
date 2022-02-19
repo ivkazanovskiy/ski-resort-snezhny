@@ -29,6 +29,7 @@ function Registration(props) {
 
     switch (response.message) {
       case 'added':
+        localStorage.setItem('auth_token', response.token);
         dispatch(authUser())
         return navigate('/')
       case 'incorrect':

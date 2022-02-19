@@ -11,16 +11,9 @@ function NavBar() {
 
   const toggle = () => setIsOpen(!isOpen)
 
-
-
   const logout = async (event) => {
     event.preventDefault()
-    await fetch('/api/logout', {
-      method: 'GET',
-      credentials: 'include'
-    }).then(data => data.json())
-      .catch(console.error)
-
+    localStorage.removeItem('auth_token')
     return dispatch(unAuthUser())
   }
 

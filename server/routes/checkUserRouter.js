@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 router.route('/')
-  .post((req, res) => {
-    if (req.session.user) return res.json({ message: 'authorized' });
-    res.json({ message: 'unAuthorized' });
+  .get((req, res) => {
+    if (req.user) return res.sendStatus(200);
+    res.sendStatus(403);
   });
 
 module.exports = router;

@@ -1,11 +1,8 @@
-const session = require('express-session');
 const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 // const cors = require('cors');
 // const corsConfig = require('./corsConfig');
-const cookieCleaner = require('../middleware/cookieCleaner');
-const sessionConfig = require('./sessionConfig');
 
 function uses(app) {
   app.use(logger('dev'));
@@ -15,8 +12,6 @@ function uses(app) {
 
   // app.use(cors(corsConfig));
   app.use(cookieParser());
-  app.use(session(sessionConfig));
-  app.use(cookieCleaner);
 }
 
 module.exports = uses;
