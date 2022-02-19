@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import { authUser, unAuthUser } from './redux/actionCreators/userAC';
 
 
 function App() {
@@ -23,9 +24,9 @@ function App() {
 
       switch (response.message) {
         case 'authorized':
-          return dispatch({ type: 'AUTORIZED' })
+          return dispatch(authUser())
         default:
-          return dispatch({ type: 'UNAUTORIZED' })
+          return dispatch(unAuthUser())
       }
     }
     checkUser()

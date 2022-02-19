@@ -1,6 +1,6 @@
 import { UNAUTH_USER, AUTH_USER } from '../actionTypes/userAT'
 
-export const isAuthorizedReducer = (state = { auth: false }, action) => {
+export const userReducer = (state = { auth: false }, action) => {
   switch (action.type) {
     case AUTH_USER:
       return { ...state, auth: true }
