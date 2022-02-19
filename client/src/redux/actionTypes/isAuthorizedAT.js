@@ -1,0 +1,2 @@
+export const AUTORIZED = 'AUTORIZED'
+export const UNAUTORIZED = 'UNAUTORIZED'
