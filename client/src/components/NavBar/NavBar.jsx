@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { unAuthUser } from '../../redux/actionCreators/userAC';
 
 function NavBar() {
 
-  const { isAuthorized } = useSelector(state => state.isAuthorizedReducer)
+  const { auth } = useSelector(state => state.userReducer)
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
 
@@ -20,7 +21,7 @@ function NavBar() {
     }).then(data => data.json())
       .catch(console.error)
 
-    return dispatch({ type: 'UNAUTORIZED' })
+    return dispatch(unAuthUser())
   }
 
   return (
@@ -41,7 +42,7 @@ function NavBar() {
               <li>
                 <Link to="/" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</Link>
               </li>
-              {(isAuthorized) ?
+              {(auth) ?
                 < li >
                   <Link to="/" onClick={logout} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Sign-out</Link>
                 </li>

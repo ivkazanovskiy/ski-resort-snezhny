@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { isAuthorizedReducer } from './isAuthorizedReducer'
+import { userReducer } from './userReducer'
 
 export const rootReducer = combineReducers({
-  isAuthorizedReducer,
+  userReducer,
 })
 
 

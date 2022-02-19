@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { authUser } from '../../redux/actionCreators/userAC';
 
 function Registration(props) {
 
@@ -28,9 +29,8 @@ function Registration(props) {
 
     switch (response.message) {
       case 'added':
-        dispatch({ type: 'AUTORIZED' })
+        dispatch(authUser())
         return navigate('/')
-
       case 'incorrect':
         return window.alert('Wrong data')
       case 'changeEmail':

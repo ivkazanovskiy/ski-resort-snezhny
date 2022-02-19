@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-
+import { authUser } from '../../redux/actionCreators/userAC';
 
 function Login(props) {
 
@@ -28,7 +28,7 @@ function Login(props) {
 
     switch (response.message) {
       case 'authorized':
-        dispatch({ type: 'AUTORIZED' })
+        dispatch(authUser())
         return navigate('/');
       case 'incorrectPassword':
         return window.alert("Wrong password");
