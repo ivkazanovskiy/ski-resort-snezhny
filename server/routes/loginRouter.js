@@ -15,16 +15,18 @@ router.route('/')
         where: { email },
       });
     } catch (err) {
-      return res.json({ message: 'dbError' });
+      return res.status(500).json({ error: err.message });
     }
 
-    if (!user) { return res.json({ message: 'notFound' }); }
+    if (!user) res.sendStatus(404);
 
     if (await bcrypt.compare(password, user.password)) {
       const info = userAttributes(user);
       const token = jwt.sign(info, process.env.ACCESS_TOKEN_SECRET);
-      return res.json({ message: 'authorized', token });
+      return res.status(200).json({ token });
     }
-    res.json({ message: 'incorrectPassword' });
+
+    // incorrect password
+    return res.sendStatus(400);
   });
 module.exports = router;

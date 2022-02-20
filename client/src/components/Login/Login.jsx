@@ -23,20 +23,23 @@ function Login(props) {
       body,
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include'
-    }).then(data => data.json())
+    })
       .catch(console.error)
 
-    switch (response.message) {
-      case 'authorized':
-        localStorage.setItem('auth_token', response.token);
+    switch (response.status) {
+      case 200:
+        const { token } = await response.json()
+        localStorage.setItem('auth_token', token);
         dispatch(authUser())
-        return navigate('/');
-      case 'incorrectPassword':
+        return navigate('/')
+      case 400:
         return window.alert("Wrong password");
-      case 'notFound':
+      case 404:
         return window.alert("Email is absent");
       default:
-        return window.alert(response.message);
+        const { error } = await response.json()
+        console.log(error);
+        return window.alert('Error')
     }
   }
 

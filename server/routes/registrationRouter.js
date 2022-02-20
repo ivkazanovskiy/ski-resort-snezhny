@@ -9,7 +9,7 @@ require('dotenv').config();
 router.route('/')
   .post(async (req, res) => {
     if (!isValid(req.body)) {
-      return res.json({ message: 'incorrect' });
+      return res.sendStatus(400);
     }
 
     const { name, email, password: passwordUnsec } = req.body;
@@ -19,10 +19,10 @@ router.route('/')
       const user = await User.create({ name, email, password });
       const info = userAttributes(user);
       const token = jwt.sign(info, process.env.ACCESS_TOKEN_SECRET);
-      return res.json({ message: 'added', token });
-    } catch (error) {
-      console.log('error', error.message);
-      return res.json({ message: 'changeEmail' });
+      return res.status(200).json({ token });
+    } catch (err) {
+      if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
+      return res.status(500).json({ error: err.message });
     }
   });
 

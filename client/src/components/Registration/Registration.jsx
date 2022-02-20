@@ -24,19 +24,22 @@ function Registration(props) {
       method: 'POST',
       body,
       headers: { 'Content-Type': 'application/json' }
-    }).then(data => data.json())
+    })
       .catch(console.error)
 
-    switch (response.message) {
-      case 'added':
-        localStorage.setItem('auth_token', response.token);
+    switch (response.status) {
+      case 200:
+        const { token } = await response.json()
+        localStorage.setItem('auth_token', token);
         dispatch(authUser())
         return navigate('/')
-      case 'incorrect':
+      case 400:
         return window.alert('Wrong data')
-      case 'changeEmail':
+      case 501:
         return window.alert('E-mail is taken')
       default:
+        const { error } = await response.json()
+        console.log(error);
         return window.alert('Error')
     }
   }

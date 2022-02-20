@@ -27,10 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT,
     },
-    refreshToken: {
-      unique: true,
-      type: DataTypes.TEXT,
-    },
   }, {
     sequelize,
     modelName: 'User',
