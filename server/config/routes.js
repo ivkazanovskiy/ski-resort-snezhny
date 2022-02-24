@@ -8,7 +8,7 @@ function routes(app) {
   app.use('/api/login', loginRouter);
   app.use('/api/registration', registrationRouter);
   app.use('/api/checkUser', authUser, checkUserRouter);
-  app.use('/api/trainingOrders', trainingOrdersRouter);
+  app.use('/api/trainingOrders', authUser, trainingOrdersRouter);
 }
 
 module.exports = routes;
