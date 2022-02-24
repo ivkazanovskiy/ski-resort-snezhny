@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 
 import EditProfileCard from '../EditProfileCard/EditProfileCard';
 import TrainingOrderCard from '../TrainingOrderCard/TrainingOrderCard';
+import axios from 'axios';
 
 function UserProfile(props) {
-  return (
 
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    axios({
+      url: 'api/trainingOrders',
+      method: 'GET',
+    })
+      .then(res => setOrders(res.data.orders))
+      .catch(err => console.log(err.message));
+  }, []);
+
+  return (
     <div className="w-full px-4 pt-8">
       <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
         <Disclosure>
@@ -36,7 +48,13 @@ function UserProfile(props) {
                 /> */}
               </Disclosure.Button>
               <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                <TrainingOrderCard></TrainingOrderCard>
+                <div className="flex flex-row-reverse">
+                  <button type="submit" className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 stroke-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                    </svg></button>
+                </div>
+                {orders.map(order => <TrainingOrderCard key={order.id} order={order}></TrainingOrderCard>)}
               </Disclosure.Panel>
             </>
           )}
