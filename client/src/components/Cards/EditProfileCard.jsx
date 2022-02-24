@@ -2,9 +2,8 @@ import React from 'react';
 import { RadioGroup } from '@headlessui/react'
 
 function EditProfileCard(props) {
-
-  const role = 'user'; //!!! trainer ПОМЕНЯТЬ НА STATE
-
+  // FIXME: !!! trainer ПОМЕНЯТЬ НА STATE
+  const role = 'trainer';
   return (
     <form className="py-4 border border-gray-300 rounded-lg p-2">
       <div className="mb-6">

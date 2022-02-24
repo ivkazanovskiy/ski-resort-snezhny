@@ -10,7 +10,8 @@ function TrainingOrderCard({ order }) {
   let month = fullDate.getMonth() + 1;
   const year = fullDate.getFullYear();
 
-  const role = 'user'; //!!! trainer ПОМЕНЯТЬ НА STATE
+  // FIXME: !!! trainer ПОМЕНЯТЬ НА STATE
+  const role = 'trainer';
 
   return (
     <form className="my-2">
