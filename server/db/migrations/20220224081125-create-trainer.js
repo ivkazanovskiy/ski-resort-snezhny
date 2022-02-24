@@ -1,6 +1,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Trainers', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,6 +13,10 @@ module.exports = {
       },
       surname: {
         allowNull: false,
+        type: Sequelize.STRING,
+      },
+      aboutMe: {
+        allowNull: true,
         type: Sequelize.STRING,
       },
       email: {
@@ -28,12 +32,14 @@ module.exports = {
       password: {
         allowNull: false,
         type: Sequelize.STRING,
-
       },
-      skiPass: {
-        allowNull: true,
-        type: Sequelize.INTEGER,
-        unique: true,
+      ski: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+      },
+      snowboard: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +52,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Trainers');
   },
 };
