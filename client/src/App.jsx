@@ -1,11 +1,13 @@
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import UserProfile from './components/Profile/UserProfile';
+
 import { authUser, unAuthUser } from './redux/actionCreators/userAC';
 
 
@@ -25,8 +27,6 @@ function App() {
     }
   }, [dispatch])
 
-
-
   return (
     <BrowserRouter >
       <NavBar />
@@ -35,6 +35,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </section>
     </BrowserRouter >
