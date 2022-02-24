@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 
-import EditProfileCard from '../EditProfileCard/EditProfileCard';
-import TrainingOrderCard from '../TrainingOrderCard/TrainingOrderCard';
+import EditProfileCard from '../Cards/EditProfileCard';
+import TrainingOrderCard from '../Cards/TrainingOrderCard';
 import axios from 'axios';
 
 function UserProfile(props) {

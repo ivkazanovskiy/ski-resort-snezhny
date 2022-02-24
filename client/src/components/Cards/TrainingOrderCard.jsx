@@ -10,6 +10,8 @@ function TrainingOrderCard({ order }) {
   let month = fullDate.getMonth() + 1;
   const year = fullDate.getFullYear();
 
+  const role = 'user'; //!!! trainer ПОМЕНЯТЬ НА STATE
+
   return (
     <form className="my-2">
       <div className="py-4 border border-gray-300 rounded-lg p-2">
@@ -23,10 +25,29 @@ function TrainingOrderCard({ order }) {
             <input placeholder={`${hours}:${minutes} - ${hours + Number(order.duration)}:${minutes}`} name="period" type="text" id="period" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
           </div>
         </div>
-        <div className="mb-6">
-          <label htmlFor="trainer" className="block mb-2 text-sm font-medium text-gray-900 ">Инструктор</label>
-          <input placeholder={`${order['Trainer.name']} ${order['Trainer.surname']}`} name="trainer" type="text" id="trainer" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
-        </div>
+        {role === 'user' ?
+          <>
+            <div className="mb-6">
+              <label htmlFor="trainer" className="block mb-2 text-sm font-medium text-gray-900 ">Инструктор</label>
+              <input placeholder={`${order['Trainer.name']} ${order['Trainer.surname']}`} name="trainer" type="text" id="trainer" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Номер телефона</label>
+              <input placeholder={order['Trainer.phone']} name="phone" type="text" id="phone" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+            </div>
+          </>
+          :
+          <>
+            <div className="mb-6">
+              <label htmlFor="client" className="block mb-2 text-sm font-medium text-gray-900 ">Клиент</label>
+              <input placeholder={`${order['User.name']} ${order['User.surname']}`} name="client" type="text" id="client" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Номер телефона</label>
+              <input placeholder={order['User.phone']} name="phone" type="text" id="phone" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
+            </div>
+          </>
+        }
         <div className="mb-6">
           <label htmlFor="sport" className="block mb-2 text-sm font-medium text-gray-900">Вид спорта</label>
           <input placeholder={order.sport} name="sport" type="text" id="sport" disable="true" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" />
