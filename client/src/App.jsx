@@ -7,7 +7,7 @@ import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import UserProfile from './components/Profile/UserProfile';
+import UserProfile from './components/Profiles/UserProfile';
 
 import { initUser, deleteUser } from './redux/actionCreators/userAC';
 
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('auth_token')) {
-      
+
       axios({
         url: '/api/checkUser',
       })
