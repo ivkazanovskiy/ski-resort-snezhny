@@ -9,10 +9,10 @@ import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import UserProfile from './components/Profiles/UserProfile';
 
-import { initUser, deleteUser } from './redux/actionCreators/userAC';
+import { checkUser } from './redux/sagaCreators/userSagaCreators';
 
 function App() {
-
+  // автоматически в запросе отправляем заголовок с токеном
   axios.defaults.headers.common['authorization'] = `Bearer ${localStorage.getItem('auth_token')}`
 
   const dispatch = useDispatch()
@@ -20,11 +20,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('auth_token')) {
 
-      axios({
-        url: '/api/checkUser',
-      })
-        .then(response => dispatch(initUser()))
-        .catch(error => dispatch(deleteUser()))
+      dispatch(checkUser())
     }
   }, [dispatch])
 

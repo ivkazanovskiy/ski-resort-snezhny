@@ -1,8 +1,9 @@
 import { INIT_USER, DELETE_USER } from '../actionTypes/userAT'
 
-export const initUser = () => {
+export const initUser = (info, role) => {
   return {
-    type: INIT_USER
+    type: INIT_USER,
+    payload: { info, role }
   }
 }
 

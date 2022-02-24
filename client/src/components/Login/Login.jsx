@@ -1,21 +1,21 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { initUser } from '../../redux/actionCreators/userAC';
-import { isValidPassword, isValidEmail } from '../../helpers/isValid'
-import axios from 'axios'
 import { Switch } from '@headlessui/react'
 
+import { loginUser } from '../../redux/sagaCreators/userSagaCreators';
+import { isValidPassword, isValidEmail } from '../../helpers/isValid'
 
 
 function Login(props) {
 
-  const [enabled, setEnabled] = useState(false)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const email = useRef()
   const password = useRef()
+
+  const [enabled, setEnabled] = useState(false)
   const [isCorrectEmail, setIsCorrectEmail] = useState(false)
   const [isCorrectPassword, setIsCorrectPassword] = useState(false)
 
@@ -30,32 +30,7 @@ function Login(props) {
         password: password.current.value
       };
 
-      axios({
-        url: '/api/login',
-        method: 'POST',
-        data,
-      })
-        .then(response => {
-          const { token, info, role } = response.data
-
-          localStorage.setItem('auth_token', token);
-          dispatch(initUser())
-          return navigate('/')
-        })
-        .catch(error => {
-          const { status } = error.response
-
-          // TODO: переделать вывод информации с алерта на текст около кнопки
-          switch (status) {
-            case 400:
-              return window.alert("Неправильный пароль");
-            case 404:
-              return window.alert("E-mail не найден");
-            default:
-              console.log(error.response.data.error);
-              return window.alert('Ошибка')
-          }
-        })
+      return dispatch(loginUser(data, navigate))
     }
   }
 
@@ -66,6 +41,7 @@ function Login(props) {
   const checkPassword = () => {
     setIsCorrectPassword(isValidPassword(password.current.value))
   }
+
 
   return (
     <form onSubmit={login} className="w-96">
