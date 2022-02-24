@@ -45,7 +45,7 @@ function Login(props) {
         .catch(error => {
           const { status } = error.response
 
-          // TODO: переделать вывод информации с алерта на текст около кнопки 
+          // TODO: переделать вывод информации с алерта на текст около кнопки
           switch (status) {
             case 400:
               return window.alert("Неправильный пароль");
