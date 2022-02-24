@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { authUser } from '../../redux/actionCreators/userAC';
+import { initUser } from '../../redux/actionCreators/userAC';
 import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../helpers/isValid'
 import axios from 'axios'
-import Toggle from '../Toggle/Toggle';
 import { Switch } from '@headlessui/react'
 import { trainerKey } from '../../helpers/trainerKey'
 
@@ -79,9 +78,10 @@ function Registration(props) {
         data,
       })
         .then(response => {
-          const { token } = response.data
+          const { token, info, role } = response.data
+
           localStorage.setItem('auth_token', token);
-          dispatch(authUser())
+          dispatch(initUser())
           return navigate('/')
         })
         .catch(error => {

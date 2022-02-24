@@ -1,13 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { authUser } from '../../redux/actionCreators/userAC';
+import { initUser } from '../../redux/actionCreators/userAC';
 import { isValidPassword, isValidEmail } from '../../helpers/isValid'
 import axios from 'axios'
+import { Switch } from '@headlessui/react'
 
 
 
 function Login(props) {
+
+  const [enabled, setEnabled] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -22,6 +25,7 @@ function Login(props) {
     if (isCorrectEmail && isCorrectPassword) {
 
       const data = {
+        role: (enabled) ? 'trainer' : 'user',
         email: email.current.value,
         password: password.current.value
       };
@@ -32,9 +36,10 @@ function Login(props) {
         data,
       })
         .then(response => {
-          const { token } = response.data
+          const { token, info, role } = response.data
+
           localStorage.setItem('auth_token', token);
-          dispatch(authUser())
+          dispatch(initUser())
           return navigate('/')
         })
         .catch(error => {
@@ -45,7 +50,7 @@ function Login(props) {
             case 400:
               return window.alert("Неправильный пароль");
             case 404:
-              return window.alert("E-mail занят");
+              return window.alert("E-mail не найден");
             default:
               console.log(error.response.data.error);
               return window.alert('Ошибка')
@@ -53,8 +58,6 @@ function Login(props) {
         })
     }
   }
-
-
 
   const checkEmail = () => {
     setIsCorrectEmail(isValidEmail(email.current.value))
@@ -83,6 +86,21 @@ function Login(props) {
           :
           <span className="block mb-2 text-sm font-medium text-red-500 ">Заглавные и строчные латинские буквы и цифры от 3 до 20</span>
         }
+      </div>
+      <div id="secretKey" className="flex items-center mb-6 gap-2 h-8">
+        {/* FIXME: плывет ширина маркера при включении*/}
+        <Switch
+          checked={enabled}
+          onChange={setEnabled}
+          className={`${enabled ? 'bg-blue-600' : 'bg-gray-200'
+            } relative inline-flex items-center h-6 rounded-full w-11`}>
+          <span className="sr-only">Enable notifications</span>
+          <span
+            className={`${enabled ? 'translate-x-6' : 'translate-x-1'
+              } inline-block w-4 h-4 transform bg-white rounded-full`}
+          />
+        </Switch>
+        <div className="text-sm font-medium text-gray-900 " >Войти как инструктор</div>
       </div>
       <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Войти</button>
     </form>

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User, Trainer } = require('../db/models');
 const isValid = require('../helpers/isValid');
-const userAttributes = require('../helpers/userAttributes');
+const clearAttributes = require('../helpers/clearAttributes');
 require('dotenv').config();
 const trainerKey = require('../helpers/trainerKey');
 
@@ -32,9 +32,9 @@ router.route('/')
           snowboard: true,
 
         });
-        const info = userAttributes(trainer);
-        const token = jwt.sign(info, process.env.ACCESS_TOKEN_SECRET);
-        return res.status(200).json({ token, role: 'trainer' });
+        const info = clearAttributes(trainer);
+        const token = jwt.sign({ role: 'trainer', id: trainer.id }, process.env.ACCESS_TOKEN_SECRET);
+        return res.status(200).json({ token, info, role: 'trainer' });
       } catch (err) {
         if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
         return res.status(500).json({ error: err.message });
@@ -45,9 +45,9 @@ router.route('/')
       const user = await User.create({
         name, surname, phone, email, password,
       });
-      const info = userAttributes(user);
-      const token = jwt.sign(info, process.env.ACCESS_TOKEN_SECRET);
-      return res.status(200).json({ token, role: 'user' });
+      const info = clearAttributes(user);
+      const token = jwt.sign({ role: 'user', id: user.id }, process.env.ACCESS_TOKEN_SECRET);
+      return res.status(200).json({ token, info, role: 'user' });
     } catch (err) {
       if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
       return res.status(500).json({ error: err.message });

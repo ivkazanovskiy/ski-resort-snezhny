@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { unAuthUser } from '../../redux/actionCreators/userAC';
+import { deleteUser } from '../../redux/actionCreators/userAC';
 
 function NavBar() {
 
@@ -14,7 +14,7 @@ function NavBar() {
   const logout = async (event) => {
     event.preventDefault()
     localStorage.removeItem('auth_token')
-    return dispatch(unAuthUser())
+    return dispatch(deleteUser())
   }
 
   return (
