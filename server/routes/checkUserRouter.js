@@ -1,9 +1,49 @@
 const router = require('express').Router();
+const { User, Trainer } = require('../db/models');
+
+const clearAttributes = require('../helpers/clearAttributes');
 
 router.route('/')
-  .get((req, res) => {
-    if (req.user) return res.sendStatus(200);
-    res.sendStatus(403);
+  .get(async (req, res) => {
+    // проверяем пришел ли токен
+    if (req.user) {
+      const { id, role } = req.user;
+
+      // находим информацию в нужной таблице в зависимости от роли
+      if (role === 'user') {
+        let user;
+        try {
+          user = await User.findOne({
+            where: { id },
+          });
+        } catch (err) {
+          return res.status(500).json({ error: err.message });
+        }
+
+        if (!user) return res.sendStatus(404);
+
+        const info = clearAttributes(user);
+        return res.status(200).json({ info, role: 'user' });
+      }
+
+      if (role === 'trainer') {
+        let trainer;
+        try {
+          trainer = await Trainer.findOne({
+            where: { id },
+          });
+        } catch (err) {
+          return res.status(500).json({ error: err.message });
+        }
+
+        if (!trainer) return res.sendStatus(404);
+
+        const info = clearAttributes(trainer);
+        return res.status(200).json({ info, role: 'trainer' });
+      }
+    }
+
+    return res.sendStatus(403);
   });
 
 module.exports = router;

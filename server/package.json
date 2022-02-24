@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js --ignore ./sessions",
-    "start": "node app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "drop": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "author": "",
   "license": "ISC",

@@ -1,31 +1,28 @@
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios'
 
 import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { authUser, unAuthUser } from './redux/actionCreators/userAC';
+import UserProfile from './components/Profiles/UserProfile';
 
+import { checkUser } from './redux/sagaCreators/userSagaCreators';
 
 function App() {
+  // автоматически в запросе отправляем заголовок с токеном
+  axios.defaults.headers.common['authorization'] = `Bearer ${localStorage.getItem('auth_token')}`
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (localStorage.getItem('auth_token')) {
 
-      fetch('/api/checkUser', {
-        headers: {
-          'authorization': `Bearer ${localStorage.getItem('auth_token')}`
-        },
-      })
-        .then(response => (response.ok) ? dispatch(authUser()) : dispatch(unAuthUser()))
+      dispatch(checkUser())
     }
   }, [dispatch])
-
-
 
   return (
     <BrowserRouter >
@@ -35,6 +32,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </section>
     </BrowserRouter >

@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { unAuthUser } from '../../redux/actionCreators/userAC';
+import { Link, useNavigate } from 'react-router-dom'
+import { deleteUser } from '../../redux/actionCreators/userAC';
 
 function NavBar() {
 
   const { auth } = useSelector(state => state.userReducer)
   const [isOpen, setIsOpen] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const toggle = () => setIsOpen(!isOpen)
 
   const logout = async (event) => {
     event.preventDefault()
     localStorage.removeItem('auth_token')
-    return dispatch(unAuthUser())
+    dispatch(deleteUser())
+    return navigate('/')
   }
 
   return (
@@ -33,19 +35,24 @@ function NavBar() {
           <div onClick={toggle} className={(isOpen) ? "w-full md:block md:w-auto" : "hidden w-full md:block md:w-auto"} id="mobile-menu">
             <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
               <li>
-                <Link to="/" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</Link>
+                <Link to="/" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Домой</Link>
               </li>
               {(auth) ?
-                < li >
-                  <Link to="/" onClick={logout} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Sign-out</Link>
-                </li>
+                <>
+                  < li >
+                    <Link to="/profile" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Личный кабинет</Link>
+                  </li>
+                  < li >
+                    <span onClick={logout} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Выйти</span>
+                  </li>
+                </>
                 :
                 <>
                   <li>
-                    <Link to="/login" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Sign-in</Link>
+                    <Link to="/login" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Войти</Link>
                   </li>
                   <li>
-                    <Link to="/registration" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Sign-up</Link>
+                    <Link to="/registration" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Зарегистрироватся</Link>
                   </li>
                 </>
               }

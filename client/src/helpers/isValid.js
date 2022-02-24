@@ -3,10 +3,13 @@ export const isValidEmail = (email) => {
 
 }
 export const isValidName = (name) => {
-  return /^[a-zA-Z\d_]{1,20}$/.test(name);
+  return /^[а-яА-Яa-zA-Z-_]{1,20}$/.test(name);
 }
 
 export const isValidPassword = (password) => {
   return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,20}$/.test(password);
 }
 
+export const isValidPhone = (name) => {
+  return /^\+7\d{10}$/.test(name);
+}
