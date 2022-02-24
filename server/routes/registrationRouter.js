@@ -37,6 +37,7 @@ router.route('/')
         return res.status(200).json({ token, info, role: 'trainer' });
       } catch (err) {
         if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
+        console.log('TRTRTR', err);
         return res.status(500).json({ error: err.message });
       }
     }
@@ -50,6 +51,7 @@ router.route('/')
       return res.status(200).json({ token, info, role: 'user' });
     } catch (err) {
       if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
+      console.log('!!!', err.message);
       return res.status(500).json({ error: err.message });
     }
   });
