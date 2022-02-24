@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { authUser } from '../../redux/actionCreators/userAC';
 import { isValidPassword, isValidName, isValidEmail } from '../../helpers/isValid'
+import axios from 'axios'
+
 
 
 function Login(props) {
@@ -14,40 +16,44 @@ function Login(props) {
   const [isCorrectEmail, setIsCorrectEmail] = useState(false)
   const [isCorrectPassword, setIsCorrectPassword] = useState(false)
 
-  const login = async (event) => {
+  const login = (event) => {
     event.preventDefault();
 
     if (isCorrectEmail && isCorrectPassword) {
 
-      const body = JSON.stringify({
+      const data = {
         email: email.current.value,
         password: password.current.value
-      });
+      };
 
-      const response = await fetch('/api/login', {
+      axios({
+        url: '/api/login',
         method: 'POST',
-        body,
-        headers: { 'Content-Type': 'application/json' },
+        data,
       })
-        .catch(console.error)
-
-      switch (response.status) {
-        case 200:
-          const { token } = await response.json()
+        .then(response => {
+          const { token } = response.data
           localStorage.setItem('auth_token', token);
           dispatch(authUser())
           return navigate('/')
-        case 400:
-          return window.alert("Wrong password");
-        case 404:
-          return window.alert("Email is absent");
-        default:
-          const { error } = await response.json()
-          console.log(error);
-          return window.alert('Error')
-      }
+        })
+        .catch(error => {
+          const { status } = error.response
+
+          // TODO: переделать вывод информации с алерта на текст около кнопки 
+          switch (status) {
+            case 400:
+              return window.alert("Wrong password");
+            case 404:
+              return window.alert("Email is absent");
+            default:
+              console.log(error);
+              return window.alert('Error')
+          }
+        })
     }
   }
+
 
 
   const checkEmail = () => {
