@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { initUser } from '../../redux/actionCreators/userAC';
-import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../helpers/isValid'
-import axios from 'axios'
 import { Switch } from '@headlessui/react'
-import { trainerKey } from '../../helpers/trainerKey'
 
+import { trainerKey } from '../../helpers/trainerKey'
+import { registrationUser } from '../../redux/sagaCreators/userSagaCreators';
+import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../helpers/isValid'
 
 function Registration(props) {
 
@@ -72,31 +71,7 @@ function Registration(props) {
         secret: secret.current ? secret.current.value : undefined
       };
 
-      axios({
-        url: '/api/registration',
-        method: 'POST',
-        data,
-      })
-        .then(response => {
-          const { token, info, role } = response.data
-
-          localStorage.setItem('auth_token', token);
-          dispatch(initUser())
-          return navigate('/')
-        })
-        .catch(error => {
-          const { status } = error.response
-          // TODO: переделать вывод информации с алерта на текст около кнопки 
-          switch (status) {
-            case 400:
-              return window.alert('Некорректеные данные')
-            case 501:
-              return window.alert('E-mail занят')
-            default:
-              console.log(error.response.data.error);
-              return window.alert('Ошибка')
-          }
-        })
+      return dispatch(registrationUser(data, navigate))
     }
   }
 
