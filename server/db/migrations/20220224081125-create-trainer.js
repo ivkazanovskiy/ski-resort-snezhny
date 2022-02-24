@@ -34,11 +34,11 @@ module.exports = {
         type: Sequelize.STRING,
       },
       ski: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.BOOLEAN,
       },
       snowboard: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {
