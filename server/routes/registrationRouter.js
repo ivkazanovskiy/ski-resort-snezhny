@@ -37,6 +37,7 @@ router.route('/')
         return res.status(200).json({ token, info, role: 'trainer' });
       } catch (err) {
         if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
+        console.log('TRTRTR', err);
         return res.status(500).json({ error: err.message });
       }
     }
@@ -49,9 +50,6 @@ router.route('/')
       const token = jwt.sign({ role: 'user', id: user.id }, process.env.ACCESS_TOKEN_SECRET);
       return res.status(200).json({ token, info, role: 'user' });
     } catch (err) {
-      console.log(err.original.constraint);
-      console.log(err.original);
-      // Object.getOwnPropertyNames(err).forEach((key) => console.log(key, '|||', err[key]));
 
       switch (err.original.constraint) {
         case 'Users_phone_key':
