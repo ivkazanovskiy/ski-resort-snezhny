@@ -3,18 +3,18 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class trainingOrder extends Model {
+  class TrainingOrder extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate({ User, Trainer }) {
-      trainingOrder.belongsTo(User, { foreignKey: 'userId' });
-      trainingOrder.belongsTo(Trainer, { foreignKey: 'trainerId' });
+      TrainingOrder.belongsTo(User, { foreignKey: 'userId' });
+      TrainingOrder.belongsTo(Trainer, { foreignKey: 'trainerId' });
     }
   }
-  trainingOrder.init({
+  TrainingOrder.init({
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'trainingOrder',
+    modelName: 'TrainingOrder',
   });
-  return trainingOrder;
+  return TrainingOrder;
 };
