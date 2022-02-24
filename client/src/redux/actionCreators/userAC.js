@@ -1,13 +1,13 @@
-import { UNAUTH_USER, AUTH_USER } from '../actionTypes/userAT'
+import { INIT_USER, DELETE_USER } from '../actionTypes/userAT'
 
-export const authUser = () => {
+export const initUser = () => {
   return {
-    type: AUTH_USER
+    type: INIT_USER
   }
 }
 
-export const unAuthUser = () => {
+export const deleteUser = () => {
   return {
-    type: UNAUTH_USER
+    type: DELETE_USER
   }
 } 
