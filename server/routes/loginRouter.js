@@ -20,8 +20,6 @@ router.route('/')
 
       if (!user) return res.sendStatus(404);
 
-      console.log(password);
-
       if (await bcrypt.compare(password, user.password)) {
         const info = clearAttributes(user);
         const token = jwt.sign({ role: 'user', id: user.id }, process.env.ACCESS_TOKEN_SECRET);
@@ -51,5 +49,6 @@ router.route('/')
       // incorrect password
       return res.sendStatus(400);
     }
+    return undefined;
   });
 module.exports = router;

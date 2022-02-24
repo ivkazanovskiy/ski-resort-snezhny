@@ -1,22 +1,21 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { initUser } from '../../redux/actionCreators/userAC';
-import { isValidPassword, isValidEmail } from '../../helpers/isValid'
-import axios from 'axios'
 import { Switch } from '@headlessui/react'
-import { authUser } from '../../redux/thunkCreators/userThunkCreators';
 
+import { loginUser } from '../../redux/sagaCreators/userSagaCreators';
+import { isValidPassword, isValidEmail } from '../../helpers/isValid'
 
 
 function Login(props) {
 
-  const [enabled, setEnabled] = useState(false)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const email = useRef()
   const password = useRef()
+
+  const [enabled, setEnabled] = useState(false)
   const [isCorrectEmail, setIsCorrectEmail] = useState(false)
   const [isCorrectPassword, setIsCorrectPassword] = useState(false)
 
@@ -31,7 +30,7 @@ function Login(props) {
         password: password.current.value
       };
 
-      dispatch(authUser(data))
+      return dispatch(loginUser(data, navigate))
     }
   }
 
