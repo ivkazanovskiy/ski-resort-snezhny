@@ -1,5 +1,5 @@
 function isValid(obj) {
-  const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,20}$/.test(obj.password);
+  const passwordCheck = /^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)[a-zA-Zа-яА-Я\d]{3,20}$/.test(obj.password);
   const nameCheck = /^[а-яА-Яa-zA-Z-_]{1,20}$/.test(obj.name);
   const surnameCheck = /^[а-яА-Яa-zA-Z-_]{1,20}$/.test(obj.surname);
   const phoneCheck = /^\+7\d{10}$/.test(obj.phone);
