@@ -13,7 +13,6 @@ const months = [
   { id: 2, name: 'Февраль', days: 28 },
   { id: 3, name: 'Март', days: 31 },
   { id: 4, name: 'Апрель', days: 30 },
-
 ]
 
 export default function ListboxMonth({ setMonth }) {

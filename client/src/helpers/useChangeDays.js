@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export function useChangeDays(initialState = []) {
-  const [days, setDays] = useState(initialState);
+export function useChangeDays(initialState) {
+  const [days, setDays] = useState(initialState ? initialState : []);
 
   function changeDays(day) {
     if (day === 0) {
