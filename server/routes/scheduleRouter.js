@@ -4,6 +4,16 @@ const { Schedule } = require('../db/models');
 const { Trainer } = require('../db/models');
 const { User } = require('../db/models');
 
+router.route('/schedule/trainers')
+  .get(async (req, res) => {
+    
+  });
+
+router.route('/schedule/date')
+  .get(async (req, res) => {
+
+  });
+
 router.route('/')
   .get(async (req, res) => {
     const { id } = req.user;

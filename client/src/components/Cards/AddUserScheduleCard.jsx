@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab } from '@headlessui/react';
 
-import TrainersListbox from '../Listboxes/TrainersListbox';
-import Calendar from '../Calendar/Calendar';
+import NewScheduleCard from './NewScheduleCard';
+
 
 function AddUserScheduleCard(props) {
 
@@ -39,17 +39,13 @@ function AddUserScheduleCard(props) {
             'bg-white rounded-xl p-3',
             'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
           )}>
-            <TrainersListbox key={'trainerSnowboard'} sport={'snowboard'}></TrainersListbox>
-            <Calendar key={'dateSnowboard'}></Calendar>
-            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Записаться</button>
+            <NewScheduleCard key={'scheduleSnowboard'} sport={'snowboard'}></NewScheduleCard>
           </Tab.Panel>
           <Tab.Panel className={classNames(
             'bg-white rounded-xl p-3',
             'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
           )}>
-            <TrainersListbox key={'trainerSki'} sport={'ski'}></TrainersListbox>
-            <Calendar key={'dateSki'}></Calendar>
-            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Записаться</button>
+            <NewScheduleCard key={'scheduleSki'} sport={'ski'}></NewScheduleCard>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

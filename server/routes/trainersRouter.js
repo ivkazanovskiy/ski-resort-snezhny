@@ -3,11 +3,25 @@ const { Trainer } = require('../db/models');
 
 router.route('/')
   .get(async (req, res) => {
+    const { sport } = req.headers;
+
     try {
-      const trainers = await Trainer.findAll({
-        attributes: ['id', 'name', 'surname', 'phone', 'ski', 'snowboard'],
-        raw: true,
-      });
+      let trainers;
+      if (sport === 'ski') {
+        trainers = await Trainer.findAll({
+          where:
+            { ski: true },
+          attributes: ['id', 'name', 'surname', 'phone'],
+          raw: true,
+        });
+      } else if (sport === 'snowboard') {
+        trainers = await Trainer.findAll({
+          where:
+            { snowboard: true },
+          attributes: ['id', 'name', 'surname', 'phone'],
+          raw: true,
+        });
+      }
 
       console.log('TRAINERS', trainers);
 

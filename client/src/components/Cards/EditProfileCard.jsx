@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RadioGroup } from '@headlessui/react'
 
 function EditProfileCard(props) {
 
