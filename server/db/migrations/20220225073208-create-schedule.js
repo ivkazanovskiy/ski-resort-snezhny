@@ -20,6 +20,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      sport: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
       userId: {
         allowNull: true,
         type: Sequelize.INTEGER,
