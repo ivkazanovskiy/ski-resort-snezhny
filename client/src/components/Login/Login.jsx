@@ -45,25 +45,25 @@ function Login(props) {
 
   return (
     <form onSubmit={login} className="w-96">
-      <div className="mb-6">
+      <div className="mb-2">
         <label htmlform="email" className="block mb-2 text-sm font-medium text-gray-900">E-mail</label>
         <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="name@mail.com" required="" />
         {(isCorrectEmail) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Доступно</span>
+          <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
           :
           <span className="block mb-2 text-sm font-medium text-red-500 ">Некорректеный e-mail</span>
         }
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <label htmlform="password" className="block mb-2 text-sm font-medium text-gray-900 ">Пароль</label>
         <input name="password" ref={password} onChange={checkPassword} type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
         {(isCorrectPassword) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Формат пароля верен</span>
+          <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
           :
           <span className="block mb-2 text-sm font-medium text-red-500 ">Заглавные и строчные латинские буквы и цифры от 3 до 20</span>
         }
       </div>
-      <div id="secretKey" className="flex items-center mb-6 gap-2 h-8">
+      <div id="secretKey" className="flex items-center mb-2 gap-2 h-8">
         {/* FIXME: плывет ширина маркера при включении*/}
         <Switch
           checked={enabled}

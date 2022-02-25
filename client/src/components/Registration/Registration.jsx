@@ -7,6 +7,7 @@ import { trainerKey } from '../../helpers/trainerKey'
 import { registrationUser } from '../../redux/sagaCreators/userSagaCreators';
 import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../helpers/isValid'
 
+
 function Registration(props) {
 
 
@@ -77,68 +78,69 @@ function Registration(props) {
 
   return (
     <form onSubmit={registration} className="w-96">
-      <div className="mb-6">
+      <div className="mb-2">
         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Имя</label>
         <input ref={name} onChange={checkName} name="name" type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
         {(isCorrectName) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Доступно</span>
+          <span className="block text-sm font-medium text-green-500 ">✓</span>
           :
-          <span className="block mb-2 text-sm font-medium text-red-500">Заглавные и строчные буквы, дефис и подчеркивание</span>
+          <span className="block text-sm font-medium text-red-500">Заглавные и строчные буквы, дефис и подчеркивание</span>
         }
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <label htmlFor="surname" className="block mb-2 text-sm font-medium text-gray-900 ">Фамилия</label>
         <input ref={surname} onChange={checkSurname} name="surname" type="text" id="surname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
         {(isCorrectSurname) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Доступно</span>
+          <span className="block text-sm font-medium text-green-500 ">✓</span>
           :
-          <span className="block mb-2 text-sm font-medium text-red-500">Заглавные и строчные буквы, дефис и подчеркивание</span>
+          <span className="block text-sm font-medium text-red-500">Заглавные и строчные буквы, дефис и подчеркивание</span>
         }
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
+        {/* TODO: сделать онлайн проверку занятоcти после прохождения регулярки */}
         <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Телефон</label>
         <input ref={phone} onChange={checkPhone} name="phone" type="tel" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
         {(isCorrectPhone) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Доступно</span>
+          <span className="block text-sm font-medium text-green-500 ">✓</span>
           :
-          <span className="block mb-2 text-sm font-medium text-red-500">Телефон в формате +79991112233</span>
+          <span className="block text-sm font-medium text-red-500">Телефон в формате +79991112233</span>
         }
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
+        {/* TODO: сделать онлайн проверку занятоcти после прохождения регулярки */}
         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">E-mail</label>
         <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="name@mail.com" required="" />
         {(isCorrectEmail) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Доступно</span>
+          <span className="block text-sm font-medium text-green-500 ">✓</span>
           :
-          <span className="block mb-2 text-sm font-medium text-red-500 ">Некорректеный e-mail</span>
+          <span className="block text-sm font-medium text-red-500 ">Некорректеный e-mail</span>
         }
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Пароль</label>
         <input name="password" ref={password} onChange={() => { checkPasswords(); checkPassword() }} type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
         {(isCorrectPassword) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Формат пароля верен</span>
+          <span className="block text-sm font-medium text-green-500 ">✓</span>
           :
-          <span className="block mb-2 text-sm font-medium text-red-500 ">Заглавные и строчные латинские буквы и цифры от 3 до 20</span>
+          <span className="block text-sm font-medium text-red-500 ">Заглавные, строчные буквы и цифры</span>
         }
       </div>
-      <div className="mb-6">
+      <div className="mb-2">
         <label htmlFor="passwordRepeat" className="block mb-2 text-sm font-medium text-gray-900 ">Повторите пароль</label>
         <input name="passwordRepeat" ref={passwordRepeat} onChange={checkPasswords} type="password" id="passwordRepeat" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
         {(areSamePasswords) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">Пароли совпадают</span>
+          <span className="block text-sm font-medium text-green-500 ">✓</span>
           :
-          <span className="block mb-2 text-sm font-medium text-red-500 ">Пароли не совпадают</span>
+          <span className="block text-sm font-medium text-red-500 ">Пароли не совпадают</span>
         }
       </div>
-      <div id="secretKey" className="flex items-center mb-6 gap-2 h-8">
+      <div id="secretKey" className="flex items-center mb-2 gap-2 h-8">
         {/* FIXME: плывет ширина маркера при включении*/}
         <Switch
           checked={enabled}
           onChange={setEnabled}
           className={`${enabled ? 'bg-blue-600' : 'bg-gray-200'
             } relative inline-flex items-center h-6 rounded-full w-11`}>
-          <span className="sr-only">Enable notifications</span>
           <span
             className={`${enabled ? 'translate-x-6' : 'translate-x-1'
               } inline-block w-4 h-4 transform bg-white rounded-full`}

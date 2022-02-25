@@ -7,9 +7,13 @@ export const isValidName = (name) => {
 }
 
 export const isValidPassword = (password) => {
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{3,20}$/.test(password);
+  return /^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d)[a-zA-Zа-яА-Я\d]{3,20}$/.test(password);
 }
 
 export const isValidPhone = (name) => {
   return /^\+7\d{10}$/.test(name);
+}
+
+export const isValidAboutMe = (name) => {
+  return /^.{0,140}$/.test(name);
 }

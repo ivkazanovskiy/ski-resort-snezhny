@@ -2,6 +2,12 @@ const loginRouter = require('../routes/loginRouter');
 const registrationRouter = require('../routes/registrationRouter');
 const checkUserRouter = require('../routes/checkUserRouter');
 const trainingOrdersRouter = require('../routes/trainingOrdersRouter');
+
+const updateUserRouter = require('../routes/updateUserRouter');
+const setScheduleRouter = require('../routes/setScheduleRouter');
+const scheduleRouter = require('../routes/scheduleRouter');
+const trainersRouter = require('../routes/trainersRouter');
+
 const authUser = require('../middleware/authUser');
 
 function routes(app) {
@@ -9,6 +15,10 @@ function routes(app) {
   app.use('/api/registration', registrationRouter);
   app.use('/api/checkUser', authUser, checkUserRouter);
   app.use('/api/trainingOrders', authUser, trainingOrdersRouter);
+  app.use('/api/updateUser', authUser, updateUserRouter);
+  app.use('/api/setSchedule', authUser, setScheduleRouter);
+  app.use('/api/schedule', authUser, scheduleRouter);
+  app.use('/api/trainers', authUser, trainersRouter);
 }
 
 module.exports = routes;
