@@ -1,9 +1,10 @@
 import React from 'react';
-import { RadioGroup } from '@headlessui/react'
+import { useSelector } from 'react-redux';
 
 function EditProfileCard(props) {
-  // FIXME: !!! trainer ПОМЕНЯТЬ НА STATE
-  const role = 'trainer';
+
+  const { role } = useSelector(state => state.userReducer);
+
   return (
     <form className="py-4 border border-gray-300 rounded-lg p-2">
       <div className="mb-6">
