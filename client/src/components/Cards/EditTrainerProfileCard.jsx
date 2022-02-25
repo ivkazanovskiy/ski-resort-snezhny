@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { RadioGroup, Disclosure } from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidAboutMe } from '../../helpers/isValid'
@@ -9,6 +9,8 @@ function EditTrainerProfileCard(props) {
 
   const dispatch = useDispatch()
 
+  let [plan, setPlan] = useState('startup')
+
   const name = useRef()
   const surname = useRef()
   const phone = useRef()
@@ -17,7 +19,8 @@ function EditTrainerProfileCard(props) {
   const passwordOld = useRef()
   const password = useRef()
   const passwordRepeat = useRef()
-  const passwordWindow = useRef()
+  const ski = useRef()
+  const snowboard = useRef()
 
   const [areSamePasswords, setAreSamePasswords] = useState(false)
   const [isCorrectName, setIsCorrectName] = useState(true)
@@ -27,8 +30,6 @@ function EditTrainerProfileCard(props) {
   const [isCorrectAboutMe, setIsCorrectAboutMe] = useState(true)
   const [isCorrectPassword, setIsCorrectPassword] = useState(false)
   const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(false)
-
-  const [isPasswordOpen, setIsPasswordOpen] = useState(false)
 
   const checkName = () => {
     setIsCorrectName(isValidName(name.current.value))
@@ -55,39 +56,43 @@ function EditTrainerProfileCard(props) {
     (password.current.value && password.current.value === passwordRepeat.current.value) ? setAreSamePasswords(true) : setAreSamePasswords(false)
   }
 
-  const { role,
+  const {
     name: nameCurrent,
     surname: surnameCurrent,
     aboutMe: aboutMeCurrent,
     email: emailCurrent,
-    phone: phoneCurrent, } = useSelector(state => state.userReducer)
+    phone: phoneCurrent,
+    ski: skiCurrent,
+    snowboard: snowboardCurrent } = useSelector(state => state.userReducer)
 
   const applyChanges = (event) => {
     event.preventDefault()
 
     if (!password.current) {
-      console.log('без пароля');
       if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe) {
         const data = {
           name: name.current.value,
           surname: surname.current.value,
           phone: phone.current.value,
           email: email.current.value,
-          aboutMe: aboutMe.current.value
+          aboutMe: aboutMe.current.value,
+          snowboard: snowboard.current.checked,
+          ski: ski.current.checked,
         };
         return dispatch(updateUser(data))
       }
     }
 
     if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
-      console.log('с паролем');
       const data = {
         name: name.current.value,
         surname: surname.current.value,
         phone: phone.current.value,
         email: email.current.value,
         aboutMe: aboutMe.current.value,
-        passwordOld: passwordOld.current.value,  
+        snowboard: snowboard.current.checked,
+        ski: ski.current.checked,
+        passwordOld: passwordOld.current.value,
         password: password.current.value
       };
       return dispatch(updateUser(data))
@@ -143,6 +148,21 @@ function EditTrainerProfileCard(props) {
           <span className="block mb-2 text-sm font-medium text-red-500">До 140 символов</span>
         }
       </div>
+      <div className="mb-2 flex flex-col border border-gray-300 rounded-lg ">
+
+
+        <label htmlFor="snowboard" className=" flex gap-2 p-2 grow text-sm font-medium text-gray-900 border-b border-gray-300">
+          <input ref={snowboard} defaultChecked={snowboardCurrent} name="snowboard" type="checkbox" id="snowboard" className=" h-4 w-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2" />
+          <span>Сноуборд</span>
+        </label>
+        <label htmlFor="ski" className=" flex gap-2 p-2 grow text-sm font-medium text-gray-900 ">
+          <input ref={ski} defaultChecked={skiCurrent} name="ski" type="checkbox" id="ski" className=" h-4 w-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2" />
+          <span>Горные лыжи</span>
+        </label>
+
+
+      </div>
+
       <Disclosure>
         <Disclosure.Button className="flex justify-between w-full px-4 py-2 mb-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
           <span>Изменить пароль</span>
