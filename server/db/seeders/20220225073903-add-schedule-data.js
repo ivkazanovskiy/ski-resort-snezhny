@@ -757,6 +757,24 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        trainerId: 3,
+        date: '2022-02-28',
+        startTime: '10',
+        // userId: ,
+        // sport: ,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        trainerId: 3,
+        date: '2022-02-28',
+        startTime: '11',
+        // userId: ,
+        // sport: ,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ], {});
   },
 

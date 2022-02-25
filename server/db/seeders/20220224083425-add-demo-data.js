@@ -49,41 +49,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-    ], {});
-    await queryInterface.bulkInsert('TrainingOrders', [
       {
-        userId: 2,
-        trainerId: 1,
-        start: new Date(2022, 1, 27, 8, 0, 0, 0),
-        duration: 8,
-        sport: 'Лыжи',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        userId: 1,
-        trainerId: 2,
-        start: new Date(2022, 1, 25, 12, 0, 0, 0),
-        duration: 4,
-        sport: 'Сноуборд',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        userId: 2,
-        trainerId: 2,
-        start: new Date(2022, 1, 29, 15, 0, 0, 0),
-        duration: 2,
-        sport: 'Сноуборд',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        userId: 1,
-        trainerId: 1,
-        start: new Date(2022, 1, 29, 11, 0, 0, 0),
-        duration: 1,
-        sport: 'Лыжи',
+        name: 'Марина',
+        surname: 'Васечкина',
+        aboutMe: 'Бла-бла-бла',
+        email: 'marina@mail.ru',
+        phone: '+79148943897',
+        password: await bcrypt.hash('1Qq', 10),
+        ski: true,
+        snowboard: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -93,6 +67,5 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Users', null, {});
     await queryInterface.bulkDelete('Trainers', null, {});
-    await queryInterface.bulkDelete('TrainingOrders', null, {});
   },
 };

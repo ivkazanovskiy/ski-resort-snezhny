@@ -1,24 +1,42 @@
 const router = require('express').Router();
 const { Trainer } = require('../db/models');
+const { Schedule } = require('../db/models');
 
 router.route('/')
   .get(async (req, res) => {
-    const { sport } = req.headers;
+    const { sport, bookingdate: date } = req.headers;
 
     try {
       let trainers;
       if (sport === 'ski') {
         trainers = await Trainer.findAll({
-          where:
-            { ski: true },
-          attributes: ['id', 'name', 'surname', 'phone'],
+          where: {
+            ski: true,
+          },
+          attributes: ['id', 'name', 'surname'],
+          include: {
+            model: Schedule,
+            where: {
+              date,
+              userId: null,
+            },
+            attributes: ['startTime'],
+          },
           raw: true,
         });
       } else if (sport === 'snowboard') {
         trainers = await Trainer.findAll({
           where:
             { snowboard: true },
-          attributes: ['id', 'name', 'surname', 'phone'],
+          attributes: ['id', 'name', 'surname'],
+          include: {
+            model: Schedule,
+            where: {
+              date,
+              userId: null,
+            },
+            attributes: ['startTime'],
+          },
           raw: true,
         });
       }
