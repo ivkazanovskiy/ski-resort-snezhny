@@ -13,3 +13,7 @@ export const isValidPassword = (password) => {
 export const isValidPhone = (name) => {
   return /^\+7\d{10}$/.test(name);
 }
+
+export const isValidAboutMe = (name) => {
+  return /^.{0,140}$/.test(name);
+}

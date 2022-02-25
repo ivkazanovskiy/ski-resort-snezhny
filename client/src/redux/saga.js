@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
-import { CHECK_USER, LOG_USER, REG_USER } from './actionTypes/userAT'
+import { CHECK_USER, LOG_USER, REG_USER, UPDATE_USER } from './actionTypes/userAT'
 import axios from 'axios'
-import { initUser } from './actionCreators/userAC'
+import { editUser, initUser } from './actionCreators/userAC'
 
 
 function* workerLogUser(action) {
@@ -73,6 +73,40 @@ function* workerRegUser(action) {
   }
 }
 
+function* workerUpdateUser(action) {
+  const data = action.payload
+
+  try {
+    const response = yield call(axios, {
+      url: '/api/updateUser',
+      method: 'PUT',
+      data: data,
+    })
+    const { info } = response.data
+
+    yield put(editUser(info))
+    // TODO: переделать вывод информации с алерта на текст около кнопки 
+    return window.alert('Данные обновлены')
+  } catch (err) {
+    const { status, data } = err.response
+    // TODO: переделать вывод информации с алерта на текст около кнопки 
+    switch (status) {
+      case 400:
+        return window.alert('Некорректеные данные')
+      case 403:
+        return window.alert('Введен неправильный пароль')
+      case 501:
+
+        if (data.message === 'changeEmail') return window.alert('E-mail уже используется')
+        return window.alert('Номер телефона уже используется')
+
+      default:
+        console.log(err.response.data.error);
+        return window.alert('Ошибка')
+    }
+  }
+}
+
 function* workerCheckUser(action) {
   try {
     const response = yield call(axios, {
@@ -89,6 +123,7 @@ function* workerCheckUser(action) {
 
 function* watcherUser() {
   yield takeEvery(LOG_USER, workerLogUser);
+  yield takeEvery(UPDATE_USER, workerUpdateUser);
   yield takeEvery(REG_USER, workerRegUser);
   yield takeEvery(CHECK_USER, workerCheckUser);
 }
