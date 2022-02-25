@@ -4,7 +4,7 @@ const { Schedule } = require('../db/models');
 
 router.route('/')
   .get(async (req, res) => {
-    const { sport, date } = req.headers;
+    const { sport, bookingdate: date } = req.headers;
 
     try {
       let trainers;
@@ -13,12 +13,14 @@ router.route('/')
           where: {
             ski: true,
           },
-          attributes: ['id', 'name', 'surname', 'phone'],
-          includes: {
+          attributes: ['id', 'name', 'surname'],
+          include: {
             model: Schedule,
             where: {
               date,
+              userId: null,
             },
+            attributes: ['startTime'],
           },
           raw: true,
         });
@@ -26,7 +28,15 @@ router.route('/')
         trainers = await Trainer.findAll({
           where:
             { snowboard: true },
-          attributes: ['id', 'name', 'surname', 'phone'],
+          attributes: ['id', 'name', 'surname'],
+          include: {
+            model: Schedule,
+            where: {
+              date,
+              userId: null,
+            },
+            attributes: ['startTime'],
+          },
           raw: true,
         });
       }

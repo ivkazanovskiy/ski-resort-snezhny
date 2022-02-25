@@ -14,20 +14,22 @@ function NewScheduleCard({ sport }) {
   const [trainers, setTrainers] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState({});
   const [date, setDate] = useState(`${year}-${month}-${day}`);
+  const [names, setNames] = useState([]);
+  const [periods, setPeriods] = useState([]);
 
   const inputDate = useRef();
 
   useEffect(() => {
-    console.log(date);
     axios({
-      url: '/api/trainers',
+      url: '/api/trainers/',
       method: 'GET',
       headers: {
         'sport': sport,
-        'date': date,
+        'bookingdate': date,
       },
     })
       .then(res => {
+        setNames(getTrainersName(res.data.trainers));
         setTrainers(res.data.trainers);
       })
       .catch(err => console.log(err.message));
@@ -37,21 +39,29 @@ function NewScheduleCard({ sport }) {
     setDate(inputDate.current.value);
   }
 
+  const getTrainersName = (arr) => {
+    const uniqueNames = [];
+    const uniqueTrainers = [];
+    arr.forEach(trainer => {
+      if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
+        uniqueNames.push(`${trainer.name} ${trainer.surname}`);
+        uniqueTrainers.push(trainer);
+      }
+    });
+    return uniqueTrainers;
+  };
+
+  const getTrainerPeriods = (arr, id) => {
+    return arr.filter(trainer => trainer.id === id);
+  };
+
   useEffect(() => {
-    console.log('DATE', date);
-    axios({
-      url: '/api/schedule/date',
-      method: 'GET',
-      headers: {
-        'date': date,
-        'trainer': selectedTrainer.id,
-      },
-    })
-      .then(res => {
-        ///TODO: обработка ответа от сервера
-      })
-      .catch(err => console.log('ошибка', err.message));;
-  }, [selectedTrainer, date]);
+    setPeriods(getTrainerPeriods(trainers, selectedTrainer.id));
+    console.log(1);
+  }, [selectedTrainer]);
+
+  console.log('TRAINERS', trainers);
+  console.log('PERIODS', periods);
 
   return (
     <>
@@ -72,31 +82,44 @@ function NewScheduleCard({ sport }) {
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {trainers.map((person, personIdx) => (
-                    <Listbox.Option
-                      key={personIdx}
-                      className={({ active }) =>
-                        `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'
-                        }`
-                      }
-                      value={person}
-                    >
-                      {({ selected }) => (
-                        <>
-                          <span
-                            className={`block truncate ${selected ? 'font-medium' : 'font-normal'
-                              }`}
-                          >
-                            {`${person.name} ${person.surname}`}
-                          </span>
-                          {selected ? (
-                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
+                  {
+                    trainers.length ?
+                      names.map((person, personIdx) => (
+                        <Listbox.Option
+                          key={personIdx}
+                          className={({ active }) =>
+                            `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'
+                            }`
+                          }
+                          value={person}
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span
+                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                  }`}
+                              >
+                                {`${person.name} ${person.surname}`}
+                              </span>
+                              {selected ? (
+                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+                                </span>
+                              ) : null}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))
+                      :
+                      <Listbox.Option
+                        key={null}
+                        className={({ active }) =>
+                          `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'
+                          }`
+                        }
+                      >
+                        Нет свободных инструкторов
+                      </Listbox.Option>
+                  }
                 </Listbox.Options>
               </Transition>
             </div>
@@ -109,7 +132,14 @@ function NewScheduleCard({ sport }) {
 
         <div className="w-full flex flex-col">
           <div className="w-full flex flex-row">
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">09:00</button>
+            {
+              periods.length ?
+                periods.map(element =>
+                  <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">{element['Schedules.startTime']}</button>
+                )
+                :
+                <span>Нет свободных окон</span>
+            }
           </div>
         </div>
       </div>
