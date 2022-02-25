@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { RadioGroup, Disclosure } from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidAboutMe } from '../../helpers/isValid'
@@ -76,8 +76,8 @@ function EditTrainerProfileCard(props) {
           phone: phone.current.value,
           email: email.current.value,
           aboutMe: aboutMe.current.value,
-          snowboard: snowboard.current.value,
-          ski: ski.current.value,
+          snowboard: snowboard.current.checked,
+          ski: ski.current.checked,
         };
         return dispatch(updateUser(data))
       }
@@ -90,8 +90,8 @@ function EditTrainerProfileCard(props) {
         phone: phone.current.value,
         email: email.current.value,
         aboutMe: aboutMe.current.value,
-        snowboard: snowboard.current.value,
-        ski: ski.current.value,
+        snowboard: snowboard.current.checked,
+        ski: ski.current.checked,
         passwordOld: passwordOld.current.value,
         password: password.current.value
       };
@@ -148,15 +148,19 @@ function EditTrainerProfileCard(props) {
           <span className="block mb-2 text-sm font-medium text-red-500">До 140 символов</span>
         }
       </div>
-      <div className="mb-2">
-        <div className="flex items-center gap-4">
+      <div className="mb-2 flex flex-col border border-gray-300 rounded-lg ">
+
+
+        <label htmlFor="snowboard" className=" flex gap-2 p-2 grow text-sm font-medium text-gray-900 border-b border-gray-300">
           <input ref={snowboard} defaultChecked={snowboardCurrent} name="snowboard" type="checkbox" id="snowboard" className=" h-4 w-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2" />
-          <label htmlFor="snowboard" className="block text-sm font-medium text-gray-900 ">Сноуборд</label>
-        </div>
-        <div className="flex items-center gap-4">
+          <span>Сноуборд</span>
+        </label>
+        <label htmlFor="ski" className=" flex gap-2 p-2 grow text-sm font-medium text-gray-900 ">
           <input ref={ski} defaultChecked={skiCurrent} name="ski" type="checkbox" id="ski" className=" h-4 w-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2" />
-          <label htmlFor="ski" className="block text-sm font-medium text-gray-900 ">Горные лыжи</label>
-        </div>
+          <span>Горные лыжи</span>
+        </label>
+
+
       </div>
 
       <Disclosure>
