@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import axios from 'axios';
 
+import PeriodButton from '../Elements/PeriodButton';
+
 function NewScheduleCard({ sport }) {
 
   let day = String(new Date().getDate());
@@ -9,13 +11,12 @@ function NewScheduleCard({ sport }) {
   const year = String(new Date().getFullYear());
 
   if (day.length === 1) day = `0${day}`;
-  if (month.length === 1) month = `0${month}`;
+  if (month.length === 1) day = `0${month}`;
 
-  const [trainers, setTrainers] = useState([]);
+  const [allTrainers, setAllTrainers] = useState([]);
+  const [currentTrainers, setCurrentTrainers] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState({});
   const [date, setDate] = useState(`${year}-${month}-${day}`);
-  const [names, setNames] = useState([]);
-  const [periods, setPeriods] = useState([]);
 
   const inputDate = useRef();
 
@@ -29,39 +30,46 @@ function NewScheduleCard({ sport }) {
       },
     })
       .then(res => {
-        setNames(getTrainersName(res.data.trainers));
-        setTrainers(res.data.trainers);
+        setAllTrainers(res.data.trainers);
       })
       .catch(err => console.log(err.message));
-  }, [sport, date]);
+  }, [date, sport]);
+
+  useEffect(() => { getTrainersName() }, [allTrainers])
 
   const getData = (event) => {
     setDate(inputDate.current.value);
   }
 
-  const getTrainersName = (arr) => {
+  const getTrainersName = (period) => {
     const uniqueNames = [];
     const uniqueTrainers = [];
-    arr.forEach(trainer => {
-      if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
-        uniqueNames.push(`${trainer.name} ${trainer.surname}`);
-        uniqueTrainers.push(trainer);
-      }
-    });
-    return uniqueTrainers;
+
+    if (!period) {
+      allTrainers.forEach(trainer => {
+        if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
+          uniqueNames.push(`${trainer.name} ${trainer.surname}`);
+          uniqueTrainers.push({ ...trainer });
+        }
+      });
+      console.log('БЕЗ ПЕРИОДА', uniqueTrainers);
+      setCurrentTrainers([...uniqueTrainers]);
+    } else {
+      allTrainers
+        .filter(trainer => trainer['Schedules.startTime'] === period)
+        .forEach(trainer => {
+          if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
+            uniqueNames.push(`${trainer.name} ${trainer.surname}`);
+            uniqueTrainers.push({ ...trainer });
+          }
+        });
+      console.log('С ПЕРИОДОМ', uniqueTrainers);
+      setCurrentTrainers([...uniqueTrainers]);
+    }
   };
 
-  const getTrainerPeriods = (arr, id) => {
-    return arr.filter(trainer => trainer.id === id);
-  };
-
-  useEffect(() => {
-    setPeriods(getTrainerPeriods(trainers, selectedTrainer.id));
-    console.log(1);
-  }, [selectedTrainer]);
-
-  console.log('TRAINERS', trainers);
-  console.log('PERIODS', periods);
+  console.log('ALL TRAINERS', allTrainers);
+  console.log('CURRENT TRAINERS', currentTrainers);
 
   return (
     <>
@@ -83,8 +91,8 @@ function NewScheduleCard({ sport }) {
               >
                 <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                   {
-                    trainers.length ?
-                      names.map((person, personIdx) => (
+                    currentTrainers.length ?
+                      currentTrainers.map((person, personIdx) => (
                         <Listbox.Option
                           key={personIdx}
                           className={({ active }) =>
@@ -127,18 +135,14 @@ function NewScheduleCard({ sport }) {
         </div>
       </div>
       <div className="w-full px-4 py-4 border-2">
-        <label for="date">Дата:</label>
+        <label htmlFor="date">Дата:</label>
         <input ref={inputDate} onChange={getData} type="date" id="date" name="date" min={new Date()} defaultValue={date} />
 
         <div className="w-full flex flex-col">
-          <div className="w-full flex flex-row">
+          <div className="w-full">
             {
-              periods.length ?
-                periods.map(element =>
-                  <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">{element['Schedules.startTime']}</button>
-                )
-                :
-                <span>Нет свободных окон</span>
+              ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']
+                .map(time =><PeriodButton key={time.id} time={time} getTrainersName={getTrainersName}></PeriodButton>)
             }
           </div>
         </div>
