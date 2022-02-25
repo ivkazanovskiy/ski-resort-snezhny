@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Disclosure } from '@headlessui/react';
+
+import EditTrainerProfileCard from '../Cards/EditTrainerProfileCard';
+import TrainingOrderCard from '../Cards/TrainingOrderCard';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function TrainerProfile(props) {
   const [orders, setOrders] = useState([]);
@@ -25,7 +31,7 @@ function TrainerProfile(props) {
                 /> */}
           </Disclosure.Button>
           <Disclosure.Panel className="pt-4 text-sm text-gray-500">
-            <EditProfileCard></EditProfileCard>
+            <EditTrainerProfileCard></EditTrainerProfileCard>
           </Disclosure.Panel>
 
         </Disclosure>

@@ -7,6 +7,7 @@ import { trainerKey } from '../../helpers/trainerKey'
 import { registrationUser } from '../../redux/sagaCreators/userSagaCreators';
 import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../helpers/isValid'
 
+
 function Registration(props) {
 
 

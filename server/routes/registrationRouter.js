@@ -50,7 +50,6 @@ router.route('/')
       const token = jwt.sign({ role: 'user', id: user.id }, process.env.ACCESS_TOKEN_SECRET);
       return res.status(200).json({ token, info, role: 'user' });
     } catch (err) {
-
       switch (err.original.constraint) {
         case 'Users_phone_key':
           return res.status(501).json({ message: 'changePhone' });
