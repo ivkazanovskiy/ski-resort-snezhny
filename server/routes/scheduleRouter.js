@@ -4,14 +4,31 @@ const { Schedule } = require('../db/models');
 const { Trainer } = require('../db/models');
 const { User } = require('../db/models');
 
-router.route('/schedule/trainers')
+router.route('/trainers')
   .get(async (req, res) => {
-    
+
   });
 
-router.route('/schedule/date')
+router.route('/date')
   .get(async (req, res) => {
-
+    const { date, trainer } = req.headers;
+    console.log('DATE', date);
+    try {
+      const periods = await Schedule.findAll({
+        where:
+        {
+          trainerId: trainer,
+          date,
+        },
+        raw: true,
+      });
+      console.log('PERIODS', periods);
+      // return res.status(200).json({ periods });
+      res.end();
+    } catch (err) {
+      console.log('ERR 123', err);
+      return res.status(500).json({ error: err.message });
+    }
   });
 
 router.route('/')

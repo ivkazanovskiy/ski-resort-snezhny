@@ -1,31 +1,63 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import axios from 'axios';
 
 function NewScheduleCard({ sport }) {
 
+  let day = String(new Date().getDate());
+  let month = String(new Date().getMonth() + 1);
+  const year = String(new Date().getFullYear());
+
+  if (day.length === 1) day = `0${day}`;
+  if (month.length === 1) month = `0${month}`;
+
   const [trainers, setTrainers] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState({});
+  const [date, setDate] = useState(`${year}-${month}-${day}`);
+
+  const inputDate = useRef();
 
   useEffect(() => {
+    console.log(date);
     axios({
       url: '/api/trainers',
       method: 'GET',
       headers: {
         'sport': sport,
+        'date': date,
       },
     })
       .then(res => {
         setTrainers(res.data.trainers);
       })
       .catch(err => console.log(err.message));
-  }, [sport]);
+  }, [sport, date]);
+
+  const getData = (event) => {
+    setDate(inputDate.current.value);
+  }
+
+  useEffect(() => {
+    console.log('DATE', date);
+    axios({
+      url: '/api/schedule/date',
+      method: 'GET',
+      headers: {
+        'date': date,
+        'trainer': selectedTrainer.id,
+      },
+    })
+      .then(res => {
+        ///TODO: обработка ответа от сервера
+      })
+      .catch(err => console.log('ошибка', err.message));;
+  }, [selectedTrainer, date]);
 
   return (
     <>
       <div className="w-full px-4 py-4 border-2">
         <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
-          <label htmlFor="trainersListbox">Инструкторы</label>
+          <label htmlFor="trainersListbox">Инструкторы:</label>
           <Listbox id="trainersListbox" defaultValue={selectedTrainer} onChange={setSelectedTrainer}>
             <div className="relative mt-1">
               <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
@@ -71,32 +103,16 @@ function NewScheduleCard({ sport }) {
           </Listbox>
         </div>
       </div>
-      <form className="w-full px-4 py-4 border-2">
-        <div>
-          <label for="date">Дата:</label>
-          <input type="date" id="date" name="date" value={new Date()} />
-        </div>
+      <div className="w-full px-4 py-4 border-2">
+        <label for="date">Дата:</label>
+        <input ref={inputDate} onChange={getData} type="date" id="date" name="date" min={new Date()} defaultValue={date} />
+
         <div className="w-full flex flex-col">
           <div className="w-full flex flex-row">
             <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">09:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">10:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">11:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">12:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">13:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">14:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">15:00</button>
-          </div>
-          <div className="w-full flex flex-row">
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">16:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">17:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">18:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">19:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">20:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">21:00</button>
-            <button className="w-12 my-2 border-solid border-2 border-sky-500 rounded-md">22:00</button>
           </div>
         </div>
-      </ form>
+      </div>
       <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Записаться</button>
     </>
   );
