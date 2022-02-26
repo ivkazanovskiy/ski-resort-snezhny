@@ -1,35 +1,56 @@
 const router = require('express').Router();
-const { Schedule } = require('../db/models');
+const { Op } = require('sequelize');
+const { Schedule, User } = require('../db/models');
 
 router.route('/')
-  .put((req, res) => {
+  .put(async (req, res) => {
     const { id } = req.user;
     const { days } = req.body;
+    if (!days) return res.sendStatus(400);
+    console.log(days);
+    // TODO: в будущем сделать более гибкое расписание
+    const possibleTime = ['09'/* , '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22' */];
 
-    const possibleDays = ['09', '10', '11'/* , '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22' */];
-
-    days.forEach(async (date) => {
-      possibleDays.forEach(async (startTime) => {
-        console.log(date, startTime);
-
-        // try {
-        //   const [record, created] = await Schedule.findOrCreate({
-        //     where: { trainerId: id },
-        //     defaults: {
-        //       date,
-        //       startTime,
-        //     },
-        //   });
-        //   if (created) {
-        //     console.log(record);
-        //   }
-        // } catch (error) {
-        //   console.log(error.message);
-        // }
+    try {
+      const cancelledDays = await Schedule.findAll({
+        where: {
+          trainerId: id,
+          date: { [Op.notIn]: days },
+        },
       });
-    });
 
-    res.json('ok');
+      if (cancelledDays.length > 0) {
+        cancelledDays.forEach(async (day) => {
+          await day.destroy();
+        });
+      }
+
+      days.forEach(async (date) => {
+        possibleTime.forEach(async (startTime) => {
+          await Schedule.findOrCreate({
+            where: {
+              trainerId: id,
+              date,
+              startTime,
+            },
+          });
+        });
+      });
+
+      const newSchedule = await Schedule.findAll({
+        where: { trainerId: id },
+        attributes: ['date', 'startTime', 'sport'],
+        raw: true,
+        include: {
+          model: User,
+          attributes: ['name', 'surname', 'phone'],
+        },
+      });
+
+      return res.status(201).json({ schedule: newSchedule });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   });
 
 module.exports = router;

@@ -47,7 +47,7 @@ function TrainerTimetable(props) {
       method: 'PUT',
       data
     })
-      .then(res => console.log(res))
+      .then(res => console.log(res.data))
       .catch(err => console.error(err))
 
     console.log(days);
