@@ -11,7 +11,6 @@ function PeriodButton({ getTrainersName, time, changeHours }) {
   return (
     <button onClick={() => {
       changeHours(time);
-      console.log(time);
       getTrainersName(time);
       setIsClicked(() => !isClicked);
     }}

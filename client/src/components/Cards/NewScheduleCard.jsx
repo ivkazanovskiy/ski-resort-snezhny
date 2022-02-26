@@ -23,7 +23,6 @@ function NewScheduleCard({ sport }) {
   const inputDate = useRef();
 
   useEffect(() => {
-    console.log('DATE', date);
     axios({
       url: '/api/trainers/',
       method: 'GET',
@@ -84,6 +83,9 @@ function NewScheduleCard({ sport }) {
       data,
     });
   }
+
+  console.log('ALL TRAINERS', allTrainers);
+  console.log('SELECTED TRAINER', selectedTrainer);
 
   return (
     <>
@@ -154,8 +156,10 @@ function NewScheduleCard({ sport }) {
         <div className="w-full flex flex-col">
           <div className="w-full grid grid-cols-4 gap-2 p-2">
             {
-              ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']
-                .map(time => <PeriodButton key={time} time={time} changeHours={changeHours} getTrainersName={getTrainersName}></PeriodButton>)
+              allTrainers
+                .filter(el => el.id === selectedTrainer.id && !el['Schedules.userId'])
+                .sort((a, b) => +a['Schedules.startTime'] - +b['Schedules.startTime'])
+                .map(el => <PeriodButton key={`${el.id}${el['Schedules.startTime']}`} time={el['Schedules.startTime']} changeHours={changeHours} getTrainersName={getTrainersName}></PeriodButton>)
             }
           </div>
         </div>

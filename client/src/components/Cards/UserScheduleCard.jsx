@@ -22,7 +22,11 @@ function UserScheduleCard({ order, setOrders, orders }) {
         trainerId: order['Trainer.id'],
       },
     })
-      .then((res) => console.log(res))
+      .then(() => {
+        setOrders(
+          orders.filter(el => (el['Trainer.id'] !== order['Trainer.id']) && (el.date !== order.date) && (el.startTime !== order.startTime))
+        );
+      })
       .catch(err => console.log(err));
   };
 
@@ -69,11 +73,6 @@ function UserScheduleCard({ order, setOrders, orders }) {
         <div className="flex flex-row-reverse">
           <button onClick={(event) => {
             deleteOrder(event);
-            console.log('ORDERS', orders);
-            console.log('ORDER', order);
-            setOrders(
-              orders.filter(el => (el['Trainer.id'] !== order['Trainer.id']) && (el.date !== order.date) && (el.startTime !== order.startTime))
-            );
           }} className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">Удалить</button>
         </div>
       </div>
