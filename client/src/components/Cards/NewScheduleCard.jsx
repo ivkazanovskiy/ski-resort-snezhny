@@ -7,12 +7,12 @@ import { useChangeHours } from '../../helpers/useChangeHours';
 
 function NewScheduleCard({ sport }) {
 
-  let day = String(new Date().getDate());
-  let month = String(new Date().getMonth() + 1);
+  const newDay = String(new Date().getDate());
+  const newMonth = String(new Date().getMonth() + 1);
   const year = String(new Date().getFullYear());
 
-  if (day.length === 1) day = `0${day}`;
-  if (month.length === 1) day = `0${month}`;
+  const day = (newDay.length === 1) ? `0${newDay}` : newDay;
+  const month = (newMonth.length === 1) ? `0${newMonth}` : newMonth;
 
   const [allTrainers, setAllTrainers] = useState([]);
   const [currentTrainers, setCurrentTrainers] = useState([]);
@@ -23,6 +23,7 @@ function NewScheduleCard({ sport }) {
   const inputDate = useRef();
 
   useEffect(() => {
+    console.log('DATE', date);
     axios({
       url: '/api/trainers/',
       method: 'GET',
@@ -55,7 +56,6 @@ function NewScheduleCard({ sport }) {
           uniqueTrainers.push({ ...trainer });
         }
       });
-      console.log('БЕЗ ПЕРИОДА', uniqueTrainers);
       setCurrentTrainers([...uniqueTrainers]);
     } else {
       allTrainers
@@ -66,7 +66,6 @@ function NewScheduleCard({ sport }) {
             uniqueTrainers.push({ ...trainer });
           }
         });
-      console.log('С ПЕРИОДОМ', uniqueTrainers);
       setCurrentTrainers([...uniqueTrainers]);
     }
   };
@@ -79,17 +78,12 @@ function NewScheduleCard({ sport }) {
       hours,
     };
 
-    console.log(data);
-
     axios({
       url: '/api/schedule',
       method: 'POST',
       data,
     });
   }
-
-  console.log('ALL TRAINERS', allTrainers);
-  console.log('CURRENT TRAINERS', currentTrainers);
 
   return (
     <>
@@ -162,7 +156,7 @@ function NewScheduleCard({ sport }) {
           <div className="w-full grid grid-cols-4 gap-2 p-2">
             {
               ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']
-                .map(time => <PeriodButton key={time.id} time={time} changeHours={changeHours} getTrainersName={getTrainersName}></PeriodButton>)
+                .map(time => <PeriodButton key={time} time={time} changeHours={changeHours} getTrainersName={getTrainersName}></PeriodButton>)
             }
           </div>
         </div>

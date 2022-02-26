@@ -18,7 +18,6 @@ router.route('/')
             model: Schedule,
             where: {
               date,
-              userId: null,
             },
             attributes: ['startTime'],
           },
@@ -33,9 +32,8 @@ router.route('/')
             model: Schedule,
             where: {
               date,
-              userId: null,
             },
-            attributes: ['startTime'],
+            attributes: ['startTime', 'userId'],
           },
           raw: true,
         });
