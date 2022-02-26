@@ -3,49 +3,45 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Room extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Schedule, Order }) {
-      User.hasMany(Schedule, { foreignKey: 'userId' });
-      User.hasMany(Order, { foreignKey: 'userId' });
+    static associate({ Addition, Image }) {
+      Room.hasOne(Addition, { foreignKey: 'additionId' });
+      Room.hasMany(Image, { foreignKey: 'roomId' });
     }
   }
-  User.init({
-    name: {
+  Room.init({
+    title: {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    surname: {
+    description: {
       allowNull: false,
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
-    email: {
+    guestCount: {
       allowNull: false,
-      type: DataTypes.STRING,
-      unique: true,
-    },
-    phone: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true,
-    },
-    password: {
-      allowNull: false,
-      type: DataTypes.STRING,
-
-    },
-    skiPass: {
-      allowNull: true,
       type: DataTypes.INTEGER,
-      unique: true,
+    },
+    cost: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    additionId: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Additions',
+        key: 'id',
+      },
     },
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Room',
   });
-  return User;
+  return Room;
 };
