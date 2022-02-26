@@ -34,15 +34,15 @@ function AddUserScheduleCard(props) {
             )
           }>Лыжи</Tab>
         </Tab.List>
-        <Tab.Panels className="mt-2">
+        <Tab.Panels className="mt-2 border-2 rounded-md">
           <Tab.Panel className={classNames(
-            'bg-white rounded-xl p-3',
+            'bg-white rounded-md',
             'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
           )}>
             <NewScheduleCard key={'scheduleSnowboard'} sport={'snowboard'}></NewScheduleCard>
           </Tab.Panel>
           <Tab.Panel className={classNames(
-            'bg-white rounded-xl p-3',
+            'bg-white rounded-md',
             'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
           )}>
             <NewScheduleCard key={'scheduleSki'} sport={'ski'}></NewScheduleCard>
