@@ -57,6 +57,35 @@ router.route('/')
   })
   .post(async (req, res) => {
     const { id: userId } = req.user;
+    const {
+      trainerId,
+      date,
+      sport,
+      hours,
+    } = req.body;
+
+    hours.forEach(async (startTime) => {
+      try {
+        const currentSchedule = await Schedule.findOne({
+          where: {
+            trainerId,
+            date,
+            startTime,
+          },
+        });
+
+        const updateSchedule = await currentSchedule.update({
+          sport,
+          userId,
+          updatedAt: new Date(),
+        });
+        await currentSchedule.save();
+        //FIXME: разобраться со статусами ответов
+        res.sendStatus(200);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
   });
 
 module.exports = router;

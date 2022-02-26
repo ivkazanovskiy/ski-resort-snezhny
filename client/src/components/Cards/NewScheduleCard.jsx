@@ -3,6 +3,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import axios from 'axios';
 
 import PeriodButton from '../Elements/PeriodButton';
+import { useChangeHours } from '../../helpers/useChangeHours';
 
 function NewScheduleCard({ sport }) {
 
@@ -17,6 +18,7 @@ function NewScheduleCard({ sport }) {
   const [currentTrainers, setCurrentTrainers] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState({});
   const [date, setDate] = useState(`${year}-${month}-${day}`);
+  const [hours, changeHours] = useChangeHours();
 
   const inputDate = useRef();
 
@@ -33,6 +35,7 @@ function NewScheduleCard({ sport }) {
         setAllTrainers(res.data.trainers);
       })
       .catch(err => console.log(err.message));
+    changeHours(0);
   }, [date, sport]);
 
   useEffect(() => { getTrainersName() }, [allTrainers])
@@ -73,6 +76,7 @@ function NewScheduleCard({ sport }) {
       trainerId: selectedTrainer.id,
       date,
       sport,
+      hours,
     };
 
     console.log(data);
@@ -81,7 +85,7 @@ function NewScheduleCard({ sport }) {
       url: '/api/schedule',
       method: 'POST',
       data,
-    })
+    });
   }
 
   console.log('ALL TRAINERS', allTrainers);
@@ -155,15 +159,15 @@ function NewScheduleCard({ sport }) {
         <input ref={inputDate} onChange={getData} type="date" id="date" name="date" min={new Date()} defaultValue={date} />
 
         <div className="w-full flex flex-col">
-          <div className="w-full">
+          <div className="w-full grid grid-cols-4 gap-2 p-2">
             {
               ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22']
-                .map(time =><PeriodButton key={time.id} time={time} getTrainersName={getTrainersName}></PeriodButton>)
+                .map(time => <PeriodButton key={time.id} time={time} changeHours={changeHours} getTrainersName={getTrainersName}></PeriodButton>)
             }
           </div>
         </div>
       </div>
-      <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Записаться</button>
+      <button onClick={saveSchedule} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Записаться</button>
     </>
   );
 }
