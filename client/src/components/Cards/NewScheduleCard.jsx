@@ -5,7 +5,7 @@ import axios from 'axios';
 import PeriodButton from '../Elements/PeriodButton';
 import { useChangeHours } from '../../helpers/useChangeHours';
 
-function NewScheduleCard({ sport }) {
+function NewScheduleCard({ sport, refresh, setRefresh }) {
 
   const newDay = String(new Date().getDate());
   const newMonth = String(new Date().getMonth() + 1);
@@ -78,18 +78,19 @@ function NewScheduleCard({ sport }) {
     };
 
     axios({
-      url: '/api/schedule',
+      url: '/api/userSchedule',
       method: 'POST',
       data,
-    });
+    })
+      .then(response => setRefresh(!refresh));
   }
 
   console.log('ALL TRAINERS', allTrainers);
   console.log('SELECTED TRAINER', selectedTrainer);
 
   return (
-    <>
-      <div className="w-full rounded-md px-4 py-4">
+    <div className="w-full rounded-md p-2 flex flex-col gap-2">
+      <div className="w-full rounded-md ">
         <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
           <label htmlFor="trainersListbox">Инструкторы:</label>
           <Listbox id="trainersListbox" defaultValue={selectedTrainer} onChange={setSelectedTrainer}>
@@ -149,7 +150,7 @@ function NewScheduleCard({ sport }) {
           </Listbox>
         </div>
       </div>
-      <div className="w-full px-4 py-4">
+      <div className="w-full">
         <label htmlFor="date">Дата:</label>
         <input ref={inputDate} onChange={getData} type="date" id="date" name="date" min={new Date()} defaultValue={date} />
 
@@ -165,7 +166,7 @@ function NewScheduleCard({ sport }) {
         </div>
       </div>
       <button onClick={saveSchedule} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Записаться</button>
-    </>
+    </div>
   );
 }
 

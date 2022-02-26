@@ -14,7 +14,7 @@ function UserScheduleCard({ order, setOrders, orders }) {
     event.preventDefault();
 
     axios({
-      url: '/api/schedule',
+      url: '/api/userSchedule',
       method: 'DELETE',
       data: {
         date: order.date,
@@ -23,60 +23,29 @@ function UserScheduleCard({ order, setOrders, orders }) {
       },
     })
       .then(() => {
-        setOrders(
-          orders.filter(el => (el['Trainer.id'] !== order['Trainer.id']) && (el.date !== order.date) && (el.startTime !== order.startTime))
-        );
+        console.log(orders, order);
+        setOrders(orders.filter(el => !(
+          (el['Trainer.id'] === order['Trainer.id'])
+          && (el.date === order.date)
+          && (el.startTime === order.startTime)
+        )));
       })
       .catch(err => console.log(err));
   };
 
   return (
-    <form className="my-2">
-      <div className="py-4 border border-gray-300 rounded-lg p-2">
-        <div className="flex flex-row">
-          <div className="col mb-6">
-            <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 ">Дата</label>
-            <span>{`${day}.${month}.${year}`}</span>
-          </div>
-          <div className="col mb-6">
-            <label htmlFor="period" className="block mb-2 text-sm font-medium text-gray-900 ">Время</label>
-            <span>{`${order.startTime}:00-${Number(order.startTime) + 1}:00`}</span>
-          </div>
+    <li className="border rounded-lg flex items-center p-2 gap-4">
+      <div className="w-16 h-16 border rounded-full"></div>
+      <div className="flex flex-col flex-1">
+        <div className="flex ">
+          <div className="font-bold">{`${order.startTime}:00-${Number(order.startTime) + 1}:00`}</div>
+          <div className="text-center grow">{order.sport}</div>
         </div>
-        {role === 'user' ?
-          <>
-            <div className="mb-6">
-              <label htmlFor="trainer" className="block mb-2 text-sm font-medium text-gray-900 ">Инструктор</label>
-              <span>{`${order['Trainer.name']} ${order['Trainer.surname']}`}</span>
-            </div>
-            <div className="mb-6">
-              <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Номер телефона</label>
-              <span>{order['Trainer.phone']}</span>
-            </div>
-          </>
-          :
-          <>
-            <div className="mb-6">
-              <label htmlFor="client" className="block mb-2 text-sm font-medium text-gray-900 ">Клиент</label>
-              <span>{`${order['User.name']} ${order['User.surname']}`}</span>
-            </div>
-            <div className="mb-6">
-              <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Номер телефона</label>
-              <span>{order['User.phone']}</span>
-            </div>
-          </>
-        }
-        <div className="mb-6">
-          <label htmlFor="sport" className="block mb-2 text-sm font-medium text-gray-900">Вид спорта</label>
-          <span>{order.sport}</span>
-        </div>
-        <div className="flex flex-row-reverse">
-          <button onClick={(event) => {
-            deleteOrder(event);
-          }} className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">Удалить</button>
-        </div>
+        <div>{`${order['Trainer.name']} ${order['Trainer.surname']}`}</div>
+        <div>{order['Trainer.phone']}</div>
       </div>
-    </form>
+      <button onClick={deleteOrder} className="h-8 w-8 text-white rounded-full bg-purple-500 hover:bg-purple-900 ">Del </button>
+    </li >
   )
 }
 
