@@ -34,16 +34,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        name: 'Володя',
-        surname: 'Путин',
-        email: 'putin@gmail.com',
-        phone: '+79001001010',
-        password: await bcrypt.hash('1Qq', 10),
-        // skiPass: ,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
         name: 'Валера',
         surname: 'Меладзе',
         email: 'meladze@mail.ru',
