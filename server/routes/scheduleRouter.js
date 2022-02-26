@@ -87,6 +87,39 @@ router.route('/')
         res.status(500).json({ error: error.message });
       }
     });
+  })
+  .delete(async (req, res) => {
+    const { id } = req.user;
+    const {
+      date,
+      startTime,
+      trainerId,
+    } = req.body;
+
+    try {
+      const selectOrder = await Schedule.findOne({
+        where: {
+          date,
+          startTime,
+          trainerId,
+        },
+      });
+
+      if (id === selectOrder.userId) {
+        await selectOrder.update({
+          sport: null,
+          userId: null,
+          updatedAt: new Date(),
+        });
+
+        await selectOrder.save();
+        res.sendStatus(200);
+      } else {
+        res.status(403).json({ message: 'Ошибка доступа' });
+      }
+    } catch (error) {
+      res.status(502).json({ error });
+    }
   });
 
 module.exports = router;

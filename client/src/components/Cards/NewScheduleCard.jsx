@@ -87,7 +87,7 @@ function NewScheduleCard({ sport }) {
 
   return (
     <>
-      <div className="w-full px-4 py-4 border-2">
+      <div className="w-full rounded-md px-4 py-4">
         <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
           <label htmlFor="trainersListbox">Инструкторы:</label>
           <Listbox id="trainersListbox" defaultValue={selectedTrainer} onChange={setSelectedTrainer}>
@@ -110,8 +110,7 @@ function NewScheduleCard({ sport }) {
                         <Listbox.Option
                           key={personIdx}
                           className={({ active }) =>
-                            `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'
-                            }`
+                            `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'}`
                           }
                           value={person}
                         >
@@ -148,7 +147,7 @@ function NewScheduleCard({ sport }) {
           </Listbox>
         </div>
       </div>
-      <div className="w-full px-4 py-4 border-2">
+      <div className="w-full px-4 py-4">
         <label htmlFor="date">Дата:</label>
         <input ref={inputDate} onChange={getData} type="date" id="date" name="date" min={new Date()} defaultValue={date} />
 

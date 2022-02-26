@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 
 import EditProfileCard from '../Cards/EditProfileCard';
-import TrainingOrderCard from '../Cards/TrainingOrderCard';
+import UserScheduleCard from '../Cards/UserScheduleCard';
 import AddUserScheduleCard from '../Cards/AddUserScheduleCard';
 import axios from 'axios';
 
@@ -53,7 +53,7 @@ function UserProfile(props) {
               </div>
 
               {orders.length ?
-                orders.map(order => <TrainingOrderCard key={order.id} order={order}></TrainingOrderCard>)
+                orders.map(order => <UserScheduleCard orders={orders} setOrders={setOrders} key={order.id} order={order}></UserScheduleCard>)
                 :
                 <span>Пока нет записей</span>
               }
