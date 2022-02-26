@@ -22,8 +22,6 @@ function UserProfile(props) {
       .catch(err => console.log(err.message));
   }, [refresh]);
 
-  console.log(orders);
-
   return (
     <>
       <div className="w-full px-4 pt-8">
@@ -62,7 +60,7 @@ function UserProfile(props) {
                 {
                   isClicked ?
                     // FIXME: избавиться от дриллинга
-                    <AddUserScheduleCard refresh={refresh} setRefresh={setRefresh}></AddUserScheduleCard>
+                    <AddUserScheduleCard refresh={refresh} setRefresh={setRefresh} />
                     :
                     <></>
                 }

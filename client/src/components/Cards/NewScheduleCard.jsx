@@ -4,20 +4,18 @@ import axios from 'axios';
 
 import PeriodButton from '../Elements/PeriodButton';
 import { useChangeHours } from '../../helpers/useChangeHours';
+import { addZero } from '../../helpers/addZero';
 
 function NewScheduleCard({ sport, refresh, setRefresh }) {
 
-  const newDay = String(new Date().getDate());
-  const newMonth = String(new Date().getMonth() + 1);
+  const day = String(new Date().getDate());
+  const month = String(new Date().getMonth() + 1);
   const year = String(new Date().getFullYear());
-
-  const day = (newDay.length === 1) ? `0${newDay}` : newDay;
-  const month = (newMonth.length === 1) ? `0${newMonth}` : newMonth;
 
   const [allTrainers, setAllTrainers] = useState([]);
   const [currentTrainers, setCurrentTrainers] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState({});
-  const [date, setDate] = useState(`${year}-${month}-${day}`);
+  const [date, setDate] = useState(addZero(year, month, day));
   const [hours, changeHours] = useChangeHours();
 
   const inputDate = useRef();
@@ -32,11 +30,12 @@ function NewScheduleCard({ sport, refresh, setRefresh }) {
       },
     })
       .then(res => {
+        console.log(`all trainers ${sport}:`, res.data.trainers)
         setAllTrainers(res.data.trainers);
       })
       .catch(err => console.log(err.message));
     changeHours(0);
-  }, [date, sport]);
+  }, [date, sport, refresh]);
 
   useEffect(() => { getTrainersName() }, [allTrainers])
 
@@ -52,21 +51,24 @@ function NewScheduleCard({ sport, refresh, setRefresh }) {
       allTrainers.forEach(trainer => {
         if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
           uniqueNames.push(`${trainer.name} ${trainer.surname}`);
+          // TODO: не уверен, что тут нужна деструктуризация
           uniqueTrainers.push({ ...trainer });
         }
       });
-      setCurrentTrainers([...uniqueTrainers]);
-    } else {
-      allTrainers
-        .filter(trainer => trainer['Schedules.startTime'] === period)
-        .forEach(trainer => {
-          if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
-            uniqueNames.push(`${trainer.name} ${trainer.surname}`);
-            uniqueTrainers.push({ ...trainer });
-          }
-        });
-      setCurrentTrainers([...uniqueTrainers]);
+      console.log('unique Without period', uniqueTrainers);
+      return setCurrentTrainers(uniqueTrainers);
     }
+
+    allTrainers
+      .filter(trainer => trainer['Schedules.startTime'] === period)
+      .forEach(trainer => {
+        if (!uniqueNames.includes(`${trainer.name} ${trainer.surname}`)) {
+          uniqueNames.push(`${trainer.name} ${trainer.surname}`);
+          uniqueTrainers.push({ ...trainer });
+        }
+      });
+    return setCurrentTrainers([...uniqueTrainers]);
+
   };
 
   const saveSchedule = () => {
@@ -84,10 +86,6 @@ function NewScheduleCard({ sport, refresh, setRefresh }) {
     })
       .then(response => setRefresh(!refresh));
   }
-
-  console.log('ALL TRAINERS', allTrainers);
-  console.log('SELECTED TRAINER', selectedTrainer);
-
   return (
     <div className="w-full rounded-md p-2 flex flex-col gap-2">
       <div className="w-full rounded-md ">

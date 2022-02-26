@@ -52,6 +52,7 @@ router.route('/')
   })
   .post(async (req, res) => {
     const { id: userId } = req.user;
+
     const {
       trainerId,
       date,

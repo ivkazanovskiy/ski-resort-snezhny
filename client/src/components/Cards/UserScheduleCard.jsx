@@ -23,6 +23,7 @@ function UserScheduleCard({ order, setOrders, orders }) {
       },
     })
       .then(() => {
+        // FIXME: сюда надо закинуть рефреш, чтобы обновить список инструкторов
         console.log(orders, order);
         setOrders(orders.filter(el => !(
           (el['Trainer.id'] === order['Trainer.id'])
@@ -32,16 +33,19 @@ function UserScheduleCard({ order, setOrders, orders }) {
       })
       .catch(err => console.log(err));
   };
-
+  console.log(order);
   return (
     <li className="border rounded-lg flex items-center p-2 gap-4">
       <div className="w-16 h-16 border rounded-full"></div>
       <div className="flex flex-col flex-1">
-        <div className="flex ">
+        <div className="flex gap-4 ">
           <div className="font-bold">{`${order.startTime}:00-${Number(order.startTime) + 1}:00`}</div>
+          <div className="">{`${order.date.split('-')[2]}/${order.date.split('-')[1]}`}</div>
+        </div>
+        <div className="flex gap-6">
+          <div>{`${order['Trainer.name']} ${order['Trainer.surname']}`}</div>
           <div className="text-center grow">{order.sport}</div>
         </div>
-        <div>{`${order['Trainer.name']} ${order['Trainer.surname']}`}</div>
         <div>{order['Trainer.phone']}</div>
       </div>
       <button onClick={deleteOrder} className="h-8 w-8 text-white rounded-full bg-purple-500 hover:bg-purple-900 ">Del </button>
