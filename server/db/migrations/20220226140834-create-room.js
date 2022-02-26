@@ -7,31 +7,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      description: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-      },
-      guestCount: {
-        allowNull: false,
+      typeId: {
         type: Sequelize.INTEGER,
-      },
-      weekdayCost: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      weekendCost: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-      },
-      additionId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
         references: {
-          model: 'Additions',
+          model: 'Types',
           key: 'id',
         },
       },

@@ -3,17 +3,17 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Addition extends Model {
+  class Type extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate({ Room }) {
-      Addition.belongsToMany(Room, { foreignKey: 'additionId' });
+      Type.belongsToMany(Room, { foreignKey: 'typesId' });
     }
   }
-  Addition.init({
+  Type.init({
     title: {
       allowNull: false,
       unique: true,
@@ -23,17 +23,21 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT,
     },
-    guarantee: {
+    guestCount: {
       allowNull: false,
-      type: DataTypes.TEXT,
+      type: DataTypes.INTEGER,
     },
-    cancelCondition: {
+    weekdayCost: {
       allowNull: false,
-      type: DataTypes.TEXT,
+      type: DataTypes.INTEGER,
+    },
+    weekendCost: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
     },
   }, {
     sequelize,
-    modelName: 'Addition',
+    modelName: 'Type',
   });
-  return Addition;
+  return Type;
 };
