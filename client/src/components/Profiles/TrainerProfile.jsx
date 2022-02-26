@@ -2,22 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 
 import EditTrainerProfileCard from '../Cards/EditTrainerProfileCard';
-import TrainingOrderCard from '../Cards/TrainingOrderCard';
+import UserScheduleCard from '../Cards/UserScheduleCard';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import TrainerTimetable from '../Cards/TrainerTimetable';
 
-function TrainerProfile(props) {
-  const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    axios({
-      url: 'api/trainingOrders',
-      method: 'GET',
-    })
-      .then(res => setOrders(res.data.orders))
-      .catch(err => console.log(err.message));
-  }, []);
+function TrainerProfile(props) {
 
   return (
     <div className="w-full px-4 pt-8 flex flex-col gap-4">
