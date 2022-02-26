@@ -5,15 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from "./redux/store";
 import { Provider } from 'react-redux'
+import { QueryClientProvider, QueryClient } from 'react-query'
 import axios from 'axios'
 
+const queryClient = new QueryClient()
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
   ,
   document.getElementById('root')

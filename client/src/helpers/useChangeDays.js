@@ -4,8 +4,8 @@ export function useChangeDays(initialState) {
   const [days, setDays] = useState(initialState ? initialState : []);
 
   function changeDays(day) {
-    if (day === 0) {
-      setDays([])
+    if ((typeof day) === 'object') {
+      setDays(day)
     }
     else {
       (days.includes(day)) ?
