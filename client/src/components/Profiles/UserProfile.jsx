@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 
-import EditProfileCard from '../Cards/EditProfileCard';
+import EditUserProfileCard from '../Cards/EditUserProfileCard';
 import UserScheduleCard from '../Cards/UserScheduleCard';
 import AddUserScheduleCard from '../Cards/AddUserScheduleCard';
 import axios from 'axios';
@@ -34,7 +34,7 @@ function UserProfile(props) {
                 /> */}
             </Disclosure.Button>
             <Disclosure.Panel className="pt-4 text-sm text-gray-500">
-              <EditProfileCard></EditProfileCard>
+              <EditUserProfileCard />
             </Disclosure.Panel>
 
           </Disclosure>
