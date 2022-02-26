@@ -57,6 +57,73 @@ router.route('/')
   })
   .post(async (req, res) => {
     const { id: userId } = req.user;
+    const {
+      trainerId,
+      date,
+      sport,
+      hours,
+    } = req.body;
+
+    hours.forEach(async (startTime) => {
+      try {
+        const currentSchedule = await Schedule.findOne({
+          where: {
+            trainerId,
+            date,
+            startTime,
+          },
+        });
+
+        if (currentSchedule.userId) {
+          res.status(500).json({ error: 'Время занято' });
+        } else {
+          await currentSchedule.update({
+            sport,
+            userId,
+            updatedAt: new Date(),
+          });
+          await currentSchedule.save();
+
+          // FIXME: разобраться со статусами ответов
+          res.sendStatus(200);
+        }
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+  })
+  .delete(async (req, res) => {
+    const { id } = req.user;
+    const {
+      date,
+      startTime,
+      trainerId,
+    } = req.body;
+
+    try {
+      const selectOrder = await Schedule.findOne({
+        where: {
+          date,
+          startTime,
+          trainerId,
+        },
+      });
+
+      if (id === selectOrder.userId) {
+        await selectOrder.update({
+          sport: null,
+          userId: null,
+          updatedAt: new Date(),
+        });
+
+        await selectOrder.save();
+        res.sendStatus(200);
+      } else {
+        res.status(403).json({ message: 'Ошибка доступа' });
+      }
+    } catch (error) {
+      res.status(502).json({ error });
+    }
   });
 
 module.exports = router;

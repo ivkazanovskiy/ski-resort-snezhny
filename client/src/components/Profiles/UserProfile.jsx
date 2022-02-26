@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 
 import EditProfileCard from '../Cards/EditProfileCard';
-import TrainingOrderCard from '../Cards/TrainingOrderCard';
+import UserScheduleCard from '../Cards/UserScheduleCard';
 import AddUserScheduleCard from '../Cards/AddUserScheduleCard';
 import axios from 'axios';
 
 function UserProfile(props) {
 
   const [orders, setOrders] = useState([]);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     axios({
@@ -44,18 +45,26 @@ function UserProfile(props) {
             </Disclosure.Button>
             <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
               <div className="flex flex-row-reverse">
-                <button type="submit" className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">
+                <button onClick={(event) => {
+                  event.preventDefault();
+                  setIsClicked(!isClicked);
+                }
+                }
+                  className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">
                 </button>
               </div>
               <div>
-                {/* FIXME: при нажатии на кнопку новой записи */}
-              <AddUserScheduleCard></AddUserScheduleCard>
+                {
+                  isClicked ?
+                    <AddUserScheduleCard></AddUserScheduleCard>
+                    :
+                    <></>
+                }
               </div>
-
               {orders.length ?
-                orders.map(order => <TrainingOrderCard key={order.id} order={order}></TrainingOrderCard>)
+                orders.map(order => <UserScheduleCard orders={orders} setOrders={setOrders} key={order.id} order={order}></UserScheduleCard>)
                 :
-                <span>Пока нет записей</span>
+                <>Пока нет записей</>
               }
             </Disclosure.Panel>
 
@@ -75,7 +84,7 @@ function UserProfile(props) {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default UserProfile;

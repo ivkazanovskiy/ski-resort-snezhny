@@ -1,13 +1,34 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-function TrainingOrderCard({ order }) {
+function UserScheduleCard({ order, setOrders, orders }) {
 
   const day = order.date.slice(8, 10);
   const month = order.date.slice(5, 7);
   const year = order.date.slice(0, 4);
 
   const { role } = useSelector(state => state.userReducer);
+
+  const deleteOrder = (event) => {
+    event.preventDefault();
+
+    axios({
+      url: '/api/schedule',
+      method: 'DELETE',
+      data: {
+        date: order.date,
+        startTime: order.startTime,
+        trainerId: order['Trainer.id'],
+      },
+    })
+      .then(() => {
+        setOrders(
+          orders.filter(el => (el['Trainer.id'] !== order['Trainer.id']) && (el.date !== order.date) && (el.startTime !== order.startTime))
+        );
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <form className="my-2">
@@ -50,11 +71,13 @@ function TrainingOrderCard({ order }) {
           <span>{order.sport}</span>
         </div>
         <div className="flex flex-row-reverse">
-          <button type="submit" className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">Удалить</button>
+          <button onClick={(event) => {
+            deleteOrder(event);
+          }} className="h-10 w-10 text-white bg-purple-500 hover:bg-purple-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm sm:w-auto px-5 py-2.5">Удалить</button>
         </div>
       </div>
     </form>
-  );
+  )
 }
 
-export default TrainingOrderCard;
+export default UserScheduleCard;
