@@ -4,7 +4,7 @@ const checkUserRouter = require('../routes/checkUserRouter');
 
 const updateUserRouter = require('../routes/updateUserRouter');
 const trainerScheduleRouter = require('../routes/trainerScheduleRouter');
-const scheduleRouter = require('../routes/scheduleRouter');
+const userScheduleRouter = require('../routes/userScheduleRouter');
 const trainersRouter = require('../routes/trainersRouter');
 
 const authUser = require('../middleware/authUser');
@@ -15,7 +15,7 @@ function routes(app) {
   app.use('/api/checkUser', authUser, checkUserRouter);
   app.use('/api/updateUser', authUser, updateUserRouter);
   app.use('/api/trainerSchedule', authUser, trainerScheduleRouter);
-  app.use('/api/schedule', authUser, scheduleRouter);
+  app.use('/api/userSchedule', authUser, userScheduleRouter);
   app.use('/api/trainers', authUser, trainersRouter);
 }
 

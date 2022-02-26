@@ -3,20 +3,9 @@ import { Listbox, Transition } from '@headlessui/react'
 // import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 
-// TODO: пофиксить количество дней в феврале
-const months = [
-  { id: 9, name: 'Сентябрь', days: 30 },
-  { id: 10, name: 'Октябрь', days: 31 },
-  { id: 11, name: 'Ноябрь', days: 30 },
-  { id: 12, name: 'Декабрь', days: 31 },
-  { id: 1, name: 'Январь', days: 31 },
-  { id: 2, name: 'Февраль', days: 28 },
-  { id: 3, name: 'Март', days: 31 },
-  { id: 4, name: 'Апрель', days: 30 },
-]
-
-export default function ListboxMonth({ setMonth }) {
-  const [selected, setSelected] = useState(months[0])
+export default function ListboxMonth({ setMonth, months }) {
+  const curMonth = new Date().getMonth() + 1;
+  const [selected, setSelected] = useState(months.find(month => month.id === curMonth) || months[0])
 
   useEffect(() => {
     setMonth(selected)

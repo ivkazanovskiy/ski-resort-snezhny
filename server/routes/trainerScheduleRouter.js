@@ -24,7 +24,7 @@ router.route('/')
     if (!days) return res.sendStatus(400);
     console.log(days);
     // TODO: в будущем сделать более гибкое расписание
-    const possibleTime = ['09'/* , '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22' */];
+    const possibleTime = ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'];
 
     try {
       const cancelledDays = await Schedule.findAll({

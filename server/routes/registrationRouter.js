@@ -27,9 +27,8 @@ router.route('/')
           phone,
           email,
           password,
-          // FIXME: удалить при обновлении BD
-          ski: true,
-          snowboard: true,
+          ski: false,
+          snowboard: false,
 
         });
         const info = clearAttributes(trainer);
@@ -37,7 +36,6 @@ router.route('/')
         return res.status(200).json({ token, info, role: 'trainer' });
       } catch (err) {
         if (err.name === 'SequelizeUniqueConstraintError') return res.sendStatus(501);
-        console.log('TRTRTR', err);
         return res.status(500).json({ error: err.message });
       }
     }

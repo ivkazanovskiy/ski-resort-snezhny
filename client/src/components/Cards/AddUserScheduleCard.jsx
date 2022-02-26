@@ -4,14 +4,14 @@ import { Tab } from '@headlessui/react';
 import NewScheduleCard from './NewScheduleCard';
 
 
-function AddUserScheduleCard(props) {
+function AddUserScheduleCard({refresh, setRefresh}) {
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
   return (
-    <div className="w-full max-w-md px-2 py-16 sm:px-0">
+    <div className="w-full max-w-md py-4">
 
       <Tab.Group>
         <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
@@ -39,13 +39,13 @@ function AddUserScheduleCard(props) {
             'bg-white rounded-md',
             'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
           )}>
-            <NewScheduleCard key={'scheduleSnowboard'} sport={'snowboard'}></NewScheduleCard>
+            <NewScheduleCard key={'scheduleSnowboard'} sport={'snowboard'} refresh={refresh} setRefresh={setRefresh}></NewScheduleCard>
           </Tab.Panel>
           <Tab.Panel className={classNames(
             'bg-white rounded-md',
             'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
           )}>
-            <NewScheduleCard key={'scheduleSki'} sport={'ski'}></NewScheduleCard>
+            <NewScheduleCard key={'scheduleSki'} sport={'ski'} refresh={refresh} setRefresh={setRefresh}></NewScheduleCard>
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
