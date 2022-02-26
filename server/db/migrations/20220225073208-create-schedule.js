@@ -9,6 +9,7 @@ module.exports = {
           model: 'Trainers',
           key: 'id',
         },
+        onDelete: 'cascade',
       },
       date: {
         primaryKey: true,
