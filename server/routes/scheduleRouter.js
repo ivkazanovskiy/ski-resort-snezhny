@@ -4,6 +4,31 @@ const { Schedule } = require('../db/models');
 const { Trainer } = require('../db/models');
 const { User } = require('../db/models');
 
+async function createOrders(startTime, trainerId, date, sport, userId) {
+  const currentSchedule = await Schedule.findOne({
+    where: {
+      trainerId,
+      date,
+      startTime,
+    },
+  });
+
+  if (currentSchedule.userId) {
+    throw new Error('Выбранное время уже занято');
+    // return res.status(500).json({ error: 'Время занято' });
+  }
+
+  await currentSchedule.update({
+    sport,
+    userId,
+    updatedAt: new Date(),
+  });
+  await currentSchedule.save();
+  return undefined;
+  // FIXME: надо вернуть rejected в промис
+  // return res.status(500).json({ error: error.message });
+}
+
 router.route('/')
   .get(async (req, res) => {
     const { id } = req.user;
@@ -21,11 +46,8 @@ router.route('/')
           raw: true,
         });
 
-        console.log('SCHEDULE USER', orders);
-
         return res.status(200).json({ orders });
       } catch (err) {
-        console.log('ERR USER', err);
         return res.status(500).json({ error: err.message });
       }
     } else if (req.user.role === 'trainer') {
@@ -46,14 +68,13 @@ router.route('/')
           raw: true,
         });
 
-        console.log('SCHEDULE TRAINER', orders);
-
         return res.status(200).json({ orders });
       } catch (err) {
-        console.log('ERR TRAINER', err);
         return res.status(500).json({ error: err.message });
       }
     }
+
+    return res.sendStatus(403);
   })
   .post(async (req, res) => {
     const { id: userId } = req.user;
@@ -63,34 +84,14 @@ router.route('/')
       sport,
       hours,
     } = req.body;
-
-    hours.forEach(async (startTime) => {
-      try {
-        const currentSchedule = await Schedule.findOne({
-          where: {
-            trainerId,
-            date,
-            startTime,
-          },
-        });
-
-        if (currentSchedule.userId) {
-          res.status(500).json({ error: 'Время занято' });
-        } else {
-          await currentSchedule.update({
-            sport,
-            userId,
-            updatedAt: new Date(),
-          });
-          await currentSchedule.save();
-
-          // FIXME: разобраться со статусами ответов
-          res.sendStatus(200);
-        }
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-    });
+    try {
+      await Promise.all(hours
+        .map((startTime) => createOrders(startTime, trainerId, date, sport, userId)));
+      // FIXME: разобраться со статусами ответов
+      return res.sendStatus(201);
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   })
   .delete(async (req, res) => {
     const { id } = req.user;

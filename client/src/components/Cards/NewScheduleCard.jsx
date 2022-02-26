@@ -73,7 +73,7 @@ function NewScheduleCard({ sport }) {
     const data = {
       trainerId: selectedTrainer.id,
       date,
-      sport,
+      sport: (sport === 'ski') ? 'Лыжи' : 'Сноуборд',
       hours,
     };
 

@@ -62,7 +62,7 @@ function UserProfile(props) {
                 }
               </div>
               {orders.length ?
-                orders.map(order => <UserScheduleCard orders={orders} setOrders={setOrders} key={order.id} order={order}></UserScheduleCard>)
+                orders.map(order => <UserScheduleCard orders={orders} setOrders={setOrders} key={`${order.date}-${order.startTime}-${order['Trainer.id']}`} order={order}></UserScheduleCard>)
                 :
                 <>Пока нет записей</>
               }
