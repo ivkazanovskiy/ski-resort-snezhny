@@ -2,11 +2,11 @@ const {
   Model,
 } = require('sequelize');
 
-module.exports = (DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     /**
      * Helper method for defining associations.
-     * This method is not a part of DataTypes lifecycle.
+     * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate({ Room, User }) {
@@ -46,7 +46,7 @@ module.exports = (DataTypes) => {
       },
     },
   }, {
-    DataTypes,
+    sequelize,
     modelName: 'Order',
   });
   return Order;
