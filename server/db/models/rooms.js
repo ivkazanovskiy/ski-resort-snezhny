@@ -4,14 +4,8 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Room extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate({ Type, Image, Order }) {
+    static associate({ Type, Order }) {
       Room.belongsTo(Type, { foreignKey: 'typeId' });
-      Room.hasMany(Image, { foreignKey: 'roomId' });
       Room.hasMany(Order, { foreignKey: 'roomId' });
     }
   }

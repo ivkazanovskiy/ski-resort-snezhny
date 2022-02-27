@@ -4,11 +4,6 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Type extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate({ Room }) {
       Type.hasMany(Room, { foreignKey: 'typeId' });
     }
@@ -34,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     weekendCost: {
       allowNull: false,
       type: DataTypes.INTEGER,
+    },
+    images: {
+      unique: true,
+      allowNull: false,
+      type: DataTypes.STRING,
     },
   }, {
     sequelize,
