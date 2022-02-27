@@ -20,10 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
     },
-    finish: {
-      allowNull: false,
-      type: DataTypes.STRING,
-    },
     roomId: {
       allowNull: false,
       type: DataTypes.INTEGER,

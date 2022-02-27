@@ -11,6 +11,7 @@ import NavBar from './components/NavBar/NavBar';
 import UserProfile from './components/Profiles/UserProfile';
 import AdminProfile from './components/Profiles/AdminProfile';
 import TrainerProfile from './components/Profiles/TrainerProfile';
+import HouseSearchForm from './components/Forms/HouseSearchForm';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import HotelsSearch from './components/Search/HotelsSearch';
@@ -40,6 +41,7 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route path="/login" element={<Login />} />
+          <Route path="/search" element={<HouseSearchForm />} />
           <Route path="/login/admin" element={<Admin />} />
           <Route path="/registration" element={<Registration />} />
 

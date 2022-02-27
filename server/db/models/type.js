@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Type.init({
+    form: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     title: {
       allowNull: false,
       unique: true,
