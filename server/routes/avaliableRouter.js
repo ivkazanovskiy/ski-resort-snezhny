@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Op } = require('sequelize');
 const { Room, Order } = require('../db/models');
+const toStringDate = require('../helpers/toStringDate');
 
 router.route('/')
   .get(async (req, res) => {
@@ -35,6 +36,30 @@ router.route('/')
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
+  })
+  .post(async (req, res) => {
+    const { start, days, roomId } = req.body;
+    const { id: userId } = req.user;
+    let numDate = new Date(start).valueOf();
+    const newBooking = [];
+
+    for (let i = 0; i < days; i += 1) {
+      newBooking.push({
+        start: toStringDate(new Date(numDate)),
+        userId,
+        roomId,
+      });
+      numDate += 1000 * 60 * 60 * 24;
+    }
+
+    try {
+      // FIXME: надо как-то транзакцию поставить, чтобы все разом создались
+      await Promise.all(newBooking.map((newOrder) => Order.create(newOrder)));
+      return res.sendStatus(201);
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    // console.log(newBooking);
   });
 
 module.exports = router;
