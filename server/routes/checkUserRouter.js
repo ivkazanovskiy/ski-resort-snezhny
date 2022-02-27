@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Trainer } = require('../db/models');
+const { User, Trainer, Admin } = require('../db/models');
 
 const clearAttributes = require('../helpers/clearAttributes');
 
@@ -40,6 +40,22 @@ router.route('/')
 
         const info = clearAttributes(trainer);
         return res.status(200).json({ info, role: 'trainer' });
+      }
+
+      if (role === 'admin') {
+        let admin;
+        try {
+          admin = await Admin.findOne({
+            where: { id },
+          });
+        } catch (err) {
+          return res.status(500).json({ error: err.message });
+        }
+
+        if (!admin) return res.sendStatus(404);
+
+        const info = clearAttributes(admin);
+        return res.status(200).json({ info, role: 'admin' });
       }
     }
 

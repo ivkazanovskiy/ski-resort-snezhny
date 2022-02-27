@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User, Trainer } = require('../db/models');
+const { User, Trainer, Admin } = require('../db/models');
 const clearAttributes = require('../helpers/clearAttributes');
 
 async function update(person, req, res) {
@@ -45,6 +45,14 @@ router.route('/')
           return res.status(500).json({ error: err.message });
         }
         break;
+      case 'admin':
+        try {
+          person = await Admin.findOne({ where: { id } });
+          if (!person) return res.sendStatus(404);
+        } catch (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        break;
       default:
         return res.sendStatus(401);
     }
@@ -54,6 +62,7 @@ router.route('/')
     if (await bcrypt.compare(passwordOld, person.password)) {
       const newPassword = await bcrypt.hash(password, 10);
       person.password = newPassword;
+      // затираем старый пароль, вместо него мы назанчили новый зашифрованный
       delete req.body.password;
       return update(person, req, res);
     }
