@@ -4,11 +4,6 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate({ Room, User }) {
       Order.belongsTo(Room, { foreignKey: 'roomId' });
       Order.belongsTo(User, { foreignKey: 'userId' });
@@ -33,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER,
       references: {
-        model: 'Rooms',
+        model: 'Room',
         key: 'id',
       },
     },
@@ -41,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
+        model: 'User',
         key: 'id',
       },
     },
