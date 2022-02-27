@@ -34,6 +34,16 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        name: 'Миша',
+        surname: 'Галустян',
+        email: 'misha@gmail.com',
+        phone: '+79995133333',
+        password: await bcrypt.hash('1Qq', 10),
+        // skiPass: ,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         name: 'Валера',
         surname: 'Меладзе',
         email: 'meladze@mail.ru',
