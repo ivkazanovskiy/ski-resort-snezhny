@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { useRef } from 'react';
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient, useMutation } from 'react-query'
 import { countGapValue } from '../../helpers/countGapValue';
 import { nextStringDate } from '../../helpers/nextStringDate';
 import { toStringDate } from '../../helpers/toStringDate';
@@ -9,6 +9,7 @@ import axios from 'axios'
 function RoomsSearch(props) {
 
   const startRef = useRef()
+  const roomRef = useRef()
   const finishRef = useRef()
   const queryClient = useQueryClient()
   const [startDate, setStartDate] = useState(nextStringDate(toStringDate(new Date()), 1))
@@ -25,17 +26,31 @@ function RoomsSearch(props) {
   const { isSuccess, isLoading, data } = useQuery('avaliableRooms', () => axios('/api/avaliable'))
   let avaliable;
 
-  if (isSuccess) {
-    avaliable = data
-    console.log(avaliable);
-  }
+  const dookDays = useMutation(() => axios({
+    url: '/api/avaliable',
+    method: 'POST',
+    data: {
+      start: startDate,
+      days: gap,
+      roomId: Number(roomRef.current.value)
+    }
+  }), {
+    onSuccess: () => queryClient.invalidateQueries('avaliableRooms'),
+    onError: (error) => window.alert(error.response.data.error),
+  })
+
+
+  if (isSuccess) avaliable = data.data.sort((a, b) => a - b)
 
   useLayoutEffect(() => {
     setFinishDate(nextStringDate(startDate, gap))
     finishRef.current.value = nextStringDate(startDate, gap)
-    queryClient.invalidateQueries('avaliableRooms')
   }, [startDate, gap])
 
+
+  useEffect(() => {
+    queryClient.invalidateQueries('avaliableRooms')
+  }, [finishDate])
 
 
   return (
@@ -59,8 +74,21 @@ function RoomsSearch(props) {
         </label>
       </div>
       <div className="">Выбранно {countGapValue(startDate, finishDate)} дней </div>
-      <button onClick={() => queryClient.invalidateQueries('avaliableRooms')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Забронировать</button>
-    </div>
+      {/* Пока грузится */}
+      {isLoading && <span>Загрузка...</span>}
+      {isSuccess && ((avaliable.length > 0) ?
+        <select name="select" className="w-40" ref={roomRef}>
+          {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
+        </select>
+        :
+        <select name="select" className="w-40" ref={roomRef} disabled>
+          <option> Свободных номеров нет</option>
+        </select>
+      )
+      }
+
+      <button onClick={dookDays.mutate} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Забронировать</button>
+    </div >
   );
 }
 
