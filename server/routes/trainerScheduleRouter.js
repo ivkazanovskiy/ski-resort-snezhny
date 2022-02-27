@@ -21,6 +21,7 @@ router.route('/')
   .put(async (req, res) => {
     const { id } = req.user;
     const { days } = req.body;
+    console.log(days);
     if (!days) return res.sendStatus(400);
     console.log(days);
     // TODO: в будущем сделать более гибкое расписание

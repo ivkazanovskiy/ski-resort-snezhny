@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 
 //FIXME: доделать reactQuery
-// import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient, useMutation } from 'react-query'
 import { Disclosure } from '@headlessui/react'
 import axios from 'axios'
 
@@ -9,8 +9,8 @@ import ListboxMonth from '../Listbox/ListboxMonth';
 import TrainerCalendar from './TrainerCalendar';
 import Day from '../Listbox/Day';
 
-import { useChangeDays } from '../../helpers/useChangeDays'
-import { getDataFromObjects } from '../../helpers/getDataFromObjects'
+import { addZero } from '../../helpers/addZero'
+import { getDates } from '../../helpers/getDates'
 
 
 
@@ -28,9 +28,6 @@ function TrainerTimetable(props) {
     { id: 4, name: 'Апрель', days: 30 },
   ]
 
-
-  //FIXME: доделать reactQuery
-  // const queryClient = useQueryClient()
   // автоматический подсчет даты для текущего месяца
   const curYear = new Date().getFullYear();
   const curMonth = new Date().getMonth() + 1;
@@ -39,55 +36,42 @@ function TrainerTimetable(props) {
     nextYear: (curMonth < 6) ? curYear : curYear + 1,
   }
 
-  // TODO: флажек для отлавливания сохранений переделать axios с useEffect на react query
-  const [refresh, setRefresh] = useState(false)
-  const [savedHours, setSavedHours] = useState([])
-  const [busyDays, changeDays] = useChangeDays()
-  const [busyHours, setBusyHours] = useState()
   const [month, setMonth] = useState(months.find(month => month.id === curMonth))
-  const [currentMonthDays, setCurrentMonthDays] = useState([])
-
-  useLayoutEffect(() => {
-    const daysArray = []
-    for (let day = 1; day <= month.days; day += 1) {
-      daysArray.push(day)
-    }
-    setCurrentMonthDays(daysArray)
-  }, [month])
 
 
-  //FIXME: доделать reactQuery
-  // const actualResponse = useQuery('updateHours', () => axios({ url: '/api/trainerSchedule' }))
+  const daysArray = []
+  for (let day = 1; day <= month.days; day += 1) {
+    daysArray.push(addZero(
+      (month > 6) ? season.prevYear : season.nextYear,
+      month.id,
+      day
+    ))
+  }
 
-  // FIXME: сделать только на выбранный месяц или оставить как есть
-  // достаем существующее расписание
-  useEffect(() => {
-    axios({
-      url: '/api/trainerSchedule',
-    })
-      .then(response => {
-        const { schedule: scheduleObjects } = response.data
-        setSavedHours(scheduleObjects)
-        changeDays(getDataFromObjects(scheduleObjects))
-        setBusyHours(scheduleObjects.filter(obj => obj.sport))
-      })
-      .catch(err => console.error(err))
-    // TODO: переделать на react query
-  }, [refresh])
+  const queryClient = useQueryClient()
+  // FIXME: сделать только на выбранный месяц или оставить как есть на весь сезон
+  const allRecords = useQuery('allRecords', () => axios({ url: '/api/trainerSchedule' }))
 
-  const saveChanges = () => {
-    const data = { days: busyDays }
-    axios({
-      url: '/api/trainerSchedule',
-      method: 'PUT',
-      data
-    })
-      .then(response => {
-        setRefresh(!refresh)
-        //FIXME: доделать reactQuery
-        // queryClient.invalidateQueries('updateHours')
-      })
-      .catch(err => console.error(err))
+  const saveRecords = useMutation(() => axios({
+    url: '/api/trainerSchedule',
+    method: 'PUT',
+    data: { days: workingDays }
+  })
+    , { onSuccess: () => queryClient.invalidateQueries('allRecords') })
+
+  let workingDays;
+  let workingHours;
+  if (allRecords.isSuccess) {
+    workingDays = getDates(allRecords.data.data.schedule)
+    workingHours = allRecords.data.data.schedule.filter(record => record['User.name'])
+  }
+
+  const changeDays = (day) => {
+    (workingDays.includes(day))
+      ?
+      workingDays = workingDays.filter(el => el !== day)
+      :
+      workingDays.push(day);
   }
 
   return (
@@ -103,10 +87,13 @@ function TrainerTimetable(props) {
 
             <ListboxMonth setMonth={setMonth} months={months} />
           </div>
+
+          {/* FIXME: сделать смещение, чтобы выходные были в конце */}
           <div className="grid grid-cols-7 gap-2 p-2">
-            {currentMonthDays.map((day, ind) => <Day key={`${month.name}-${ind}`} savedHours={savedHours} day={day} month={month.id} year={(month.id >= 6) ? season.prevYear : season.nextYear} changeDays={changeDays} />)}
+            {allRecords.isLoading && <>Загрузка</>}
+            {allRecords.isSuccess && daysArray.map((date, ind) => <Day key={date} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} />)}
           </div>
-          <button onClick={saveChanges} className="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Сохранить расписание</button>
+          <button onClick={saveRecords.mutate} className="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Сохранить расписание</button>
         </Disclosure.Panel>
       </Disclosure>
 
@@ -115,7 +102,8 @@ function TrainerTimetable(props) {
           <span>Посмотреть записи</span>
         </Disclosure.Button>
         <Disclosure.Panel className="pt-4 mb-2 text-sm text-gray-500">
-          <TrainerCalendar busyHours={busyHours}></TrainerCalendar>
+          {allRecords.isLoading && <>Загрузка</>}
+          {allRecords.isSuccess && <TrainerCalendar workingHours={workingHours}></TrainerCalendar>}
         </Disclosure.Panel>
       </Disclosure>
     </div>
