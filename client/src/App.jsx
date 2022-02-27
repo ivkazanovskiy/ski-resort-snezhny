@@ -4,13 +4,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios'
 
 import Login from './components/Login/Login';
+import Admin from './components/Login/Admin';
 import Registration from './components/Registration/Registration';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import UserProfile from './components/Profiles/UserProfile';
+import AdminProfile from './components/Profiles/AdminProfile';
 import TrainerProfile from './components/Profiles/TrainerProfile';
+import HouseSearchForm from './components/Forms/HouseSearchForm';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
+import HotelsSearch from './components/Search/HotelsSearch';
+import CottagesSearch from './components/Search/CottagesSearch';
+import RoomsSearch from './components/Search/RoomsSearch';
 
 function App() {
   // автоматически в запросе отправляем заголовок с токеном
@@ -26,20 +32,25 @@ function App() {
     }
   }, [dispatch])
 
+
   return (
     <BrowserRouter >
       <NavBar />
       <section className="flex justify-center">
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
+          <Route path="/search" element={<HouseSearchForm />} />
+          <Route path="/login/admin" element={<Admin />} />
           <Route path="/registration" element={<Registration />} />
-          {
-            (role === "user") ?
-              <Route path="/profile" element={<UserProfile />} />
-              :
-              <Route path="/profile" element={<TrainerProfile />} />
-          }
+
+          {role === "user" && <Route path="/profile" element={<UserProfile />} />}
+          {role === "trainer" && <Route path="/profile" element={<TrainerProfile />} />}
+          {role === "admin" && <Route path="/profile" element={<AdminProfile />} />}
+          {role === "user" && <Route path="/search/rooms" element={<RoomsSearch />} />}
+          {role === "user" && <Route path="/search/cottages" element={<CottagesSearch />} />}
+
         </Routes>
       </section>
     </BrowserRouter >

@@ -4,11 +4,6 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Trainer extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate({ Schedule }) {
       Trainer.hasMany(Schedule, { foreignKey: 'trainerId' });
     }
@@ -33,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     phone: {
       allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+    },
+    photo: {
+      allowNull: true,
       type: DataTypes.STRING,
       unique: true,
     },

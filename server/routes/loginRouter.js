@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User, Trainer } = require('../db/models');
+const { User, Trainer, Admin } = require('../db/models');
 const clearAttributes = require('../helpers/clearAttributes');
 require('dotenv').config();
 
@@ -28,7 +28,8 @@ router.route('/')
 
       // incorrect password
       return res.sendStatus(400);
-    } if (role === 'trainer') {
+    }
+    if (role === 'trainer') {
       let trainer;
       try {
         trainer = await Trainer.findOne({
@@ -49,6 +50,28 @@ router.route('/')
       // incorrect password
       return res.sendStatus(400);
     }
-    return undefined;
+
+    if (role === 'admin') {
+      let admin;
+      try {
+        admin = await Admin.findOne({
+          where: { email },
+        });
+      } catch (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      if (!admin) return res.sendStatus(404);
+
+      if (await bcrypt.compare(password, admin.password)) {
+        const info = clearAttributes(admin);
+        const token = jwt.sign({ role: 'admin', id: admin.id }, process.env.ACCESS_TOKEN_SECRET);
+        return res.status(200).json({ token, info, role: 'admin' });
+      }
+
+      // incorrect password
+      return res.sendStatus(400);
+    }
+    return res.status(401).json({ message: 'Invalid role' });
   });
 module.exports = router;
