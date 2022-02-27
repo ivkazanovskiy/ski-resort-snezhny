@@ -4,12 +4,6 @@ import axios from 'axios';
 
 function UserScheduleCard({ order, setOrders, orders }) {
 
-  const day = order.date.slice(8, 10);
-  const month = order.date.slice(5, 7);
-  const year = order.date.slice(0, 4);
-
-  const { role } = useSelector(state => state.userReducer);
-
   const deleteOrder = (event) => {
     event.preventDefault();
 
@@ -33,7 +27,7 @@ function UserScheduleCard({ order, setOrders, orders }) {
       })
       .catch(err => console.log(err));
   };
-  console.log(order);
+
   return (
     <li className="border rounded-lg flex items-center p-2 gap-4">
       <div className="w-16 h-16 border rounded-full"></div>
