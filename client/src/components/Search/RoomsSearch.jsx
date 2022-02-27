@@ -25,17 +25,17 @@ function RoomsSearch(props) {
   const { isSuccess, isLoading, data } = useQuery('avaliableRooms', () => axios('/api/avaliable'))
   let avaliable;
 
-  if (isSuccess) {
-    avaliable = data
-    console.log(avaliable);
-  }
+  if (isSuccess) avaliable = data.data.sort((a, b) => a - b)
 
   useLayoutEffect(() => {
     setFinishDate(nextStringDate(startDate, gap))
     finishRef.current.value = nextStringDate(startDate, gap)
-    queryClient.invalidateQueries('avaliableRooms')
   }, [startDate, gap])
 
+
+  useEffect(() => {
+    queryClient.invalidateQueries('avaliableRooms')
+  }, [finishDate])
 
 
   return (
@@ -59,6 +59,18 @@ function RoomsSearch(props) {
         </label>
       </div>
       <div className="">Выбранно {countGapValue(startDate, finishDate)} дней </div>
+      {/* Пока грузится */}
+      {isLoading && <span>Загрузка...</span>}
+      {isSuccess && (avaliable) ?
+        <select name="select">
+          {avaliable.map(id => <option value={id}>{id}</option>)}
+        </select>
+        :
+        <select name="select">
+          <option value="value1">Свободных дат нет</option>
+        </select>
+      }
+
       <button onClick={() => queryClient.invalidateQueries('avaliableRooms')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Забронировать</button>
     </div>
   );

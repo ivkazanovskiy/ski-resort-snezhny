@@ -7,6 +7,7 @@ router.route('/')
     const { start: startWish, finish: finishWish, type: typeString } = req.headers;
     const typeId = Number(typeString);
     try {
+      // TODO: еределать в один запрос, если будет вермя
       const allRooms = await Room.findAll({
         where: { typeId },
         raw: true,
@@ -15,21 +16,13 @@ router.route('/')
 
       const ordered = await Order.findAll({
         where: {
-          [Op.or]: [{
-            [Op.and]: [{
-              start: { [Op.lte]: startWish },
-            }, {
-              finish: { [Op.gt]: startWish },
-            }],
+          [Op.and]: [{
+            start: { [Op.gte]: startWish },
           }, {
-            [Op.and]: [{
-              start: { [Op.lt]: finishWish },
-            }, {
-              finish: { [Op.gte]: finishWish },
-            }],
+            start: { [Op.lt]: finishWish },
           }],
-
         },
+        group: ['roomId'],
         attributes: ['roomId'],
         raw: true,
       });
