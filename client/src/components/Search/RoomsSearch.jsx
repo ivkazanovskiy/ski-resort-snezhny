@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { useRef } from 'react';
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
 import { countGapValue } from '../../helpers/countGapValue';
 import { nextStringDate } from '../../helpers/nextStringDate';
 import { toStringDate } from '../../helpers/toStringDate';
@@ -10,24 +10,33 @@ function RoomsSearch(props) {
 
   const startRef = useRef()
   const finishRef = useRef()
+  const queryClient = useQueryClient()
+  const [startDate, setStartDate] = useState(nextStringDate(toStringDate(new Date()), 1))
+  const [gap, setGap] = useState(1)
 
-  const [startDate, setStartDate] = useState(toStringDate(new Date()))
-  const [gap, setGap] = useState(2)
-  let finishDate = (nextStringDate(startDate, gap))
+  // TODO: возможно стоит заменить не переменную
+  const [finishDate, setFinishDate] = useState(nextStringDate(startDate, gap))
 
+  axios.defaults.headers.common['start'] = startDate
+  axios.defaults.headers.common['finish'] = finishDate
+  //   // FIXME: сделать из req.params
+  axios.defaults.headers.common['type'] = 1
 
-  const avaliableRooms = useQuery('avaliableRooms', axios({
-    url: '/api/avaliable',
-    headers: {
-      start: startDate,
-      finish: finishDate
-    }
-  }))
+  const { isSuccess, isLoading, data } = useQuery('avaliableRooms', () => axios('/api/avaliable'))
+  let avaliable;
 
-  useEffect(() => {
-    finishDate = (nextStringDate(startDate, gap))
+  if (isSuccess) {
+    avaliable = data
+    console.log(avaliable);
+  }
+
+  useLayoutEffect(() => {
+    setFinishDate(nextStringDate(startDate, gap))
     finishRef.current.value = nextStringDate(startDate, gap)
+    queryClient.invalidateQueries('avaliableRooms')
   }, [startDate, gap])
+
+
 
   return (
     <div className="flex flex-col border w-full gap-2">
@@ -41,7 +50,7 @@ function RoomsSearch(props) {
       <div className="flex justify-around">
         <label htmlFor="start" className="flex flex-col gap-1">
           <div>Заезд</div>
-          <input type="date" id="start" defaultValue={startDate} ref={startRef} onChange={() => setStartDate(startRef.current.value)} />
+          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} />
         </label>
 
         <label htmlFor="start" className="flex flex-col gap-1">
@@ -50,7 +59,7 @@ function RoomsSearch(props) {
         </label>
       </div>
       <div className="">Выбранно {countGapValue(startDate, finishDate)} дней </div>
-      <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Забронировать</button>
+      <button onClick={() => queryClient.invalidateQueries('avaliableRooms')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Забронировать</button>
     </div>
   );
 }
