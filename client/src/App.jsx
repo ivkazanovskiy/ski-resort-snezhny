@@ -9,6 +9,7 @@ import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import UserProfile from './components/Profiles/UserProfile';
 import TrainerProfile from './components/Profiles/TrainerProfile';
+import HouseSearchForm from './components/Forms/HouseSearchForm';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/search" element={<HouseSearchForm />} />
           <Route path="/registration" element={<Registration />} />
           {
             (role === "user") ?
