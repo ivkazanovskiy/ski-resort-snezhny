@@ -11,7 +11,8 @@ function OrderCard({ orders }) {
     method: 'DELETE',
     data: { ids }
   }), {
-    onSuccess: () => queryClient.invalidateQueries('allCards')
+    onSuccess: () => queryClient.invalidateQueries('allCards'),
+    onError: (err) => console.log(err.response.data)
   })
 
   const roomId = orders[0].roomId
