@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidAboutMe } from '../../helpers/isValid'
 import { updateUser } from '../../redux/sagaCreators/userSagaCreators';
+import { updateAvatar } from '../../redux/actionCreators/userAC';
 import axios from 'axios';
 
 function EditTrainerProfileCard(props) {
@@ -117,8 +118,8 @@ function EditTrainerProfileCard(props) {
       }
     })
       .then(res => {
-        console.log(res);
         setAvatar(res.data.photo);
+        dispatch(updateAvatar(res.data.photo));
       });
   }, [avatar]);
 

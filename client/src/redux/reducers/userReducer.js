@@ -1,4 +1,4 @@
-import { DELETE_USER, EDIT_USER, INIT_USER } from '../actionTypes/userAT'
+import { DELETE_USER, EDIT_USER, INIT_USER, UPDATE_AVATAR } from '../actionTypes/userAT'
 
 export const userReducer = (state = { auth: false }, action) => {
   switch (action.type) {
@@ -9,6 +9,8 @@ export const userReducer = (state = { auth: false }, action) => {
       return { ...state, ...action.payload.info }
     case DELETE_USER:
       return { auth: false }
+    case UPDATE_AVATAR:
+      return { ...state, photo: action.payload }
     default:
       return state
   }
