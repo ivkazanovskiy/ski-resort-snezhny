@@ -19,6 +19,16 @@ router.route('/')
       console.log(err.message);
       return res.status(500).json({ error: err.message });
     }
+  })
+  .delete(async (req, res) => {
+    const { ids } = req.body;
+
+    try {
+      await Promise.all(ids.map((id) => Order.destroy({ where: { id } })));
+      return res.sendStatus(200);
+    } catch (err) {
+      return res.status(500).json({ error: err });
+    }
   });
 
 module.exports = router;
