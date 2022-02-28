@@ -1,6 +1,6 @@
 import { DELETE_USER, EDIT_USER, INIT_USER } from '../actionTypes/userAT'
 
-export const userReducer = (state = { auth: false }, action) => {
+export const userReducer = (state = { auth: undefined }, action) => {
   switch (action.type) {
     case INIT_USER:
       const { info, role } = action.payload
