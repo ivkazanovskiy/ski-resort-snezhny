@@ -41,7 +41,7 @@ function NavBar() {
                 <>
                   {/* FIXME: временная , убрать как закончу */}
                   < li >
-                    <Link to="/search/rooms" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">ROOMS</Link>
+                    <Link to="/search/rooms/1" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">ROOMS</Link>
                   </li>
                   < li >
                     <Link to="/profile" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Личный кабинет</Link>

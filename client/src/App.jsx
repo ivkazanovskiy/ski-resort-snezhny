@@ -48,9 +48,10 @@ function App() {
           {role === "user" && <Route path="/profile" element={<UserProfile />} />}
           {role === "trainer" && <Route path="/profile" element={<TrainerProfile />} />}
           {role === "admin" && <Route path="/profile" element={<AdminProfile />} />}
-          {role === "user" || role==="admin" && <Route path="/search/rooms" element={<RoomsSearch />} />}
-          {role === "user" && <Route path="/search/cottages" element={<CottagesSearch />} />}
-
+          {role === "user" || role==="admin" && <Route path="/search/rooms/:type" element={<RoomsSearch />} />}
+          {role === "user" || role==="admin" && <Route path="/search/cottages/:type" element={<RoomsSearch />} />}
+          {role === "user" || role==="admin" && <Route path="/search/hotels" element={<RoomsSearch />} />}
+          
         </Routes>
       </section>
     </BrowserRouter >
