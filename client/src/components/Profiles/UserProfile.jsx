@@ -5,6 +5,7 @@ import EditUserProfileCard from '../Cards/EditUserProfileCard';
 import UserScheduleCard from '../Cards/UserScheduleCard';
 import AddUserScheduleCard from '../Cards/AddUserScheduleCard';
 import axios from 'axios';
+import AllOrdersCards from '../Cards/AllOrdersCards';
 
 function UserProfile(props) {
 
@@ -82,7 +83,7 @@ function UserProfile(props) {
                   <span>Брони</span>
                 </Disclosure.Button>
                 <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                  No.
+                  <AllOrdersCards />
                 </Disclosure.Panel>
               </>
             )}

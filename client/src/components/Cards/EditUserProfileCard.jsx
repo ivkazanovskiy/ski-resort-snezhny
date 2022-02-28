@@ -2,8 +2,10 @@ import React, { useState, useRef } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux';
 
-import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../helpers/isValid'
+import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidSkiPass } from '../../helpers/isValid'
 import { updateUser } from '../../redux/sagaCreators/userSagaCreators';
+
+
 
 function EditUserProfileCard(props) {
 
@@ -12,6 +14,7 @@ function EditUserProfileCard(props) {
   const name = useRef()
   const surname = useRef()
   const phone = useRef()
+  const skiPass = useRef()
   const email = useRef()
   const passwordOld = useRef()
   const password = useRef()
@@ -20,6 +23,7 @@ function EditUserProfileCard(props) {
   const [areSamePasswords, setAreSamePasswords] = useState(false)
   const [isCorrectName, setIsCorrectName] = useState(true)
   const [isCorrectSurname, setIsCorrectSurname] = useState(true)
+  const [isCorrectSkiPass, setIsCorrectSkiPass] = useState(true)
   const [isCorrectPhone, setIsCorrectPhone] = useState(true)
   const [isCorrectEmail, setIsCorrectEmail] = useState(true)
   const [isCorrectPassword, setIsCorrectPassword] = useState(false)
@@ -43,6 +47,9 @@ function EditUserProfileCard(props) {
   const checkPassword = () => {
     setIsCorrectPassword(isValidPassword(password.current.value))
   }
+  const checkSkiPass = () => {
+    setIsCorrectSkiPass(isValidSkiPass(skiPass.current.value))
+  }
   const checkPasswords = () => {
     (password.current.value && password.current.value === passwordRepeat.current.value) ? setAreSamePasswords(true) : setAreSamePasswords(false)
   }
@@ -51,37 +58,33 @@ function EditUserProfileCard(props) {
     name: nameCurrent,
     surname: surnameCurrent,
     email: emailCurrent,
-    phone: phoneCurrent, } = useSelector(state => state.userReducer)
+    phone: phoneCurrent,
+    skiPass: skiPassCurrent,
+  } = useSelector(state => state.userReducer)
 
   const applyChanges = (event) => {
     event.preventDefault()
 
+    const data = {
+      name: name.current.value,
+      surname: surname.current.value,
+      phone: phone.current.value,
+      email: email.current.value,
+      skiPass: (skiPass.current.value ? skiPass.current.value : null),
+    };
     if (!password.current) {
-      if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone) {
-        const data = {
-          name: name.current.value,
-          surname: surname.current.value,
-          phone: phone.current.value,
-          email: email.current.value,
-        };
+      if (isCorrectName && isCorrectSurname && isCorrectPhone && isCorrectEmail && isCorrectSkiPass) {
         return dispatch(updateUser(data))
       }
     }
 
-    if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
-      const data = {
-        name: name.current.value,
-        surname: surname.current.value,
-        phone: phone.current.value,
-        email: email.current.value,
-        passwordOld: passwordOld.current.value,
-        password: password.current.value
-      };
+    if (isCorrectName && isCorrectSurname && isCorrectPhone && isCorrectEmail && isCorrectSkiPass && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
+      data.passwordOld = passwordOld.current.value
+      data.password = password.current.value
       return dispatch(updateUser(data))
-    }
-
-
+    };
   }
+
 
   return (
     <form className="py-4 border border-gray-300 rounded-lg p-2">
@@ -101,6 +104,15 @@ function EditUserProfileCard(props) {
           <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
           :
           <span className="block mb-2 text-sm font-medium text-red-500">Фамилия должна быть короче 20 букв</span>
+        }
+      </div>
+      <div className="mb-2">
+        <label htmlFor="skiPass" className="block mb-2 text-sm font-medium text-gray-900 ">Номер Ski-pass</label>
+        <input name="skiPass" type="text" id="skiPass" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" defaultValue={skiPassCurrent} ref={skiPass} onChange={checkSkiPass} />
+        {(isCorrectSkiPass) ?
+          <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
+          :
+          <span className="block mb-2 text-sm font-medium text-red-500">Ski-pass может отсутствовать, либо в формате 12345</span>
         }
       </div>
       <div className="mb-2">
