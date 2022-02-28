@@ -4,6 +4,8 @@ import { Disclosure } from '@headlessui/react';
 import EditAdminProfileCard from '../Cards/EditAdminProfileCard';
 import AdminOrdersForm from '../Forms/AdminOrdersForm';
 import axios from 'axios';
+import ChooseEditRoomCard from '../Cards/ChooseEditRoomCard';
+import AllOrdersCards from '../Cards/AllOrdersCards';
 
 function AdminProfile(props) {
 
@@ -13,7 +15,7 @@ function AdminProfile(props) {
         <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
           <Disclosure as="div" className="mt-2">
             <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-              <span>Информация</span>
+              <span>Информация профиля</span>
               {/* <ChevronUpIcon
                   className={`${open ? 'transform rotate-180' : ''
                     } w-5 h-5 text-purple-500`}
@@ -25,7 +27,7 @@ function AdminProfile(props) {
           </Disclosure>
           <Disclosure as="div" className="mt-2">
             <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-              <span>Бронирования</span>
+              <span>Календарь бронирований</span>
               {/* <ChevronUpIcon
                   className={`${open ? 'transform rotate-180' : ''
                     } w-5 h-5 text-purple-500`}
@@ -37,14 +39,26 @@ function AdminProfile(props) {
           </Disclosure>
           <Disclosure as="div" className="mt-2">
             <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-              <span>Номера</span>
+              <span>Бронирования администратора</span>
               {/* <ChevronUpIcon
                   className={`${open ? 'transform rotate-180' : ''
                     } w-5 h-5 text-purple-500`}
                 /> */}
             </Disclosure.Button>
             <Disclosure.Panel className="pt-4 text-sm text-gray-500">
-              Здесь будут карточки номеров
+              <AllOrdersCards />
+            </Disclosure.Panel>
+          </Disclosure>
+          <Disclosure as="div" className="mt-2">
+            <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              <span>Редактирование номеров/коттеджей</span>
+              {/* <ChevronUpIcon
+                  className={`${open ? 'transform rotate-180' : ''
+                    } w-5 h-5 text-purple-500`}
+                /> */}
+            </Disclosure.Button>
+            <Disclosure.Panel className="pt-4 text-sm text-gray-500">
+              <ChooseEditRoomCard />
             </Disclosure.Panel>
           </Disclosure>
         </div>

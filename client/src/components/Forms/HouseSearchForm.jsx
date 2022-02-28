@@ -23,8 +23,6 @@ function HouseSearchForm(props) {
     return classes.filter(Boolean).join(' ')
   }
 
-  console.log('ALL TYPES', allTypes);
-
   return (
     <div className="w-full px-4 pt-8">
       <div className="w-full max-w-md py-4">

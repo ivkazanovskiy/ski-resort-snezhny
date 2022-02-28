@@ -17,3 +17,8 @@ export const isValidPhone = (name) => {
 export const isValidAboutMe = (name) => {
   return /^.{0,140}$/.test(name);
 }
+
+export const isValidSkiPass = (name) => {
+  return /(^$)|(^[\d]{5}$)/.test(name);
+}
+

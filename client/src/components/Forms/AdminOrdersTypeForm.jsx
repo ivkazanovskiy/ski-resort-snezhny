@@ -4,7 +4,7 @@ import { Tab } from '@headlessui/react';
 
 import AdminTableCard from '../Cards/AdminTableCard';
 
-function AdminOrdersTypeForm({ form }) {
+function AdminOrdersTypeForm({ form, dates }) {
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -14,7 +14,7 @@ function AdminOrdersTypeForm({ form }) {
     <>
       {
         form === 'hotel' ?
-          <AdminTableCard form={form} type={undefined}></AdminTableCard>
+          <AdminTableCard dates={dates} form={form} type={undefined}></AdminTableCard>
           :
           <div className="w-full max-w-md pb-4">
             <Tab.Group>
@@ -44,13 +44,13 @@ function AdminOrdersTypeForm({ form }) {
                   'bg-white rounded-md',
                   'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
                 )}>
-                  <AdminTableCard form={form} type={'standart'}></AdminTableCard>
+                  <AdminTableCard dates={dates} form={form} type={'standart'}></AdminTableCard>
                 </Tab.Panel>
                 <Tab.Panel className={classNames(
                   'bg-white rounded-md',
                   'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
                 )}>
-                  <AdminTableCard form={form} type={'comfort'}></AdminTableCard>
+                  <AdminTableCard dates={dates} form={form} type={'comfort'}></AdminTableCard>
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
