@@ -48,7 +48,7 @@ function App() {
           {role === "user" && <Route path="/profile" element={<UserProfile />} />}
           {role === "trainer" && <Route path="/profile" element={<TrainerProfile />} />}
           {role === "admin" && <Route path="/profile" element={<AdminProfile />} />}
-          {role === "user" && <Route path="/search/rooms" element={<RoomsSearch />} />}
+          {role === "user" || role==="admin" && <Route path="/search/rooms" element={<RoomsSearch />} />}
           {role === "user" && <Route path="/search/cottages" element={<CottagesSearch />} />}
 
         </Routes>

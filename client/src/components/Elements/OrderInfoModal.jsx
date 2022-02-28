@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
 import axios from 'axios';
 
 function OrderInfoModal({ id, date, setIsModal }) {
 
-  const [info, setInfo] = useState({});
+  const order = useQuery(`${id}/${date}`, () => axios(
+    `/api/orders/${id}/${date}`
+  ));
 
-  useEffect(() => {
-    axios({
-      url: `/api/orders/${id}/${date}`,
-      method: 'GET',
-    })
-      .then(res => setInfo(res.data.order))
-      .catch(error => console.log(error));
-  }, []);
+  let info;
+
+  if (order.isSuccess) info = order.data.data.order;
 
   return (
-    <div className="m-4 absolute w-60 border bg-slate-200">
-      <div className="flex flex-col">
-        <span>Имя: {`${info['User.name']} ${info['User.surname']}`}</span>
-        <span>Номер телефона: {info['User.phone']}</span>
-        <span>Почта: {info['User.email']}</span>
-        <span></span>
-      </div>
-      <button onClick={() => setIsModal(false)}>Закрыть</button>
-    </div>
+    <>
+      {info && <div className="m-4 absolute w-60 border bg-slate-200">
+        <div className="flex flex-col">
+          <span>Имя: {`${info['User.name']} ${info['User.surname']}`}</span>
+          <span>Номер телефона: {info['User.phone']}</span>
+          <span>Почта: {info['User.email']}</span>
+        </div>
+        <button onClick={() => setIsModal(false)}>Закрыть</button>
+      </div>}
+    </>
   );
 }
 

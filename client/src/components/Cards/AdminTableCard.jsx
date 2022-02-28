@@ -25,8 +25,6 @@ function AdminTableCard({ dates, form, type }) {
   }, []);
 
   const isMarked = (id, date) => {
-    console.log('ID', id);
-    console.log('DATE', date);
     return !!orders.find(el => el.start === date && el['Room.id'] === id);
   }
 
@@ -38,7 +36,7 @@ function AdminTableCard({ dates, form, type }) {
         }
       </div>
       {
-        rooms.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={dates} />)
+        rooms.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={dates} typeId={el['Type.id']}/>)
       }
     </ul>
   );
