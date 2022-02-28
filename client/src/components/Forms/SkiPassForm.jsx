@@ -30,14 +30,6 @@ function SkiPassForm(props) {
     }
   }, [type, tableQuery, amountPasses, amountHours])
 
-
-
-
-  // console.log(tableQuery);
-  console.log(type, chosen, amountPasses);
-
-  // FIXME: обернуть в useCallback
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
