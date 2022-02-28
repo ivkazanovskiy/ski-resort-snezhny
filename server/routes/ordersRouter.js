@@ -74,9 +74,6 @@ router.route('/')
         rooms = [...allRooms];
       }
 
-      console.log(rooms);
-      console.log(orders);
-
       res.status(200).json({ orders, rooms });
     } catch (error) {
       res.status(500).json({ error: error.message });

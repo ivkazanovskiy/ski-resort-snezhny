@@ -6,7 +6,6 @@ router.route('/')
     const { folder } = req.headers;
     fs.readdir(`src${folder}`, (err, photos) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({ error: err });
       }
 

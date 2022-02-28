@@ -1,15 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidAboutMe } from '../../helpers/isValid'
 import { updateUser } from '../../redux/sagaCreators/userSagaCreators';
+import { updateAvatar } from '../../redux/actionCreators/userAC';
+import axios from 'axios';
 
 function EditTrainerProfileCard(props) {
 
   const dispatch = useDispatch()
-
-  let [plan, setPlan] = useState('startup')
+  const { id, photo } = useSelector(state => state.userReducer);
+  const [avatar, setAvatar] = useState(null);
 
   const name = useRef()
   const surname = useRef()
@@ -101,8 +103,39 @@ function EditTrainerProfileCard(props) {
 
   }
 
+  const updatePhoto = useCallback((event) => {
+    event.preventDefault();
+    const data = new FormData();
+    data.append('photo', avatar);
+    console.log('DATA', data);
+
+    axios({
+      url: `/api/trainers/${id}`,
+      method: 'POST',
+      data,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+      .then(res => {
+        setAvatar(res.data.photo);
+        dispatch(updateAvatar(res.data.photo));
+      });
+  }, [avatar]);
+
   return (
-    <form className="py-4 border border-gray-300 rounded-lg p-2">
+    <form className="py-4 border border-gray-300 rounded-lg p-2 ">
+      <div className="mb-2">
+        <div encType="multipart/form-data">
+          <label htmlFor="photo" className="block mb-2 text-sm font-medium text-gray-900 ">Фото</label>
+          <img className="w-24 h-24 border rounded-full" src={`/photos/${photo}`}></img>
+          <input onChange={(event) => {
+            console.log('TARGET', event.target.files[0]);
+            setAvatar(event.target.files[0]);
+          }} name="filedata" type="file" id="photo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"></input>
+          <button onClick={updatePhoto}>Изменить фото</button>
+        </div>
+      </div>
       <div className="mb-2">
         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Имя</label>
         <input name="name" type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" defaultValue={nameCurrent} ref={name} onChange={checkName} />
@@ -199,8 +232,8 @@ function EditTrainerProfileCard(props) {
       </Disclosure>
 
       <button type="submit" onClick={applyChanges} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Изменить информацию</button>
-    </form>
-  );
+
+    </form>)
 }
 
 export default EditTrainerProfileCard;
