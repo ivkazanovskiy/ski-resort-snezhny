@@ -12,21 +12,23 @@ function AllOrdersCards(props) {
   if (allCards.isSuccess) {
     // TODO: вынести в отдельный helper
     const separetedOrders = allCards.data.data
-    orderCards = [[separetedOrders[0]]]
-    for (let i = 1; i < separetedOrders.length; i += 1) {
-      const order = separetedOrders[i];
-      const lastOrderArray = orderCards[orderCards.length - 1]
-      const previousOrder = lastOrderArray[lastOrderArray.length - 1]
+    if (separetedOrders.length > 0) {
+      orderCards = [[separetedOrders[0]]]
+      for (let i = 1; i < separetedOrders.length; i += 1) {
+        const order = separetedOrders[i];
+        const lastOrderArray = orderCards[orderCards.length - 1]
+        const previousOrder = lastOrderArray[lastOrderArray.length - 1]
 
-      if (previousOrder.roomId === order.roomId
-        && order.start === nextStringDate(previousOrder.start, 1)) {
-        lastOrderArray.push(order)
-      } else {
-        orderCards.push([order])
+        if (previousOrder.roomId === order.roomId
+          && order.start === nextStringDate(previousOrder.start, 1)) {
+          lastOrderArray.push(order)
+        } else {
+          orderCards.push([order])
+        }
       }
     }
   }
-
+  
   return (
     <>
       {orderCards ?

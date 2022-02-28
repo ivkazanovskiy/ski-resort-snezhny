@@ -14,8 +14,6 @@ import TrainerProfile from './components/Profiles/TrainerProfile';
 import HouseSearchForm from './components/Forms/HouseSearchForm';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
-import HotelsSearch from './components/Search/HotelsSearch';
-import CottagesSearch from './components/Search/CottagesSearch';
 import RoomsSearch from './components/Search/RoomsSearch';
 
 function App() {
@@ -48,9 +46,9 @@ function App() {
           {role === "user" && <Route path="/profile" element={<UserProfile />} />}
           {role === "trainer" && <Route path="/profile" element={<TrainerProfile />} />}
           {role === "admin" && <Route path="/profile" element={<AdminProfile />} />}
-          {role === "user" || role === "admin" && <Route path="/search/rooms/:type" element={<RoomsSearch />} />}
-          {role === "user" || role === "admin" && <Route path="/search/cottages/:type" element={<RoomsSearch />} />}
-          {role === "user" || role === "admin" && <Route path="/search/hotels" element={<RoomsSearch />} />}
+          {(role === "user" || role === "admin") && <Route path="/search/rooms/:type" element={<RoomsSearch />} />}
+          {(role === "user" || role === "admin") && <Route path="/search/cottages/:type" element={<RoomsSearch />} />}
+          {(role === "user" || role === "admin") && <Route path="/search/hotels" element={<RoomsSearch />} />}
 
         </Routes>
       </section>
