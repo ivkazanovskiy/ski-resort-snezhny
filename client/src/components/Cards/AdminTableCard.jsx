@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Row from '../Elements/Row';
+import DateButton from '../Elements/DateButton';
 
-function AdminTableCard({ form, type }) {
+function AdminTableCard({ dates, form, type }) {
 
   const [orders, setOrders] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -24,15 +25,18 @@ function AdminTableCard({ form, type }) {
   }, []);
 
   const isMarked = (id, date) => {
-    console.log('ID', id);
-    console.log('DATE', date);
     return !!orders.find(el => el.start === date && el['Room.id'] === id);
   }
 
   return (
     <ul>
+      <div className="flex gap-2">
+        {
+          dates.map(el => <DateButton date={ el.split('-').reverse()[0] } />)
+        }
+      </div>
       {
-        rooms.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={['2022-02-28', '2022-03-01', '2022-03-02']} />)
+        rooms.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={dates} typeId={el['Type.id']}/>)
       }
     </ul>
   );

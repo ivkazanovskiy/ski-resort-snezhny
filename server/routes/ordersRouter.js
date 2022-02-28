@@ -2,6 +2,30 @@ const router = require('express').Router();
 const { Order } = require('../db/models');
 const { Room } = require('../db/models');
 const { Type } = require('../db/models');
+const { User } = require('../db/models');
+
+router.route('/:id/:date')
+  .get(async (req, res) => {
+    const { id, date } = req.params;
+
+    try {
+      const order = await Order.findOne({
+        where: {
+          roomId: +id,
+          start: date,
+        },
+        include: {
+          model: User,
+          attributes: ['name', 'surname', 'phone', 'email'],
+        },
+        raw: true,
+      });
+
+      res.status(200).json({ order });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 router.route('/')
   .get(async (req, res) => {
@@ -49,6 +73,9 @@ router.route('/')
         orders = allOrders.filter((el) => el['Room.Type.form'] === form);
         rooms = [...allRooms];
       }
+
+      console.log(rooms);
+      console.log(orders);
 
       res.status(200).json({ orders, rooms });
     } catch (error) {
