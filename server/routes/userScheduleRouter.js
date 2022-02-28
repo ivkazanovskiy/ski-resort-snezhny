@@ -40,7 +40,7 @@ router.route('/')
         order: [['date', 'ASC'], ['startTime', 'ASC']],
         include: {
           model: Trainer,
-          attributes: ['id', 'name', 'surname', 'phone'],
+          attributes: ['id', 'name', 'surname', 'phone', 'photo'],
         },
         raw: true,
       });
