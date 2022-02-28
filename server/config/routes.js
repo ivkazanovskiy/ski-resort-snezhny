@@ -11,7 +11,8 @@ const typesRouter = require('../routes/typesRouter');
 const typesEditRouter = require('../routes/typesEditRouter');
 const photosRouter = require('../routes/photosRouter');
 const ordersRouter = require('../routes/ordersRouter');
-const userOrders = require('../routes/userOrders');
+const userOrdersRouter = require('../routes/userOrdersRouter');
+const skiPassRouter = require('../routes/skiPassRouter');
 
 const authUser = require('../middleware/authUser');
 
@@ -24,8 +25,9 @@ function routes(app) {
   app.use('/api/userSchedule', authUser, userScheduleRouter);
   app.use('/api/trainers', authUser, trainersRouter);
   app.use('/api/avaliable', authUser, avaliableRouter);
-  app.use('/api/userOrders', authUser, userOrders);
+  app.use('/api/userOrders', authUser, userOrdersRouter);
   app.use('/api/types/edit', authUser, typesEditRouter);
+  app.use('/api/skiPass', authUser, skiPassRouter);
   app.use('/api/types', typesRouter);
   app.use('/api/photos', photosRouter);
   app.use('/api/orders', ordersRouter);
