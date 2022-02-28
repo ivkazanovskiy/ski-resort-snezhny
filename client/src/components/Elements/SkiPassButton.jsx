@@ -18,7 +18,7 @@ function SkiPassButton({ data }) {
       )
     }>
       {data.amount}
-    </Tab>
+    </Tab >
   );
 }
 

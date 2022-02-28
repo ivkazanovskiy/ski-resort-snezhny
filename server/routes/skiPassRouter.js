@@ -7,6 +7,7 @@ router.route('/')
       const table = await SkiPass.findAll({
         raw: true,
         attributes: [
+          'id',
           'amount',
           'type',
           'weekDayYoung',
