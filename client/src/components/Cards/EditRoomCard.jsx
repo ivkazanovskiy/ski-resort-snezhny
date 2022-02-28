@@ -64,20 +64,19 @@ function EditRoomCard({ type }) {
       },
     })
       .then((res) => {
-        console.log(res.data.photos);
         setPhotos(res.data.photos);
       })
       .catch(err => console.log(err));
   }, [relativePath])
 
-  const updateImages = useCallback((event) => {
+  const uploadImage = useCallback((event) => {
     event.preventDefault();
     const data = new FormData();
     data.append('image', image);
     console.log('DATA', data);
 
     axios({
-      url: `/api/photos/${type}/new`,
+      url: `/api/photos/${type}`,
       method: 'POST',
       data,
       headers: {
@@ -88,6 +87,20 @@ function EditRoomCard({ type }) {
         setPhotos(() => [...photos, res.data.image]);
       });
   }, [image]);
+
+  const deleteImage = (image) => {
+
+    axios({
+      url: `/api/photos/${type}`,
+      method: 'DELETE',
+      data: {
+        image,
+      }
+    })
+      .then(res => {
+        res.data.isDelete ? setPhotos(photos.filter(el => el !== image)) : console.log(res.data.error);
+      });
+  };
 
   return (
     <>
@@ -121,7 +134,12 @@ function EditRoomCard({ type }) {
                     photos.map(el =>
                       <div key={el} className="flex flex-col">
                         <img className="row m-0 p-0 w-auto rounded-md" src={`${relativePath}/${el}`} />
-                        <button className="row m-0 p-0">Удалить</button>
+                        <button onClick={
+                          (event) => {
+                            event.preventDefault();
+                            deleteImage(el);
+                          }
+                        } className="row m-0 p-0">Удалить</button>
                       </div>
                     )
                     :
@@ -130,7 +148,7 @@ function EditRoomCard({ type }) {
 
               </div>
               <input onChange={(event) => setImage(event.target.files[0])} name="image" type="file" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"></input>
-              <button onClick={updateImages}>Добавить</button>
+              <button onClick={uploadImage}>Добавить</button>
             </label>
           </div>
           <button onClick={() => save.mutate()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Изменить информацию</button>
