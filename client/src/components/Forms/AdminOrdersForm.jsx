@@ -26,7 +26,7 @@ function AdminOrdersForm(props) {
     }
 
     setArrayDate(arrayDate);
-  }, [gap])
+  }, [startDate, gap])
 
   // TODO: возможно стоит заменить не переменную
   const [finishDate, setFinishDate] = useState(nextStringDate(startDate, gap));
