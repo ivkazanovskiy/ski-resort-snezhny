@@ -1,3 +1,5 @@
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
 const loginRouter = require('../routes/loginRouter');
 const registrationRouter = require('../routes/registrationRouter');
 const checkUserRouter = require('../routes/checkUserRouter');
@@ -31,6 +33,18 @@ function routes(app) {
   app.use('/api/types', typesRouter);
   app.use('/api/photos', photosRouter);
   app.use('/api/orders', ordersRouter);
+  app.use(createProxyMiddleware(
+    '/data',
+    {
+      target: 'https://api.openweathermap.org/',
+      changeOrigin: true,
+    },
+  ), async (req, res) => {
+    const response = await fetch('/');
+    const data = await response.json();
+    console.log(data);
+    res.end();
+  });
 }
 
 module.exports = routes;
