@@ -24,7 +24,7 @@ function RoomCard({ type }) {
 
   return (
     <li className="rounded-md flex flex-col items-center gap-4 my-4 font-sans">
-      <img className="row w-full h-auto rounded-md" src={`${relativePath}/${photos[0]}`} />
+      <img className="row w-full h-auto rounded-md" alt="/" src={`${relativePath}/${photos[0]}`} />
       <div className="row w-full grid grid-cols-6 gap-4">
         <div className="col-start-2 col-span-4 grid">
           <div className="justify-items-center text-center text-xl">{type.title}</div>
