@@ -26,7 +26,7 @@ module.exports = {
       {
         name: 'Ваня',
         surname: 'Казановский',
-        email: 'ivan@gmail.com',
+        email: 'q@q.q',
         phone: '+79312903562',
         password: await bcrypt.hash('1Qq', 10),
         skiPass: 67890,
