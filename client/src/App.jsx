@@ -42,7 +42,8 @@ function App() {
         ''
         :
         <>
-          <section className=" static h-screen w-full p-16 flex flex-col pb-20 items-center overflow-y-auto bg-main bg-bottom">
+          <TopMenu />
+          <section className="mb-[10px] flex flex-col flex-1 items-center overflow-y-auto">
             <Routes>
 
               <Route path="/" element={<Home />} />
@@ -72,7 +73,7 @@ function App() {
 
             </Routes>
           </section>
-          <TopMenu />
+
           <BottomMenu />
         </>
       }

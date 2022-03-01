@@ -11,7 +11,11 @@
 @layer components{
 
   #root{
-    @apply h-screen w-full relative flex flex-col
+    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover
+  }
+ 
+  .svg-bot{
+    @apply h-10 w-10 text-custom-navy
   }
 
   .slider{
