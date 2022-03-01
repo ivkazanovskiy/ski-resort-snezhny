@@ -42,33 +42,29 @@ function TopMenu() {
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
           <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
         </button>
-        {/* <div onClick={toggle} className={(isOpen) ? "fixed mb-2 bg-white top-16 w-full md:block md:w-auto" : "hidden w-full md:block md:w-auto"} id="mobile-menu">
-            <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-              <li>
-                <Link to="/" className="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Домой</Link>
-              </li>
-              {(auth) ?
-                <>
-                  < li >
-                    <Link to="/profile" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Личный кабинет</Link>
-                  </li>
-                  < li >
-                    <span onClick={logout} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Выйти</span>
-                  </li>
-                </>
-                :
-                <>
-                  <li>
-                    <Link to="/login" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Войти</Link>
-                  </li>
-                  <li>
-                    <Link to="/registration" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Зарегистрироваться</Link>
-                  </li>
-                </>
-              }
-            </ul>
-          </div> */}
       </nav>
+      {isOpen &&
+        <section className="absolute top-0 left-0 w-full h-full flex">
+          <div onClick={() => toggle()} className="flex w-1/4 justify-center pt-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <aside className="w-3/4 h-full p-6 text-custom-navy backdrop-blur-md z-10 bg-white/80 flex items-center" >
+            <ul className="flex flex-col gap-6">
+              <li>
+                <Link to="/map" onClick={() => toggle()} className="nav-link">Карта курорта</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={() => toggle()} className="nav-link">Корпоративный отдых</Link>
+              </li>
+              <li>
+                <Link to="/" onClick={() => toggle()} className="nav-link">Рестораны</Link>
+              </li>
+            </ul>
+          </aside>
+        </section>
+      }
     </>
   );
 }
