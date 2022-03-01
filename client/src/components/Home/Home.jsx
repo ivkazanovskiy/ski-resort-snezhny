@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import { useQuery } from 'react-query';
+import HomeLinkCard from '../Cards/HomeLinkCard';
 
 function Home(props) {
 
   return (
     <>
+      <HomeLinkCard />
+
     </>
   );
 }
