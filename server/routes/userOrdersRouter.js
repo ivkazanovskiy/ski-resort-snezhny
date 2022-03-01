@@ -18,7 +18,7 @@ router.route('/')
         raw: true,
       });
 
-      if (!allOrders) return res.sendStatus(404);
+      if (allOrders.length === 0) return res.sendStatus(404);
 
       return res.status(200).json(allOrders);
     } catch (err) {
@@ -32,8 +32,6 @@ router.route('/')
 
     try {
       await Promise.all(ids.map((id) => checkRights(id, userId)));
-      console.log('all rogth');
-
       await Promise.all(ids.map((id) => Order.destroy({ where: { id } })));
       return res.sendStatus(200);
     } catch (err) {

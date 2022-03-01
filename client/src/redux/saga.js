@@ -116,8 +116,6 @@ function* workerCheckUser(action) {
     const { info, role } = response.data
     yield put(initUser(info, role))
   } catch (err) {
-
-    
     console.log(err)
   }
 }

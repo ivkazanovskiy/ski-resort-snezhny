@@ -1,24 +1,52 @@
 import { Tab } from '@headlessui/react';
 import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toStringDate } from '../../helpers/toStringDate'
 import SkiPassButton from '../Elements/SkiPassButton';
 import axios from 'axios'
+import ModalBuy from '../Modals/ModalBuy';
 
 function SkiPassForm(props) {
 
   const tableQuery = useQuery('tableQuery', () => axios('/api/skiPass'))
+  const save = useMutation(() => axios({
+    url: '/api/skiPass',
+    method: 'POST',
+    data: {
+      typeId: chosen.id,
+      skiPass,
+      date
+    }
+  }), {
+    onSuccess: () => {
+      setModal(false)
+      // FIXME: заменить на другое отображение
+      window.alert('Ски-пасс куплен')
+    },
+    onError: (err) => {
+      console.log(err.response.data.error);
+      window.alert('Ошибка')
+    },
+  })
+
   const { auth, skiPass } = useSelector(state => state.userReducer)
-  const dayRef = useRef()
+
+  const dateRef = useRef()
+  const [modal, setModal] = useState(false)
+  const [date, setDate] = useState(toStringDate(new Date()))
   const [type, setType] = useState(0)
   const [chosen, setChosen] = useState()
   const [amountHours, setAmountHours] = useState(0)
   const [amountPasses, setAmountPasses] = useState(0)
+  // 0 - взрослый, 1 - детский
+  const [age, setAge] = useState(0)
 
-
-  const today = toStringDate(new Date())
+  const day = (new Date(date)).toString().split(' ')[0]
+  const dayPrefix = (day === 'Sun' || day === 'Sat') ? 'weekEnd' : 'weekDay'
+  const agePostfix = (age === 0) ? 'Old' : 'Young'
+  const keyString = dayPrefix + agePostfix
 
   useEffect(() => {
     if (tableQuery.isSuccess) {
@@ -28,7 +56,7 @@ function SkiPassForm(props) {
         // TODO: сделать динамический учет количества опций по проходам
         setChosen(tableQuery.data.data[amountHours + 4])
     }
-  }, [type, tableQuery, amountPasses, amountHours])
+  }, [type, tableQuery, amountPasses, amountHours, age])
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -60,8 +88,34 @@ function SkiPassForm(props) {
     <>
       <div className="flex gap-6 mt-6 p-2">
         Выберите день:
-        <input type="date" ref={dayRef} defaultValue={today} />
+        <input type="date" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
       </div>
+      <Tab.Group onChange={setAge} defaultIndex={age}>
+        <Tab.List className="flex w-full mb-2 self-stretch p-1 space-x-1 bg-blue-900/20 rounded-xl">
+          <Tab className={({ selected }) =>
+            classNames(
+              'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
+              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+              selected
+                ? 'bg-white shadow'
+                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+            )
+          } >
+            Взрослый
+          </Tab>
+          <Tab className={({ selected }) =>
+            classNames(
+              'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
+              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+              selected
+                ? 'bg-white shadow'
+                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+            )
+          } >
+            Детский
+          </Tab>
+        </Tab.List>
+      </Tab.Group>
       <Tab.Group onChange={setType} defaultIndex={type}>
         <Tab.List className="flex self-stretch p-1 space-x-1 bg-blue-900/20 rounded-xl">
           <Tab className={({ selected }) =>
@@ -108,7 +162,9 @@ function SkiPassForm(props) {
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
-      <div className="p-4 border rounded-lg w-full">{chosen.weekDayYoung}</div>
+      <div className="p-4 border rounded-lg w-full">{chosen[keyString]}</div>
+      <button onClick={() => setModal(true)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Оплатить</button>
+      {modal && <ModalBuy setModal={setModal} mutation={save} cost={chosen[keyString]} />}
     </>
   )
 
