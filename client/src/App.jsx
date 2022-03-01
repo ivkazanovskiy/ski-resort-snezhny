@@ -6,7 +6,7 @@ import axios from 'axios'
 import Login from './components/Login/Login';
 import Admin from './components/Login/Admin';
 import Registration from './components/Registration/Registration';
-import Home from './components/Home/Home';
+import Home from './components/Pages/Home';
 import TopMenu from './components/Navbars/TopMenu';
 import UserProfile from './components/Profiles/UserProfile';
 import AdminProfile from './components/Profiles/AdminProfile';
@@ -18,6 +18,7 @@ import RoomsSearch from './components/Search/RoomsSearch';
 import BottomMenu from './components/Navbars/BottomMenu';
 import SkiPassForm from './components/Forms/SkiPassForm';
 import { deleteUser } from './redux/actionCreators/userAC';
+import Map from './components/Pages/Map';
 
 function App() {
   // автоматически в запросе отправляем заголовок с токеном
@@ -43,10 +44,11 @@ function App() {
         :
         <>
           <TopMenu />
-          <section className="mb-[10px] flex flex-col flex-1 items-center overflow-y-auto">
+          <section className="mb-[10px] flex flex-col flex-1 items-center justify-end overflow-y-auto">
             <Routes>
 
               <Route path="/" element={<Home />} />
+              <Route path="/map" element={<Map />} />
               <Route path="/login" element={<Login />} />
               <Route path="/search" element={<HouseSearchForm />} />
               <Route path="/skipass" element={<SkiPassForm />} />

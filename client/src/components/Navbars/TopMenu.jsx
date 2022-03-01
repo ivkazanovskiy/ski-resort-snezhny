@@ -53,13 +53,13 @@ function TopMenu() {
           <aside className="w-3/4 h-full p-6 text-custom-navy backdrop-blur-md z-10 bg-white/80 flex items-center" >
             <ul className="flex flex-col gap-6">
               <li>
-                <Link to="/" className="nav-link">Карта курорта</Link>
+                <Link to="/map" onClick={() => toggle()} className="nav-link">Карта курорта</Link>
               </li>
               <li>
-                <Link to="/" className="nav-link">Корпоративный отдых</Link>
+                <Link to="/" onClick={() => toggle()} className="nav-link">Корпоративный отдых</Link>
               </li>
               <li>
-                <Link to="/" className="nav-link">Рестораны</Link>
+                <Link to="/" onClick={() => toggle()} className="nav-link">Рестораны</Link>
               </li>
             </ul>
           </aside>

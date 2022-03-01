@@ -16,7 +16,6 @@ function RoomCard({ type }) {
       },
     })
       .then((res) => {
-        console.log(res.data.photos);
         setPhotos(res.data.photos);
       })
       .catch(err => console.log(err));
