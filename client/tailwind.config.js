@@ -4,8 +4,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'custom-blue': '#4794ff',
+        'custom-navy': '#212d52',
+        'custom-gray': '#8a96be',
+        'custom-sand': '#c5c5c5',
+      },
       backgroundImage: {
-        'main': "url('/src/css/bg/main.jpg')",
+        'main': "url('/src/css/bg/main6.jpg')",
       }
     },
   },

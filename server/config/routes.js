@@ -39,12 +39,7 @@ function routes(app) {
       target: 'https://api.openweathermap.org/',
       changeOrigin: true,
     },
-  ), async (req, res) => {
-    const response = await fetch('/');
-    const data = await response.json();
-    console.log(data);
-    res.end();
-  });
+  ));
 }
 
 module.exports = routes;
