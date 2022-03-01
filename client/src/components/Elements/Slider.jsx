@@ -18,6 +18,7 @@ function Slider({ type }) {
   }
 
   useEffect(() => {
+    console.log('6');
     axios({
       url: '/api/photos/',
       method: 'GET',

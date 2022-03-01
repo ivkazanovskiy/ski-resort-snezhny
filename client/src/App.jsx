@@ -43,7 +43,7 @@ function App() {
         :
         <>
           <TopMenu />
-          <section className="mb-[10px] flex flex-col flex-1 items-center overflow-y-auto">
+          <section className="mb-[10px] flex flex-col flex-1 items-center justify-end overflow-y-auto">
             <Routes>
 
               <Route path="/" element={<Home />} />

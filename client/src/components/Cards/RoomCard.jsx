@@ -8,6 +8,7 @@ function RoomCard({ type }) {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
+    console.log('4');
     axios({
       url: '/api/photos/',
       method: 'GET',
