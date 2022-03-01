@@ -6,7 +6,7 @@
 
 /* @layer base{
 
-  
+
 } */
 @layer components{
 
@@ -23,11 +23,25 @@
   }
 
   .slider-active{
-    @apply backdrop-blur-sm  bg-white/30 text-custom-navy 
+    @apply backdrop-blur-sm  bg-white/30 text-custom-navy
     }
 
   .slider-passive{
     @apply text-custom-gray
     }
 
+    .card {
+      @apply w-full grid grid-cols-6 rounded-md
+    }
+
+    .card-avatar{
+      @apply w-20 h-20 rounded-[10px] border-custom-gray
+    }
+
+    .card-name{
+      @apply text-custom-navy
+    }
+    .card-info{
+      @apply text-custom-gray
+    }
 }
