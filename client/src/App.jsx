@@ -7,7 +7,7 @@ import Login from './components/Login/Login';
 import Admin from './components/Login/Admin';
 import Registration from './components/Registration/Registration';
 import Home from './components/Home/Home';
-import NavBar from './components/NavBar/NavBar';
+import TopMenu from './components/Navbars/TopMenu';
 import UserProfile from './components/Profiles/UserProfile';
 import AdminProfile from './components/Profiles/AdminProfile';
 import TrainerProfile from './components/Profiles/TrainerProfile';
@@ -15,7 +15,7 @@ import HouseSearchForm from './components/Forms/HouseSearchForm';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import RoomsSearch from './components/Search/RoomsSearch';
-import BottomMenu from './components/NavBar/BottomMenu';
+import BottomMenu from './components/Navbars/BottomMenu';
 import SkiPassForm from './components/Forms/SkiPassForm';
 import { deleteUser } from './redux/actionCreators/userAC';
 
@@ -42,9 +42,10 @@ function App() {
         ''
         :
         <>
-          <NavBar />
+          <TopMenu />
           <section className="flex-1 flex flex-col mb-20 items-center overflow-y-auto w-full">
             <Routes>
+
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/search" element={<HouseSearchForm />} />
@@ -52,12 +53,24 @@ function App() {
               <Route path="/login/admin" element={<Admin />} />
               <Route path="/registration" element={<Registration />} />
 
-              {role === "user" && <Route path="/profile" element={<UserProfile />} />}
-              {role === "trainer" && <Route path="/profile" element={<TrainerProfile />} />}
-              {role === "admin" && <Route path="/profile" element={<AdminProfile />} />}
-              {(role === "user" || role === "admin") && <Route path="/search/rooms/:type" element={<RoomsSearch />} />}
-              {(role === "user" || role === "admin") && <Route path="/search/cottages/:type" element={<RoomsSearch />} />}
-              {(role === "user" || role === "admin") && <Route path="/search/hotels" element={<RoomsSearch />} />}
+              {role === "user" && [
+                <Route path="/profile" key={'userProfile'} element={<UserProfile />} />,
+                <Route path="/search/rooms/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
+                <Route path="/search/cottages/:type" key={'userSearchCottages'} element={<RoomsSearch />} />,
+                <Route path="/search/hotels" key={'userSearchHottels'} element={<RoomsSearch />} />
+              ]}
+
+              {role === "admin" && [
+                <Route path="/profile" key={'adminProfile'} element={<AdminProfile />} />,
+                <Route path="/search/rooms/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
+                <Route path="/search/cottages/:type" key={'adminSearchCottages'} element={<RoomsSearch />} />,
+                <Route path="/search/hotels" key={'adminSearchHottels'} element={<RoomsSearch />} />
+              ]}
+
+              {role === "trainer" && [
+                <Route path="/profile" key={'trainerProfile'} element={<TrainerProfile />} />
+              ]}
+
             </Routes>
           </section>
           <BottomMenu />

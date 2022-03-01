@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { deleteUser } from '../../redux/actionCreators/userAC';
 
-function NavBar() {
+function TopMenu() {
 
   const { auth } = useSelector(state => state.userReducer)
   const [isOpen, setIsOpen] = useState(false)
@@ -39,10 +39,6 @@ function NavBar() {
               </li>
               {(auth) ?
                 <>
-                  {/* FIXME: временная , убрать как закончу */}
-                  < li >
-                    <Link to="/search/rooms/1" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">ROOMS</Link>
-                  </li>
                   < li >
                     <Link to="/profile" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Личный кабинет</Link>
                   </li>
@@ -68,4 +64,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default TopMenu;
