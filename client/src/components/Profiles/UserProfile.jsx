@@ -29,7 +29,7 @@ function UserProfile(props) {
   }
 
   return (
-    <div className="h-full grid content-end">
+    <div className="w-full">
       {/* <div className="w-full px-4 pt-8">
         <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
           <Disclosure>
@@ -80,13 +80,12 @@ function UserProfile(props) {
         </div>
       </div> */}
 
-      <div className="w-full px-4 pt-8">
-        <div className="w-full max-w-md py-4">
+      <div className="w-full">
+        <div className="w-full max-w-md">
           <Tab.Group>
             <Tab.Panels className="mt-2 rounded-md">
               <Tab.Panel className={classNames(
-                'bg-white rounded-md',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
+                '',
               )}>
                 <ul className="grid grid-col gap-2">
                   {orders ?
@@ -97,8 +96,7 @@ function UserProfile(props) {
                 </ul>
               </Tab.Panel>
               <Tab.Panel className={classNames(
-                'bg-white rounded-md',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
+                '',
               )}>
                 <AllOrdersCards />
               </Tab.Panel>

@@ -56,6 +56,7 @@ function EditRoomCard({ type }) {
   }
 
   useEffect(() => {
+    console.log('3');
     axios({
       url: '/api/photos/',
       method: 'GET',
@@ -89,7 +90,6 @@ function EditRoomCard({ type }) {
   }, [image]);
 
   const deleteImage = (image) => {
-
     axios({
       url: `/api/photos/${type}`,
       method: 'DELETE',

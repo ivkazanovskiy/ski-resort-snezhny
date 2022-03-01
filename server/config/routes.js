@@ -15,6 +15,7 @@ const photosRouter = require('../routes/photosRouter');
 const ordersRouter = require('../routes/ordersRouter');
 const userOrdersRouter = require('../routes/userOrdersRouter');
 const skiPassRouter = require('../routes/skiPassRouter');
+const roomsRouter = require('../routes/roomsRouter');
 
 const authUser = require('../middleware/authUser');
 
@@ -33,6 +34,7 @@ function routes(app) {
   app.use('/api/types', typesRouter);
   app.use('/api/photos', photosRouter);
   app.use('/api/orders', ordersRouter);
+  app.use('/api/rooms', roomsRouter);
   app.use(createProxyMiddleware(
     '/data',
     {
