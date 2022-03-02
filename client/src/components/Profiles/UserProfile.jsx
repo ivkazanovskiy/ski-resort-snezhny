@@ -81,7 +81,7 @@ function UserProfile(props) {
       </div> */}
 
       <div className="w-full">
-        <div className="w-full max-w-md">
+        <div className="w-full">
           <Tab.Group>
             <Tab.Panels className="mt-2 rounded-md">
               <Tab.Panel className={classNames(
