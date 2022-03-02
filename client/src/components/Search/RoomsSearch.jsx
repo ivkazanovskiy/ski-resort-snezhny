@@ -78,56 +78,61 @@ function RoomsSearch(props) {
 
   return (
     <>
-      <div>
-
+      <div className=" grow w-full pt-20 mb-2 rounded-lg overflow-y-auto">
+        <div className="w-full p-2 flex flex-col gap-2 rounded-lg  backdrop-blur-sm bg-white/60">
+          <div><Slider type={type} /></div >
+          <h1 className="w-full text-xl flex ">
+            {thisType ? thisType.title : 'Загрузка...'}
+            <span className="material-icons font-light w-fit flex ml-4 items-center">person_outline</span>
+            <span className="">{thisType ? thisType.guestCount : 'Загрузка...'}</span>
+          </h1>
+          <div className="flex items-center">
+            <div className="grow flex flex-col">
+              <span className="grow">пн-пт: {thisType ? thisType.weekdayCost : 'Загрузка...'} ₽/день</span>
+              <span className="grow">сб-вс: {thisType ? thisType.weekendCost : 'Загрузка...'} ₽/день</span>
+            </div>
+          </div>
+          <h2 className="w-full text-md ">{thisType ? thisType.description : 'Загрузка...'}</h2>
+        </div>
       </div>
-      <div className="flex flex-col border w-full gap-2">
-        {/* FIXME: сделать подгрузку куртинок */}
-        {/* < div className="w-full h-60 bg-cyan-100 text-center " > {thisType ? thisType.images : 'Загрузка...'} </div > */}
-        < div className="w-full h-60 bg-cyan-100 text-center " ><Slider type={type} /></div >
-        <h1 className="w-full text-xl "> {thisType ? thisType.title : 'Загрузка...'}</h1>
-        <h2 className="w-full text-md ">{thisType ? thisType.description : 'Загрузка...'}</h2>
-        <div className="">Количество человек для размещения: {thisType ? thisType.guestCount : 'Загрузка...'}</div>
-        <div className="">Стоимость буднего дня: {thisType ? thisType.weekdayCost : 'Загрузка...'}</div>
-        <div className="">Стоимость выходного дня: {thisType ? thisType.weekendCost : 'Загрузка...'}</div>
-        <div className="flex justify-around">
-          <label htmlFor="start" className="flex flex-col gap-1">
-            <div>Заезд</div>
-            <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} />
-          </label>
-
-          <label htmlFor="start" className="flex flex-col gap-1">
-            <div>Выезд</div>
-            <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} />
-          </label>
+      <div className="w-full flex flex-col gap-2 z-0">
+        <div className="flex w-full gap-2 ">
+          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow" />
+          <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow" />
         </div>
-        <div className="flex">
-          <div className="flex flex-col flex-1">
-            <div className="">Выбранно {countGapValue(startDate, finishDate)} дней </div>
-            {/* Пока грузится */}
-            {avaliableRooms.isLoading && <span>Загрузка...</span>}
-            {
-              avaliableRooms.isSuccess && ((avaliable.length > 0) ?
-                <select name="select" className="w-40" ref={roomRef}>
-                  {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
-                </select>
-                :
-                <select name="select" className="w-40" ref={roomRef} disabled>
-                  <option> Свободных номеров нет</option>
-                </select>
-              )
-            }
+        <div className="flex w-full gap-2">
+          <div className="rounded-lg font-medium backdrop-blur-sm bg-white/70 p-2 flex grow">
+            <div className="text-center grow">Дней: </div><div className="w-10 text-center">{countGapValue(startDate, finishDate)}</div>
           </div>
-          <div className="flex-1 text-center">
-            Стоимость: {cost}
+          <div className="rounded-lg font-medium backdrop-blur-sm bg-white/70 p-2 flex grow">
+            <div className="text-center grow">Стоимость: </div>
+            <div className="w-20 text-center">{cost} ₽</div>
           </div>
         </div>
-        <button onClick={() => setModal(true)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Забронировать</button>
-        {modal && <ModalBuy setModal={setModal} mutation={dookDays} cost={cost}/>}
+        <div className="flex w-full gap-2 ">
 
-      </div >
+          {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
+            <button onClick={() => setModal(true)} className="basic-btn grow">Забронировать</button>
+            :
+            <button className="basic-btn bg-custom-sand grow" disabled>Свободных номеров нет</button>
+          }
+          {/* Пока грузится */}
+          {avaliableRooms.isLoading && <span>Загрузка...</span>}
+          {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
+            <select name="select" className="date-input w-20" ref={roomRef} value='qwe'>
+              {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
+            </select>
+            :
+            <select name="select" className="date-input w-20" ref={roomRef} value='qwe' disabled>
+              <option className="">-</option>
+            </select>
+          }
+
+
+        </div>
+      </div>
+      {modal && <ModalBuy setModal={setModal} mutation={dookDays} cost={cost} />}
     </>
-
   );
 }
 
