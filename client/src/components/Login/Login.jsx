@@ -47,13 +47,13 @@ function Login(props) {
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="email" className="basis-2/6 edit-label text-center">Email</label>
-          <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="basis-4/6 edit-input border-[1px] border-white/0" />
+          <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="basis-4/6 edit-input border-[1px] border-white/0" required/>
         </div>
       </div>
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="password" className="basis-2/6 edit-label text-center">Пароль</label>
-          <input ref={password} onChange={checkPassword} name="password" type="password" id="password" className={`basis-4/6 edit-input border-[1px] border-white/0`} />
+          <input ref={password} onChange={checkPassword} name="password" type="password" id="password" className={`basis-4/6 edit-input border-[1px] border-white/0`} required/>
         </div>
       </div>
       <div className="flex flex-row justify-around justify-items-center items-center">
