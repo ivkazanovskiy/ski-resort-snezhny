@@ -14,6 +14,8 @@ import TrainerProfile from './components/Profiles/TrainerProfile';
 import HouseSearchForm from './components/Forms/HouseSearchForm';
 import EditUserProfileCard from './components/Cards/EditUserProfileCard';
 import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
+import EditAdminProfileCard from './components/Cards/EditAdminProfileCard';
+import AdminOrdersForm from './components/Forms/AdminOrdersForm';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import RoomsSearch from './components/Search/RoomsSearch';
@@ -59,20 +61,22 @@ function App() {
               <Route path="/registration" element={<Registration />} />
 
               {role === "user" && [
-                <Route path="/profile/edit" key={'editUserProfile'} element={<EditUserProfileCard />} />,
-                <Route path="/profile" key={'userProfile'} element={<UserProfile />} />,
+                <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,
+                <Route path="/orders" key={'userOrders'} element={<UserProfile />} />,
                 <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
               ]}
 
               {role === "admin" && [
-                <Route path="/profile" key={'adminProfile'} element={<AdminProfile />} />,
+                <Route path="/calendar" key={'adminOrdersForm'} element={<AdminOrdersForm />} />,
+                <Route path="/profile" key={'editAdminProfile'} element={<EditAdminProfileCard />} />,
+                <Route path="/orders" key={'adminProfile'} element={<AdminProfile />} />,
                 <Route path="/search/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
               ]}
 
               {role === "trainer" && [
-                <Route path="/profile/edit" key={'editTrainerProfile'} element={<EditTrainerProfileCard />} />,
-                <Route path="/profile" key={'trainerProfile'} element={<TrainerProfile />} />,
-                <Route path="/calendar" key={'trainerCalendar'} element={<CalendarTrainer />} />
+                <Route path="/profile" key={'editTrainerProfile'} element={<EditTrainerProfileCard />} />,
+                <Route path="/calendar" key={'trainerCalendar'} element={<CalendarTrainer />} />,
+                <Route path="/orders" key={'trainerProfile'} element={<TrainerProfile />} />
               ]}
 
             </Routes>

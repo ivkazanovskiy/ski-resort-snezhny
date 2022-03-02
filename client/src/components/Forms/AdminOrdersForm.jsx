@@ -47,8 +47,6 @@ function AdminOrdersForm(props) {
     return classes.filter(Boolean).join(' ')
   }
 
-  console.log(arrayDate);
-
   return (
     <>
       <div className="flex justify-around">
@@ -64,41 +62,11 @@ function AdminOrdersForm(props) {
       </div>
       <div className="">Выбрано {gap} дней </div>
 
-      <div className="w-full max-w-md pt-4">
+      <div className="w-full  pt-4">
         <Tab.Group>
-          <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-            <Tab className={({ selected }) =>
-              classNames(
-                'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-              )
-            } >Номера
-            </Tab>
-            <Tab className={({ selected }) =>
-              classNames(
-                'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-              )
-            }>Коттеджи</Tab>
-            <Tab className={({ selected }) =>
-              classNames(
-                'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-              )
-            }>Гостиницы</Tab>
-          </Tab.List>
-          <Tab.Panels className="mt-2 border-2 rounded-md">
+          <Tab.Panels className="mt-2 rounded-lg">
             <Tab.Panel className={classNames(
-              'bg-white rounded-md',
+              ' rounded-lg',
               'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
             )}>
               <AdminOrdersTypeForm dates={arrayDate} form={'room'}></AdminOrdersTypeForm>
@@ -116,6 +84,33 @@ function AdminOrdersForm(props) {
               <AdminOrdersTypeForm dates={arrayDate} form={'hotel'}></AdminOrdersTypeForm>
             </Tab.Panel>
           </Tab.Panels>
+          <Tab.List className="flex gap-2 p-[3px] mb-2 rounded-b-lg backdrop-blur-sm bg-white/30 mt-0">
+            <Tab className={({ selected }) =>
+              classNames(
+                'slider-tab',
+                selected
+                  ? 'slider-active'
+                  : 'slider-passive'
+              )
+            } >Номера
+            </Tab>
+            <Tab className={({ selected }) =>
+              classNames(
+                'slider-tab',
+                selected
+                  ? 'slider-active'
+                  : 'slider-passive'
+              )
+            }>Коттеджи</Tab>
+            <Tab className={({ selected }) =>
+              classNames(
+                'slider-tab',
+                selected
+                  ? 'slider-active'
+                  : 'slider-passive'
+              )
+            }>Гостиницы</Tab>
+          </Tab.List>
         </Tab.Group>
       </div>
     </>
