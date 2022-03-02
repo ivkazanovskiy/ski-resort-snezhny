@@ -11,14 +11,31 @@
 
 @layer components{
 
+
+
   #root{
-    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover text-custom-navy
+    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover text-custom-navy 
+  }
+  
+  .date-input{
+    @apply p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70
   }
 
+  .select-input{
+    @apply p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70
+  }
+
+  .basic-btn{
+    @apply p-2 text-white bg-custom-blue font-medium text-lg rounded-lg backdrop-blur-sm
+  }
+
+  .botmenu-btn{
+    @apply  p-4 flex items-center justify-center
+  }
   .svg-bot{
-    @apply h-10 w-10 text-custom-navy
+    @apply h-10 w-10
   }
-
+  
   .slider-list-skipass{
     @apply flex gap-2 p-[3px] self-stretch w-full
   }

@@ -161,8 +161,8 @@ function SkiPassForm(props) {
         </Tab.Group>
       </div>
       <div className="flex mt-2 w-full gap-2">
-        <input type="date" className="w-1/2 p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/60" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
-        <button onClick={() => setModal(true)} className="text-white bg-custom-blue font-medium text-lg w-1/2 rounded-lg backdrop-blur-sm">Оплатить</button>
+        <input type="date" className="w-1/2 date-input" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
+        <button onClick={() => setModal(true)} className="basic-btn  w-1/2">Оплатить</button>
         {modal && <ModalBuy setModal={setModal} mutation={save} cost={chosen[keyString]} />}
       </div>
 
