@@ -12,19 +12,28 @@
 @layer components{
 
   #root{
-    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover
+    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover text-custom-navy
   }
 
   .svg-bot{
     @apply h-10 w-10 text-custom-navy
   }
 
-  .slider{
+  .slider-list-skipass{
+    @apply flex gap-2 p-[3px] self-stretch w-full 
+  }
+
+
+  .slider-list{
     @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-xl  backdrop-blur-sm bg-white/30
   }
 
+  .slider-panel{
+    @apply flex  gap-2 w-full
+  }
+
   .slider-tab{
-  @apply w-full text-sm font-medium rounded-[10px] text-white p-2
+  @apply w-full grow  font-medium rounded-[10px] text-white p-2
   }
 
   .slider-active{
