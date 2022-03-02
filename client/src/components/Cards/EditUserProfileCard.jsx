@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Disclosure } from '@headlessui/react'
+import { ChevronUpIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidSkiPass } from '../../helpers/isValid'
@@ -20,14 +21,14 @@ function EditUserProfileCard(props) {
   const password = useRef()
   const passwordRepeat = useRef()
 
-  const [areSamePasswords, setAreSamePasswords] = useState(false)
+  const [areSamePasswords, setAreSamePasswords] = useState(true)
   const [isCorrectName, setIsCorrectName] = useState(true)
   const [isCorrectSurname, setIsCorrectSurname] = useState(true)
   const [isCorrectSkiPass, setIsCorrectSkiPass] = useState(true)
   const [isCorrectPhone, setIsCorrectPhone] = useState(true)
   const [isCorrectEmail, setIsCorrectEmail] = useState(true)
-  const [isCorrectPassword, setIsCorrectPassword] = useState(false)
-  const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(false)
+  const [isCorrectPassword, setIsCorrectPassword] = useState(true)
+  const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(true)
 
   const checkName = () => {
     setIsCorrectName(isValidName(name.current.value))
@@ -87,89 +88,76 @@ function EditUserProfileCard(props) {
 
 
   return (
-    <form className="py-4 border border-gray-300 rounded-lg p-2">
-      <div className="mb-2">
-        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Имя</label>
-        <input name="name" type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" defaultValue={nameCurrent} ref={name} onChange={checkName} />
-        {(isCorrectName) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block mb-2 text-sm font-medium text-red-500">Имя должно быть короче 20 букв</span>
-        }
+    <form className="card flex-col mb-2 mt-8">
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
+          <input name="name" type="text" id="name" className={`basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 20 букв</span>
+        </div>
       </div>
-      <div className="mb-2">
-        <label htmlFor="surname" className="block mb-2 text-sm font-medium text-gray-900 ">Фамилия</label>
-        <input name="surname" type="text" id="surname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
-        {(isCorrectSurname) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block mb-2 text-sm font-medium text-red-500">Фамилия должна быть короче 20 букв</span>
-        }
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="surname" className="basis-1/4 edit-label text-center">Фамилия</label>
+          <input name="surname" type="text" id="surname" className={`basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 20 букв</span>
+        </div>
       </div>
-      <div className="mb-2">
-        <label htmlFor="skiPass" className="block mb-2 text-sm font-medium text-gray-900 ">Номер Ski-pass</label>
-        <input name="skiPass" type="text" id="skiPass" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" defaultValue={skiPassCurrent} ref={skiPass} onChange={checkSkiPass} />
-        {(isCorrectSkiPass) ?
-          <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block mb-2 text-sm font-medium text-red-500">Ski-pass может отсутствовать, либо в формате 12345</span>
-        }
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="skiPass" className="basis-1/4 edit-label text-center">Ski-pass</label>
+          <input name="skiPass" type="text" id="skiPass" className={`basis-3/4 edit-input border-[1px] ${isCorrectSkiPass ? "border-white/0" : "border-red-600"}`} defaultValue={skiPassCurrent} ref={skiPass} onChange={checkSkiPass} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>*5 цифр</span>
+        </div>
       </div>
-      <div className="mb-2">
-        <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Телефон</label>
-        <input name="phone" type="tel" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@mail.com" defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
-        {(isCorrectPhone) ?
-          <span className="block mb-2 text-sm font-medium text-green-500">✓</span>
-          :
-          <span className="block mb-2 text-sm font-medium text-red-500 ">Телефон в формате +79991112233</span>
-        }
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="phone" className="basis-1/4 edit-label text-center">Телефон</label>
+          <input name="phone" type="tel" id="phone" className={`basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>+79*********</span>
+        </div>
       </div>
-      <div className="mb-2">
-        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Электронная почта</label>
-        <input name="email" type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@mail.com" defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
-        {(isCorrectEmail) ?
-          <span className="block mb-2 text-sm font-medium text-green-500">✓</span>
-          :
-          <span className="block mb-2 text-sm font-medium text-red-500 ">Почта указана некорректно</span>
-        }
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="email" className="basis-1/4 edit-label text-center">Email</label>
+          <input name="email" type="email" id="email" className={`basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>***@***.**</span>
+        </div>
       </div>
 
       <Disclosure>
-        <Disclosure.Button className="flex justify-between w-full px-4 py-2 mb-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-          <span>Изменить пароль</span>
-        </Disclosure.Button>
-        <Disclosure.Panel className="pt-4 text-sm text-gray-500">
-          <div className="mb-2">
-            <label htmlFor="passwordOld" className="block mb-2 text-sm font-medium text-gray-900 ">Старый пароль</label>
-            <input name="passwordOld" type="password" id="passwordOld" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" ref={passwordOld} onChange={checkPasswordOld} />
-            {(isCorrectPasswordOld) ?
-              <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
-              :
-              <span className="block mb-2 text-sm font-medium text-red-500 ">Пароль должен содержать от 3 до 20 букв верхнего и нижнего регистра и цифр</span>
-            }
-          </div>
-          <div className="mb-2">
-            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Новый пароль</label>
-            <input name="password" type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-            {(isCorrectPassword) ?
-              <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
-              :
-              <span className="block mb-2 text-sm font-medium text-red-500 ">Пароль должен содержать от 3 до 20 букв верхнего и нижнего регистра и цифр</span>
-            }
-          </div>
-          <div className="mb-2">
-            <label htmlFor="passwordRepeat" className="block mb-2 text-sm font-medium text-gray-900 ">Повторите пароль</label>
-            <input name="passwordRepeat" type="password" id="passwordRepeat" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" ref={passwordRepeat} onChange={checkPasswords} />
-            {(areSamePasswords) ?
-              <span className="block mb-2 text-sm font-medium text-green-500 ">✓</span>
-              :
-              <span className="block mb-2 text-sm font-medium text-red-500 ">Пароли не совпадают</span>
-            }
-          </div>
-        </Disclosure.Panel>
+        {({ open }) => (
+          <>
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
+              <span>Изменить пароль </span>
+              <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
+            </Disclosure.Button>
+            <Disclosure.Panel className="flex flex-col">
+              <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
+              <input placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+              <input placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+              <input placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
+              <span className={`block m-2 text-sm font-medium text-red-600 ${areSamePasswords ? "hidden" : "visible"}`}>Пароли не совпадают</span>
+            </Disclosure.Panel>
+          </>
+        )}
       </Disclosure>
-
-      <button type="submit" onClick={applyChanges} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Изменить информацию</button>
+      <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
     </form>
   );
 }
