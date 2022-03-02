@@ -48,9 +48,6 @@ function CalendarTrainer(props) {
   const pseudoArr = []
   for (let i = 0; i < shiftAmount; i += 1)  pseudoArr.push(1)
 
-
-
-
   const queryClient = useQueryClient()
   // FIXME: сделать только на выбранный месяц или оставить как есть на весь сезон
   const allRecords = useQuery('allRecords', () => axios({ url: '/api/trainerSchedule' }))
