@@ -80,10 +80,10 @@ function RoomsSearch(props) {
     <>
       <div className=" grow w-full pt-20 mb-2 rounded-lg overflow-y-auto">
         <div className="w-full p-2 flex flex-col gap-2 rounded-lg  backdrop-blur-sm bg-white/60">
-          <div><Slider type={type} /></div >
+          <Slider type={type} />
           <h1 className="w-full text-xl flex ">
             {thisType ? thisType.title : 'Загрузка...'}
-            <span className="material-icons font-light w-fit flex ml-4 items-center">person_outline</span>
+            <span className="material-icons font-light w-fit ml-4 items-center">groups</span>
             <span className="">{thisType ? thisType.guestCount : 'Загрузка...'}</span>
           </h1>
           <div className="flex items-center">
@@ -114,7 +114,7 @@ function RoomsSearch(props) {
           {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
             <button onClick={() => setModal(true)} className="basic-btn grow">Забронировать</button>
             :
-            <button className="basic-btn bg-custom-sand grow" disabled>Свободных номеров нет</button>
+            <button className="basic-btn bg-custom-sand grow" disabled>Свободных мест нет</button>
           }
           {/* Пока грузится */}
           {avaliableRooms.isLoading && <span>Загрузка...</span>}
@@ -127,8 +127,6 @@ function RoomsSearch(props) {
               <option className="">-</option>
             </select>
           }
-
-
         </div>
       </div>
       {modal && <ModalBuy setModal={setModal} mutation={dookDays} cost={cost} />}
