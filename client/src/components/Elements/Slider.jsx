@@ -8,8 +8,6 @@ function Slider({ type }) {
   const infoQuery = useQuery(`room-${type}`, () => axios(`/api/types/${type}`));
   const [photos, setPhotos] = useState([]);
 
-  const [isShowing, setIsShowing] = useState(false)
-
   let info;
   let relativePath;
   if (infoQuery.isSuccess) {
@@ -18,7 +16,6 @@ function Slider({ type }) {
   }
 
   useEffect(() => {
-    console.log('6');
     axios({
       url: '/api/photos/',
       method: 'GET',
@@ -34,11 +31,11 @@ function Slider({ type }) {
 
   return (
     <>
-      <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
+      <div className="flex rounded-lg h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
         {
           photos.length ?
             photos.map(el =>
-              <img key={el} className="shrink-0 snap-center h-96 w-auto" src={`${relativePath}/${el}`} />
+              <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
             )
             :
             <></>

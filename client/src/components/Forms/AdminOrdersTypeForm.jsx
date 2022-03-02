@@ -12,50 +12,50 @@ function AdminOrdersTypeForm({ form, dates }) {
 
   return (
     <>
-      {
-        form === 'hotel' ?
-          <AdminTableCard dates={dates} form={form} type={undefined}></AdminTableCard>
-          :
-          <div className="w-full max-w-md pb-4">
-            <Tab.Group>
-              <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
-                <Tab className={({ selected }) =>
-                  classNames(
-                    'w-full p-1 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                    selected
-                      ? 'bg-white shadow'
-                      : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                  )
-                } >Стандарт
-                </Tab>
-                <Tab className={({ selected }) =>
-                  classNames(
-                    'w-full p-1 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                    'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
-                    selected
-                      ? 'bg-white shadow'
-                      : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
-                  )
-                }>Комфорт</Tab>
-              </Tab.List>
-              <Tab.Panels className="mt-2 border-2 rounded-md">
-                <Tab.Panel className={classNames(
-                  'bg-white rounded-md',
-                  'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-                )}>
-                  <AdminTableCard dates={dates} form={form} type={'standart'}></AdminTableCard>
-                </Tab.Panel>
-                <Tab.Panel className={classNames(
-                  'bg-white rounded-md',
-                  'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-                )}>
-                  <AdminTableCard dates={dates} form={form} type={'comfort'}></AdminTableCard>
-                </Tab.Panel>
-              </Tab.Panels>
-            </Tab.Group>
-          </div>
-      }
+
+
+      <div className="">
+        {
+          form === 'hotel' ?
+            <AdminTableCard dates={dates} form={form} type={undefined}></AdminTableCard>
+            :
+            <div className="w-full">
+              <Tab.Group>
+                <Tab.Panels className="mt-2 rounded-lg">
+                  <Tab.Panel className={classNames(
+                    'rounded-lg w-full overflow-x-auto'
+                  )}>
+                    <AdminTableCard dates={dates} form={form} type={'standart'}></AdminTableCard>
+                  </Tab.Panel>
+                  <Tab.Panel className={classNames(
+                    'rounded-lg w-full overflow-x-auto'
+                  )}>
+                    <AdminTableCard dates={dates} form={form} type={'comfort'}></AdminTableCard>
+                  </Tab.Panel>
+                </Tab.Panels>
+                <Tab.List className="flex gap-2 p-[3px] mt-8 rounded-t-lg backdrop-blur-sm bg-white/30 mb-0">
+                  <Tab className={({ selected }) =>
+                    classNames(
+                      'slider-tab',
+                      selected
+                        ? 'slider-active'
+                        : 'slider-passive'
+                    )
+                  } >Стандарт
+                  </Tab>
+                  <Tab className={({ selected }) =>
+                    classNames(
+                      'slider-tab',
+                      selected
+                        ? 'slider-active'
+                        : 'slider-passive'
+                    )
+                  }>Комфорт</Tab>
+                </Tab.List>
+              </Tab.Group>
+            </div>
+        }
+      </div>
     </>
   );
 }

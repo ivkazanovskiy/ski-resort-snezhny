@@ -24,9 +24,9 @@ function HouseSearchForm(props) {
   }
 
   return (
-    <div className="w-full px-4 pt-8">
-      <div className="w-full max-w-md py-4">
-
+      <ul className="w-full flex flex-col-reverse gap-2">
+        {allTypes.map(el => <RoomCard key={`${el.id}-room`} type={el}></RoomCard>)}
+        {/* 
         <Tab.Group>
           <Tab.List className="slider">
             <Tab
@@ -90,9 +90,8 @@ function HouseSearchForm(props) {
               }
             </Tab.Panel>
           </Tab.Panels>
-        </Tab.Group>
-      </div>
-    </div>
+        </Tab.Group> */}
+      </ul>
   );
 }
 

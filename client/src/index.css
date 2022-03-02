@@ -11,54 +11,87 @@
 
 @layer components{
 
+
+
   #root{
-    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover
+    @apply h-screen w-full relative flex flex-col p-[10px] bg-main bg-bottom bg-cover text-custom-navy 
+  }
+  
+  .date-input{
+    @apply p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70
   }
 
+  .select-input{
+    @apply p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70
+  }
+
+  .basic-btn{
+    @apply p-2 text-white bg-custom-blue font-medium text-lg rounded-lg backdrop-blur-sm
+  }
+
+  .botmenu-btn{
+    @apply  p-4 flex items-center justify-center
+  }
   .svg-bot{
-    @apply h-10 w-10 text-custom-navy
+    @apply h-10 w-10
+  }
+  
+  .slider-list-skipass{
+    @apply flex gap-2 p-[3px] self-stretch w-full
   }
 
-  .slider{
-    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-xl  backdrop-blur-sm bg-white/30
+  .slider-list{
+    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-xl backdrop-blur-sm bg-white/30
+  }
+
+  .slider-panel{
+    @apply flex gap-2 w-full
   }
 
   .slider-tab{
-  @apply w-full text-sm font-medium rounded-[10px] text-white p-2
+  @apply w-full grow font-medium rounded-[10px] text-white p-2
   }
 
   .slider-active{
-    @apply backdrop-blur-sm  bg-white/30 text-custom-navy
+    @apply backdrop-blur-sm bg-white/30 text-custom-navy
     }
 
   .slider-passive{
     @apply text-custom-navy
     }
 
-    .card {
-      @apply flex justify-between w-full p-3 rounded-xl backdrop-blur-sm bg-white/60 text-custom-navy
+  .card {
+      @apply flex justify-between w-full p-3 rounded-xl backdrop-blur-sm bg-white/80 text-custom-navy
     }
 
-    .card-avatar{
+  .card-avatar{
       @apply w-24 h-24 rounded-[10px] justify-items-start
     }
-    .card-content{
+  .card-content{
       @apply flex flex-col justify-around my-2
     }
 
-    .card-name{
+  .card-name{
       @apply text-xl font-bold
     }
 
-    .card-info{
+  .card-info{
       @apply text-base
     }
 
-    .card-delete{
+  .card-delete{
       @apply flex p-2
     }
 
-    .delete-btn{
+  .delete-btn{
       @apply  h-6 w-6 self-center justify-self-center
     }
+
+  .edit-input{
+    @apply w-full p-2 rounded-md bg-white/60 text-base text-custom-navy outline-none
+  }
+
+  .edit-label{
+    @apply p-2 text-base font-medium text-custom-navy
+  }
 }

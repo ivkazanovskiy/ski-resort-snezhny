@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { addZero } from '../../helpers/addZero';
-import AdminOrdersTypeForm from '../Forms/AdminOrdersTypeForm';
+import AdminTableCard from '../Cards/AdminTableCard';
 import { nextStringDate } from '../../helpers/nextStringDate';
 import { toStringDate } from '../../helpers/toStringDate';
 import { countGapValue } from '../../helpers/countGapValue';
@@ -12,21 +12,19 @@ function AdminOrdersForm(props) {
 
   const startRef = useRef();
   const finishRef = useRef();
+  const arrayDate = useRef()
+
+  const [type, setType] = useState(0)
+  const [grade, setGrade] = useState(0)
 
   const [startDate, setStartDate] = useState(toStringDate(new Date()));
   //TODO: сохранить GAP  в locals.storage
   const [gap, setGap] = useState(7);
-  const [arrayDate, setArrayDate] = useState([]);
 
-  useEffect(() => {
-    const arrayDate = [];
-
-    for (let i = 0; i < gap; i += 1) {
-      arrayDate.push(nextStringDate(toStringDate(new Date()), i));
-    }
-
-    setArrayDate(arrayDate);
-  }, [startDate, gap])
+  arrayDate.current = [];
+  for (let i = 0; i < gap; i += 1) {
+    arrayDate.current.push(nextStringDate(startDate, i));
+  }
 
   // TODO: возможно стоит заменить не переменную
   const [finishDate, setFinishDate] = useState(nextStringDate(startDate, gap));
@@ -36,88 +34,73 @@ function AdminOrdersForm(props) {
     finishRef.current.value = nextStringDate(startDate, gap)
   }, [startDate, gap]);
 
-  useEffect(() => {
-    axios({
-      url: '/api/orders',
-      method: 'GET',
-    });
-  }, []);
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
-  console.log(arrayDate);
-
   return (
     <>
-      <div className="flex justify-around">
-        <label htmlFor="start" className="flex flex-col gap-1">
-          <div>Заезд</div>
-          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} />
-        </label>
-
-        <label htmlFor="start" className="flex flex-col gap-1">
-          <div>Выезд</div>
-          <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} />
-        </label>
-      </div>
-      <div className="">Выбрано {gap} дней </div>
-
-      <div className="w-full max-w-md pt-4">
-        <Tab.Group>
-          <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+      <AdminTableCard dates={arrayDate.current} gap={gap} type={type} grade={grade} />
+      <div className="w-full mt-2 mb-2 rounded-lg backdrop-blur-sm bg-white/30">
+        {type !== 2 &&
+          <Tab.Group onChange={setGrade} defaultIndex={grade}>
+            <Tab.List className="flex gap-2 p-[3px]  mb-0">
+              <Tab className={({ selected }) =>
+                classNames(
+                  'slider-tab',
+                  selected
+                    ? 'slider-active'
+                    : 'slider-passive'
+                )
+              } >Стандарт
+              </Tab>
+              <Tab className={({ selected }) =>
+                classNames(
+                  'slider-tab',
+                  selected
+                    ? 'slider-active'
+                    : 'slider-passive'
+                )
+              }>Комфорт</Tab>
+            </Tab.List>
+          </Tab.Group>
+        }
+        <Tab.Group onChange={setType} defaultIndex={type}>
+          <Tab.List className="flex gap-2 p-[3px]  mt-0">
             <Tab className={({ selected }) =>
               classNames(
-                'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+                'slider-tab',
                 selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                  ? 'slider-active'
+                  : 'slider-passive'
               )
             } >Номера
             </Tab>
             <Tab className={({ selected }) =>
               classNames(
-                'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+                'slider-tab',
                 selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                  ? 'slider-active'
+                  : 'slider-passive'
               )
             }>Коттеджи</Tab>
             <Tab className={({ selected }) =>
               classNames(
-                'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-                'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+                'slider-tab',
                 selected
-                  ? 'bg-white shadow'
-                  : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                  ? 'slider-active'
+                  : 'slider-passive'
               )
-            }>Гостиницы</Tab>
+            }>Гостиницa</Tab>
           </Tab.List>
-          <Tab.Panels className="mt-2 border-2 rounded-md">
-            <Tab.Panel className={classNames(
-              'bg-white rounded-md',
-              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-            )}>
-              <AdminOrdersTypeForm dates={arrayDate} form={'room'}></AdminOrdersTypeForm>
-            </Tab.Panel>
-            <Tab.Panel className={classNames(
-              'bg-white rounded-md',
-              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-            )}>
-              <AdminOrdersTypeForm dates={arrayDate} form={'cottage'}></AdminOrdersTypeForm>
-            </Tab.Panel>
-            <Tab.Panel className={classNames(
-              'bg-white rounded-md',
-              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-            )}>
-              <AdminOrdersTypeForm dates={arrayDate} form={'hotel'}></AdminOrdersTypeForm>
-            </Tab.Panel>
-          </Tab.Panels>
         </Tab.Group>
       </div>
+
+      <div className="flex w-full gap-2">
+        <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow" />
+        <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow" />
+      </div>
+
     </>
   );
 }
