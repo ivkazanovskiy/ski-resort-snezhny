@@ -80,51 +80,47 @@ function UserProfile(props) {
         </div>
       </div> */}
 
-      <div className="w-full">
-        <div className="w-full">
-          <Tab.Group>
-            <Tab.Panels className="mt-2 rounded-md">
-              <Tab.Panel className={classNames(
-                '',
-              )}>
-                <ul className="grid grid-col gap-2">
-                  {orders ?
-                    orders.map(order => <UserScheduleCard refresh={refresh} setRefresh={setRefresh} orders={orders} setOrders={setOrders} key={`${order.date}-${order.startTime}-${order['Trainer.id']}`} order={order}></UserScheduleCard>)
-                    :
-                    <li>Пока нет записей</li>
-                  }
-                </ul>
-              </Tab.Panel>
-              <Tab.Panel className={classNames(
-                '',
-              )}>
-                <AllOrdersCards />
-              </Tab.Panel>
-            </Tab.Panels>
-            <Tab.List className="slider-list">
-              <Tab
-                className={({ selected }) =>
-                  classNames(
-                    'slider-tab',
-                    selected
-                      ? 'slider-active'
-                      : 'slider-passive'
-                  )
-                } >
-                Записи</Tab>
-              <Tab
-                className={({ selected }) =>
-                  classNames(
-                    'slider-tab',
-                    selected
-                      ? 'slider-active'
-                      : 'slider-passive'
-                  )
-                } >Бронирования</Tab>
-            </Tab.List>
-          </Tab.Group>
-        </div>
-      </div>
+      <Tab.Group>
+        <Tab.Panels className="mt-2 rounded-lg">
+          <Tab.Panel className={classNames(
+            '',
+          )}>
+            <ul className="grid grid-col gap-2">
+              {orders ?
+                orders.map(order => <UserScheduleCard refresh={refresh} setRefresh={setRefresh} orders={orders} setOrders={setOrders} key={`${order.date}-${order.startTime}-${order['Trainer.id']}`} order={order}></UserScheduleCard>)
+                :
+                <li>Пока нет записей</li>
+              }
+            </ul>
+          </Tab.Panel>
+          <Tab.Panel className={classNames(
+            '',
+          )}>
+            <AllOrdersCards />
+          </Tab.Panel>
+        </Tab.Panels>
+        <Tab.List className="slider-list">
+          <Tab
+            className={({ selected }) =>
+              classNames(
+                'slider-tab',
+                selected
+                  ? 'slider-active'
+                  : 'slider-passive'
+              )
+            } >
+            Записи</Tab>
+          <Tab
+            className={({ selected }) =>
+              classNames(
+                'slider-tab',
+                selected
+                  ? 'slider-active'
+                  : 'slider-passive'
+              )
+            } >Бронирования</Tab>
+        </Tab.List>
+      </Tab.Group>
     </div>
   )
 }
