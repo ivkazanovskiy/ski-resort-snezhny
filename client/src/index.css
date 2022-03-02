@@ -20,24 +20,23 @@
   }
 
   .slider-list-skipass{
-    @apply flex gap-2 p-[3px] self-stretch w-full 
+    @apply flex gap-2 p-[3px] self-stretch w-full
   }
 
-
   .slider-list{
-    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-xl  backdrop-blur-sm bg-white/30
+    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-xl backdrop-blur-sm bg-white/30
   }
 
   .slider-panel{
-    @apply flex  gap-2 w-full
+    @apply flex gap-2 w-full
   }
 
   .slider-tab{
-  @apply w-full grow  font-medium rounded-[10px] text-white p-2
+  @apply w-full grow font-medium rounded-[10px] text-white p-2
   }
 
   .slider-active{
-    @apply backdrop-blur-sm  bg-white/30 text-custom-navy
+    @apply backdrop-blur-sm bg-white/30 text-custom-navy
     }
 
   .slider-passive{
