@@ -12,6 +12,8 @@ import UserProfile from './components/Profiles/UserProfile';
 import AdminProfile from './components/Profiles/AdminProfile';
 import TrainerProfile from './components/Profiles/TrainerProfile';
 import HouseSearchForm from './components/Forms/HouseSearchForm';
+import EditUserProfileCard from './components/Cards/EditUserProfileCard';
+import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import RoomsSearch from './components/Search/RoomsSearch';
@@ -56,6 +58,7 @@ function App() {
               <Route path="/registration" element={<Registration />} />
 
               {role === "user" && [
+                <Route path="/profile/edit" key={'editUserProfile'} element={<EditUserProfileCard />} />,
                 <Route path="/profile" key={'userProfile'} element={<UserProfile />} />,
                 <Route path="/search/rooms/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
                 <Route path="/search/cottages/:type" key={'userSearchCottages'} element={<RoomsSearch />} />,
@@ -70,6 +73,7 @@ function App() {
               ]}
 
               {role === "trainer" && [
+                <Route path="/profile/edit" key={'editTrainerProfile'} element={<EditTrainerProfileCard />} />,
                 <Route path="/profile" key={'trainerProfile'} element={<TrainerProfile />} />
               ]}
 
