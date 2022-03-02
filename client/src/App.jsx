@@ -14,6 +14,7 @@ import TrainerProfile from './components/Profiles/TrainerProfile';
 import HouseSearchForm from './components/Forms/HouseSearchForm';
 import EditUserProfileCard from './components/Cards/EditUserProfileCard';
 import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
+import EditAdminProfileCard from './components/Cards/EditAdminProfileCard';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import RoomsSearch from './components/Search/RoomsSearch';
@@ -66,6 +67,7 @@ function App() {
               ]}
 
               {role === "admin" && [
+                <Route path="/profile/edit" key={'editAdminProfile'} element={<EditAdminProfileCard />} />,
                 <Route path="/profile" key={'adminProfile'} element={<AdminProfile />} />,
                 <Route path="/search/rooms/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
                 <Route path="/search/cottages/:type" key={'adminSearchCottages'} element={<RoomsSearch />} />,
