@@ -10,7 +10,7 @@ import Home from './components/Pages/Home';
 import TopMenu from './components/Navbars/TopMenu';
 import UserProfile from './components/Profiles/UserProfile';
 import AdminProfile from './components/Profiles/AdminProfile';
-import TrainerProfile from './components/Profiles/TrainerProfile';
+import TrainerTimetable from './components/Cards/TrainerTimetable';
 import HouseSearchForm from './components/Forms/HouseSearchForm';
 import EditUserProfileCard from './components/Cards/EditUserProfileCard';
 import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
@@ -76,7 +76,7 @@ function App() {
               {role === "trainer" && [
                 <Route path="/profile" key={'editTrainerProfile'} element={<EditTrainerProfileCard />} />,
                 <Route path="/calendar" key={'trainerCalendar'} element={<CalendarTrainer />} />,
-                <Route path="/orders" key={'trainerProfile'} element={<TrainerProfile />} />
+                <Route path="/orders" key={'trainerProfile'} element={<TrainerTimetable />} />
               ]}
 
             </Routes>
