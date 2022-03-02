@@ -27,13 +27,13 @@ function AdminTableCard({ dates, form, type }) {
   }
 
   return (
-    <ul className="backdrop-blur-sm bg-white/30 p-2 rounded-lg flex flex-col items-center gap-2 overflow-auto">
-      <div className="flex gap-2 justify-end content-end">
-      <button disabled='true' className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/60"></button>
+    <ul className="backdrop-blur-sm w-fit bg-white/30 p-2 rounded-lg flex flex-col items-stretch gap-2">
+      <li className="flex gap-2">
+      <button disabled={true} className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/60"></button>
         {
-          dates.map(el => <button disabled='true' className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/60">{el.split('-').reverse()[0]}</button>)
+          dates.map(el => <button disabled={true} key={el} className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/60">{el.split('-').reverse()[0]}</button>)
         }
-      </div>
+      </li>
       {
         rooms.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={dates} typeId={el['Type.id']} />)
       }
