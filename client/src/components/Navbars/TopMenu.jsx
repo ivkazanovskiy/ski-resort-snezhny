@@ -33,7 +33,7 @@ function TopMenu() {
 
   return (
     <>
-      <nav className="absolute right-[10px] backdrop-blur-sm bg-white/80 rounded-[25px] h-16 flex items-center p-4">
+      <nav className="absolute right-[10px] backdrop-blur-sm bg-white/80 rounded-lg h-16 flex items-center p-4 z-10">
         <div className="">
           {t && `${t}`}
         </div>
@@ -44,13 +44,13 @@ function TopMenu() {
         </button>
       </nav>
       {isOpen &&
-        <section className="absolute top-0 left-0 w-full h-full flex">
+        <section className="absolute top-0 left-0 w-full h-full backdrop-blur-md flex  z-10">
           <div onClick={() => toggle()} className="flex w-1/4 justify-center pt-8">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <aside className="w-3/4 h-full p-6 text-custom-navy backdrop-blur-md z-10 bg-white/80 flex items-center" >
+          <aside className="w-3/4 h-full p-6 text-custom-navy  bg-white/90 flex items-center" >
             <ul className="flex flex-col gap-6">
               <li>
                 <Link to="/map" onClick={() => toggle()} className="nav-link">Карта курорта</Link>
