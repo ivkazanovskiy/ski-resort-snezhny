@@ -25,7 +25,7 @@ function Home(props) {
   ];
 
   return (
-    <div className="flex gap-2 justify-start overflow-x-scroll w-fit self-start ">
+    <div className="flex gap-2 overflow-x-auto w-fit self-start">
       {array.map((obj) => <HomeLinkCard key={obj.id} obj={obj} />)}
     </div>
   );

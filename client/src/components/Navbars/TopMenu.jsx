@@ -24,18 +24,18 @@ function TopMenu() {
 
   const weather = useRef();
 
-  let t
+  let temperature
   if (isSuccess) {
     const number = Math.round(data.data.main.temp - 273)
-    t = (number > 0) ? `+${number}°C` : `${number} °C`
-    if (number === 0) t = '0 °C'
+    temperature = (number > 0) ? `+${number}°C` : `${number} °C`
+    if (number === 0) temperature = '0 °C'
   }
 
   return (
     <>
       <nav className="absolute right-[10px] backdrop-blur-sm bg-white/80 rounded-lg h-16 flex items-center p-4 z-10">
         <div className="">
-          {t && `${t}`}
+          {temperature && `${temperature}`}
         </div>
         <button onClick={toggle} type="button" className="ml-2" aria-controls="mobile-menu-2" aria-expanded="false">
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>

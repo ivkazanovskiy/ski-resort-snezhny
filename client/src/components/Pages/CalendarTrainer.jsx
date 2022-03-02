@@ -42,9 +42,11 @@ function CalendarTrainer(props) {
     ))
   }
 
-  const shiftDays = ['', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  const shiftDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const firstWeekDay = (new Date(daysArray[0])).toString().split(' ')[0]
   const shiftAmount = shiftDays.indexOf(firstWeekDay)
+  const pseudoArr = []
+  for (let i = 0; i < shiftAmount; i += 1)  pseudoArr.push(1)
 
   const queryClient = useQueryClient()
   // FIXME: сделать только на выбранный месяц или оставить как есть на весь сезон
@@ -72,17 +74,17 @@ function CalendarTrainer(props) {
       workingDays.push(day);
   }
 
-  console.log(months[5].days);
 
   return (
     <div className="flex flex-col gap-2 w-full">
       {/* FIXME: сделать смещение, чтобы выходные были в конце */}
       <div className="grid grid-cols-7 gap-2 w-full">
+        {pseudoArr.map((el, ind) => <div key={`pseudo-${ind}`} className=""></div>)}
         {allRecords.isLoading && <>Загрузка</>}
-        {allRecords.isSuccess && daysArray.map((date, ind) => <Day key={date} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} shift={ind === 0 ? shiftAmount : false} />)}
+        {allRecords.isSuccess && daysArray.map((date) => <Day key={`${date}-btn`} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} />)}
       </div>
       <div className="w-full flex gap-2">
-        <div className="p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70">
+        <div className="p-2 text-center rounded-lg text-custom-navy backdrop-blur-sm bg-white/80">
           {`${season.prevYear}/${season.nextYear}`}
         </div>
         <ListboxMonth setMonth={setMonth} months={months} />
