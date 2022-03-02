@@ -10,7 +10,6 @@ import { isValidPassword, isValidName, isValidEmail, isValidPhone } from '../../
 
 function Registration(props) {
 
-
   // индикатор поля ввода для инструктора
   const [enabled, setEnabled] = useState(false)
   const navigate = useNavigate()
@@ -24,12 +23,12 @@ function Registration(props) {
   const passwordRepeat = useRef()
   const secret = useRef()
 
-  const [areSamePasswords, setAreSamePasswords] = useState(false)
-  const [isCorrectName, setIsCorrectName] = useState(false)
-  const [isCorrectSurname, setIsCorrectSurname] = useState(false)
-  const [isCorrectPhone, setIsCorrectPhone] = useState(false)
-  const [isCorrectEmail, setIsCorrectEmail] = useState(false)
-  const [isCorrectPassword, setIsCorrectPassword] = useState(false)
+  const [areSamePasswords, setAreSamePasswords] = useState(true)
+  const [isCorrectName, setIsCorrectName] = useState(true)
+  const [isCorrectSurname, setIsCorrectSurname] = useState(true)
+  const [isCorrectPhone, setIsCorrectPhone] = useState(true)
+  const [isCorrectEmail, setIsCorrectEmail] = useState(true)
+  const [isCorrectPassword, setIsCorrectPassword] = useState(true)
 
   const checkName = () => {
     setIsCorrectName(isValidName(name.current.value))
@@ -71,90 +70,101 @@ function Registration(props) {
         password: password.current.value,
         secret: secret.current ? secret.current.value : undefined
       };
+      console.log(data);
 
       return dispatch(registrationUser(data, navigate))
     }
   }
 
   return (
-    <form onSubmit={registration} className="w-96">
-      <div className="mb-2">
-        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 ">Имя</label>
-        <input ref={name} onChange={checkName} name="name" type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
-        {(isCorrectName) ?
-          <span className="block text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block text-sm font-medium text-red-500">Заглавные и строчные буквы, дефис и подчеркивание</span>
+      <form onSubmit={registration} className="card flex-col mb-2 mt-8">
+        <div className="mb-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <label htmlFor="name" className="basis-1/3 edit-label text-center">Имя</label>
+            <input name="name" type="text" id="name" className={`basis-2/3 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} ref={name} onChange={checkName} required/>
+          </div>
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <span className="basis-1/3"></span>
+            <span className={`basis-2/3 block text-sm text-custom-gray`}>*до 20 букв</span>
+          </div>
+        </div>
+        <div className="mb-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <label htmlFor="surname" className="basis-1/3 edit-label text-center">Фамилия</label>
+            <input name="surname" type="text" id="surname" className={`basis-2/3 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} ref={surname} onChange={checkSurname} required/>
+          </div>
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <span className="basis-1/3"></span>
+            <span className={`basis-2/3 block text-sm text-custom-gray`}>*до 20 букв</span>
+          </div>
+        </div>
+        <div className="mb-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <label htmlFor="phone" className="basis-1/3 edit-label text-center">Телефон</label>
+            <input name="phone" type="tel" id="phone" className={`basis-2/3 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} ref={phone} onChange={checkPhone} required/>
+          </div>
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <span className="basis-1/3"></span>
+            <span className={`basis-2/3 block text-sm text-custom-gray`}>+79*********</span>
+          </div>
+        </div>
+        <div className="mb-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <label htmlFor="email" className="basis-1/3 edit-label text-center">Email</label>
+            <input name="email" type="email" id="email" className={`basis-2/3 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} ref={email} onChange={checkEmail} required/>
+          </div>
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <span className="basis-1/3"></span>
+            <span className={`basis-2/3 block text-sm text-custom-gray`}>***@***.**</span>
+          </div>
+        </div>
+        <div className="mb-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <label htmlFor="password" className="basis-1/3 edit-label text-center">Пароль</label>
+            <input name="password" ref={password} onChange={() => { checkPasswords(); checkPassword() }} type="password" id="password" className={`basis-2/3 edit-input border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} required/>
+          </div>
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <span className="basis-1/3"></span>
+            <span className={`basis-2/3 block text-sm text-custom-gray`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
+          </div>
+        </div>
+        <div className="mb-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <label htmlFor="passwordRepeat" className="basis-1/3 edit-label text-center">Повторите пароль</label>
+            <input name="passwordRepeat" ref={passwordRepeat} onChange={checkPasswords} type="password" id="passwordRepeat" className={`basis-2/3 edit-input border-[1px] ${areSamePasswords ? "border-white/0" : "border-red-600"}`} required/>
+          </div>
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <span className="basis-1/3"></span>
+            <span className={`basis-2/3 block text-sm text-red-600 ${areSamePasswords ? "hidden" : "visible"}`}>Пароли не совпадают</span>
+          </div>
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label className="edit-label basis-5/6 text-center">Зарегистрироваться как инструктор</label>
+          <div className="basis-1/6">
+            <Switch
+              checked={enabled}
+              onChange={setEnabled}
+              className={`${enabled ? 'bg-custom-blue/60' : 'bg-custom-gray/60'}
+          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
+              <span
+                aria-hidden="true"
+                className={`${enabled ? 'translate-x-6' : 'translate-x-0'}
+            pointer-events-none inline-block h-[20px] w-[20px] rounded-lg bg-white transform ring-0 transition ease-in-out duration-200`} />
+            </Switch>
+          </div>
+        </div>
+        {
+          enabled
+            ? <div className="mb-2 flex flex-col">
+              <div className="flex flex-row justify-around justify-items-center items-center">
+                <label htmlFor="secretKey" className="basis-1/3 edit-label text-center">Cекретное слово</label>
+                <input name="secretKey" ref={secret} type="password" id="secretKey" className="basis-2/3 edit-input border-[1px]"/>
+              </div>
+            </div>
+            : <></>
         }
-      </div>
-      <div className="mb-2">
-        <label htmlFor="surname" className="block mb-2 text-sm font-medium text-gray-900 ">Фамилия</label>
-        <input ref={surname} onChange={checkSurname} name="surname" type="text" id="surname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
-        {(isCorrectSurname) ?
-          <span className="block text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block text-sm font-medium text-red-500">Заглавные и строчные буквы, дефис и подчеркивание</span>
-        }
-      </div>
-      <div className="mb-2">
-        {/* TODO: сделать онлайн проверку занятоcти после прохождения регулярки */}
-        <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 ">Телефон</label>
-        <input ref={phone} onChange={checkPhone} name="phone" type="tel" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
-        {(isCorrectPhone) ?
-          <span className="block text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block text-sm font-medium text-red-500">Телефон в формате +79991112233</span>
-        }
-      </div>
-      <div className="mb-2">
-        {/* TODO: сделать онлайн проверку занятоcти после прохождения регулярки */}
-        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">E-mail</label>
-        <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="name@mail.com" required="" />
-        {(isCorrectEmail) ?
-          <span className="block text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block text-sm font-medium text-red-500 ">Некорректеный e-mail</span>
-        }
-      </div>
-      <div className="mb-2">
-        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Пароль</label>
-        <input name="password" ref={password} onChange={() => { checkPasswords(); checkPassword() }} type="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required="" />
-        {(isCorrectPassword) ?
-          <span className="block text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block text-sm font-medium text-red-500 ">Заглавные, строчные буквы и цифры</span>
-        }
-      </div>
-      <div className="mb-2">
-        <label htmlFor="passwordRepeat" className="block mb-2 text-sm font-medium text-gray-900 ">Повторите пароль</label>
-        <input name="passwordRepeat" ref={passwordRepeat} onChange={checkPasswords} type="password" id="passwordRepeat" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" />
-        {(areSamePasswords) ?
-          <span className="block text-sm font-medium text-green-500 ">✓</span>
-          :
-          <span className="block text-sm font-medium text-red-500 ">Пароли не совпадают</span>
-        }
-      </div>
-      <div id="secretKey" className="flex items-center mb-2 gap-2 h-8">
-        {/* FIXME: плывет ширина маркера при включении*/}
-        <Switch
-          checked={enabled}
-          onChange={setEnabled}
-          className={`${enabled ? 'bg-blue-600' : 'bg-gray-200'
-            } relative inline-flex items-center h-6 rounded-full w-11`}>
-          <span
-            className={`${enabled ? 'translate-x-6' : 'translate-x-1'
-              } inline-block w-4 h-4 transform bg-white rounded-full`}
-          />
-        </Switch>
-        {enabled
-          ?
-          <input name="secret" ref={secret} type="text" id="secert" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required="" placeholder="Введите секретное слово" />
-          :
-          <div className="text-sm font-medium text-gray-900 " >Зарегистрироваться как инструктор</div>
-        }
-      </div>
-      <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Зарегистрироваться</button>
-    </form>
+        <button type="submit" className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Зарегистрироваться</button>
+      </form>
   );
 }
 
