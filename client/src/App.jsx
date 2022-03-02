@@ -21,6 +21,7 @@ import BottomMenu from './components/Navbars/BottomMenu';
 import SkiPassForm from './components/Forms/SkiPassForm';
 import { deleteUser } from './redux/actionCreators/userAC';
 import Map from './components/Pages/Map';
+import CalendarTrainer from './components/Pages/CalendarTrainer';
 
 function App() {
   // автоматически в запросе отправляем заголовок с токеном
@@ -60,21 +61,18 @@ function App() {
               {role === "user" && [
                 <Route path="/profile/edit" key={'editUserProfile'} element={<EditUserProfileCard />} />,
                 <Route path="/profile" key={'userProfile'} element={<UserProfile />} />,
-                <Route path="/search/rooms/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
-                <Route path="/search/cottages/:type" key={'userSearchCottages'} element={<RoomsSearch />} />,
-                <Route path="/search/hotels" key={'userSearchHottels'} element={<RoomsSearch />} />
+                <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
               ]}
 
               {role === "admin" && [
                 <Route path="/profile" key={'adminProfile'} element={<AdminProfile />} />,
-                <Route path="/search/rooms/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
-                <Route path="/search/cottages/:type" key={'adminSearchCottages'} element={<RoomsSearch />} />,
-                <Route path="/search/hotels" key={'adminSearchHottels'} element={<RoomsSearch />} />
+                <Route path="/search/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
               ]}
 
               {role === "trainer" && [
                 <Route path="/profile/edit" key={'editTrainerProfile'} element={<EditTrainerProfileCard />} />,
-                <Route path="/profile" key={'trainerProfile'} element={<TrainerProfile />} />
+                <Route path="/profile" key={'trainerProfile'} element={<TrainerProfile />} />,
+                <Route path="/calendar" key={'trainerCalendar'} element={<CalendarTrainer />} />
               ]}
 
             </Routes>

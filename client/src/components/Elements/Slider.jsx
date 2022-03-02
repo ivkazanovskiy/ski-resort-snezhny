@@ -31,11 +31,11 @@ function Slider({ type }) {
 
   return (
     <>
-      <div className="flex rounded-lg overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
+      <div className="flex rounded-lg h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
         {
           photos.length ?
             photos.map(el =>
-              <img key={el} alt="" className="shrink-0 snap-center h-96 w-auto " src={`${relativePath}/${el}`} />
+              <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
             )
             :
             <></>

@@ -4,61 +4,42 @@ import { Listbox, Transition } from '@headlessui/react'
 
 
 export default function ListboxMonth({ setMonth, months }) {
-  const curMonth = new Date().getMonth() + 1;
-  const [selected, setSelected] = useState(months.find(month => month.id === curMonth) || months[0])
+  const curMonthNumber = new Date().getMonth() + 1;
+  const [selected, setSelected] = useState(months.find(month => month.id === curMonthNumber) || months[0])
 
   useEffect(() => {
     setMonth(selected)
   }, [selected, setMonth])
 
   return (
-    <div className=" flex-1">
+    <div className="grow">
       <Listbox value={selected} onChange={setSelected}>
-        <div className="relative">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-            <span className="block truncate">{selected.name}</span>
-            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-              {/* <SelectorIcon
-                className="w-5 h-5 text-gray-400"
-                aria-hidden="true"
-              /> */}
-            </span>
-          </Listbox.Button>
+        <div className="relative ">
+
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {months.map((month, personIdx) => (
+            <Listbox.Options className="absolute bottom-10 backdrop-blur-sm bg-white/70 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
+              {months.map((month, ind) => (
                 <Listbox.Option
-                  key={personIdx}
-                  className={({ active }) =>
-                    `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'
-                    }`
-                  }
-                  value={month}
-                >
-                  {({ selected }) => (
-                    <>
-                      <span
-                        className={`block truncate ${selected ? 'font-medium' : 'font-normal'
-                          }`}
-                      >
-                        {month.name}
-                      </span>
-                      {selected ? (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                          {/* <CheckIcon className="w-5 h-5" aria-hidden="true" /> */}
-                        </span>
-                      ) : null}
-                    </>
-                  )}
+                  key={ind}
+                  className='p-2' value={month} >
+                  <>
+                    <span
+                      className='block truncate'>
+                      {month.name}
+                    </span>
+                  </>
                 </Listbox.Option>
               ))}
             </Listbox.Options>
           </Transition>
+          <Listbox.Button className="relative p-2 rounded-lg w-full text-left backdrop-blur-sm bg-white/80">
+            <span className="">{selected.name}</span>
+          </Listbox.Button>
         </div>
       </Listbox>
     </div >
