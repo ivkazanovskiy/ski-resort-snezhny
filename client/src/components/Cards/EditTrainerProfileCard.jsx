@@ -25,7 +25,10 @@ function EditTrainerProfileCard(props) {
 
   const [snowboard, setSnowboard] = useState(snowboardCurrent);
   const [ski, setSki] = useState(skiCurrent);
-  const [newPass, setNewPass] = useState(false);
+
+  const newPass = useRef();
+
+  newPass.current = false;
 
   const { id, photo } = useSelector(state => state.userReducer);
   const [avatar, setAvatar] = useState(null);
@@ -40,14 +43,14 @@ function EditTrainerProfileCard(props) {
   const passwordRepeat = useRef()
 
   const newPhoto = useRef();
-  const [areSamePasswords, setAreSamePasswords] = useState(true)
+  const [areSamePasswords, setAreSamePasswords] = useState(false)
   const [isCorrectName, setIsCorrectName] = useState(true)
   const [isCorrectSurname, setIsCorrectSurname] = useState(true)
   const [isCorrectPhone, setIsCorrectPhone] = useState(true)
   const [isCorrectEmail, setIsCorrectEmail] = useState(true)
   const [isCorrectAboutMe, setIsCorrectAboutMe] = useState(true)
-  const [isCorrectPassword, setIsCorrectPassword] = useState(true)
-  const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(true)
+  const [isCorrectPassword, setIsCorrectPassword] = useState(false)
+  const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(false)
 
   const checkName = () => {
     setIsCorrectName(isValidName(name.current.value))
@@ -110,7 +113,7 @@ function EditTrainerProfileCard(props) {
       }
     }
 
-    if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe && newPass && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
+    if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
       data = {
         name: name.current.value,
         surname: surname.current.value,
@@ -232,19 +235,15 @@ function EditTrainerProfileCard(props) {
         <Disclosure>
           {({ open }) => (
             <>
-              {
-                open ? setNewPass(true) : <></>
-              }
               <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
                 <span>Изменить пароль </span>
                 <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
               </Disclosure.Button>
               <Disclosure.Panel className="flex flex-col">
                 <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
-                <input placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
-                <input placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-                <input placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
-                <span className={`block m-2 text-sm font-medium text-red-600 ${areSamePasswords ? "hidden" : "visible"}`}>Пароли не совпадают</span>
+                <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+                <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+                <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
               </Disclosure.Panel>
             </>
           )}
@@ -273,7 +272,7 @@ function EditTrainerProfileCard(props) {
           )}
         </Disclosure>
         <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
-        <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Выйти</button>
+        <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-gray font-medium rounded-lg text-base w-full text-center">Выйти</button>
       </form>
 
 
