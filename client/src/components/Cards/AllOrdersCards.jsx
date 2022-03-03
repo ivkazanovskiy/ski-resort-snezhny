@@ -1,10 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import { nextStringDate } from '../../helpers/nextStringDate'
 import OrderCard from './OrderCard';
+import UnauthorizedCard from './UnauthorizedCard';
 
 function AllOrdersCards(props) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   const allCards = useQuery('allCards', () => axios('/api/userOrders'))
 
@@ -28,6 +32,8 @@ function AllOrdersCards(props) {
       }
     }
   }
+
+  if (!role) return (<UnauthorizedCard />)
 
   return (
     <>

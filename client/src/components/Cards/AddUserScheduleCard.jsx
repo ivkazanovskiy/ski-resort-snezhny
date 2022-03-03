@@ -1,14 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Tab } from '@headlessui/react';
 
 import NewScheduleCard from './NewScheduleCard';
+import UnauthorizedCard from './UnauthorizedCard';
 
 
-function AddUserScheduleCard({refresh, setRefresh}) {
+function AddUserScheduleCard({ refresh, setRefresh }) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
+
+  if (!role) return (<UnauthorizedCard />)
 
   return (
     <div className="w-full max-w-md py-4">
