@@ -55,15 +55,15 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/map" element={<Map />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/search" element={<HouseSearchForm />} />
-              <Route path="/skipass" element={<SkiPassForm />} />
               <Route path="/login/admin" element={<Admin />} />
               <Route path="/registration" element={<Registration />} />
 
               {role === "user" && [
+                <Route path="/skipass" element={<SkiPassForm />} />,
                 <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,
                 <Route path="/orders" key={'userOrders'} element={<UserProfile />} />,
                 <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
+                <Route path="/search" element={<HouseSearchForm />} />
               ]}
 
               {role === "admin" && [
@@ -71,6 +71,7 @@ function App() {
                 <Route path="/profile" key={'editAdminProfile'} element={<EditAdminProfileCard />} />,
                 <Route path="/orders" key={'adminProfile'} element={<AdminProfile />} />,
                 <Route path="/search/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
+                <Route path="/search" element={<HouseSearchForm />} />
               ]}
 
               {role === "trainer" && [
