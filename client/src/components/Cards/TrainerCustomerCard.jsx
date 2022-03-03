@@ -5,7 +5,7 @@ function TrainerCustomerCard({ info }) {
     <li>
       <div className="card justify-start">
         <div className=" card-avatar flex justify-center items-center">
-          <span class="material-icons text-7xl ">
+          <span className="material-icons text-7xl ">
             {
               info.sport === 'Лыжи'
                 ? "downhill_skiing"

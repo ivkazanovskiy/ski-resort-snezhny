@@ -2,15 +2,16 @@ import React, { useState, useRef } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidSkiPass } from '../../helpers/isValid'
 import { updateUser } from '../../redux/sagaCreators/userSagaCreators';
-
-
+import { deleteUser } from '../../redux/actionCreators/userAC';
 
 function EditUserProfileCard(props) {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const name = useRef()
   const surname = useRef()
@@ -86,6 +87,12 @@ function EditUserProfileCard(props) {
     };
   }
 
+  const logout = async (event) => {
+    event.preventDefault()
+    localStorage.removeItem('auth_token')
+    dispatch(deleteUser())
+    return navigate('/')
+  }
 
   return (
     <form className="card flex-col mb-2 mt-8">
@@ -158,6 +165,7 @@ function EditUserProfileCard(props) {
         )}
       </Disclosure>
       <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
+      <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Выйти</button>
     </form>
   );
 }

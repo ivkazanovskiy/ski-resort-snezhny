@@ -44,7 +44,7 @@ function TopMenu() {
       {isOpen &&
         <section className="absolute top-0 left-0 w-full h-full backdrop-blur-md flex  z-10">
           <div onClick={() => toggle()} className="flex w-1/4 justify-center pt-8">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>

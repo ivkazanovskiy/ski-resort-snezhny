@@ -2,15 +2,17 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Disclosure, Switch } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidAboutMe } from '../../helpers/isValid'
 import { updateUser } from '../../redux/sagaCreators/userSagaCreators';
-import { updateAvatar } from '../../redux/actionCreators/userAC';
+import { updateAvatar, deleteUser } from '../../redux/actionCreators/userAC';
 import axios from 'axios';
 
 function EditTrainerProfileCard(props) {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     name: nameCurrent,
@@ -23,8 +25,8 @@ function EditTrainerProfileCard(props) {
 
   const [snowboard, setSnowboard] = useState(snowboardCurrent);
   const [ski, setSki] = useState(skiCurrent);
+  const [newPass, setNewPass] = useState(false);
 
-  let [plan, setPlan] = useState('startup')
   const { id, photo } = useSelector(state => state.userReducer);
   const [avatar, setAvatar] = useState(null);
 
@@ -73,7 +75,6 @@ function EditTrainerProfileCard(props) {
   }
 
   const updatePhoto = useCallback((event) => {
-    event.preventDefault();
     const data = new FormData();
     data.append('photo', avatar);
 
@@ -93,6 +94,7 @@ function EditTrainerProfileCard(props) {
 
   const applyChanges = (event) => {
     event.preventDefault()
+
     let data;
     if (!password.current) {
       if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe) {
@@ -102,28 +104,38 @@ function EditTrainerProfileCard(props) {
           phone: phone.current.value,
           email: email.current.value,
           aboutMe: aboutMe.current.value,
-          snowboard: snowboard.current.checked,
-          ski: ski.current.checked,
+          snowboard,
+          ski,
         };
       }
     }
-    if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
+
+    if (isCorrectName && isCorrectEmail && isCorrectSurname && isCorrectPhone && isCorrectAboutMe && newPass && areSamePasswords && isCorrectPassword && isCorrectPasswordOld) {
       data = {
         name: name.current.value,
         surname: surname.current.value,
         phone: phone.current.value,
         email: email.current.value,
         aboutMe: aboutMe.current.value,
-        snowboard: snowboard.current.checked,
-        ski: ski.current.checked,
+        snowboard,
+        ski,
         passwordOld: passwordOld.current.value,
         password: password.current.value
       };
     }
+
     if (newPhoto.current) {
       updatePhoto();
     }
+
     return dispatch(updateUser(data))
+  }
+
+  const logout = async (event) => {
+    event.preventDefault()
+    localStorage.removeItem('auth_token')
+    dispatch(deleteUser())
+    return navigate('/')
   }
 
   return (
@@ -185,6 +197,7 @@ function EditTrainerProfileCard(props) {
             <div className="basis-3/4">
               <Switch
                 id="snowboard"
+                name="snowboard"
                 checked={snowboard}
                 onChange={() => setSnowboard(!snowboard)}
                 className={`${snowboard ? 'bg-custom-blue/60' : 'bg-custom-gray/60'}
@@ -203,6 +216,7 @@ function EditTrainerProfileCard(props) {
             <div className="basis-3/4">
               <Switch
                 id="ski"
+                name="ski"
                 checked={ski}
                 onChange={() => setSki(!ski)}
                 className={`${ski ? 'bg-custom-blue/60' : 'bg-custom-gray/60'}
@@ -218,6 +232,9 @@ function EditTrainerProfileCard(props) {
         <Disclosure>
           {({ open }) => (
             <>
+              {
+                open ? setNewPass(true) : <></>
+              }
               <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
                 <span>Изменить пароль </span>
                 <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
@@ -256,6 +273,7 @@ function EditTrainerProfileCard(props) {
           )}
         </Disclosure>
         <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
+        <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Выйти</button>
       </form>
 
 
