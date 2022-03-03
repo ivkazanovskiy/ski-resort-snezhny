@@ -9,7 +9,7 @@ function ChooseEditRoomCard(props) {
   }
   return (
     <Tab.Group>
-      <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+      {/* <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
         <Tab className={({ selected }) =>
           classNames(
             'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
@@ -130,7 +130,7 @@ function ChooseEditRoomCard(props) {
         )}>
           <EditRoomCard type={5} />
         </Tab.Panel>
-      </Tab.Panels>
+      </Tab.Panels> */}
     </Tab.Group>
   );
 }

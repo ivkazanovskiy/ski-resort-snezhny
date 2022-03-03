@@ -31,7 +31,6 @@ router.route('/:id')
 router.route('/')
   .get(async (req, res) => {
     const { sport, bookingdate: date } = req.headers;
-    console.log(sport === 'ski');
     try {
       let trainers;
 
