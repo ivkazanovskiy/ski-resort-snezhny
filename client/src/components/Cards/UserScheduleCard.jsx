@@ -30,7 +30,11 @@ function UserScheduleCard({ order, setOrders, orders }) {
   return (
     <li>
       <div className="card">
-        <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`}></img>
+        {
+          order['Trainer.photo']
+            ? <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`}></img>
+            : <img className="card-avatar" src="https://brilliant24.ru/files/cat/template_01.png"></img>
+        }
         <div className="card-content">
           <div className="card-name">
             {`${order['Trainer.name']} ${order['Trainer.surname']}`}
@@ -44,7 +48,7 @@ function UserScheduleCard({ order, setOrders, orders }) {
         </div>
         <div className="card-delete">
           <button onClick={deleteOrder} className="delete-btn">
-            <span class="material-icons">
+            <span className="material-icons">
               delete
             </span>
           </button>

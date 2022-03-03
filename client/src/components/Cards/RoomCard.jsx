@@ -19,9 +19,7 @@ function RoomCard({ type }) {
         folder: relativePath,
       },
     })
-      .then((res) => {
-        setPhotos(res.data.photos);
-      })
+      .then((res) => setPhotos(res.data.photos))
       .catch(err => console.log(err));
   }, [])
 
@@ -30,7 +28,11 @@ function RoomCard({ type }) {
       <Link to={`/search/${type.id}`} className="w-full">
         <div className="card gap-4">
           <div className="card-avatar">
-            <img className="w-full h-full object-cover rounded-md" src={`${relativePath}/${photos[0]}`} alt="..."></img>
+            {
+              photos[0]
+                ? <img className="w-full h-full object-cover rounded-md" src={`${relativePath}/${photos[0]}`}></img>
+                : <img className="w-full h-full object-cover rounded-md" src="https://brilliant24.ru/files/cat/template_01.png"></img>
+            }
           </div>
           <div className="flex flex-col grow justify-around">
             <span className="card-name">{type.title}</span>
@@ -43,7 +45,7 @@ function RoomCard({ type }) {
           {
             role === 'admin'
               ? <Link to={`/edit/${type.id}`} className="absolute h-10 w-10 right-3 bottom-3 z-40 flex justify-center">
-                <span class="material-icons text-2xl text-custom-navy">edit</span>
+                <span className="material-icons text-2xl text-custom-navy">edit</span>
               </Link>
               : <></>
           }

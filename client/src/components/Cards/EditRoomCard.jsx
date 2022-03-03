@@ -109,19 +109,19 @@ function EditRoomCard(props) {
         <div className="w-full mb-2 flex flex-col">
           <div className="w-full flex flex-row p-2">
             <label htmlFor="name" className="basis-1/4 edit-label text-center">Заголовок</label>
-            <input name="name" type="text" id="name" className="basis-3/4 edit-input text-sm" defaultValue={info.title} ref={titleRef} required/>
+            <input name="name" type="text" id="name" className="basis-3/4 edit-input text-sm" defaultValue={info.title} ref={titleRef} required />
           </div>
           <div className="w-full flex flex-row p-2">
             <label htmlFor="description" className="basis-1/4 edit-label text-center">Описание</label>
-            <textarea name="description" type="text" id="description" className="basis-3/4 edit-input text-sm h-24" defaultValue={info.description} ref={descriptionRef} required/>
+            <textarea name="description" type="text" id="description" className="basis-3/4 edit-input text-sm h-24" defaultValue={info.description} ref={descriptionRef} required />
           </div>
           <div className="w-full flex flex-row p-2">
             <label htmlFor="weekdayCost" className="basis-1/4 edit-label text-center">Будни</label>
-            <input name="weekdayCost" type="number" id="weekdayCost" className="basis-3/4 edit-input text-sm" defaultValue={info.weekdayCost} ref={weekdayCostRef} required/>
+            <input name="weekdayCost" type="number" id="weekdayCost" className="basis-3/4 edit-input text-sm" defaultValue={info.weekdayCost} ref={weekdayCostRef} required />
           </div>
           <div className="w-full flex flex-row p-2">
             <label htmlFor="weekendCost" className="basis-1/4 edit-label text-center">Выходные</label>
-            <input name="weekendCost" type="number" id="weekendCost" className="basis-3/4 edit-input text-sm" defaultValue={info.weekendCost} ref={weekendCostRef} required/>
+            <input name="weekendCost" type="number" id="weekendCost" className="basis-3/4 edit-input text-sm" defaultValue={info.weekendCost} ref={weekendCostRef} required />
           </div>
           <div className="w-full flex flex-row p-2">
             <label htmlFor="photo" className="basis-1/4 edit-label text-center">Фото</label>
@@ -131,7 +131,11 @@ function EditRoomCard(props) {
                   photos.length ?
                     photos.map(el =>
                       <div key={el} className="relative flex flex-col">
-                        <img className="row m-0 p-0 w-auto h-[80px] rounded-md object-cover" src={`${relativePath}/${el}`} />
+                        {
+                          relativePath
+                            ? <img className="row m-0 p-0 w-auto h-[80px] rounded-md object-cover" src={`${relativePath}/${el}`} />
+                            : <img className="row m-0 p-0 w-auto h-[80px] rounded-md object-cover" src="https://brilliant24.ru/files/cat/template_01.png" />
+                        }
                         <button onClick={
                           (event) => {
                             event.preventDefault();
