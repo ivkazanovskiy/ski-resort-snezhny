@@ -1,6 +1,5 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-// import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 
 export default function ListboxMonth({ setMonth, months }) {
@@ -22,7 +21,7 @@ export default function ListboxMonth({ setMonth, months }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute bottom-10 backdrop-blur-sm bg-white/70 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
+            <Listbox.Options className="absolute bottom-10 bg-white/60 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
               {months.map((month, ind) => (
                 <Listbox.Option
                   key={ind}
@@ -37,7 +36,7 @@ export default function ListboxMonth({ setMonth, months }) {
               ))}
             </Listbox.Options>
           </Transition>
-          <Listbox.Button className="relative p-2 rounded-lg w-full text-left backdrop-blur-sm bg-white/80">
+          <Listbox.Button className="relative p-2 rounded-lg w-full text-left bg-white/90">
             <span className="">{selected.name}</span>
           </Listbox.Button>
         </div>

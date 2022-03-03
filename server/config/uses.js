@@ -1,8 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-// const cors = require('cors');
-// const corsConfig = require('./corsConfig');
 
 function uses(app) {
   app.use(logger('dev'));

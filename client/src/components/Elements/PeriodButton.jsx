@@ -5,8 +5,8 @@ function PeriodButton({ getTrainersName, time, changeHours }) {
 
   const [isClicked, setIsClicked] = useState(false);
 
-  const passiveStyle = "p-2 shadow-md text-center text-sm text-gray-500 border border-gray-300 rounded-lg"
-  const activeStyle = "p-2 shadow-md text-center text-sm text-white border border-gray-300 rounded-lg bg-blue-500 "
+  const passiveStyle = "bg-white/60  "
+  const activeStyle = "bg-custom-blue/70 text-white"
 
   return (
     <button onClick={() => {
@@ -14,7 +14,7 @@ function PeriodButton({ getTrainersName, time, changeHours }) {
       getTrainersName(time);
       setIsClicked(() => !isClicked);
     }}
-      id={time} className={isClicked ? activeStyle : passiveStyle}>
+      id={time} className={`p-2 rounded-lg ${isClicked ? activeStyle : passiveStyle}`}>
       {`${time}:00`}</button>
   );
 }

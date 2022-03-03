@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { prettyPhone } from '../../helpers/pretty'
 import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 
-function UserScheduleCard({ order, setOrders, orders }) {
+function UserScheduleCard({ order }) {
+  const queryClient = useQueryClient()
 
-  const [photos, setPhotos] = useState('');
-
-  useEffect(() => {
-    console.log(5);
-    axios({
-      url: '/api/photos/',
-      method: 'GET',
-      headers: {
-        folder: '/photos',
-      },
-    })
-      .then((res) => setPhotos(res.data.photos))
-      .catch(err => console.log(err));
-  }, [orders])
-
-  const deleteOrder = (event) => {
-    event.preventDefault();
-
+  const deleteOrder = useMutation(() => {
     axios({
       url: '/api/userSchedule',
       method: 'DELETE',
@@ -31,38 +16,41 @@ function UserScheduleCard({ order, setOrders, orders }) {
         trainerId: order['Trainer.id'],
       },
     })
-      .then(() => {
-        // FIXME: сюда надо закинуть рефреш, чтобы обновить список инструкторов
-        setOrders(orders.filter(el => !(
-          (el['Trainer.id'] === order['Trainer.id'])
-          && (el.date === order.date)
-          && (el.startTime === order.startTime)
-        )));
-      })
-      .catch(err => console.log(err));
-  };
+  }, {
+
+    onSuccess: () => {
+      queryClient.invalidateQueries('allOrdersQuery')
+    }
+  })
+
 
   return (
     <li>
       <div className="card">
-        <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`} alt="..."></img>
+        {
+          order['Trainer.photo']
+            ? <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`}></img>
+            : <img className="card-avatar" src="https://brilliant24.ru/files/cat/template_01.png"></img>
+        }
         <div className="card-content">
           <div className="card-name">
             {`${order['Trainer.name']} ${order['Trainer.surname']}`}
           </div>
           <div className="card-info">
-            {order['Trainer.phone']}
+            {prettyPhone(order['Trainer.phone'])}
           </div>
           <div className="card-info">
             {`${order.date.split('-')[2]}.${order.date.split('-')[1]} ${order.startTime}:00-${Number(order.startTime) + 1}:00`}
           </div>
         </div>
         <div className="card-delete">
-          <button onClick={deleteOrder} className="delete-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#212D52">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-          </button>
+          {deleteOrder.isIdle &&
+            <button onClick={() => deleteOrder.mutate()} className="delete-btn">
+              <span class="material-icons">
+                delete
+              </span>
+            </button>
+          }
         </div>
       </div>
     </li>

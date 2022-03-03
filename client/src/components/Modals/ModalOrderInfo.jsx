@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { prettyPhone } from '../../helpers/pretty'
 
 function ModalOrderInfo({ setModal, id, date }) {
 
@@ -10,14 +11,13 @@ function ModalOrderInfo({ setModal, id, date }) {
 
   let info;
   if (order.isSuccess) info = order.data.data.order;
-  console.log(info);
 
   if (order.isLoading) return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-md bg-slate-400/70"></div>
+    <div className="fixed inset-0 z-50 flex justify-center items-center bg-slate-400/70"></div>
   )
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-md bg-slate-400/70">
+    <div className="fixed inset-0 z-50 flex justify-center items-center bg-slate-400/70">
       <div className=" p-2 bg-white w-96 flex flex-col gap-2 rounded-lg">
         <div className=" border rounded-[15px] flex flex-col p-4 gap-4">
           <div className="flex ">
@@ -41,7 +41,7 @@ function ModalOrderInfo({ setModal, id, date }) {
               Телефон
             </div>
             <div className="bg-slate-100 grow p-2 text-custom-navy rounded-lg">
-              {info['User.phone']}
+              {prettyPhone(info['User.phone'])}
             </div>
           </div>
           <div className="flex ">
@@ -56,7 +56,6 @@ function ModalOrderInfo({ setModal, id, date }) {
         <button onClick={() => setModal(false)} className="p-2 text-white  bg-custom-sand font-medium text-lg grow rounded-lg">Закрыть</button>
       </div>
     </div>
-
   );
 }
 

@@ -23,7 +23,7 @@ function TrainerTimetable(props) {
   const [chosenDate, setChosenDate] = useState(todayStringDay)
 
   return (
-    <>
+    <div className="rounded-lg bg-white/60 p-2 w-full overflow-y-auto">
       {allRecords.isLoading && <>Загрузка</>}
       {allRecords.isSuccess &&
         <>
@@ -33,11 +33,11 @@ function TrainerTimetable(props) {
             </ul>
           </div>
           <div className="flex justify-center mt-2 w-full gap-2">
-            <input type="date" className="w-1/2 date-input" ref={dateRef} onChange={() => setChosenDate(dateRef.current.value)} defaultValue={todayStringDay} />
+            <input type="date" className="w-1/2 date-input shadow-current-gray shadow-xl" ref={dateRef} onChange={() => setChosenDate(dateRef.current.value)} defaultValue={todayStringDay} />
           </div>
 
         </>}
-    </>
+    </div>
   );
 }
 

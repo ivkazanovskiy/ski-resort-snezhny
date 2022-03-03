@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const fs = require('fs');
+const { Op } = require('sequelize');
 const { middlewareAvatar } = require('../middleware/uploadFile');
 const { Trainer } = require('../db/models');
 const { Schedule } = require('../db/models');
@@ -23,7 +24,6 @@ router.route('/:id')
       });
       return res.status(200).json({ photo: filedata.filename });
     } catch (error) {
-      console.log(error.message);
       return res.status(500).json({ error: error.message });
     }
   });
@@ -31,34 +31,32 @@ router.route('/:id')
 router.route('/')
   .get(async (req, res) => {
     const { sport, bookingdate: date } = req.headers;
-    console.log(sport === 'ski');
-    try {
-      let trainers;
 
-      if (sport === 'ski') {
-        trainers = await Trainer.findAll({
-          where: { ski: true },
-          attributes: ['id', 'name', 'surname'],
-          include: {
-            model: Schedule,
-            where: { date },
-            attributes: ['startTime', 'userId'],
-          },
-          raw: true,
-        });
-      } else if (sport === 'snowboard') {
-        trainers = await Trainer.findAll({
-          where: { snowboard: true },
-          attributes: ['id', 'name', 'surname'],
-          include: {
-            model: Schedule,
-            where: { date },
-            attributes: ['startTime', 'userId'],
-          },
-          raw: true,
-        });
-      }
-      return res.status(200).json({ trainers });
+    const sportCondition = (sport === 'ski') ? { ski: true } : { snowboard: true };
+    try {
+      // const trainers = await Schedule.findAll({
+      //   where: { date, userId: null },
+      //   attributes: [],
+      //   group: 'Trainer.id',
+      //   include: {
+      //     model: Trainer,
+      //     where: { ...sportCondition },
+      //     attributes: ['id', 'name', 'surname'],
+      //   },
+      //   raw: true,
+      // });
+
+      const trainers = await Trainer.findAll({
+        where: { ...sportCondition },
+        attributes: ['id', 'name', 'surname'],
+        include: {
+          model: Schedule,
+          where: { date },
+          attributes: ['startTime', 'userId'],
+        },
+        raw: true,
+      });
+      return res.json(trainers);
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }

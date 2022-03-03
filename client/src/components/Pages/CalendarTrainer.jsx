@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 
@@ -8,9 +8,9 @@ import Day from '../Listbox/Day'
 import { addZero } from '../../helpers/addZero'
 import { getDates } from '../../helpers/getDates'
 
+import spin from '../../css/svg/spin.svg';
 
 function CalendarTrainer(props) {
-
   const curYear = new Date().getFullYear();
   const curMonth = new Date().getMonth() + 1;
   const season = {
@@ -29,8 +29,6 @@ function CalendarTrainer(props) {
     { id: 4, name: 'Апрель', days: 30 },
   ]
 
-
-
   const [month, setMonth] = useState(months.find(month => month.id === curMonth))
 
   const daysArray = []
@@ -41,6 +39,10 @@ function CalendarTrainer(props) {
       day
     ))
   }
+
+  useEffect(() => {
+    saveRecords.reset()
+  }, [month])
 
   const shiftDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const firstWeekDay = (new Date(daysArray[0])).toString().split(' ')[0]
@@ -67,6 +69,8 @@ function CalendarTrainer(props) {
   }
 
   const changeDays = (day) => {
+    if (saveRecords.isSuccess) { saveRecords.reset() }
+
     (workingDays.includes(day))
       ?
       workingDays = workingDays.filter(el => el !== day)
@@ -74,22 +78,26 @@ function CalendarTrainer(props) {
       workingDays.push(day);
   }
 
+  if (allRecords.isLoading) return ""
 
   return (
     <div className="flex flex-col gap-2 w-full">
       {/* FIXME: сделать смещение, чтобы выходные были в конце */}
-      <div className="grid grid-cols-7 gap-2 w-full">
+      <div className="grid grid-cols-7 gap-2 w-full bg-white/60 p-2 rounded-lg">
         {pseudoArr.map((el, ind) => <div key={`pseudo-${ind}`} className=""></div>)}
         {allRecords.isLoading && <>Загрузка</>}
         {allRecords.isSuccess && daysArray.map((date) => <Day key={`${date}-btn`} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} />)}
       </div>
       <div className="w-full flex gap-2">
-        <div className="p-2 text-center rounded-lg text-custom-navy backdrop-blur-sm bg-white/80">
+        <div className="p-2 text-center rounded-lg text-custom-navy bg-white/90">
           {`${season.prevYear}/${season.nextYear}`}
         </div>
         <ListboxMonth setMonth={setMonth} months={months} />
       </div>
-      <button onClick={saveRecords.mutate} className="basic-btn w-full">Сохранить расписание</button>
+      {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn w-full h-12 bg-custom-blue'>Сохранить расписание</button>}
+      {(saveRecords.isLoading || allRecords.isLoading) && <button onClick={() => saveRecords.mutate()} className='  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex h-12'>
+        <img src={spin} className="w-8 top-1/2 animate-spin mx-auto text-white " alt="" /></button>}
+      {(saveRecords.isSuccess) && <button className="basic-btn w-full bg-custom-green h-12">Расписание сохранено</button>}
     </div>
   );
 }

@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { Op } = require('sequelize');
 const { Room, Order } = require('../db/models');
+
+const authUser = require('../middleware/authUser');
+
 const toStringDate = require('../helpers/toStringDate');
 
 router.route('/')
@@ -37,7 +40,7 @@ router.route('/')
       return res.status(500).json({ error: err.message });
     }
   })
-  .post(async (req, res) => {
+  .post(authUser, async (req, res) => {
     const { start, days, roomId } = req.body;
     const { id: userId } = req.user;
     let numDate = new Date(start).valueOf();
@@ -59,7 +62,6 @@ router.route('/')
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
-    // console.log(newBooking);
   });
 
 module.exports = router;

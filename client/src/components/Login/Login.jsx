@@ -47,13 +47,13 @@ function Login(props) {
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="email" className="basis-2/6 edit-label text-center">Email</label>
-          <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="basis-4/6 edit-input border-[1px] border-white/0" required/>
+          <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="basis-4/6 edit-input border-[1px] border-white/0" required />
         </div>
       </div>
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="password" className="basis-2/6 edit-label text-center">Пароль</label>
-          <input ref={password} onChange={checkPassword} name="password" type="password" id="password" className={`basis-4/6 edit-input border-[1px] border-white/0`} required/>
+          <input ref={password} onChange={checkPassword} name="password" type="password" id="password" className={`basis-4/6 edit-input border-[1px] border-white/0`} required />
         </div>
       </div>
       <div className="flex flex-row justify-around justify-items-center items-center">
@@ -62,8 +62,8 @@ function Login(props) {
           <Switch
             checked={enabled}
             onChange={setEnabled}
-            className={`${enabled ? 'bg-custom-blue/60' : 'bg-custom-gray/60'}
-          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
+            className={`${enabled ? 'bg-custom-blue/70' : 'bg-custom-gray/70'}
+          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200 outline-none`}>
             <span
               aria-hidden="true"
               className={`${enabled ? 'translate-x-6' : 'translate-x-0'}

@@ -1,8 +1,6 @@
-import axios from 'axios';
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
 import { Tab } from '@headlessui/react';
 
-import { addZero } from '../../helpers/addZero';
 import AdminTableCard from '../Cards/AdminTableCard';
 import { nextStringDate } from '../../helpers/nextStringDate';
 import { toStringDate } from '../../helpers/toStringDate';
@@ -41,7 +39,7 @@ function AdminOrdersForm(props) {
   return (
     <>
       <AdminTableCard dates={arrayDate.current} gap={gap} type={type} grade={grade} />
-      <div className="w-full mt-2 mb-2 rounded-lg backdrop-blur-sm bg-white/30">
+      <div className="w-full mt-2 mb-2 rounded-lg bg-white/60">
         {type !== 2 &&
           <Tab.Group onChange={setGrade} defaultIndex={grade}>
             <Tab.List className="flex gap-2 p-[3px]  mb-0">

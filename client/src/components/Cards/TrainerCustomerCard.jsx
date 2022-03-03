@@ -1,11 +1,12 @@
 import React from 'react';
+import { prettyPhone } from '../../helpers/pretty'
 
 function TrainerCustomerCard({ info }) {
   return (
-    <li>
-      <div className="card justify-start">
+    <li className="">
+      <div className="card justify-start shadow-current-gray shadow-xl">
         <div className=" card-avatar flex justify-center items-center">
-          <span class="material-icons text-7xl ">
+          <span className="material-icons text-7xl ">
             {
               info.sport === 'Лыжи'
                 ? "downhill_skiing"
@@ -18,7 +19,7 @@ function TrainerCustomerCard({ info }) {
             {`${info['User.name']} ${info['User.surname']}`}
           </div>
           <div className="card-info">
-            {info['User.phone']}
+            {prettyPhone(info['User.phone'])}
           </div>
           <div className="card-info">
             {`${info.date.split('-')[2]}.${info.date.split('-')[1]} ${info.startTime}:00-${Number(info.startTime) + 1}:00`}

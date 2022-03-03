@@ -21,9 +21,7 @@ router.route('/')
   .put(async (req, res) => {
     const { id } = req.user;
     const { days } = req.body;
-    console.log(days);
     if (!days) return res.sendStatus(400);
-    console.log(days);
     // TODO: в будущем сделать более гибкое расписание
     const possibleTime = ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'];
 
@@ -54,18 +52,6 @@ router.route('/')
           });
         }));
       }));
-      // FIXME: удалить если ничего не сломается
-      // const schedule = await Schedule.findAll({
-      //   where: { trainerId: id },
-      //   attributes: ['date', 'startTime', 'sport'],
-      //   raw: true,
-      //   include: {
-      //     model: User,
-      //     attributes: ['name', 'surname', 'phone'],
-      //   },
-      // });
-
-      // return res.status(200).json({ schedule });
       res.sendStatus(201);
     } catch (err) {
       return res.status(500).json({ error: err.message });

@@ -1,5 +1,5 @@
 import { Tab } from '@headlessui/react';
-import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useQuery, useMutation } from 'react-query';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,10 +7,13 @@ import { toStringDate } from '../../helpers/toStringDate'
 import SkiPassButton from '../Elements/SkiPassButton';
 import axios from 'axios'
 import ModalBuy from '../Modals/ModalBuy';
+import { prettyCost } from '../../helpers/pretty'
 
-import bill from '../../css/svg/bill.svg'
+import UnauthorizedCard from '../Cards/UnauthorizedCard';
 
 function SkiPassForm(props) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   const tableQuery = useQuery('tableQuery', () => axios('/api/skiPass'))
   const save = useMutation(() => axios({
@@ -22,18 +25,15 @@ function SkiPassForm(props) {
       date
     }
   }), {
-    onSuccess: () => {
-      setModal(false)
-      // FIXME: заменить на другое отображение
-      window.alert('Ски-пасс куплен')
-    },
     onError: (err) => {
       console.log(err.response.data.error);
       window.alert('Ошибка')
     },
   })
 
-  const { auth, skiPass } = useSelector(state => state.userReducer)
+  // save.reset()
+
+  const { skiPass } = useSelector(state => state.userReducer)
 
   const dateRef = useRef()
   const [modal, setModal] = useState(false)
@@ -64,19 +64,12 @@ function SkiPassForm(props) {
     return classes.filter(Boolean).join(' ')
   }
 
-  if (!auth) return (
-    <>
-      <div className="w-3/4 mt-6">Для покупки Ski-Pass войдите в свой профиль или зарегистрируйтесь</div>
-      <div className="flex p-2 gap-2 w-full">
-        <Link to="/login" type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm flex-1 px-5 py-2.5 text-center ">Войти</Link>
-        <Link to="/registration" type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm flex-1 px-5 py-2.5 text-center ">Зарегистрироваться</Link>
-      </div>
-    </>)
+  if (!role) return (<UnauthorizedCard />)
 
   if (!skiPass) return (
     <>
       <div className="w-3/4 mt-6">Для пополнения Ski-Pass необходимо купить его в кассе Горнолыжного курорта Снежный и добавить в личном кабинете в разделе "Информация"</div>
-      <Link to="/profile" type="submit" className="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center ">Личный кабинет</Link>
+      <Link to="/profile" type="submit" className="mt-2 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm  px-5 py-2.5 text-center ">Личный кабинет</Link>
     </>
   )
 
@@ -89,7 +82,7 @@ function SkiPassForm(props) {
   if (chosen) return (
     <>
       <div className="w-full pt-16 grow flex justify-center items-center ">
-        <div className="p-4 mb-2 flex flex-col items-center rounded-lg w-60 backdrop-blur-sm bg-white/80">
+        <div className="p-4 mb-2 flex flex-col items-center rounded-lg w-60 bg-white/60">
           <div className="self-end">
             № {skiPass}
           </div>
@@ -97,12 +90,12 @@ function SkiPassForm(props) {
             Итого к оплате:
           </div>
           <div className="text-2xl font-medium">
-            {chosen[keyString]} ₽
+            {prettyCost(chosen[keyString])} ₽
           </div>
         </div>
       </div>
 
-      <div className="backdrop-blur-sm bg-white/40 w-full rounded-lg">
+      <div className="bg-white/30 w-full rounded-lg">
         <Tab.Group onChange={setType} defaultIndex={type}>
           <Tab.Panels className="self-stretch">
             <Tab.Panel className="slider-panel">
@@ -165,15 +158,10 @@ function SkiPassForm(props) {
         <button onClick={() => setModal(true)} className="basic-btn  w-1/2">Оплатить</button>
         {modal && <ModalBuy setModal={setModal} mutation={save} cost={chosen[keyString]} />}
       </div>
-
     </>
   )
 
-  return (
-    <>
-
-    </>
-  );
+  return (<></>);
 }
 
 export default SkiPassForm;

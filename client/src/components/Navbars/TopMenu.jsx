@@ -1,28 +1,15 @@
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { deleteUser } from '../../redux/actionCreators/userAC';
+import { Link } from 'react-router-dom'
 
 function TopMenu() {
 
-  const { auth } = useSelector(state => state.userReducer)
   const [isOpen, setIsOpen] = useState(false)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const toggle = () => setIsOpen(!isOpen)
 
-  const logout = async (event) => {
-    event.preventDefault()
-    localStorage.removeItem('auth_token')
-    dispatch(deleteUser())
-    return navigate('/')
-  }
   const { isLoading, isSuccess, data } = useQuery('weatherQuery', () => axios('/data/2.5/weather?lat=60.521970&lon=29.764107&appid=f42b2f779a9734d9aa2d43a8aef21bf8'));
-
-  const weather = useRef();
 
   let temperature
   if (isSuccess) {
@@ -33,7 +20,7 @@ function TopMenu() {
 
   return (
     <>
-      <nav className="absolute right-[10px] backdrop-blur-sm bg-white/80 rounded-lg h-16 flex items-center p-4 z-10">
+      <nav className="absolute right-[10px] bg-white/60 rounded-lg h-16 flex items-center p-4 z-10">
         <div className="">
           {temperature && `${temperature}`}
         </div>
@@ -42,13 +29,13 @@ function TopMenu() {
         </button>
       </nav>
       {isOpen &&
-        <section className="absolute top-0 left-0 w-full h-full backdrop-blur-md flex  z-10">
+        <section className="absolute top-0 left-0 w-full h-full flex  z-10">
           <div onClick={() => toggle()} className="flex w-1/4 justify-center pt-8">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <aside className="w-3/4 h-full p-6 text-custom-navy  bg-white/90 flex items-center" >
+          <aside className="w-3/4 h-full p-6 text-custom-navy  bg-white/60 flex items-center" >
             <ul className="flex flex-col gap-6">
               <li>
                 <Link to="/map" onClick={() => toggle()} className="nav-link">Карта курорта</Link>
