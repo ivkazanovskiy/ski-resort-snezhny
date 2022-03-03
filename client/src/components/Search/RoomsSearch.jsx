@@ -9,7 +9,7 @@ import { toStringDate } from '../../helpers/toStringDate';
 import { prettyCost } from '../../helpers/pretty'
 import Slider from '../Elements/Slider';
 import axios from 'axios'
-import ModalBuy from '../Modals/ModalBuy';
+import ModalOrderRoom from '../Modals/ModalOrderRoom';
 
 function RoomsSearch(props) {
 
@@ -48,8 +48,6 @@ function RoomsSearch(props) {
   }), {
     onSuccess: () => {
       queryClient.invalidateQueries('avaliableRooms')
-      setModal(false)
-      window.alert('Оплата прошла успешно')
     },
     onError: (error) => window.alert(error.response.data.error),
   })
@@ -132,7 +130,7 @@ function RoomsSearch(props) {
           }
         </div>
       </div>
-      {modal && <ModalBuy setModal={setModal} mutation={dookDays} cost={cost} />}
+      {modal && <ModalOrderRoom setModal={setModal} mutation={dookDays} query={avaliableRooms} cost={cost} />}
     </>
   );
 }

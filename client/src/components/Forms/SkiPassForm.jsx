@@ -23,16 +23,13 @@ function SkiPassForm(props) {
       date
     }
   }), {
-    onSuccess: () => {
-      setModal(false)
-      // FIXME: заменить на другое отображение
-      window.alert('Ски-пасс куплен')
-    },
     onError: (err) => {
       console.log(err.response.data.error);
       window.alert('Ошибка')
     },
   })
+
+  // save.reset()
 
   const { auth, skiPass } = useSelector(state => state.userReducer)
 

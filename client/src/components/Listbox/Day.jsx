@@ -22,7 +22,7 @@ function Day({ date, changeDays, isMarked }) {
       changeDays(date)
       setIsClicked(!isClicked)
     }
-    } className={`p-2 text-center text-sm rounded-lg backdrop-blur-sm ${isClicked ? activeStyle : passiveStyle} ${isWeekEnd && 'border-2 border-red-300'}`}>
+    } className={`p-2 text-center shadow-lg text-sm rounded-lg backdrop-blur-sm ${isClicked ? activeStyle : passiveStyle} ${isWeekEnd && 'border-2 border-red-300'}`}>
       {date.split('-')[2]}
     </ button >
   );

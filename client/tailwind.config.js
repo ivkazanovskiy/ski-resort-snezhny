@@ -9,6 +9,7 @@ module.exports = {
         'custom-navy': '#212d52',
         'custom-gray': '#8a96be',
         'custom-sand': '#c5c5c5',
+        'custom-green': '#019529',
       },
       backgroundImage: {
         'main': "url('/src/css/bg/main6.jpg')",
