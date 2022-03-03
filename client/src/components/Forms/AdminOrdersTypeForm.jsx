@@ -30,7 +30,7 @@ function AdminOrdersTypeForm({ form, dates }) {
                   <AdminTableCard dates={dates} form={form} type={'comfort'}></AdminTableCard>
                 </Tab.Panel>
               </Tab.Panels>
-              <Tab.List className="flex gap-2 p-[3px] mt-8 rounded-t-lg backdrop-blur-sm bg-white/30 mb-0">
+              <Tab.List className="flex gap-2 p-[3px] mt-8 rounded-t-lg bg-white/60 mb-0">
                 <Tab className={({ selected }) =>
                   classNames(
                     'slider-tab',

@@ -83,18 +83,18 @@ function CalendarTrainer(props) {
   return (
     <div className="flex flex-col gap-2 w-full">
       {/* FIXME: сделать смещение, чтобы выходные были в конце */}
-      <div className="grid grid-cols-7 gap-2 w-full backdrop-blur-sm bg-white/20 p-2 rounded-lg">
+      <div className="grid grid-cols-7 gap-2 w-full bg-white/60 p-2 rounded-lg">
         {pseudoArr.map((el, ind) => <div key={`pseudo-${ind}`} className=""></div>)}
         {allRecords.isLoading && <>Загрузка</>}
         {allRecords.isSuccess && daysArray.map((date) => <Day key={`${date}-btn`} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} />)}
       </div>
       <div className="w-full flex gap-2">
-        <div className="p-2 text-center rounded-lg text-custom-navy backdrop-blur-sm bg-white/80">
+        <div className="p-2 text-center rounded-lg text-custom-navy bg-white/90">
           {`${season.prevYear}/${season.nextYear}`}
         </div>
         <ListboxMonth setMonth={setMonth} months={months} />
       </div>
-      {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn w-full h-12'>Сохранить расписание</button>}
+      {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn w-full h-12 bg-custom-blue'>Сохранить расписание</button>}
       {(saveRecords.isLoading || allRecords.isLoading) && <button onClick={() => saveRecords.mutate()} className='  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex h-12'>
         <img src={spin} className="w-8 top-1/2 animate-spin mx-auto text-white " alt="" /></button>}
       {(saveRecords.isSuccess) && <button className="basic-btn w-full bg-custom-green h-12">Расписание сохранено</button>}

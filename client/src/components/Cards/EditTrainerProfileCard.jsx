@@ -31,7 +31,7 @@ function EditTrainerProfileCard(props) {
   newPass.current = false;
 
   const { id, photo } = useSelector(state => state.userReducer);
-  const [avatar, setAvatar] = useState('1.png');
+  const [avatar, setAvatar] = useState();
 
   const name = useRef()
   const surname = useRef()
@@ -142,139 +142,138 @@ function EditTrainerProfileCard(props) {
   }
 
   return (
-    <>
-      <form className="card flex-col mb-2 mt-8">
-        <div className="mb-2 flex flex-col">
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
-            <input name="name" type="text" id="name" className={`basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
-          </div>
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <span className="basis-1/4"></span>
-            <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 20 букв</span>
+    <form className="card flex-col mb-2 mt-8 overflow-y-auto">
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
+          <input name="name" type="text" id="name" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 20 букв</span>
+        </div>
+      </div>
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="surname" className="basis-1/4 edit-label text-center">Фамилия</label>
+          <input name="surname" type="text" id="surname" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 20 букв</span>
+        </div>
+      </div>
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="phone" className="basis-1/4 edit-label text-center">Телефон</label>
+          <input name="phone" type="tel" id="phone" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>+79*********</span>
+        </div>
+      </div>
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="email" className="basis-1/4 edit-label text-center">Email</label>
+          <input name="email" type="email" id="email" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>***@***.**</span>
+        </div>
+      </div>
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label htmlFor="skiPass" className="basis-1/4 edit-label text-center">О себе</label>
+          <input name="skiPass" type="text" id="skiPass" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectAboutMe ? "border-white/0" : "border-red-600"}`} defaultValue={aboutMeCurrent} ref={aboutMe} onChange={checkAboutMe} />
+        </div>
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <span className="basis-1/4"></span>
+          <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 140 символов</span>
+        </div>
+      </div>
+      <div className="mb-2 flex flex-col">
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label className="edit-label basis-1/4 text-center">Сноуборд</label>
+          <div className="basis-3/4">
+            <Switch
+              id="snowboard"
+              name="snowboard"
+              checked={snowboard}
+              onChange={() => setSnowboard(!snowboard)}
+              className={`${snowboard ? 'bg-custom-blue/70' : 'bg-custom-gray/70'}
+          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200`}
+            >
+              <span
+                aria-hidden="true"
+                className={`${snowboard ? 'translate-x-6' : 'translate-x-0'}
+                pointer-events-none inline-block h-[20px] w-[20px] rounded-lg bg-white transform ring-0 transition ease-in-out duration-200`}
+              />
+            </Switch>
           </div>
         </div>
-        <div className="mb-2 flex flex-col">
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label htmlFor="surname" className="basis-1/4 edit-label text-center">Фамилия</label>
-            <input name="surname" type="text" id="surname" className={`basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
-          </div>
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <span className="basis-1/4"></span>
-            <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 20 букв</span>
-          </div>
-        </div>
-        <div className="mb-2 flex flex-col">
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label htmlFor="phone" className="basis-1/4 edit-label text-center">Телефон</label>
-            <input name="phone" type="tel" id="phone" className={`basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
-          </div>
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <span className="basis-1/4"></span>
-            <span className={`basis-3/4 block text-sm text-custom-gray`}>+79*********</span>
-          </div>
-        </div>
-        <div className="mb-2 flex flex-col">
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label htmlFor="email" className="basis-1/4 edit-label text-center">Email</label>
-            <input name="email" type="email" id="email" className={`basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
-          </div>
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <span className="basis-1/4"></span>
-            <span className={`basis-3/4 block text-sm text-custom-gray`}>***@***.**</span>
-          </div>
-        </div>
-        <div className="mb-2 flex flex-col">
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label htmlFor="skiPass" className="basis-1/4 edit-label text-center">О себе</label>
-            <input name="skiPass" type="text" id="skiPass" className={`basis-3/4 edit-input border-[1px] ${isCorrectAboutMe ? "border-white/0" : "border-red-600"}`} defaultValue={aboutMeCurrent} ref={aboutMe} onChange={checkAboutMe} />
-          </div>
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <span className="basis-1/4"></span>
-            <span className={`basis-3/4 block text-sm text-custom-gray`}>*до 140 символов</span>
-          </div>
-        </div>
-        <div className="mb-2 flex flex-col">
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label className="edit-label basis-1/4 text-center">Сноуборд</label>
-            <div className="basis-3/4">
-              <Switch
-                id="snowboard"
-                name="snowboard"
-                checked={snowboard}
-                onChange={() => setSnowboard(!snowboard)}
-                className={`${snowboard ? 'bg-custom-blue/60' : 'bg-custom-gray/60'}
-          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`${snowboard ? 'translate-x-6' : 'translate-x-0'}
-            pointer-events-none inline-block h-[20px] w-[20px] rounded-lg bg-white transform ring-0 transition ease-in-out duration-200`}
-                />
-              </Switch>
-            </div>
-          </div>
-          <div className="flex flex-row justify-around justify-items-center items-center">
-            <label className="edit-label basis-1/4 text-center">Горные лыжи</label>
-            <div className="basis-3/4">
-              <Switch
-                id="ski"
-                name="ski"
-                checked={ski}
-                onChange={() => setSki(!ski)}
-                className={`${ski ? 'bg-custom-blue/60' : 'bg-custom-gray/60'}
-          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
-                <span
-                  aria-hidden="true"
-                  className={`${ski ? 'translate-x-6' : 'translate-x-0'}
+        <div className="flex flex-row justify-around justify-items-center items-center">
+          <label className="edit-label basis-1/4 text-center">Горные лыжи</label>
+          <div className="basis-3/4">
+            <Switch
+              id="ski"
+              name="ski"
+              checked={ski}
+              onChange={() => setSki(!ski)}
+              className={`${ski ? 'bg-custom-blue/70' : 'bg-custom-gray/70'}
+          relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200`}>
+              <span
+                aria-hidden="true"
+                className={`${ski ? 'translate-x-6' : 'translate-x-0'}
             pointer-events-none inline-block h-[20px] w-[20px] rounded-lg bg-white transform ring-0 transition ease-in-out duration-200`} />
-              </Switch>
-            </div>
+            </Switch>
           </div>
         </div>
-        <Disclosure>
-          {({ open }) => (
-            <>
-              <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
-                <span>Изменить пароль </span>
-                <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
-              </Disclosure.Button>
-              <Disclosure.Panel className="flex flex-col">
-                <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
-                <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
-                <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-                <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-        <Disclosure>
-          {({ open }) => (
-            <>
-              <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
-                <span>Изменить фотографию </span>
-                <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
-              </Disclosure.Button>
-              <Disclosure.Panel className="flex flex-col">
-                <span className={`text-sm text-custom-navy m-2`}>*.jpeg, .jpg, .png</span>
-                <div className="mb-2 flex flex-col">
-                  <div className="flex flex-row justify-around justify-items-center items-center">
-                    <div className="basis-1/4">
-                      <img className="w-24 h-24 border rounded-lg" src={`/photos/${photo}`}></img>
-                    </div>
-                    <input onChange={(event) => {
-                      setAvatar(event.target.files[0]);
-                    }} name="filedata" ref={newPhoto} type="file" id="photo" className="basis-3/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"></input>
+      </div>
+      <Disclosure>
+        {({ open }) => (
+          <>
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
+              <span>Изменить пароль </span>
+              <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
+            </Disclosure.Button>
+            <Disclosure.Panel className="flex flex-col">
+              <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
+              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+      <Disclosure>
+        {({ open }) => (
+          <>
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
+              <span>Изменить фотографию </span>
+              <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
+            </Disclosure.Button>
+            <Disclosure.Panel className="flex flex-col">
+              <span className={`text-sm text-custom-navy m-2`}>*.jpeg, .jpg, .png</span>
+              <div className="mb-2 flex flex-col">
+                <div className="flex flex-row justify-around justify-items-center items-center">
+                  <div className="basis-1/4">
+                    <img className="w-24 h-24 border rounded-lg" src={`/photos/${photo}`}></img>
+                  </div>
+                  <div className="basis-3/4 col ml-2">
+                    <input onChange={(event) => setAvatar(event.target.files[0])} name="filedata" ref={newPhoto} type="file" id="photo" className="shadow-current-gray shadow-xl block col file-button text-sm"></input>
+                    <button className="py-2 block text-white bg-custom-blue/70 font-medium rounded-lg w-full text-center">Добавить</button>
                   </div>
                 </div>
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
-        <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
-        <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-gray font-medium rounded-lg text-base w-full text-center">Выйти</button>
-      </form>
-    </>)
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+      <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
+      <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-gray font-medium rounded-lg text-base w-full text-center">Выйти</button>
+    </form>)
 }
 
 export default EditTrainerProfileCard;
