@@ -41,7 +41,9 @@ function AllOrdersCards(props) {
         <ul className="flex flex-col gap-2">
           {orderCards.map(orders => <OrderCard key={orders[0].id} orders={orders} />)}
         </ul>
-        : 'Бронирования отсутствуют'}
+        : 
+        <div className="w-full p-2 rounded-lg text-lg justify-self-center bg-white/80 text-center">Бронирования отсутствуют</div>
+        }
     </>
 
   );
