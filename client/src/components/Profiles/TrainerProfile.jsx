@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Disclosure } from '@headlessui/react';
 
-import EditTrainerProfileCard from '../Cards/EditTrainerProfileCard';
-import UserScheduleCard from '../Cards/UserScheduleCard';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
 import TrainerTimetable from '../Cards/TrainerTimetable';
 
 

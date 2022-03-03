@@ -1,28 +1,15 @@
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { deleteUser } from '../../redux/actionCreators/userAC';
+import { Link } from 'react-router-dom'
 
 function TopMenu() {
 
-  const { auth } = useSelector(state => state.userReducer)
   const [isOpen, setIsOpen] = useState(false)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const toggle = () => setIsOpen(!isOpen)
 
-  const logout = async (event) => {
-    event.preventDefault()
-    localStorage.removeItem('auth_token')
-    dispatch(deleteUser())
-    return navigate('/')
-  }
   const { isLoading, isSuccess, data } = useQuery('weatherQuery', () => axios('/data/2.5/weather?lat=60.521970&lon=29.764107&appid=f42b2f779a9734d9aa2d43a8aef21bf8'));
-
-  const weather = useRef();
 
   let temperature
   if (isSuccess) {

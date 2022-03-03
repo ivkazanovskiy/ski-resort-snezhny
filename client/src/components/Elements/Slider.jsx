@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useQuery, useMutation, useQueryClient } from 'react-query'
-import { Transition } from '@headlessui/react'
+import { useQuery } from 'react-query';
 
 function Slider({ type }) {
 
@@ -30,18 +29,16 @@ function Slider({ type }) {
   }, [relativePath]);
 
   return (
-    <>
-      <div className="flex rounded-lg h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
-        {
-          photos.length ?
-            photos.map(el =>
-              <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
-            )
-            :
-            <></>
-        }
-      </div>
-    </>
+    <div className="flex rounded-lg h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
+      {
+        photos.length ?
+          photos.map(el =>
+            <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
+          )
+          :
+          <></>
+      }
+    </div>
   );
 }
 

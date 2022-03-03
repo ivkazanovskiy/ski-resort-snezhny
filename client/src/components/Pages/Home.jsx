@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import HomeLinkCard from '../Cards/HomeLinkCard';
 
 function Home(props) {

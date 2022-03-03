@@ -1,11 +1,41 @@
 import React from 'react';
+import { Disclosure } from '@headlessui/react';
+import { ChevronUpIcon } from '@heroicons/react/solid';
+
+import Login from '../Login/Login';
+import Registration from '../Registration/Registration';
 
 function UnauthorizedCard(props) {
+
   return (
-    <form className="card flex-col mb-2 mt-8">
-      <button type="submit" className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Войти</button>
-      <button type="click" className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Зарегистрироваться</button>
-    </form>
+    <div className="card flex-col mb-2 mt-8">
+      <Disclosure as="div" className="mt-2">
+        {({ open }) => (
+          <>
+            <Disclosure.Panel className="flex flex-col">
+              <Login />
+            </Disclosure.Panel>
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
+              <span>Войти</span>
+              <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} w-6 h-6 text-white`} />
+            </Disclosure.Button>
+          </>
+        )}
+      </Disclosure>
+      <Disclosure>
+        {({ open }) => (
+          <>
+            <Disclosure.Panel className="flex flex-col">
+              <Registration />
+            </Disclosure.Panel>
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
+              <span>Зарегистрироваться</span>
+              <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} w-6 h-6 text-white`} />
+            </Disclosure.Button>
+          </>
+        )}
+      </Disclosure>
+    </div>
   );
 }
 

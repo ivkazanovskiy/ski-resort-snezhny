@@ -24,7 +24,6 @@ router.route('/:id')
       });
       return res.status(200).json({ photo: filedata.filename });
     } catch (error) {
-      console.log(error.message);
       return res.status(500).json({ error: error.message });
     }
   });

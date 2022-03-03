@@ -1,5 +1,5 @@
 import { Tab } from '@headlessui/react';
-import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useQuery, useMutation } from 'react-query';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,6 @@ import axios from 'axios'
 import ModalBuy from '../Modals/ModalBuy';
 import { prettyCost } from '../../helpers/pretty'
 
-import bill from '../../css/svg/bill.svg'
 import UnauthorizedCard from '../Cards/UnauthorizedCard';
 
 function SkiPassForm(props) {
@@ -34,7 +33,7 @@ function SkiPassForm(props) {
 
   // save.reset()
 
-  const { auth, skiPass } = useSelector(state => state.userReducer)
+  const { skiPass } = useSelector(state => state.userReducer)
 
   const dateRef = useRef()
   const [modal, setModal] = useState(false)
@@ -159,15 +158,10 @@ function SkiPassForm(props) {
         <button onClick={() => setModal(true)} className="basic-btn  w-1/2">Оплатить</button>
         {modal && <ModalBuy setModal={setModal} mutation={save} cost={chosen[keyString]} />}
       </div>
-
     </>
   )
 
-  return (
-    <>
-
-    </>
-  );
+  return (<></>);
 }
 
 export default SkiPassForm;

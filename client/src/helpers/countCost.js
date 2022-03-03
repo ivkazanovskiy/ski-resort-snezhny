@@ -6,7 +6,6 @@ export function countCost(startDateString, gap, weekdayCost, weekEndCost) {
     const day = currentDate.toString().split(' ')[0]
     const currentCost = (day === 'Sun' || day === 'Sat') ? weekEndCost : weekdayCost
     cost += currentCost
-    console.log(currentDate, currentCost);
     currentDate = nextDate(currentDate)
   }
   return cost

@@ -1,24 +1,14 @@
-
-import React, { useState, useEffect, useRef, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { Listbox, Transition } from '@headlessui/react';
 
 import PeriodButton from '../Elements/PeriodButton';
-import { useChangeHours } from '../../helpers/useChangeHours';
-import { addZero } from '../../helpers/addZero';
 import UnauthorizedCard from './UnauthorizedCard';
 
 function NewScheduleCard({ allTrainers, setHours, selectedTrainer, setSelectedTrainer }) {
 
-
-  
   const [currentTrainers, setCurrentTrainer] = useState([])
   const { role } = useSelector(state => state.userReducer);
-
-  //const day = String(new Date().getDate());
-  //const month = String(new Date().getMonth() + 1);
-  //const year = String(new Date().getFullYear());
-
 
   useEffect(() => { getTrainersName() }, [])
 

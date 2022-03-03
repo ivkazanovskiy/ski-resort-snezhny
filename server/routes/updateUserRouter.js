@@ -10,7 +10,6 @@ async function update(person, req, res) {
     const info = clearAttributes(person);
     return res.status(201).json({ info });
   } catch (err) {
-    console.log(err);
     switch (err.original.constraint.split('_')[1]) {
       case 'phone':
         return res.status(501).json({ message: 'changePhone' });

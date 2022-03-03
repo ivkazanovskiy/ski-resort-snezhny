@@ -59,7 +59,6 @@ router.route('/')
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
-    // console.log(newBooking);
   });
 
 module.exports = router;

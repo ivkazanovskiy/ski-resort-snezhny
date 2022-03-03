@@ -1,22 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { prettyPhone } from '../../helpers/pretty'
 import axios from 'axios';
 
 function UserScheduleCard({ order, setOrders, orders }) {
-
-  const [photos, setPhotos] = useState('');
-
-  useEffect(() => {
-    axios({
-      url: '/api/photos/',
-      method: 'GET',
-      headers: {
-        folder: '/photos',
-      },
-    })
-      .then((res) => setPhotos(res.data.photos))
-      .catch(err => console.log(err));
-  }, [orders])
 
   const deleteOrder = (event) => {
     event.preventDefault();
@@ -44,7 +30,7 @@ function UserScheduleCard({ order, setOrders, orders }) {
   return (
     <li>
       <div className="card">
-        <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`} alt="..."></img>
+        <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`}></img>
         <div className="card-content">
           <div className="card-name">
             {`${order['Trainer.name']} ${order['Trainer.surname']}`}
