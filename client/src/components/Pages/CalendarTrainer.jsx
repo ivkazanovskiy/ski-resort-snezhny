@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 
@@ -9,7 +9,6 @@ import { addZero } from '../../helpers/addZero'
 import { getDates } from '../../helpers/getDates'
 
 import spin from '../../css/svg/spin.svg';
-
 
 function CalendarTrainer(props) {
   const curYear = new Date().getFullYear();
@@ -95,17 +94,10 @@ function CalendarTrainer(props) {
         </div>
         <ListboxMonth setMonth={setMonth} months={months} />
       </div>
-
-
-
       {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn w-full h-12'>Сохранить расписание</button>}
-
       {(saveRecords.isLoading || allRecords.isLoading) && <button onClick={() => saveRecords.mutate()} className='  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex h-12'>
         <img src={spin} className="w-8 top-1/2 animate-spin mx-auto text-white " alt="" /></button>}
-
-
       {(saveRecords.isSuccess) && <button className="basic-btn w-full bg-custom-green h-12">Расписание сохранено</button>}
-
     </div>
   );
 }

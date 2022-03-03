@@ -7,7 +7,6 @@ import axios from 'axios';
 import NewScheduleCard from './NewScheduleCard';
 import { toStringDate } from '../../helpers/toStringDate';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import ListboxTrainers from '../Listbox/ListboxTrainers';
 import { useChangeHours } from '../../helpers/useChangeHours';
 import UnauthorizedCard from './UnauthorizedCard';
 

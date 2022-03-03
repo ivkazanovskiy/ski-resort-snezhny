@@ -11,7 +11,6 @@ function ModalOrderInfo({ setModal, id, date }) {
 
   let info;
   if (order.isSuccess) info = order.data.data.order;
-  console.log(info);
 
   if (order.isLoading) return (
     <div className="fixed inset-0 z-50 flex justify-center items-center backdrop-blur-md bg-slate-400/70"></div>
@@ -57,7 +56,6 @@ function ModalOrderInfo({ setModal, id, date }) {
         <button onClick={() => setModal(false)} className="p-2 text-white  bg-custom-sand font-medium text-lg grow rounded-lg">Закрыть</button>
       </div>
     </div>
-
   );
 }
 

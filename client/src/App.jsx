@@ -60,7 +60,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/registration" element={<Registration />} />
 
-              {role !== 'trainer' && [
+              {role === 'user' && [
                 <Route path="/skipass" element={<SkiPassForm />} />,
                 <Route path="/school" element={<AddUserScheduleCard />} />,
                 <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,

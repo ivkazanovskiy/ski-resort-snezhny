@@ -1,6 +1,5 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-// import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 
 export default function ListboxTrainers({ freeTrainers }) {

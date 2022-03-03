@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import Row from '../Elements/Row';
-import DateButton from '../Elements/DateButton';
 import { useQuery } from 'react-query';
 
 function AdminTableCard({ dates, type, grade }) {

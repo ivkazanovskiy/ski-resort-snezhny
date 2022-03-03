@@ -8,12 +8,7 @@ function Day({ date, changeDays, isMarked }) {
 
 
   const [isClicked, setIsClicked] = useState(isMarked)
-  // useEffect(() => {
-  //   setWasSelected(savedHours.map(hour => hour.date).includes(currentDay))
-  //   setIsClicked(savedHours.map(hour => hour.date).includes(currentDay))
-  // }, [savedHours])
-
-  // const deletedStyle = "p-2 text-center text-sm text-white border border-gray-300 rounded-lg bg-red-500 "
+  
   const passiveStyle = "bg-white/80  "
   const activeStyle = "bg-custom-blue/70 text-white"
 

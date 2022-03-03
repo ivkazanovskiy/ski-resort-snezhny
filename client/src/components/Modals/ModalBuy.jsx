@@ -26,15 +26,15 @@ function ModalBuy({ setModal, mutation, cost }) {
           }} className="p-2 text-white  bg-custom-sand font-medium text-lg px-4 rounded-lg">Закрыть
 
           </button>
-          
+
           {(mutation.isIdle) && <button onClick={() => mutation.mutate()} className='p-2 text-white  font-medium text-lg grow rounded-lg bg-custom-blue'>Оплатить {prettyCost(cost)}₽</button>}
 
           {(mutation.isLoading) && <button onClick={() => mutation.mutate()} className='relative  font-medium text-lg grow rounded-lg bg-custom-gray'><img src={spin} className="w-8 top-1/2 animate-spin mx-auto text-white " alt="" /></button>}
-  
+
           {(mutation.isSuccess) && <button onClick={() => {
             mutation.reset()
             setModal(false)
-          }} className='p-2 text-white  font-medium text-lg grow rounded-lg bg-green-500'>Оплачено </button>}
+          }} className='p-2 text-white  font-medium text-lg grow rounded-lg bg-custom-green'>Оплачено </button>}
 
         </div>
       </div>
