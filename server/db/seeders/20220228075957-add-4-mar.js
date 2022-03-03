@@ -3,7 +3,7 @@ module.exports = {
     await queryInterface.bulkInsert('Schedules', [
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '09',
         userId: 7,
         sport: 'Лыжи',
@@ -12,7 +12,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '10',
         // userId: ,
         // sport: ,
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '11',
         // userId: ,
         // sport: ,
@@ -30,7 +30,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '12',
         // userId: ,
         // sport: ,
@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '13',
         // userId: ,
         // sport: ,
@@ -48,7 +48,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '14',
         userId: 5,
         sport: 'Сноуборд',
@@ -57,7 +57,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '15',
         userId: 5,
         sport: 'Сноуборд',
@@ -66,7 +66,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '16',
         userId: 5,
         sport: 'Сноуборд',
@@ -75,7 +75,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '17',
         userId: 7,
         sport: 'Лыжи',
@@ -84,7 +84,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '18',
         // userId: ,
         // sport: ,
@@ -93,7 +93,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '19',
         // userId: ,
         // sport: ,
@@ -102,7 +102,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '20',
         // userId: ,
         // sport: ,
@@ -111,7 +111,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '21',
         // userId: ,
         // sport: ,
@@ -120,7 +120,7 @@ module.exports = {
       },
       {
         trainerId: 3,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '22',
         // userId: ,
         // sport: ,
@@ -130,7 +130,7 @@ module.exports = {
 
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '09',
         userId: 2,
         sport: 'Лыжи',
@@ -139,7 +139,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '10',
         // userId: ,
         // sport: ,
@@ -148,7 +148,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '11',
         // userId: ,
         // sport: ,
@@ -157,7 +157,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '12',
         // userId: ,
         // sport: ,
@@ -166,7 +166,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '13',
         userId: 3,
         sport: 'Сноуборд',
@@ -175,7 +175,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '14',
         userId: 3,
         sport: 'Сноуборд',
@@ -184,7 +184,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '15',
         userId: 7,
         sport: 'Лыжи',
@@ -193,7 +193,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '16',
         userId: 7,
         sport: 'Лыжи',
@@ -202,7 +202,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '17',
         userId: 7,
         sport: 'Лыжи',
@@ -211,7 +211,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '18',
         // userId: ,
         // sport: ,
@@ -220,7 +220,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '19',
         // userId: ,
         // sport: ,
@@ -229,7 +229,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '20',
         // userId: ,
         // sport: ,
@@ -238,7 +238,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '21',
         // userId: ,
         // sport: ,
@@ -247,7 +247,7 @@ module.exports = {
       },
       {
         trainerId: 5,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '22',
         // userId: ,
         // sport: ,
@@ -257,7 +257,7 @@ module.exports = {
 
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '09',
         // userId: ,
         // sport: ,
@@ -266,7 +266,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '10',
         // userId: ,
         // sport: ,
@@ -275,7 +275,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '11',
         // userId: ,
         // sport: ,
@@ -284,7 +284,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '12',
         // userId: ,
         // sport: ,
@@ -293,7 +293,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '13',
         // userId: ,
         // sport: ,
@@ -302,7 +302,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '14',
         userId: 4,
         sport: 'Лыжи',
@@ -311,7 +311,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '15',
         userId: 4,
         sport: 'Лыжи',
@@ -320,7 +320,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '16',
         userId: 4,
         sport: 'Лыжи',
@@ -329,7 +329,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '17',
         userId: 4,
         sport: 'Лыжи',
@@ -338,7 +338,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '18',
         // userId: ,
         // sport: ,
@@ -347,7 +347,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '19',
         // userId: ,
         // sport: ,
@@ -356,7 +356,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '20',
         // userId: ,
         // sport: ,
@@ -365,7 +365,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '21',
         // userId: ,
         // sport: ,
@@ -374,7 +374,7 @@ module.exports = {
       },
       {
         trainerId: 7,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '22',
         // userId: ,
         // sport: ,
@@ -384,7 +384,7 @@ module.exports = {
 
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '09',
         // userId: ,
         // sport: ,
@@ -393,7 +393,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '10',
         // userId: ,
         // sport: ,
@@ -402,7 +402,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '11',
         // userId: ,
         // sport: ,
@@ -411,7 +411,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '12',
         // userId: ,
         // sport: ,
@@ -420,7 +420,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '13',
         // userId: ,
         // sport: ,
@@ -429,7 +429,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '14',
         // userId: ,
         // sport: ,
@@ -438,7 +438,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '15',
         userId: 7,
         sport: 'Лыжи',
@@ -447,7 +447,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '16',
         userId: 7,
         sport: 'Лыжи',
@@ -456,7 +456,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '17',
         userId: 7,
         sport: 'Сноуборд',
@@ -465,7 +465,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '18',
         userId: 7,
         sport: 'Сноуборд',
@@ -474,7 +474,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '19',
         userId: 7,
         sport: 'Сноуборд',
@@ -483,7 +483,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '20',
         // userId: ,
         // sport: ,
@@ -492,7 +492,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '21',
         userId: 5,
         sport: 'Лыжи',
@@ -501,7 +501,7 @@ module.exports = {
       },
       {
         trainerId: 10,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '22',
         userId: 5,
         sport: 'Лыжи',
@@ -511,7 +511,7 @@ module.exports = {
 
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '09',
         // userId: ,
         // sport: ,
@@ -520,7 +520,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '10',
         // userId: ,
         // sport: ,
@@ -529,7 +529,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '11',
         userId: 4,
         sport: 'Сноуборд',
@@ -538,7 +538,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '12',
         userId: 4,
         sport: 'Сноуборд',
@@ -547,7 +547,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '13',
         // userId: ,
         // sport: ,
@@ -556,7 +556,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '14',
         // userId: ,
         // sport: ,
@@ -565,7 +565,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '15',
         userId: 7,
         sport: 'Лыжи',
@@ -574,7 +574,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '16',
         userId: 7,
         sport: 'Лыжи',
@@ -583,7 +583,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '17',
         userId: 7,
         sport: 'Лыжи',
@@ -592,7 +592,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '18',
         // userId: ,
         // sport: ,
@@ -601,7 +601,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '19',
         // userId: ,
         // sport: ,
@@ -610,7 +610,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '20',
         // userId: ,
         // sport: ,
@@ -619,7 +619,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '21',
         // userId: ,
         // sport: ,
@@ -628,7 +628,7 @@ module.exports = {
       },
       {
         trainerId: 12,
-        date: '2022-03-02',
+        date: '2022-03-04',
         startTime: '22',
         // userId: ,
         // sport: ,
