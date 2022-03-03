@@ -7,8 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { isValidPassword, isValidName, isValidEmail, isValidPhone, isValidSkiPass } from '../../helpers/isValid'
 import { updateUser } from '../../redux/sagaCreators/userSagaCreators';
 import { deleteUser } from '../../redux/actionCreators/userAC';
+import UnauthorizedCard from './UnauthorizedCard';
 
 function EditUserProfileCard(props) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -93,6 +96,8 @@ function EditUserProfileCard(props) {
     dispatch(deleteUser())
     return navigate('/')
   }
+
+  if (!role) return (<UnauthorizedCard />)
 
   return (
     <form className="card flex-col mb-2 mt-8">

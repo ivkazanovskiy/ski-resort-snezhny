@@ -1,12 +1,16 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { prettyCost } from '../../helpers/pretty'
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 function RoomCard({ type }) {
 
   const relativePath = `/rooms/${type.images}`;
   const [photos, setPhotos] = useState([]);
+  const navigate = useNavigate();
+
+  const { role } = useSelector(state => state.userReducer);
 
   useEffect(() => {
     axios({
@@ -37,6 +41,15 @@ function RoomCard({ type }) {
             </div>
             <span className="">от {prettyCost(type.weekdayCost)}₽ / ночь</span>
           </div>
+          {
+            role === 'admin'
+              ? <Link to={`/edit/${type.id}`} className="absolute h-10 w-10 border-2 right-3 bottom-3 z-40 flex justify-center">
+                <span class="material-icons text-2xl text-custom-navy">
+                  edit
+                </span>
+              </Link>
+              : <></>
+          }
         </div>
       </Link>
     </li>

@@ -34,7 +34,6 @@ router.route('/')
     const { sport, bookingdate: date } = req.headers;
 
     const sportCondition = (sport === 'ski') ? { ski: true } : { snowboard: true };
-
     try {
       // const trainers = await Schedule.findAll({
       //   where: { date, userId: null },

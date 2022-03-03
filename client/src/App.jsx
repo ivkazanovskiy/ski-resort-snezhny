@@ -16,6 +16,7 @@ import EditUserProfileCard from './components/Cards/EditUserProfileCard';
 import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
 import EditAdminProfileCard from './components/Cards/EditAdminProfileCard';
 import AdminOrdersForm from './components/Forms/AdminOrdersForm';
+import EditRoomCard from './components/Cards/EditRoomCard';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import RoomsSearch from './components/Search/RoomsSearch';
@@ -50,30 +51,32 @@ function App() {
         :
         <>
           <TopMenu />
-          <section className="mb-[10px] flex flex-col flex-1 items-center justify-end overflow-y-auto">
+          <section className="mb-[10px] mt-[72px] rounded-lg flex flex-col flex-1 items-center justify-end overflow-y-auto">
             <Routes>
 
               <Route path="/" element={<Home />} />
               <Route path="/map" element={<Map />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/login/admin" element={<Admin />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="/registration" element={<Registration />} />
 
-              {role === "user" && [
+              {role !== 'trainer' && [
                 <Route path="/skipass" element={<SkiPassForm />} />,
                 <Route path="/school" element={<AddUserScheduleCard />} />,
                 <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,
                 <Route path="/orders" key={'userOrders'} element={<UserProfile />} />,
                 <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
                 <Route path="/search" element={<HouseSearchForm />} />
-              ]}
+              ]
+              }
 
               {role === "admin" && [
                 <Route path="/calendar" key={'adminOrdersForm'} element={<AdminOrdersForm />} />,
                 <Route path="/profile" key={'editAdminProfile'} element={<EditAdminProfileCard />} />,
                 <Route path="/orders" key={'adminProfile'} element={<AdminProfile />} />,
                 <Route path="/search/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
-                <Route path="/search" element={<HouseSearchForm />} />
+                <Route path="/search" key={'adminSearchRooms'} element={<HouseSearchForm />} />,
+                <Route path="/edit/:type" key={'editRoomCard'} element={<EditRoomCard />} />,
               ]}
 
               {role === "trainer" && [

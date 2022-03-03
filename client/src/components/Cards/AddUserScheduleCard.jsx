@@ -1,4 +1,6 @@
+
 import React, { useRef, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Tab } from '@headlessui/react';
 import axios from 'axios';
 
@@ -7,6 +9,8 @@ import { toStringDate } from '../../helpers/toStringDate';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import ListboxTrainers from '../Listbox/ListboxTrainers';
 import { useChangeHours } from '../../helpers/useChangeHours';
+import UnauthorizedCard from './UnauthorizedCard';
+
 
 function AddUserScheduleCard() {
 
@@ -49,9 +53,13 @@ function AddUserScheduleCard() {
   let allTrainers;
   if (allTrainersQuery.isSuccess) allTrainers = allTrainersQuery.data.data
 
+  const { role } = useSelector(state => state.userReducer);
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
+
+  if (!role) return (<UnauthorizedCard />)
 
   return (
     <div className="w-full">
