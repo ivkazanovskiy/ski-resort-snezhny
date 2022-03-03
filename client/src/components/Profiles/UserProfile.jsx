@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux'
 import { Disclosure, Tab } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid'
 
@@ -7,8 +8,11 @@ import UserScheduleCard from '../Cards/UserScheduleCard';
 import AddUserScheduleCard from '../Cards/AddUserScheduleCard';
 import axios from 'axios';
 import AllOrdersCards from '../Cards/AllOrdersCards';
+import UnauthorizedCard from '../Cards/UnauthorizedCard';
 
 function UserProfile(props) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   // TODO: флажок для обновления стейта, переделать на useQuery
   const [refresh, setRefresh] = useState(false)
@@ -27,6 +31,8 @@ function UserProfile(props) {
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
+
+  if (!role) return (<UnauthorizedCard />);
 
   return (
     <div className="w-full">

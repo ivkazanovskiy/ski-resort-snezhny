@@ -31,7 +31,7 @@ function EditTrainerProfileCard(props) {
   newPass.current = false;
 
   const { id, photo } = useSelector(state => state.userReducer);
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState('1.png');
 
   const name = useRef()
   const surname = useRef()
