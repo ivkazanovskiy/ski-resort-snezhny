@@ -7,6 +7,7 @@ import { toStringDate } from '../../helpers/toStringDate'
 import SkiPassButton from '../Elements/SkiPassButton';
 import axios from 'axios'
 import ModalBuy from '../Modals/ModalBuy';
+import { prettyCost } from '../../helpers/pretty'
 
 import bill from '../../css/svg/bill.svg'
 import UnauthorizedCard from '../Cards/UnauthorizedCard';
@@ -25,16 +26,13 @@ function SkiPassForm(props) {
       date
     }
   }), {
-    onSuccess: () => {
-      setModal(false)
-      // FIXME: заменить на другое отображение
-      window.alert('Ски-пасс куплен')
-    },
     onError: (err) => {
       console.log(err.response.data.error);
       window.alert('Ошибка')
     },
   })
+
+  // save.reset()
 
   const { auth, skiPass } = useSelector(state => state.userReducer)
 
@@ -93,7 +91,7 @@ function SkiPassForm(props) {
             Итого к оплате:
           </div>
           <div className="text-2xl font-medium">
-            {chosen[keyString]} ₽
+            {prettyCost(chosen[keyString])} ₽
           </div>
         </div>
       </div>

@@ -25,6 +25,7 @@ import SkiPassForm from './components/Forms/SkiPassForm';
 import { deleteUser } from './redux/actionCreators/userAC';
 import Map from './components/Pages/Map';
 import CalendarTrainer from './components/Pages/CalendarTrainer';
+import AddUserScheduleCard from './components/Cards/AddUserScheduleCard';
 
 function App() {
   // автоматически в запросе отправляем заголовок с токеном
@@ -61,6 +62,7 @@ function App() {
 
               {role !== 'trainer' && [
                 <Route path="/skipass" element={<SkiPassForm />} />,
+                <Route path="/school" element={<AddUserScheduleCard />} />,
                 <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,
                 <Route path="/orders" key={'userOrders'} element={<UserProfile />} />,
                 <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,

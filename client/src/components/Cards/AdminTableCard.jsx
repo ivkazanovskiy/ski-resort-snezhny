@@ -36,8 +36,8 @@ function AdminTableCard({ dates, type, grade }) {
   }
 
   return (
-    <div className="flex flex-col w-full overflow-auto">
-      <div className="w-fit h-fit p-2 rounded-lg bg-white/50 flex flex-col items-stretch gap-2">
+    <div className="flex flex-col w-full rounded-lg mt-[72px] overflow-auto">
+      <div className="w-fit h-fit p-2 bg-white/50 flex flex-col items-stretch gap-2">
         {
           rooms.current.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={dates} typeId={el['Type.id']} />)
         }

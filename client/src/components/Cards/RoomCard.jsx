@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { prettyCost } from '../../helpers/pretty'
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -38,7 +39,7 @@ function RoomCard({ type }) {
               <span className="material-icons font-light w-fit ">groups</span>
               <span className="">{type.guestCount}</span>
             </div>
-            <span className="">от {type.weekdayCost}₽ / ночь</span>
+            <span className="">от {prettyCost(type.weekdayCost)}₽ / ночь</span>
           </div>
           {
             role === 'admin'
