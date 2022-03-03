@@ -42,10 +42,8 @@ function RoomCard({ type }) {
           </div>
           {
             role === 'admin'
-              ? <Link to={`/edit/${type.id}`} className="absolute h-10 w-10 border-2 right-3 bottom-3 z-40 flex justify-center">
-                <span class="material-icons text-2xl text-custom-navy">
-                  edit
-                </span>
+              ? <Link to={`/edit/${type.id}`} className="absolute h-10 w-10 right-3 bottom-3 z-40 flex justify-center">
+                <span class="material-icons text-2xl text-custom-navy">edit</span>
               </Link>
               : <></>
           }

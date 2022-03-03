@@ -30,6 +30,8 @@ function AdminTableCard({ dates, type, grade }) {
   rooms.current = data.data.rooms
   orders.current = data.data.orders
 
+  console.log(rooms);
+
   const isMarked = (id, date) => {
     return !!orders.current.find(el => el.start === date && el['Room.id'] === id);
   }

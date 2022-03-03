@@ -66,7 +66,7 @@ router.route('/')
       let orders;
       let rooms;
 
-      if (newType) {
+      if (form !== 'hotel') {
         orders = allOrders.filter((el) => el['Room.Type.form'] === form && el['Room.Type.title'].includes(newType));
         rooms = allRooms.filter((el) => el['Type.title'].includes(newType));
       } else {
