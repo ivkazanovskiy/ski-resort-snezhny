@@ -97,4 +97,12 @@
   .edit-label{
     @apply p-2 text-base font-medium text-custom-navy
   }
+  .file-button{
+    @apply w-full text-sm my-2
+    file:mr-4 file:py-2 file:px-2
+    file:rounded-lg
+    file:text-sm file:font-medium
+  file:bg-custom-gray/50 file:text-white
+    file:border-0 file:w-1/2
+  }
 }

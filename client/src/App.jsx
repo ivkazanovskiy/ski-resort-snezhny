@@ -16,6 +16,7 @@ import EditUserProfileCard from './components/Cards/EditUserProfileCard';
 import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
 import EditAdminProfileCard from './components/Cards/EditAdminProfileCard';
 import AdminOrdersForm from './components/Forms/AdminOrdersForm';
+import EditRoomCard from './components/Cards/EditRoomCard';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
 import RoomsSearch from './components/Search/RoomsSearch';
@@ -49,7 +50,7 @@ function App() {
         :
         <>
           <TopMenu />
-          <section className="mb-[10px] flex flex-col flex-1 items-center justify-end overflow-y-auto">
+          <section className="mb-[10px] mt-[72px] rounded-lg flex flex-col flex-1 items-center justify-end overflow-y-auto">
             <Routes>
 
               <Route path="/" element={<Home />} />
@@ -71,7 +72,8 @@ function App() {
                 <Route path="/profile" key={'editAdminProfile'} element={<EditAdminProfileCard />} />,
                 <Route path="/orders" key={'adminProfile'} element={<AdminProfile />} />,
                 <Route path="/search/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
-                <Route path="/search" element={<HouseSearchForm />} />
+                <Route path="/search" key={'adminSearchRooms'} element={<HouseSearchForm />} />,
+                <Route path="/edit/:type" key={'editRoomCard'} element={<EditRoomCard />} />,
               ]}
 
               {role === "trainer" && [
