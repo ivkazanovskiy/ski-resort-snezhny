@@ -22,13 +22,13 @@ function EditAdminProfileCard(props) {
   const password = useRef()
   const passwordRepeat = useRef()
 
-  const [areSamePasswords, setAreSamePasswords] = useState(true)
+  const [areSamePasswords, setAreSamePasswords] = useState(false)
   const [isCorrectName, setIsCorrectName] = useState(true)
   const [isCorrectSurname, setIsCorrectSurname] = useState(true)
   const [isCorrectPhone, setIsCorrectPhone] = useState(true)
   const [isCorrectEmail, setIsCorrectEmail] = useState(true)
-  const [isCorrectPassword, setIsCorrectPassword] = useState(true)
-  const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(true)
+  const [isCorrectPassword, setIsCorrectPassword] = useState(false)
+  const [isCorrectPasswordOld, setIsCorrectPasswordOld] = useState(false)
 
   const checkName = () => {
     setIsCorrectName(isValidName(name.current.value))
@@ -145,10 +145,9 @@ function EditAdminProfileCard(props) {
             </Disclosure.Button>
             <Disclosure.Panel className="flex flex-col">
               <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
-              <input placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
-              <input placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-              <input placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
-              <span className={`block m-2 text-sm font-medium text-red-600 ${areSamePasswords ? "hidden" : "visible"}`}>Пароли не совпадают</span>
+              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
             </Disclosure.Panel>
           </>
         )}
