@@ -27,7 +27,7 @@ function routes(app) {
   app.use('/api/trainerSchedule', authUser, trainerScheduleRouter);
   app.use('/api/userSchedule', authUser, userScheduleRouter);
   app.use('/api/trainers', authUser, trainersRouter);
-  app.use('/api/avaliable', authUser, avaliableRouter);
+  app.use('/api/avaliable', avaliableRouter);
   app.use('/api/userOrders', authUser, userOrdersRouter);
   app.use('/api/types/edit', authUser, typesEditRouter);
   app.use('/api/skiPass', authUser, skiPassRouter);

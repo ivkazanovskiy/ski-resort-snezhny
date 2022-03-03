@@ -16,15 +16,6 @@ function UserProfile(props) {
   let orders
   if (ordersQuery.isSuccess) { orders = ordersQuery.data.data.orders }
 
-  // useEffect(() => {
-  //   axios({
-  //     url: '/api/userSchedule',
-  //     method: 'GET',
-  //   })
-  //     .then(res => setOrders(res.data.orders))
-  //     .catch(err => console.log(err.message));
-  // }, [refresh]);
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }

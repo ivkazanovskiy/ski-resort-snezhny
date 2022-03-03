@@ -64,7 +64,7 @@
   }
 
   .card {
-    @apply flex justify-between w-full p-3 rounded-xl backdrop-blur-sm bg-white/80 text-custom-navy
+    @apply flex justify-between w-full p-3 rounded-xl backdrop-blur-sm bg-white/90 shadow-lg text-custom-navy
   }
 
   .card-avatar{
