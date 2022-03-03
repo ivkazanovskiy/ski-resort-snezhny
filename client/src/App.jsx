@@ -54,35 +54,34 @@ function App() {
           <section className="mb-[10px] mt-[72px] rounded-lg flex flex-col flex-1 items-center justify-end overflow-y-auto">
             <Routes>
 
-              <Route path="/" element={<Home />} />
-              <Route path="/map" element={<Map />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/registration" element={<Registration />} />
+              <Route path="/" key="home" element={<Home />} />
+              <Route path="/map" key="map" element={<Map />} />
+              <Route path="/login" key="login" element={<Login />} />
+              <Route path="/admin" key="admin" element={<Admin />} />
+              <Route path="/registration" key="registration" element={<Registration />} />
+              <Route path="/profile" key="profile" element={<EditUserProfileCard />} />,
 
               {role === 'user' && [
-                <Route path="/skipass" element={<SkiPassForm />} />,
-                <Route path="/school" element={<AddUserScheduleCard />} />,
-                <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,
-                <Route path="/orders" key={'userOrders'} element={<UserProfile />} />,
-                <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
-                <Route path="/search" element={<HouseSearchForm />} />
-              ]
-              }
+                <Route path="/skipass" key="userSkiPass" element={<SkiPassForm />} />,
+                <Route path="/school" key="school" element={<AddUserScheduleCard />} />,
+                <Route path="/orders" key="userOrders" element={<UserProfile />} />,
+                <Route path="/search/:type" key="userSearchRooms" element={<RoomsSearch />} />,
+                <Route path="/search" key="search" element={<HouseSearchForm />} />
+              ]}
 
               {role === "admin" && [
-                <Route path="/calendar" key={'adminOrdersForm'} element={<AdminOrdersForm />} />,
-                <Route path="/profile" key={'editAdminProfile'} element={<EditAdminProfileCard />} />,
-                <Route path="/orders" key={'adminProfile'} element={<AdminProfile />} />,
-                <Route path="/search/:type" key={'adminSearchRooms'} element={<RoomsSearch />} />,
-                <Route path="/search" key={'adminSearchRooms'} element={<HouseSearchForm />} />,
-                <Route path="/edit/:type" key={'editRoomCard'} element={<EditRoomCard />} />,
+                <Route path="/calendar" key="dminOrdersForm" element={<AdminOrdersForm />} />,
+                <Route path="/profile" key="editAdminProfile" element={<EditAdminProfileCard />} />,
+                <Route path="/orders" key="adminProfile" element={<AdminProfile />} />,
+                <Route path="/search/:type" key="adminSearchRooms" element={<RoomsSearch />} />,
+                <Route path="/search" key="adminSearchRooms" element={<HouseSearchForm />} />,
+                <Route path="/edit/:type" key="editRoomCard" element={<EditRoomCard />} />,
               ]}
 
               {role === "trainer" && [
-                <Route path="/profile" key={'editTrainerProfile'} element={<EditTrainerProfileCard />} />,
-                <Route path="/calendar" key={'trainerCalendar'} element={<CalendarTrainer />} />,
-                <Route path="/orders" key={'trainerProfile'} element={<TrainerTimetable />} />
+                <Route path="/profile" key="editTrainerProfile" element={<EditTrainerProfileCard />} />,
+                <Route path="/calendar" key="trainerCalendar" element={<CalendarTrainer />} />,
+                <Route path="/orders" key="trainerProfile" element={<TrainerTimetable />} />
               ]}
 
             </Routes>
