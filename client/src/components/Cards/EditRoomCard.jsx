@@ -103,7 +103,7 @@ function EditRoomCard(props) {
   };
 
   return (
-    <div className="backdrop-blur-sm bg-white/80 rounded-lg overflow-y-auto">
+    <div className="bg-white/60 rounded-lg overflow-y-auto">
       {
         info &&
         <div className="w-full mb-2 flex flex-col">
@@ -133,8 +133,8 @@ function EditRoomCard(props) {
                       <div key={el} className="relative flex flex-col">
                         {
                           relativePath
-                            ? <img className="row m-0 p-0 w-auto h-[80px] rounded-md object-cover" src={`${relativePath}/${el}`} />
-                            : <img className="row m-0 p-0 w-auto h-[80px] rounded-md object-cover" src="https://brilliant24.ru/files/cat/template_01.png" />
+                            ? <img className="row m-0 p-0 w-auto h-[80px] rounded-lg object-cover" src={`${relativePath}/${el}`} />
+                            : <img className="row m-0 p-0 w-auto h-[80px] rounded-lg object-cover" src="https://brilliant24.ru/files/cat/template_01.png" />
                         }
                         <button onClick={
                           (event) => {
@@ -146,14 +146,13 @@ function EditRoomCard(props) {
                             delete
                           </span>
                         </button>
-                      </div>
-                    )
+                      </div>)
                     :
                     <></>
                 }
               </div>
               <input onChange={(event) => setImage(event.target.files[0])} name="image" type="file" id="image" className="col file-button text-sm"></input>
-              <button className="py-2 text-white bg-custom-blue/60 font-medium rounded-lg w-full text-center" onClick={uploadImage}>Добавить</button>
+              <button className="py-2 text-white bg-custom-blue/70 font-medium rounded-lg w-full text-center" onClick={uploadImage}>Добавить</button>
             </div>
           </div>
           <button onClick={() => save.mutate()} className="p-2 m-2 text-white text-sm bg-custom-blue font-medium rounded-lg text-center">Сохранить изменения</button>

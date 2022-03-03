@@ -39,7 +39,7 @@ function AdminOrdersForm(props) {
   return (
     <>
       <AdminTableCard dates={arrayDate.current} gap={gap} type={type} grade={grade} />
-      <div className="w-full mt-2 mb-2 rounded-lg backdrop-blur-sm bg-white/30">
+      <div className="w-full mt-2 mb-2 rounded-lg bg-white/60">
         {type !== 2 &&
           <Tab.Group onChange={setGrade} defaultIndex={grade}>
             <Tab.List className="flex gap-2 p-[3px]  mb-0">

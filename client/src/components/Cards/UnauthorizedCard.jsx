@@ -15,7 +15,7 @@ function UnauthorizedCard(props) {
             <Disclosure.Panel className="flex flex-col">
               <Login />
             </Disclosure.Panel>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
               <span>Войти</span>
               <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} w-6 h-6 text-white`} />
             </Disclosure.Button>
@@ -28,7 +28,7 @@ function UnauthorizedCard(props) {
             <Disclosure.Panel className="flex flex-col">
               <Registration />
             </Disclosure.Panel>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
               <span>Зарегистрироваться</span>
               <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} w-6 h-6 text-white`} />
             </Disclosure.Button>

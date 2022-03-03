@@ -38,12 +38,12 @@ function AdminTableCard({ dates, type, grade }) {
 
   return (
     <div className="flex flex-col w-full rounded-lg mt-[72px] overflow-auto">
-      <div className="w-fit h-fit p-2 bg-white/50 flex flex-col items-stretch gap-2">
+      <div className="w-fit h-fit p-2 bg-white/60 flex flex-col items-stretch gap-2">
         {
           rooms.current.map(el => <Row key={el.id} room={el} isMarked={isMarked} dates={dates} typeId={el['Type.id']} />)
         }
         <li className="flex gap-2">
-          <button disabled={true} className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/60"></button>
+          <button disabled={true} className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/70"></button>
           {
             dates.map(el => <button disabled={true} key={el} className="p-2 w-10 h-10 text-white font-medium rounded-lg bg-custom-gray/60">{el.split('-').reverse()[0]}</button>)
           }

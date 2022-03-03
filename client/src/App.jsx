@@ -59,7 +59,11 @@ function App() {
               <Route path="/login" key="login" element={<Login />} />
               <Route path="/admin" key="admin" element={<Admin />} />
               <Route path="/registration" key="registration" element={<Registration />} />
-              <Route path="/profile" key="profile" element={<EditUserProfileCard />} />,
+
+              {
+                (role !== 'trainer' && role !== 'admin') &&
+                <Route path="/profile" key="profile" element={<EditUserProfileCard />} />
+              }
 
               {role === 'user' && [
                 <Route path="/skipass" key="userSkiPass" element={<SkiPassForm />} />,

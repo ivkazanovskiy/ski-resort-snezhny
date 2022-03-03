@@ -30,8 +30,8 @@ function RoomCard({ type }) {
           <div className="card-avatar">
             {
               photos[0]
-                ? <img className="w-full h-full object-cover rounded-md" src={`${relativePath}/${photos[0]}`}></img>
-                : <img className="w-full h-full object-cover rounded-md" src="https://brilliant24.ru/files/cat/template_01.png"></img>
+                ? <img className="w-full h-full object-cover rounded-lg" src={`${relativePath}/${photos[0]}`}></img>
+                : <img className="w-full h-full object-cover rounded-lg" src="https://brilliant24.ru/files/cat/template_01.png"></img>
             }
           </div>
           <div className="flex flex-col grow justify-around">

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { memo, useState } from 'react';
 
 
 function Day({ date, changeDays, isMarked }) {
@@ -8,16 +8,16 @@ function Day({ date, changeDays, isMarked }) {
 
 
   const [isClicked, setIsClicked] = useState(isMarked)
-  
-  const passiveStyle = "bg-white/80  "
-  const activeStyle = "bg-custom-blue/70 text-white"
+
+  const passiveStyle = "bg-white"
+  const activeStyle = "bg-custom-blue/90 text-white/90"
 
   return (
     <button onClick={() => {
       changeDays(date)
       setIsClicked(!isClicked)
     }
-    } className={`p-2 text-center shadow-lg text-sm rounded-lg backdrop-blur-sm ${isClicked ? activeStyle : passiveStyle} ${isWeekEnd && 'border-2 border-red-300'}`}>
+    } className={`p-2 text-center shadow-current-gray shadow-xl text-sm rounded-lg ${isClicked ? activeStyle : passiveStyle} ${isWeekEnd && 'border-2 border-red-300'}`}>
       {date.split('-')[2]}
     </ button >
   );

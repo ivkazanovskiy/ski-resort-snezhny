@@ -94,11 +94,11 @@ function EditAdminProfileCard(props) {
   }
 
   return (
-    <form className="card flex-col mb-2 mt-8">
+    <form className="card flex-col mb-2 mt-8 overflow-y-auto">
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
-          <input name="name" type="text" id="name" className={`basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
+          <input name="name" type="text" id="name" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
         </div>
         <div className="flex flex-row justify-around justify-items-center items-center">
           <span className="basis-1/4"></span>
@@ -108,7 +108,7 @@ function EditAdminProfileCard(props) {
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="surname" className="basis-1/4 edit-label text-center">Фамилия</label>
-          <input name="surname" type="text" id="surname" className={`basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
+          <input name="surname" type="text" id="surname" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
         </div>
         <div className="flex flex-row justify-around justify-items-center items-center">
           <span className="basis-1/4"></span>
@@ -118,7 +118,7 @@ function EditAdminProfileCard(props) {
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="phone" className="basis-1/4 edit-label text-center">Телефон</label>
-          <input name="phone" type="tel" id="phone" className={`basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
+          <input name="phone" type="tel" id="phone" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
         </div>
         <div className="flex flex-row justify-around justify-items-center items-center">
           <span className="basis-1/4"></span>
@@ -128,7 +128,7 @@ function EditAdminProfileCard(props) {
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="email" className="basis-1/4 edit-label text-center">Email</label>
-          <input name="email" type="email" id="email" className={`basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
+          <input name="email" type="email" id="email" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
         </div>
         <div className="flex flex-row justify-around justify-items-center items-center">
           <span className="basis-1/4"></span>
@@ -139,15 +139,15 @@ function EditAdminProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/60 rounded-md">
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
               <span>Изменить пароль </span>
               <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
             </Disclosure.Button>
             <Disclosure.Panel className="flex flex-col">
               <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
-              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
-              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
+              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
             </Disclosure.Panel>
           </>
         )}

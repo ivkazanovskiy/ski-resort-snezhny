@@ -70,7 +70,7 @@ function AddUserScheduleCard() {
           <NewScheduleCard allTrainers={allTrainers} date={date} setHours={setHours} selectedTrainer={selectedTrainer} setSelectedTrainer={setSelectedTrainer} />
           // < ListboxTrainers freeTrainers={freeTrainers} />
           :
-          <div className="p-2 text-base rounded-lg w-full backdrop-blur-sm bg-white/60">Свободных инструкторов нет</div>
+          <div className="p-2 text-base rounded-lg w-full bg-white/60">Свободных инструкторов нет</div>
       )}
       <Tab.Group onChange={setSportInd} defaultIndex={sportInd}>
         <Tab.List className="slider-list mt-2">
