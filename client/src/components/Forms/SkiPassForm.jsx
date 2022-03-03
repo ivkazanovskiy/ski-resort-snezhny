@@ -7,8 +7,9 @@ import { toStringDate } from '../../helpers/toStringDate'
 import SkiPassButton from '../Elements/SkiPassButton';
 import axios from 'axios'
 import ModalBuy from '../Modals/ModalBuy';
+import { prettyCost } from '../../helpers/pretty'
 
-import bill from '../../css/svg/bill.svg'
+
 
 function SkiPassForm(props) {
 
@@ -97,7 +98,7 @@ function SkiPassForm(props) {
             Итого к оплате:
           </div>
           <div className="text-2xl font-medium">
-            {chosen[keyString]} ₽
+            {prettyCost(chosen[keyString])} ₽
           </div>
         </div>
       </div>

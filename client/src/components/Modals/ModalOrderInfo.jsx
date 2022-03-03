@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { prettyPhone } from '../../helpers/pretty'
 
 function ModalOrderInfo({ setModal, id, date }) {
 
@@ -41,7 +42,7 @@ function ModalOrderInfo({ setModal, id, date }) {
               Телефон
             </div>
             <div className="bg-slate-100 grow p-2 text-custom-navy rounded-lg">
-              {info['User.phone']}
+              {prettyPhone(info['User.phone'])}
             </div>
           </div>
           <div className="flex ">

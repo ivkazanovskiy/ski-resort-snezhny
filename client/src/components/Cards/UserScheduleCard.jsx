@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { prettyPhone } from '../../helpers/pretty'
 import axios from 'axios';
 
 function UserScheduleCard({ order, setOrders, orders }) {
@@ -7,7 +7,6 @@ function UserScheduleCard({ order, setOrders, orders }) {
   const [photos, setPhotos] = useState('');
 
   useEffect(() => {
-    console.log(5);
     axios({
       url: '/api/photos/',
       method: 'GET',
@@ -51,7 +50,7 @@ function UserScheduleCard({ order, setOrders, orders }) {
             {`${order['Trainer.name']} ${order['Trainer.surname']}`}
           </div>
           <div className="card-info">
-            {order['Trainer.phone']}
+            {prettyPhone(order['Trainer.phone'])}
           </div>
           <div className="card-info">
             {`${order.date.split('-')[2]}.${order.date.split('-')[1]} ${order.startTime}:00-${Number(order.startTime) + 1}:00`}

@@ -6,6 +6,7 @@ import { countGapValue } from '../../helpers/countGapValue';
 import { countCost } from '../../helpers/countCost'
 import { nextStringDate } from '../../helpers/nextStringDate';
 import { toStringDate } from '../../helpers/toStringDate';
+import { prettyCost } from '../../helpers/pretty'
 import Slider from '../Elements/Slider';
 import axios from 'axios'
 import ModalBuy from '../Modals/ModalBuy';
@@ -13,6 +14,7 @@ import ModalBuy from '../Modals/ModalBuy';
 function RoomsSearch(props) {
 
   const { type } = useParams()
+  const gapRef = useRef()
   const startRef = useRef()
   const roomRef = useRef()
   const finishRef = useRef()
@@ -69,6 +71,7 @@ function RoomsSearch(props) {
   useEffect(() => {
     setFinishDate(nextStringDate(startDate, gap))
     finishRef.current.value = nextStringDate(startDate, gap)
+    gapRef.current.value = gap
   }, [startDate, gap])
 
   // когда финиш изменился мы можем на основании старта и финиша отпаравить новый запрос
@@ -88,8 +91,8 @@ function RoomsSearch(props) {
           </h1>
           <div className="flex items-center">
             <div className="grow flex flex-col">
-              <span className="grow">пн-пт: {thisType ? thisType.weekdayCost : 'Загрузка...'} ₽/день</span>
-              <span className="grow">сб-вс: {thisType ? thisType.weekendCost : 'Загрузка...'} ₽/день</span>
+              <span className="grow">пн-пт: {thisType ? prettyCost(thisType.weekdayCost) : 'Загрузка...'} ₽/день</span>
+              <span className="grow">сб-вс: {thisType ? prettyCost(thisType.weekendCost) : 'Загрузка...'} ₽/день</span>
             </div>
           </div>
           <h2 className="w-full text-md ">{thisType ? thisType.description : 'Загрузка...'}</h2>
@@ -102,11 +105,11 @@ function RoomsSearch(props) {
         </div>
         <div className="flex w-full gap-2">
           <div className="rounded-lg font-medium backdrop-blur-sm bg-white/70 p-2 flex grow">
-            <div className="text-center grow">Дней: </div><div className="w-10 text-center">{countGapValue(startDate, finishDate)}</div>
+            <div className="text-center grow">Дней: </div><input className="w-16 bg-white/0 text-center" type="number" onChange={() => gapRef.current.value > 0 && setGap(gapRef.current.value)} ref={gapRef} defaultValue={gap} />
           </div>
           <div className="rounded-lg font-medium backdrop-blur-sm bg-white/70 p-2 flex grow">
             <div className="text-center grow">Стоимость: </div>
-            <div className="w-20 text-center">{cost} ₽</div>
+            <div className="w-20 text-center">{cost && prettyCost(cost)} ₽</div>
           </div>
         </div>
         <div className="flex w-full gap-2 ">
@@ -119,11 +122,11 @@ function RoomsSearch(props) {
           {/* Пока грузится */}
           {avaliableRooms.isLoading && <span>Загрузка...</span>}
           {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
-            <select name="select" className="date-input w-20" ref={roomRef} value='qwe'>
+            <select name="select" className="date-input w-20" ref={roomRef}>
               {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
             </select>
             :
-            <select name="select" className="date-input w-20" ref={roomRef} value='qwe' disabled>
+            <select name="select" className="date-input w-20" ref={roomRef} disabled>
               <option className="">-</option>
             </select>
           }

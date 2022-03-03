@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
 
-import ListboxMonth from '../Listbox/ListboxMonth'
+import ListboxMonth from '../Listbox/ListboxTrainers'
 import Day from '../Listbox/Day'
 import { addZero } from '../../helpers/addZero'
 import { getDates } from '../../helpers/getDates'

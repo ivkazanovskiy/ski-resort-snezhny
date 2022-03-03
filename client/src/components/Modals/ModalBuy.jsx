@@ -1,4 +1,5 @@
 import React from 'react';
+import { prettyCost } from '../../helpers/pretty'
 
 function ModalBuy({ setModal, mutation, cost }) {
   return (
@@ -16,7 +17,7 @@ function ModalBuy({ setModal, mutation, cost }) {
         </div>
         <div className="flex  gap-2">
           <button onClick={() => setModal(false)} className="p-2 text-white  bg-custom-sand font-medium text-lg grow rounded-lg">Закрыть</button>
-          <button onClick={() => mutation.mutate()} className="p-2 text-white bg-custom-blue font-medium text-lg grow rounded-lg">Оплатить {cost}₽</button>
+          <button onClick={() => mutation.mutate()} className="p-2 text-white bg-custom-blue font-medium text-lg grow rounded-lg">Оплатить {prettyCost(cost)}₽</button>
         </div>
       </div>
     </div>

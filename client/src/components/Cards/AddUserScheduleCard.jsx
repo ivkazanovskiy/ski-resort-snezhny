@@ -1,54 +1,97 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Tab } from '@headlessui/react';
+import axios from 'axios';
 
 import NewScheduleCard from './NewScheduleCard';
+import { toStringDate } from '../../helpers/toStringDate';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import ListboxTrainers from '../Listbox/ListboxTrainers';
+import { useChangeHours } from '../../helpers/useChangeHours';
 
+function AddUserScheduleCard() {
 
-function AddUserScheduleCard({refresh, setRefresh}) {
+  const dateRef = useRef()
+  const [selectedTrainer, setSelectedTrainer] = useState({})
+  const [hours, setHours] = useChangeHours()
+  const [date, setDate] = useState(toStringDate(new Date()))
+  const [sportInd, setSportInd] = useState(0)
+  const sport = ['snowboard', 'ski'][sportInd]
+
+  const queryClient = useQueryClient()
+
+  const allTrainersQuery = useQuery(`allTrainers-${sport}-${date}`, () => axios({
+    url: '/api/trainers/',
+    method: 'GET',
+    headers: {
+      'sport': sport,
+      'bookingdate': date,
+    },
+  }))
+
+  useEffect(() => setHours(0), [sportInd, date])
+
+  const saveSchedule = useMutation(() => axios({
+    url: '/api/userSchedule',
+    method: 'POST',
+    data: {
+      trainerId: selectedTrainer.id,
+      date,
+      sport: (sport === 'ski') ? 'Лыжи' : 'Сноуборд',
+      hours,
+    }
+  }), {
+    onSuccess: () => {
+      setHours(0)
+      queryClient.invalidateQueries(`allTrainers-${sport}-${date}`)
+    }
+  })
+
+  let allTrainers;
+  if (allTrainersQuery.isSuccess) allTrainers = allTrainersQuery.data.data
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
   return (
-    <div className="w-full max-w-md py-4">
+    <div className="w-full">
 
-      <Tab.Group>
-        <Tab.List className="flex p-1 space-x-1 bg-blue-900/20 rounded-xl">
+      {allTrainersQuery.isLoading && 'Загрузка'}
+      {allTrainersQuery.isSuccess && (
+        allTrainers.length > 0 ?
+
+          <NewScheduleCard allTrainers={allTrainers} date={date} setHours={setHours} selectedTrainer={selectedTrainer} setSelectedTrainer={setSelectedTrainer} />
+          // < ListboxTrainers freeTrainers={freeTrainers} />
+          :
+          <div className="p-2 text-base rounded-lg w-full backdrop-blur-sm bg-white/60">Свободных инструкторов нет</div>
+      )}
+      <Tab.Group onChange={setSportInd} defaultIndex={sportInd}>
+        <Tab.List className="slider-list mt-2">
           <Tab className={({ selected }) =>
             classNames(
-              'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+              'slider-tab',
               selected
-                ? 'bg-white shadow'
-                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                ? 'slider-active'
+                : 'slider-passive'
             )
           } >Сноуборд</Tab>
           <Tab className={({ selected }) =>
             classNames(
-              'w-full py-2.5 text-sm leading-5 font-medium text-blue-700 rounded-lg',
-              'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60',
+              'slider-tab',
               selected
-                ? 'bg-white shadow'
-                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                ? 'slider-active'
+                : 'slider-passive'
             )
-          }>Лыжи</Tab>
+          }>Горные лыжи</Tab>
         </Tab.List>
-        <Tab.Panels className="mt-2 border-2 rounded-md">
-          <Tab.Panel className={classNames(
-            'bg-white rounded-md',
-            'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-          )}>
-            <NewScheduleCard key={'scheduleSnowboard'} sport={'snowboard'} refresh={refresh} setRefresh={setRefresh}></NewScheduleCard>
-          </Tab.Panel>
-          <Tab.Panel className={classNames(
-            'bg-white rounded-md',
-            'focus:outline-none focus:ring-2 ring-offset-2 ring-offset-blue-400 ring-white ring-opacity-60'
-          )}>
-            <NewScheduleCard key={'scheduleSki'} sport={'ski'} refresh={refresh} setRefresh={setRefresh}></NewScheduleCard>
-          </Tab.Panel>
-        </Tab.Panels>
       </Tab.Group>
+      <div className="flex mt-2 w-full gap-2">
+        <input type="date" className="w-1/2 date-input" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
+        <button onClick={() => {
+          console.log(hours, selectedTrainer);
+          saveSchedule.mutate()
+        }} className="basic-btn  w-1/2">Записаться</button>
+      </div>
     </div>
   )
 }
