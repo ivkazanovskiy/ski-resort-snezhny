@@ -20,15 +20,15 @@
   }
 
   .date-input{
-    @apply p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70
+    @apply p-2 text-center rounded-lg text-custom-navy font-medium bg-white/60
   }
 
   .select-input{
-    @apply p-2 text-center rounded-lg text-custom-navy font-medium backdrop-blur-sm bg-white/70
+    @apply p-2 text-center rounded-lg text-custom-navy font-medium bg-white/60
   }
 
   .basic-btn{
-    @apply p-2 text-white bg-custom-blue font-medium text-lg rounded-lg backdrop-blur-sm
+    @apply p-2 text-white bg-custom-blue font-medium text-lg rounded-lg
   }
 
   .botmenu-btn{
@@ -44,7 +44,7 @@
   }
 
   .slider-list{
-    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-xl backdrop-blur-sm bg-white/30
+    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-lg bg-white/30
   }
 
   .slider-panel{
@@ -56,7 +56,7 @@
   }
 
   .slider-active{
-    @apply backdrop-blur-sm bg-white/30 text-custom-navy
+    @apply bg-white/30 text-custom-navy
   }
 
   .slider-passive{
@@ -64,7 +64,7 @@
   }
 
   .card {
-    @apply flex justify-between w-full p-3 rounded-xl backdrop-blur-sm bg-white/90 shadow-lg text-custom-navy
+    @apply flex justify-between w-full p-3 rounded-lg bg-white/60 text-custom-navy
   }
 
   .card-avatar{
@@ -91,7 +91,7 @@
   }
 
   .edit-input{
-    @apply w-full p-2 rounded-md bg-white/60 text-base text-custom-navy outline-none
+    @apply w-full p-2 rounded-lg bg-white/60 text-base text-custom-navy outline-none
   }
 
   .edit-label{
@@ -102,7 +102,7 @@
     file:mr-4 file:py-2 file:px-2
     file:rounded-lg
     file:text-sm file:font-medium
-  file:bg-custom-gray/50 file:text-white
+  file:bg-custom-gray/70 file:text-white
     file:border-0 file:w-1/2
   }
 }

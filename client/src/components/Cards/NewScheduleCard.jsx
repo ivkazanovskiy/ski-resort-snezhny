@@ -52,7 +52,7 @@ function NewScheduleCard({ allTrainers, setHours, selectedTrainer, setSelectedTr
       </div>
       <Listbox defaultValue={selectedTrainer} onChange={setSelectedTrainer}>
         <div className="relative">
-          <Listbox.Button className="relative p-2 rounded-lg w-full text-left backdrop-blur-sm bg-white/80">
+          <Listbox.Button className="relative p-2 rounded-lg w-full text-left bg-white/60">
             <span className="block truncate">{`${selectedTrainer.name || 'Выберите инструктора:'} ${selectedTrainer.surname || ''}`}</span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             </span>
@@ -63,7 +63,7 @@ function NewScheduleCard({ allTrainers, setHours, selectedTrainer, setSelectedTr
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute bottom-10 backdrop-blur-sm bg-white/70 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
+            <Listbox.Options className="absolute bottom-10 bg-white/60 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
               {
                 currentTrainers.length ?
                   currentTrainers.map((person, personIdx) => (

@@ -3,8 +3,8 @@ import { prettyPhone } from '../../helpers/pretty'
 
 function TrainerCustomerCard({ info }) {
   return (
-    <li>
-      <div className="card justify-start">
+    <li className="">
+      <div className="card justify-start shadow-current-gray shadow-xl">
         <div className=" card-avatar flex justify-center items-center">
           <span className="material-icons text-7xl ">
             {

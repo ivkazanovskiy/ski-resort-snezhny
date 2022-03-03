@@ -33,7 +33,11 @@ function Slider({ type }) {
       {
         photos.length ?
           photos.map(el =>
-            <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
+            {
+              relativePath
+              ? <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
+              : <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src="https://brilliant24.ru/files/cat/template_01.png" />
+            }
           )
           :
           <></>

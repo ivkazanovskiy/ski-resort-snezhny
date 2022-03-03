@@ -6,7 +6,7 @@ import axios from 'axios'
 function OrderCard({ orders }) {
 
   const [orderInfo, setOrderInfo] = useState({});
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState();
 
   const queryClient = useQueryClient()
 
@@ -62,10 +62,14 @@ function OrderCard({ orders }) {
       <li>
         <div className="card">
           <div className="card-avatar relative">
-            <div className="absolute w-8 h-8 bg-custom-navy/60 rounded-md bottom-0 right-0 text-white flex items-center justify-center">
+            <div className="absolute w-8 h-8 bg-custom-navy/60 rounded-lg bottom-0 right-0 text-white flex items-center justify-center">
               <p className="">{orders[0].roomId}</p>
             </div>
-            <img className="w-full h-full object-cover rounded-md" src={`/rooms/${orderInfo['Type.images']}/${photo}`} alt="..."></img>
+            {
+              photo
+                ? <img className="w-full h-full object-cover rounded-lg" src={`/rooms/${orderInfo['Type.images']}/${photo}`}></img>
+                : <img className="w-full h-full object-cover rounded-lg" src="https://brilliant24.ru/files/cat/template_01.png"></img>
+            }
           </div>
           <div className="card-content">
             <div className="card-name">
@@ -76,7 +80,6 @@ function OrderCard({ orders }) {
             </div>
           </div>
           <div className="card-delete">
-
             {save.isIdle &&
               <button onClick={() => save.mutate()} className="delete-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#212D52">

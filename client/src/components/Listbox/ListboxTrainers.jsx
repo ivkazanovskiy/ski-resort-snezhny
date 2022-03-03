@@ -17,7 +17,7 @@ export default function ListboxTrainers({ freeTrainers }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute bottom-10 backdrop-blur-sm bg-white/70 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
+            <Listbox.Options className="absolute bottom-10 bg-white/60 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
               {freeTrainers.map((trainer) => (
                 <Listbox.Option
                   key={trainer['Trainer.id']}
@@ -32,7 +32,7 @@ export default function ListboxTrainers({ freeTrainers }) {
               ))}
             </Listbox.Options>
           </Transition>
-          <Listbox.Button className="relative p-2 rounded-lg w-full text-left backdrop-blur-sm bg-white/80">
+          <Listbox.Button className="relative p-2 rounded-lg w-full text-left bg-white/60">
             <span className="">{`${selected['Trainer.name']} ${selected['Trainer.surname']}`}</span>
           </Listbox.Button>
         </div>

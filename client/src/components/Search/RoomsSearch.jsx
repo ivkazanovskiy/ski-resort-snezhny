@@ -62,9 +62,9 @@ function RoomsSearch(props) {
   let thisType;
   let cost;
   if (typeInfo.isSuccess) {
-    // когда подгружится запрос по типу дома, заполняем данные 
+    // когда подгружится запрос по типу дома, заполняем данные
     thisType = typeInfo.data.data;
-    // когда подгружится запрос по типу дома, пересчитываем стоимость 
+    // когда подгружится запрос по типу дома, пересчитываем стоимость
     cost = countCost(startDate, gap, thisType.weekdayCost, thisType.weekendCost)
   }
 
@@ -82,8 +82,8 @@ function RoomsSearch(props) {
 
   return (
     <>
-      <div className=" grow w-full mb-2 rounded-lg overflow-y-auto">
-        <div className="w-full p-2 flex flex-col gap-2 rounded-lg  backdrop-blur-sm bg-white/60">
+      <div className=" grow w-full pt-20 mb-2 rounded-lg overflow-y-auto">
+        <div className="w-full p-2 flex flex-col gap-2 rounded-lg bg-white/60">
           <Slider type={type} />
           <h1 className="w-full text-xl flex items-center">
             {thisType ? thisType.title : 'Загрузка...'}
@@ -96,7 +96,7 @@ function RoomsSearch(props) {
               <span className="grow">сб-вс: {thisType ? prettyCost(thisType.weekendCost) : 'Загрузка...'} ₽/день</span>
             </div>
           </div>
-          <h2 className="w-full text-md ">{thisType ? thisType.description : 'Загрузка...'}</h2>
+          <h2 className="w-full">{thisType ? thisType.description : 'Загрузка...'}</h2>
         </div>
       </div>
       <div className="w-full flex flex-col gap-2 z-0">
@@ -105,10 +105,10 @@ function RoomsSearch(props) {
           <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow" />
         </div>
         <div className="flex w-full gap-2">
-          <div className="rounded-lg font-medium backdrop-blur-sm bg-white/70 p-2 flex grow">
+          <div className="rounded-lg font-medium bg-white/60 p-2 flex grow">
             <div className="text-center grow">Дней: </div><input className="w-16 bg-white/0 text-center" type="number" onChange={() => gapRef.current.value > 0 && setGap(gapRef.current.value)} ref={gapRef} defaultValue={gap} />
           </div>
-          <div className="rounded-lg font-medium backdrop-blur-sm bg-white/70 p-2 flex grow">
+          <div className="rounded-lg font-medium bg-white/60 p-2 flex grow">
             <div className="text-center grow">Стоимость: </div>
             <div className="w-20 text-center">{cost && prettyCost(cost)} ₽</div>
           </div>

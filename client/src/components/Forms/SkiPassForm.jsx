@@ -69,7 +69,7 @@ function SkiPassForm(props) {
   if (!skiPass) return (
     <>
       <div className="w-3/4 mt-6">Для пополнения Ski-Pass необходимо купить его в кассе Горнолыжного курорта Снежный и добавить в личном кабинете в разделе "Информация"</div>
-      <Link to="/profile" type="submit" className="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm  px-5 py-2.5 text-center ">Личный кабинет</Link>
+      <Link to="/profile" type="submit" className="mt-2 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm  px-5 py-2.5 text-center ">Личный кабинет</Link>
     </>
   )
 
@@ -82,7 +82,7 @@ function SkiPassForm(props) {
   if (chosen) return (
     <>
       <div className="w-full pt-16 grow flex justify-center items-center ">
-        <div className="p-4 mb-2 flex flex-col items-center rounded-lg w-60 backdrop-blur-sm bg-white/80">
+        <div className="p-4 mb-2 flex flex-col items-center rounded-lg w-60 bg-white/60">
           <div className="self-end">
             № {skiPass}
           </div>
@@ -95,7 +95,7 @@ function SkiPassForm(props) {
         </div>
       </div>
 
-      <div className="backdrop-blur-sm bg-white/40 w-full rounded-lg">
+      <div className="bg-white/30 w-full rounded-lg">
         <Tab.Group onChange={setType} defaultIndex={type}>
           <Tab.Panels className="self-stretch">
             <Tab.Panel className="slider-panel">
