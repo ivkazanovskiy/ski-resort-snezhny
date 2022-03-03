@@ -28,23 +28,6 @@ function AdminTableCard({ dates, type, grade }) {
     </>
   );
 
-  console.log(dates);
-
-  // useEffect(() => {
-  //   axios({
-  //     url: '/api/orders',
-  //     method: 'GET',
-  //     headers: { form, type },
-  //   })
-  //     .then((res) => {
-  //       setOrders(res.data.orders);
-  //       setRooms(res.data.rooms);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
-
-
-
   rooms.current = data.data.rooms
   orders.current = data.data.orders
 
