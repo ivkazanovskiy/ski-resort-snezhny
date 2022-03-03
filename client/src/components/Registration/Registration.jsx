@@ -70,8 +70,6 @@ function Registration(props) {
         password: password.current.value,
         secret: secret.current ? secret.current.value : undefined
       };
-      console.log(data);
-
       return dispatch(registrationUser(data, navigate))
     }
   }

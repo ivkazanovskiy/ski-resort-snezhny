@@ -94,10 +94,7 @@ function AddUserScheduleCard() {
       </Tab.Group>
       <div className="flex mt-2 w-full gap-2">
         <input type="date" className="w-1/2 date-input" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
-        <button onClick={() => {
-          console.log(hours, selectedTrainer);
-          saveSchedule.mutate()
-        }} className="basic-btn  w-1/2">Записаться</button>
+        <button onClick={() => saveSchedule.mutate()} className="basic-btn  w-1/2">Записаться</button>
       </div>
     </div>
   )

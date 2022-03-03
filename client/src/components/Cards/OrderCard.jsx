@@ -37,7 +37,6 @@ function OrderCard({ orders }) {
 
 
   useEffect(() => {
-    console.log('2');
     axios({
       url: `/api/rooms/${orders[0].roomId}`,
     })
@@ -46,7 +45,6 @@ function OrderCard({ orders }) {
   }, [])
 
   useEffect(() => {
-    console.log('2');
     axios({
       url: '/api/photos/',
       method: 'GET',
