@@ -1,12 +1,12 @@
 import React from 'react';
 import { prettyPhone } from '../../helpers/pretty'
 import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
 
-function UserScheduleCard({ order, setOrders, orders }) {
+function UserScheduleCard({ order }) {
+  const queryClient = useQueryClient()
 
-  const deleteOrder = (event) => {
-    event.preventDefault();
-
+  const deleteOrder = useMutation(() => {
     axios({
       url: '/api/userSchedule',
       method: 'DELETE',
@@ -16,16 +16,13 @@ function UserScheduleCard({ order, setOrders, orders }) {
         trainerId: order['Trainer.id'],
       },
     })
-      .then(() => {
-        // FIXME: сюда надо закинуть рефреш, чтобы обновить список инструкторов
-        setOrders(orders.filter(el => !(
-          (el['Trainer.id'] === order['Trainer.id'])
-          && (el.date === order.date)
-          && (el.startTime === order.startTime)
-        )));
-      })
-      .catch(err => console.log(err));
-  };
+  }, {
+
+    onSuccess: () => {
+      queryClient.invalidateQueries('allOrdersQuery')
+    }
+  })
+
 
   return (
     <li>
@@ -47,11 +44,13 @@ function UserScheduleCard({ order, setOrders, orders }) {
           </div>
         </div>
         <div className="card-delete">
-          <button onClick={deleteOrder} className="delete-btn">
-            <span className="material-icons">
-              delete
-            </span>
-          </button>
+          {deleteOrder.isIdle &&
+            <button onClick={() => deleteOrder.mutate()} className="delete-btn">
+              <span class="material-icons">
+                delete
+              </span>
+            </button>
+          }
         </div>
       </div>
     </li>

@@ -5,23 +5,16 @@ import UserScheduleCard from '../Cards/UserScheduleCard';
 import axios from 'axios';
 import AllOrdersCards from '../Cards/AllOrdersCards';
 import UnauthorizedCard from '../Cards/UnauthorizedCard';
+import { useQuery } from 'react-query';
 
 function UserProfile(props) {
 
   const { role } = useSelector(state => state.userReducer);
 
-  // TODO: флажок для обновления стейта, переделать на useQuery
-  const [refresh, setRefresh] = useState(false)
-  const [orders, setOrders] = useState([]);
+  const ordersQuery = useQuery('allOrdersQuery', () => axios('/api/userSchedule'))
 
-  useEffect(() => {
-    axios({
-      url: '/api/userSchedule',
-      method: 'GET',
-    })
-      .then(res => setOrders(res.data.orders))
-      .catch(err => console.log(err.message));
-  }, [refresh]);
+  let orders
+  if (ordersQuery.isSuccess) { orders = ordersQuery.data.data.orders }
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -36,13 +29,17 @@ function UserProfile(props) {
           <Tab.Panel className={classNames(
             '',
           )}>
-            <ul className="grid grid-col gap-2">
-              {orders ?
-                orders.map(order => <UserScheduleCard refresh={refresh} setRefresh={setRefresh} orders={orders} setOrders={setOrders} key={`${order.date}-${order.startTime}-${order['Trainer.id']}`} order={order}></UserScheduleCard>)
-                :
-                <li>Пока нет записей</li>
-              }
-            </ul>
+
+            {orders &&
+              <ul className="grid grid-col gap-2">
+                {orders.length > 0 ?
+                  orders.map(order => <UserScheduleCard orders={orders} key={`${order.date}-${order.startTime}-${order['Trainer.id']}`} order={order}></UserScheduleCard>)
+                  :
+                  <li className="w-full p-2 rounded-lg text-lg justify-self-center bg-white/80 text-center">Записи к инструктору отсутствуют</li>
+
+                }
+              </ul>
+            }
           </Tab.Panel>
           <Tab.Panel className={classNames(
             '',
@@ -50,7 +47,7 @@ function UserProfile(props) {
             <AllOrdersCards />
           </Tab.Panel>
         </Tab.Panels>
-        <Tab.List className="slider-list">
+        <Tab.List className="slider-list mt-2">
           <Tab
             className={({ selected }) =>
               classNames(

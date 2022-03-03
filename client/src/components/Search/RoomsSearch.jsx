@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useQuery, useQueryClient, useMutation } from 'react-query'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { countGapValue } from '../../helpers/countGapValue';
 import { countCost } from '../../helpers/countCost'
@@ -10,6 +10,7 @@ import { prettyCost } from '../../helpers/pretty'
 import Slider from '../Elements/Slider';
 import axios from 'axios'
 import ModalOrderRoom from '../Modals/ModalOrderRoom';
+import { useSelector } from 'react-redux';
 
 function RoomsSearch(props) {
 
@@ -19,6 +20,8 @@ function RoomsSearch(props) {
   const roomRef = useRef()
   const finishRef = useRef()
   const queryClient = useQueryClient()
+  const { role } = useSelector(state => state.userReducer)
+
 
   //  FIXME: попробовать заменить стейты на переменные, чтобы уменьшить количество переменных
   const [startDate, setStartDate] = useState(nextStringDate(toStringDate(new Date()), 1))
@@ -82,9 +85,9 @@ function RoomsSearch(props) {
       <div className=" grow w-full pt-20 mb-2 rounded-lg overflow-y-auto">
         <div className="w-full p-2 flex flex-col gap-2 rounded-lg bg-white/60">
           <Slider type={type} />
-          <h1 className="w-full text-xl flex ">
+          <h1 className="w-full text-xl flex items-center">
             {thisType ? thisType.title : 'Загрузка...'}
-            <span className="material-icons font-light w-fit ml-4 items-center">groups</span>
+            <span className="material-icons font-light w-fit ml-4 mr-2">groups</span>
             <span className="">{thisType ? thisType.guestCount : 'Загрузка...'}</span>
           </h1>
           <div className="flex items-center">
@@ -111,14 +114,17 @@ function RoomsSearch(props) {
           </div>
         </div>
         <div className="flex w-full gap-2 ">
-
-          {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
-            <button onClick={() => setModal(true)} className="basic-btn grow">Забронировать</button>
+          {!role ?
+            <Link to='/profile' className="basic-btn bg-custom-sand grow">Для бронирования пройдите авторизацию</Link>
             :
-            <button className="basic-btn bg-custom-sand grow" disabled>Свободных мест нет</button>
+            <>
+              {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
+                <button onClick={() => setModal(true)} className="basic-btn grow">Забронировать</button>
+                :
+                <button className="basic-btn bg-custom-sand grow" disabled>Свободных мест нет</button>}
+            </>
           }
           {/* Пока грузится */}
-          {avaliableRooms.isLoading && <span>Загрузка...</span>}
           {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
             <select name="select" className="date-input w-20" ref={roomRef}>
               {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
@@ -128,6 +134,7 @@ function RoomsSearch(props) {
               <option className="">-</option>
             </select>
           }
+
         </div>
       </div>
       {modal && <ModalOrderRoom setModal={setModal} mutation={dookDays} query={avaliableRooms} cost={cost} />}

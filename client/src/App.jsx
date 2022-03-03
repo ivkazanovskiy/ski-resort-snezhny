@@ -59,7 +59,7 @@ function App() {
               <Route path="/login" key="login" element={<Login />} />
               <Route path="/admin" key="admin" element={<Admin />} />
               <Route path="/registration" key="registration" element={<Registration />} />
-
+                
               {
                 (role !== 'trainer' && role !== 'admin') &&
                 <Route path="/profile" key="profile" element={<EditUserProfileCard />} />
@@ -70,7 +70,6 @@ function App() {
                 <Route path="/school" key="school" element={<AddUserScheduleCard />} />,
                 <Route path="/orders" key="userOrders" element={<UserProfile />} />,
                 <Route path="/search/:type" key="userSearchRooms" element={<RoomsSearch />} />,
-                <Route path="/search" key="search" element={<HouseSearchForm />} />
               ]}
 
               {role === "admin" && [
