@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Listbox, Transition } from '@headlessui/react';
 import axios from 'axios';
 
 import PeriodButton from '../Elements/PeriodButton';
 import { useChangeHours } from '../../helpers/useChangeHours';
 import { addZero } from '../../helpers/addZero';
+import UnauthorizedCard from './UnauthorizedCard';
 
 function NewScheduleCard({ sport, refresh, setRefresh }) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   const day = String(new Date().getDate());
   const month = String(new Date().getMonth() + 1);
@@ -86,6 +90,9 @@ function NewScheduleCard({ sport, refresh, setRefresh }) {
     })
       .then(response => setRefresh(!refresh));
   }
+
+  if (!role) return (<UnauthorizedCard />)
+
   return (
     <div className="w-full rounded-md p-2 flex flex-col gap-2">
       <div className="w-full rounded-md ">

@@ -14,33 +14,33 @@ function BottomMenu(props) {
           (role === 'user' || role === undefined)
           &&
           [
-            <NavLink to="/" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"userHome"} to="/" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 home
               </span>
             </NavLink>,
-            <NavLink to="/search" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"userRooms"} to="/search" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 hotel
               </span>
             </NavLink>,
-            <NavLink to="/skipass" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"userSkipass"} to="/skipass" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 style
               </span>
             </NavLink>,
-            <NavLink to="/school" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"userSchool"} to="/school" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 downhill_skiing
               </span>
             </NavLink>,
-            <NavLink to="/orders" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"userCalendar"} to="/orders" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 calendar_month
               </span>
             </NavLink>,
-            <NavLink to="/profile" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"userProfile"} to="/profile" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 assignment_ind
               </span>
             </NavLink>,
@@ -51,23 +51,23 @@ function BottomMenu(props) {
           role === 'trainer'
           &&
           [
-            <NavLink to="/" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"trainerHome"} to="/" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 home
               </span>
             </NavLink>,
-            <NavLink to="/orders" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"trainerOrders"} to="/orders" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 list_alt
               </span>
             </NavLink>,
-            <NavLink to="/calendar" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"trainerCalendar"} to="/calendar" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 calendar_month
               </span>
             </NavLink>,
-            <NavLink to="/profile" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"trainerProfile"} to="/profile" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 assignment_ind
               </span>
             </NavLink>,
@@ -78,28 +78,28 @@ function BottomMenu(props) {
           role === 'admin'
           &&
           [
-            <NavLink to="/" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"adminHome"} to="/" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 home
               </span>
             </NavLink>,
-            <NavLink to="/search" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"adminRooms"} to="/search" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 hotel
               </span>
             </NavLink>,
-            <NavLink to="/orders" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"adminOrders"} to="/orders" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 list_alt
               </span>
             </NavLink>,
-            <NavLink to="/calendar" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"adminCalendar"} to="/calendar" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 calendar_month
               </span>
             </NavLink>,
-            <NavLink to="/profile" className="botmenu-btn">
-              <span class="material-icons text-current-navy text-4xl">
+            <NavLink key={"adminProfile"} to="/profile" className="botmenu-btn">
+              <span className="material-icons text-current-navy text-4xl">
                 assignment_ind
               </span>
             </NavLink>,

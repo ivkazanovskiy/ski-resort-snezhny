@@ -59,13 +59,14 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/registration" element={<Registration />} />
 
-              {role === "user" && [
+              {role !== 'trainer' && [
                 <Route path="/skipass" element={<SkiPassForm />} />,
                 <Route path="/profile" key={'userProfile'} element={<EditUserProfileCard />} />,
                 <Route path="/orders" key={'userOrders'} element={<UserProfile />} />,
                 <Route path="/search/:type" key={'userSearchRooms'} element={<RoomsSearch />} />,
                 <Route path="/search" element={<HouseSearchForm />} />
-              ]}
+              ]
+              }
 
               {role === "admin" && [
                 <Route path="/calendar" key={'adminOrdersForm'} element={<AdminOrdersForm />} />,

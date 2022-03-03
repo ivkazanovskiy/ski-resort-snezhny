@@ -9,8 +9,11 @@ import axios from 'axios'
 import ModalBuy from '../Modals/ModalBuy';
 
 import bill from '../../css/svg/bill.svg'
+import UnauthorizedCard from '../Cards/UnauthorizedCard';
 
 function SkiPassForm(props) {
+
+  const { role } = useSelector(state => state.userReducer);
 
   const tableQuery = useQuery('tableQuery', () => axios('/api/skiPass'))
   const save = useMutation(() => axios({
@@ -64,14 +67,7 @@ function SkiPassForm(props) {
     return classes.filter(Boolean).join(' ')
   }
 
-  if (!auth) return (
-    <>
-      <div className="w-3/4 mt-6">Для покупки Ski-Pass войдите в свой профиль или зарегистрируйтесь</div>
-      <div className="flex p-2 gap-2 w-full">
-        <Link to="/login" type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm flex-1 px-5 py-2.5 text-center ">Войти</Link>
-        <Link to="/registration" type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm flex-1 px-5 py-2.5 text-center ">Зарегистрироваться</Link>
-      </div>
-    </>)
+  if (!role) return (<UnauthorizedCard />)
 
   if (!skiPass) return (
     <>
