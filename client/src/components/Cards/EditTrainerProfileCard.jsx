@@ -232,6 +232,16 @@ function EditTrainerProfileCard(props) {
             </div>
           </div>
         </div>
+        <div className="mb-2 mx-2 flex flex-col">
+          <div className="flex flex-row justify-around justify-items-center items-center">
+            <div className="basis-1/4">
+              <img className="w-24 h-24 border rounded-lg myshadow" src={`/photos/${photo}`}></img>
+            </div>
+            <div className="basis-3/4 flex flex-col justify-between ml-2">
+              <input onChange={(event) => setAvatar(event.target.files[0])} name="filedata" ref={newPhoto} type="file" id="photo" className="myshadow rounded-lg block file-button text-sm"></input>
+            </div>
+          </div>
+        </div>
       </div>
       <Disclosure>
         {({ open }) => (
@@ -244,32 +254,6 @@ function EditTrainerProfileCard(props) {
             </Disclosure.Panel>
             <Disclosure.Button className="flex justify-center mx-2 mb-2 myshadow p-2 text-base font-medium text-white bg-custom-blue rounded-lg">
               <span>Изменить пароль </span>
-              <ChevronUpIcon className={`${open && 'transform rotate-180'} w-6 h-6 text-white`} />
-            </Disclosure.Button>
-
-          </>
-        )}
-      </Disclosure>
-      <Disclosure>
-        {({ open }) => (
-          <>
-
-            <Disclosure.Panel className="flex flex-col myblur rounded-lg mx-2 mb-2">
-              <span className={`text-sm text-custom-navy m-2`}>*.jpeg, .jpg, .png</span>
-              <div className="mb-2 mx-2 flex flex-col">
-                <div className="flex flex-row justify-around justify-items-center items-center">
-                  <div className="basis-1/4">
-                    <img className="w-24 h-24 border rounded-lg myshadow" src={`/photos/${photo}`}></img>
-                  </div>
-                  <div className="basis-3/4 flex flex-col justify-between ml-2">
-                    <input onChange={(event) => setAvatar(event.target.files[0])} name="filedata" ref={newPhoto} type="file" id="photo" className="myshadow rounded-lg block file-button text-sm"></input>
-                    <button className="p-2 block text-white bg-custom-blue font-medium rounded-lg myshadow text-center">Добавить</button>
-                  </div>
-                </div>
-              </div>
-            </Disclosure.Panel>
-            <Disclosure.Button className="flex justify-center mx-2 p-2 mb-2 myshadow text-base font-medium text-white bg-custom-blue rounded-lg">
-              <span>Изменить фотографию </span>
               <ChevronUpIcon className={`${open && 'transform rotate-180'} w-6 h-6 text-white`} />
             </Disclosure.Button>
           </>

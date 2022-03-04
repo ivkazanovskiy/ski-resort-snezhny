@@ -3,13 +3,10 @@
 @tailwind utilities;
 
 @font-face{
-  
+  font-family: 'Material Icons';
+  font-display: block;
 }
 
-/* @layer base{
-
-
-} */
 @layer base{
 
   input{
