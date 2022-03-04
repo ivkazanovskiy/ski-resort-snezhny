@@ -8,7 +8,7 @@ function ModalOrderRoom({ setModal, mutation, cost, query }) {
   console.log(mutation);
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center bg-slate-400/70 ">
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-center items-center backdrop-blur-md bg-slate-400/70 ">
       <div className=" p-2 bg-white w-80 flex flex-col gap-2 rounded-lg">
         <div className=" border rounded-[15px] flex flex-col p-4 gap-4">
           <div className="bg-slate-100 p-2 text-custom-navy rounded-lg">

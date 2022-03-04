@@ -52,7 +52,7 @@ function CalendarTrainer(props) {
 
   const queryClient = useQueryClient()
   // FIXME: сделать только на выбранный месяц или оставить как есть на весь сезон
-  const allRecords = useQuery('allRecords', () => axios({ url: '/api/trainerSchedule' }))
+  const allRecords = useQuery(`allRecords`, () => axios({ url: '/api/trainerSchedule' }))
 
   const saveRecords = useMutation(() => axios({
     url: '/api/trainerSchedule',
@@ -67,7 +67,6 @@ function CalendarTrainer(props) {
     workingDays = getDates(allRecords.data.data.schedule)
     workingHours = allRecords.data.data.schedule.filter(record => record['User.name'])
   }
-
   const changeDays = (day) => {
     if (saveRecords.isSuccess) { saveRecords.reset() }
 

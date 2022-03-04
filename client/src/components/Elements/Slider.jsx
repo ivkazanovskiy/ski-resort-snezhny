@@ -29,7 +29,7 @@ function Slider({ type }) {
   }, [relativePath]);
 
   return (
-    <div className="flex rounded-lg h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
+    <div className="flex rounded-lg myshadow h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
       {
         photos.length ?
           photos.map(el => {
