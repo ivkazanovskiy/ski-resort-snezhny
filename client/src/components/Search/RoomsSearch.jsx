@@ -83,7 +83,7 @@ function RoomsSearch(props) {
   return (
     <>
       <div className="grow m-2 rounded-lg overflow-y-auto myblur">
-        <div className="w-full p-2 flex flex-col gap-2 justify-between rounded-lg mb-2 mt-8">
+        <div className="w-full p-2 flex flex-col gap-2 justify-between rounded-lg mb-2 ">
           <Slider type={type} />
           <h1 className="w-full text-xl flex items-center">
             {thisType ? thisType.title : 'Загрузка...'}
