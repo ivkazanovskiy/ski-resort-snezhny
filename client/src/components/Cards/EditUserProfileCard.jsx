@@ -101,11 +101,11 @@ function EditUserProfileCard(props) {
 
   return (
     <form className="flex justify-between w-full flex-col rounded-lg overflow-y-auto">
-      <div className="myblur mx-2 rounded-lg my-2 p-2">
+      <div className="myblur mx-2 rounded-lg my-2">
         <div className="mb-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
-            <input name="name" type="text" id="name" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
+            <input name="name" type="text" id="name" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] mt-2 ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
           </div>
           <div className="flex flex-row justify-around justify-items-center items-center">
             <span className="basis-1/4"></span>

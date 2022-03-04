@@ -7,15 +7,16 @@ import Registration from '../Registration/Registration';
 
 function UnauthorizedCard(props) {
 
+
   return (
-    <div className="card flex-col mb-2 mt-8">
-      <Disclosure as="div" className="mt-2">
+    <div className="flex flex-col self-stretch">
+      <Disclosure >
         {({ open }) => (
           <>
             <Disclosure.Panel className="flex flex-col">
               <Login />
             </Disclosure.Panel>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
+            <Disclosure.Button className="flex justify-center p-2 mx-2 mb-2 myshadow text-base font-medium text-white bg-custom-gray rounded-lg">
               <span>Войти</span>
               <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} w-6 h-6 text-white`} />
             </Disclosure.Button>
@@ -28,7 +29,7 @@ function UnauthorizedCard(props) {
             <Disclosure.Panel className="flex flex-col">
               <Registration />
             </Disclosure.Panel>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
+            <Disclosure.Button className="flex justify-center p-2 mx-2 mb-2 myshadow text-base font-medium text-white bg-custom-gray rounded-lg">
               <span>Зарегистрироваться</span>
               <ChevronUpIcon className={`${open ? 'transform rotate-180' : ''} w-6 h-6 text-white`} />
             </Disclosure.Button>

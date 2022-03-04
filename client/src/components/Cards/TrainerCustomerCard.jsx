@@ -3,8 +3,7 @@ import { prettyPhone } from '../../helpers/pretty'
 
 function TrainerCustomerCard({ info }) {
   return (
-    <li className="">
-      <div className="card justify-start shadow-current-gray shadow-xl">
+    <li className="card justify-start">
         <div className=" card-avatar flex justify-center items-center">
           <span className="material-icons text-7xl ">
             {
@@ -25,7 +24,6 @@ function TrainerCustomerCard({ info }) {
             {`${info.date.split('-')[2]}.${info.date.split('-')[1]} ${info.startTime}:00-${Number(info.startTime) + 1}:00`}
           </div>
         </div>
-      </div>
     </li>
   );
 }
