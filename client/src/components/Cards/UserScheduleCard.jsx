@@ -6,23 +6,19 @@ import { useMutation, useQueryClient } from 'react-query';
 function UserScheduleCard({ order }) {
   const queryClient = useQueryClient()
 
-  const deleteOrder = useMutation(() => {
-    axios({
-      url: '/api/userSchedule',
-      method: 'DELETE',
-      data: {
-        date: order.date,
-        startTime: order.startTime,
-        trainerId: order['Trainer.id'],
-      },
-    })
-  }, {
-
+  const deleteOrder = useMutation(() => axios({
+    url: '/api/userSchedule',
+    method: 'DELETE',
+    data: {
+      date: order.date,
+      startTime: order.startTime,
+      trainerId: order['Trainer.id'],
+    },
+  }), {
     onSuccess: () => {
       queryClient.invalidateQueries('allOrdersQuery')
     }
   })
-
 
   return (
     <li>
@@ -46,11 +42,18 @@ function UserScheduleCard({ order }) {
         <div className="card-delete">
           {deleteOrder.isIdle &&
             <button onClick={() => deleteOrder.mutate()} className="delete-btn">
-              <span class="material-icons">
-                delete
-              </span>
-            </button>
-          }
+              <span className="material-icons">delete</span>
+            </button>}
+
+          {(deleteOrder.isLoading) &&
+            <button className="delete-btn animate-ping">
+              <span className="material-icons">delete</span>
+            </button>}
+
+          {deleteOrder.isSuccess &&
+            <button className="delete-btn ">
+              <span className="material-icons">delete</span>
+            </button>}
         </div>
       </div>
     </li>

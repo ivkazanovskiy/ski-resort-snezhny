@@ -8,7 +8,7 @@ function Home(props) {
       id: 1,
       link: '/map',
       title: 'Карта курорта',
-      img: '/homepage/1.jpg'
+      img: '/homepage/6.jpeg'
     },
     {
       id: 2,
