@@ -82,8 +82,8 @@ function RoomsSearch(props) {
 
   return (
     <>
-      <div className=" grow w-full pt-20 mb-2 rounded-lg overflow-y-auto">
-        <div className="w-full p-2 flex flex-col gap-2 rounded-lg bg-white/60">
+      <div className="grow w-full pt-20 mb-2 rounded-lg overflow-y-auto backdrop-blur-sm bg-white/30">
+        <div className="w-full p-2 flex flex-col gap-2 justify-between rounded-lg mb-2 mt-8">
           <Slider type={type} />
           <h1 className="w-full text-xl flex items-center">
             {thisType ? thisType.title : 'Загрузка...'}
@@ -101,14 +101,14 @@ function RoomsSearch(props) {
       </div>
       <div className="w-full flex flex-col gap-2 z-0">
         <div className="flex w-full gap-2 ">
-          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow" />
-          <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow" />
+          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow backdrop-blur-sm bg-white/30" />
+          <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow backdrop-blur-sm bg-white/30" />
         </div>
         <div className="flex w-full gap-2">
-          <div className="rounded-lg font-medium bg-white/60 p-2 flex grow">
+          <div className="rounded-lg font-medium p-2 flex grow backdrop-blur-sm bg-white/30">
             <div className="text-center grow">Дней: </div><input className="w-16 bg-white/0 text-center" type="number" onChange={() => gapRef.current.value > 0 && setGap(gapRef.current.value)} ref={gapRef} defaultValue={gap} />
           </div>
-          <div className="rounded-lg font-medium bg-white/60 p-2 flex grow">
+          <div className="rounded-lg font-medium p-2 flex grow backdrop-blur-sm bg-white/30">
             <div className="text-center grow">Стоимость: </div>
             <div className="w-20 text-center">{cost && prettyCost(cost)} ₽</div>
           </div>
@@ -126,7 +126,7 @@ function RoomsSearch(props) {
           }
           {/* Пока грузится */}
           {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
-            <select name="select" className="date-input w-20" ref={roomRef}>
+            <select name="select" className="date-input w-20 backdrop-blur-sm bg-white/30" ref={roomRef}>
               {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
             </select>
             :
