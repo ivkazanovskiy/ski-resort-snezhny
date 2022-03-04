@@ -43,7 +43,7 @@ function Login(props) {
   }
 
   return (
-    <form onSubmit={login} className="flex flex-col mx-2 justify-between  rounded-lg mb-2 overflow-y-auto myblur">
+    <form onSubmit={login} className="flex flex-col self-stretch mx-2 justify-between  rounded-lg mb-2 overflow-y-auto myblur">
       <div className="my-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="email" className="basis-2/6 edit-label text-center">Email</label>
