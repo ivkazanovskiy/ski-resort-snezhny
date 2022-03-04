@@ -141,7 +141,7 @@ function EditAdminProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
               <span>Изменить пароль </span>
               <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
             </Disclosure.Button>

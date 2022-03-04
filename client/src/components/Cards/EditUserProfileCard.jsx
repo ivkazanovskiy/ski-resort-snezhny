@@ -157,21 +157,22 @@ function EditUserProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center px-4 py-2 mx-2 mb-2 text-base font-medium text-white bg-custom-blue/70 rounded-lg myshadow">
-              <span>Изменить пароль </span>
-              <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
-            </Disclosure.Button>
             <Disclosure.Panel className="flex flex-col myblur mx-2 mb-2">
               <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
               <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={` edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
               <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`  edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
               <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
             </Disclosure.Panel>
+            <Disclosure.Button className="flex justify-center px-4 py-2 mx-2 mb-2 text-base font-medium text-white bg-custom-blue rounded-lg myshadow">
+              <span>Изменить пароль </span>
+              <ChevronUpIcon className={`${open && 'transform rotate-180' } w-6 h-6 text-white`} />
+            </Disclosure.Button>
+
           </>
         )}
       </Disclosure>
       <button type="submit" onClick={applyChanges} className="px-4 py-2 mx-2 mb-2 text-white bg-custom-blue font-medium rounded-lg text-base text-center myshadow">Сохранить</button>
-      <button type="click" onClick={logout} className="px-4 py-2 mx-2 text-white bg-custom-gray font-medium rounded-lg text-base text-center myshadow">Выйти</button>
+      <button type="click" onClick={logout} className="px-4 py-2 mx-2 mb-2 text-white bg-custom-gray font-medium rounded-lg text-base text-center myshadow">Выйти</button>
     </form>
   );
 }

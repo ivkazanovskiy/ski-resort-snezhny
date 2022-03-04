@@ -113,7 +113,7 @@ function RoomsSearch(props) {
             <div className="w-20 text-center">{cost && prettyCost(cost)} ₽</div>
           </div>
         </div>
-        <div className="flex mx-2 gap-2 ">
+        <div className="flex mx-2 gap-2 mb-2">
           {!role ?
             <Link to='/profile' className="basic-btn bg-custom-sand grow shadow-custom-navy shadow-lg">Для бронирования пройдите авторизацию</Link>
             :

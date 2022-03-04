@@ -19,7 +19,7 @@ function HouseSearchForm(props) {
   }, []);
 
   return (
-      <ul className="w-full flex flex-col-reverse gap-2">
+      <ul className="w-full flex flex-col-reverse gap-2 mb-2">
         {allTypes.map(el => <RoomCard key={`${el.id}-room`} type={el}></RoomCard>)}
       </ul>
   );

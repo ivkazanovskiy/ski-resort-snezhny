@@ -51,7 +51,7 @@ function App() {
         :
         <>
           <TopMenu />
-          <section className="mb-[10px] mt-[72px] rounded-lg flex flex-col flex-1 items-center justify-end overflow-y-auto">
+          <section className="mt-[72px] rounded-lg flex flex-col flex-1 items-center justify-end overflow-y-auto">
             <Routes>
 
               <Route path="/" key="home" element={<Home />} />

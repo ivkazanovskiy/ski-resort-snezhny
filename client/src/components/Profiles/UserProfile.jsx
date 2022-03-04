@@ -47,7 +47,7 @@ function UserProfile(props) {
             <AllOrdersCards />
           </Tab.Panel>
         </Tab.Panels>
-        <Tab.List className="slider-list mt-2 mx-2 mb-0 self-stretch">
+        <Tab.List className="slider-list m-2 self-stretch">
           <Tab
             className={({ selected }) =>
               classNames(

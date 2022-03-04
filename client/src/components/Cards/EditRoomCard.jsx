@@ -152,7 +152,7 @@ function EditRoomCard(props) {
                 }
               </div>
               <input onChange={(event) => setImage(event.target.files[0])} name="image" type="file" id="image" className="col file-button text-sm"></input>
-              <button className="py-2 text-white bg-custom-blue/70 font-medium rounded-lg w-full text-center" onClick={uploadImage}>Добавить</button>
+              <button className="py-2 text-white bg-custom-blue font-medium rounded-lg w-full text-center" onClick={uploadImage}>Добавить</button>
             </div>
           </div>
           <button onClick={() => save.mutate()} className="p-2 m-2 text-white text-sm bg-custom-blue font-medium rounded-lg text-center">Сохранить изменения</button>

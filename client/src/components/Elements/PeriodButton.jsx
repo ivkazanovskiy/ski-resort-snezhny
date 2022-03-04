@@ -6,7 +6,7 @@ function PeriodButton({ getTrainersName, time, changeHours }) {
   const [isClicked, setIsClicked] = useState(false);
 
   const passiveStyle = "backdrop-blur-sm bg-white/60"
-  const activeStyle = "bg-custom-blue/70 text-white"
+  const activeStyle = "bg-custom-blue text-white"
 
   return (
     <button onClick={() => {

@@ -203,7 +203,7 @@ function EditTrainerProfileCard(props) {
                 name="snowboard"
                 checked={snowboard}
                 onChange={() => setSnowboard(!snowboard)}
-                className={`${snowboard ? 'bg-custom-blue/70' : 'bg-custom-gray/70'}
+                className={`${snowboard ? 'bg-custom-blue' : 'bg-custom-gray/70'}
           relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200`}
               >
                 <span
@@ -222,7 +222,7 @@ function EditTrainerProfileCard(props) {
                 name="ski"
                 checked={ski}
                 onChange={() => setSki(!ski)}
-                className={`${ski ? 'bg-custom-blue/70' : 'bg-custom-gray/70'}
+                className={`${ski ? 'bg-custom-blue' : 'bg-custom-gray/70'}
           relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200`}>
                 <span
                   aria-hidden="true"
@@ -236,7 +236,7 @@ function EditTrainerProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
               <span>Изменить пароль </span>
               <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
             </Disclosure.Button>
@@ -252,7 +252,7 @@ function EditTrainerProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
+            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
               <span>Изменить фотографию </span>
               <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
             </Disclosure.Button>
@@ -265,7 +265,7 @@ function EditTrainerProfileCard(props) {
                   </div>
                   <div className="basis-3/4 col ml-2">
                     <input onChange={(event) => setAvatar(event.target.files[0])} name="filedata" ref={newPhoto} type="file" id="photo" className="shadow-current-gray shadow-xl block col file-button text-sm"></input>
-                    <button className="py-2 block text-white bg-custom-blue/70 font-medium rounded-lg w-full text-center">Добавить</button>
+                    <button className="py-2 block text-white bg-custom-blue font-medium rounded-lg w-full text-center">Добавить</button>
                   </div>
                 </div>
               </div>

@@ -10,7 +10,7 @@ function OrderButton({ id, date, isMarked, typeId }) {
   return (
     <>
       {isMarked ?
-        <button onClick={() => setModal(true)} className="w-10 h-10 rounded-lg border bg-custom-blue/70"></button>
+        <button onClick={() => setModal(true)} className="w-10 h-10 rounded-lg border bg-custom-blue"></button>
         :
         <button className="w-10 h-10 rounded-lg border bg-white/60" onClick={() => navigate(`/search/${typeId}`)}></button>
       }

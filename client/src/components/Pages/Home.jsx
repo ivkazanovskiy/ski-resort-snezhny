@@ -30,7 +30,7 @@ function Home(props) {
         <span className="text-center font-black">Снежный образ жизни</span>
       </div>
       <div className="overflow-x-auto w-full">
-        <div className="flex gap-2 w-fit mx-2 self-start">
+        <div className="flex gap-2 w-fit mx-2 mb-2 self-start">
           {array.map((obj) => <HomeLinkCard key={obj.id} obj={obj} />)}
         </div>
       </div>

@@ -92,7 +92,7 @@ function AddUserScheduleCard() {
           }>Горные лыжи</Tab>
         </Tab.List>
       </Tab.Group>
-      <div className="flex mt-2 gap-2">
+      <div className="flex mt-2 gap-2 mb-2">
         <input type="date" className="w-1/2 date-input myblur" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
         <button onClick={() => saveSchedule.mutate()} className="basic-btn  w-1/2 myshadow">Записаться</button>
       </div>

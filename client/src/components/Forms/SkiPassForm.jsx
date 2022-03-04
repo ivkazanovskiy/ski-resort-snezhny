@@ -155,7 +155,7 @@ function SkiPassForm(props) {
           </Tab.Group>
         </div>
       </div>
-      <div className="flex mt-2 gap-2 self-stretch mx-2">
+      <div className="flex mt-2 gap-2 self-stretch mx-2 mb-2">
         <input type="date" className="w-1/2 date-input myblur" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
         <button onClick={() => setModal(true)} className="basic-btn my-shadow w-1/2">Оплатить</button>
         {modal && <ModalBuy setModal={setModal} mutation={save} cost={chosen[keyString]} />}

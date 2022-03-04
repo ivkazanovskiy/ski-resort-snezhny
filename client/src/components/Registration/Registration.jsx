@@ -142,7 +142,7 @@ function Registration(props) {
           <Switch
             checked={enabled}
             onChange={setEnabled}
-            className={`${enabled ? 'bg-custom-blue/70' : 'bg-custom-gray/70'}
+            className={`${enabled ? 'bg-custom-blue' : 'bg-custom-gray/70'}
           relative inline-flex flex-shrink-0 h-[24px] w-[48px] border-2 border-transparent rounded-lg cursor-pointer transition-colors ease-in-out duration-200 outline-none`}>
             <span
               aria-hidden="true"
