@@ -9,6 +9,7 @@ import { addZero } from '../../helpers/addZero'
 import { getDates } from '../../helpers/getDates'
 
 import spin from '../../css/svg/spin.svg';
+import { useSelector } from 'react-redux';
 
 function CalendarTrainer(props) {
   const curYear = new Date().getFullYear();
@@ -28,7 +29,7 @@ function CalendarTrainer(props) {
     { id: 3, name: 'Март', days: 31 },
     { id: 4, name: 'Апрель', days: 30 },
   ]
-
+  const { id } = useSelector(state => state.userReducer)
   const [month, setMonth] = useState(months.find(month => month.id === curMonth))
 
   const daysArray = []
@@ -52,7 +53,7 @@ function CalendarTrainer(props) {
 
   const queryClient = useQueryClient()
   // FIXME: сделать только на выбранный месяц или оставить как есть на весь сезон
-  const allRecords = useQuery(`allRecords`, () => axios({ url: '/api/trainerSchedule' }))
+  const allRecords = useQuery(`allRecords-id${id}`, () => axios({ url: '/api/trainerSchedule' }))
 
   const saveRecords = useMutation(() => axios({
     url: '/api/trainerSchedule',
