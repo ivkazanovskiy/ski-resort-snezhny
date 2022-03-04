@@ -40,11 +40,11 @@
   }
 
   .slider-list-skipass{
-    @apply flex gap-2 p-[3px] self-stretch w-full
+    @apply flex gap-2 p-[3px] self-stretch w-full backdrop-blur-sm bg-white/30
   }
 
   .slider-list{
-    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-lg bg-white/30
+    @apply flex gap-2 p-[3px] mb-2 mt-8 rounded-lg backdrop-blur-sm bg-white/30
   }
 
   .slider-panel{
@@ -64,7 +64,7 @@
   }
 
   .card {
-    @apply flex justify-between w-full p-3 rounded-lg bg-white/60 text-custom-navy
+    @apply flex justify-between w-full p-3 rounded-lg backdrop-blur-sm bg-white/30 text-custom-navy
   }
 
   .card-avatar{

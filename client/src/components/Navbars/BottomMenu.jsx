@@ -7,7 +7,7 @@ function BottomMenu(props) {
   const { role } = useSelector(state => state.userReducer)
 
   return (
-    <nav className="bg-white/60 rounded-lg h-20 flex justify-around">
+    <nav className="backdrop-blur-sm bg-white/30 rounded-lg h-20 flex justify-around">
       {
         (role === 'user' || role === undefined)
         &&

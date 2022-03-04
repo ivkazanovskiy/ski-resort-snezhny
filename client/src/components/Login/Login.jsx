@@ -43,7 +43,7 @@ function Login(props) {
   }
 
   return (
-    <form onSubmit={login} className="card flex-col mb-2 mt-8">
+    <form onSubmit={login} className="flex justify-between p-2 w-full flex-col rounded-lg mb-2 mt-8 overflow-y-auto backdrop-blur-sm bg-white/30">
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="email" className="basis-2/6 edit-label text-center">Email</label>
