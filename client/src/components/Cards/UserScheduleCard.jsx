@@ -20,8 +20,6 @@ function UserScheduleCard({ order }) {
     }
   })
 
-  console.log(order)
-
   return (
     <li>
       <div className="card">
