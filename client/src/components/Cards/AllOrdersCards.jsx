@@ -42,7 +42,7 @@ function AllOrdersCards(props) {
           {orderCards.map(orders => <OrderCard key={orders[0].id} orders={orders} />)}
         </ul>
         : 
-        <div className="w-full p-2 rounded-lg text-lg justify-self-center bg-white/80 text-center">Бронирования отсутствуют</div>
+        <div className="mx-2 p-2 rounded-lg text-lg justify-self-center myblur text-center">Бронирования отсутствуют</div>
         }
     </>
 

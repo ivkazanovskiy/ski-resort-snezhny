@@ -82,7 +82,7 @@ function RoomsSearch(props) {
 
   return (
     <>
-      <div className="grow w-full pt-20 mb-2 rounded-lg overflow-y-auto backdrop-blur-sm bg-white/30">
+      <div className="grow m-2 rounded-lg overflow-y-auto myblur">
         <div className="w-full p-2 flex flex-col gap-2 justify-between rounded-lg mb-2 mt-8">
           <Slider type={type} />
           <h1 className="w-full text-xl flex items-center">
@@ -99,34 +99,34 @@ function RoomsSearch(props) {
           <h2 className="w-full">{thisType ? thisType.description : 'Загрузка...'}</h2>
         </div>
       </div>
-      <div className="w-full flex flex-col gap-2 z-0">
-        <div className="flex w-full gap-2 ">
-          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow backdrop-blur-sm bg-white/30" />
-          <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow backdrop-blur-sm bg-white/30" />
+      <div className="w-full flex flex-col  gap-2 z-0">
+        <div className="flex mx-2 gap-2 ">
+          <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow myblur" />
+          <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow myblur" />
         </div>
-        <div className="flex w-full gap-2">
-          <div className="rounded-lg font-medium p-2 flex grow backdrop-blur-sm bg-white/30">
+        <div className="flex mx-2 gap-2">
+          <div className="rounded-lg font-medium p-2 flex grow myblur">
             <div className="text-center grow">Дней: </div><input className="w-16 bg-white/0 text-center" type="number" onChange={() => gapRef.current.value > 0 && setGap(gapRef.current.value)} ref={gapRef} defaultValue={gap} />
           </div>
-          <div className="rounded-lg font-medium p-2 flex grow backdrop-blur-sm bg-white/30">
+          <div className="rounded-lg font-medium p-2 flex grow myblur">
             <div className="text-center grow">Стоимость: </div>
             <div className="w-20 text-center">{cost && prettyCost(cost)} ₽</div>
           </div>
         </div>
-        <div className="flex w-full gap-2 ">
+        <div className="flex mx-2 gap-2 ">
           {!role ?
-            <Link to='/profile' className="basic-btn bg-custom-sand grow">Для бронирования пройдите авторизацию</Link>
+            <Link to='/profile' className="basic-btn bg-custom-sand grow shadow-custom-navy shadow-lg">Для бронирования пройдите авторизацию</Link>
             :
             <>
               {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
-                <button onClick={() => setModal(true)} className="basic-btn grow">Забронировать</button>
+                <button onClick={() => setModal(true)} className="basic-btn grow shadow-custom-navy shadow-lg">Забронировать</button>
                 :
-                <button className="basic-btn bg-custom-sand grow" disabled>Свободных мест нет</button>}
+                <button className="basic-btn bg-custom-sand grow shadow-custom-navy shadow-lg" disabled>Свободных мест нет</button>}
             </>
           }
           {/* Пока грузится */}
           {(avaliableRooms.isSuccess && (avaliable.length > 0)) ?
-            <select name="select" className="date-input w-20 backdrop-blur-sm bg-white/30" ref={roomRef}>
+            <select name="select" className="date-input w-20 myblur" ref={roomRef}>
               {avaliable.map(id => <option value={id} key={id}>{id}</option>)}
             </select>
             :

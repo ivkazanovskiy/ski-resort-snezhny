@@ -16,6 +16,7 @@ async function update(person, req, res) {
       case 'email':
         return res.status(501).json({ message: 'changeEmail' });
       default:
+        console.log(err);
         return res.status(500).json({ error: err.message });
     }
   }
@@ -26,6 +27,7 @@ router.route('/')
     const { id, role } = req.user;
     const { passwordOld, password } = req.body;
 
+    console.log(req.body);
     // FIXME: сделать общую валидацию данных
     let person;
 

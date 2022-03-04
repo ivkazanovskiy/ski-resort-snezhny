@@ -75,7 +75,7 @@ function Registration(props) {
   }
 
   return (
-    <form onSubmit={registration} className="flex justify-between p-2 w-full flex-col rounded-lg mb-2 mt-8 overflow-y-auto backdrop-blur-sm bg-white/30">
+    <form onSubmit={registration} className="flex justify-between p-2 w-full flex-col rounded-lg mb-2 mt-8 overflow-y-auto backdrop-blur-sm bg-white/60">
       <div className="mb-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="name" className="basis-1/3 edit-label text-center">Имя</label>

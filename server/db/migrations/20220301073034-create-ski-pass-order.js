@@ -16,10 +16,6 @@ module.exports = {
       },
       skiPass: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'skiPass',
-        },
       },
       date: {
         allowNull: false,

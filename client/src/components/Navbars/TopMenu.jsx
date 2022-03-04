@@ -20,7 +20,7 @@ function TopMenu() {
 
   return (
     <>
-      <nav className="absolute right-[10px] bg-white/60 backdrop-blur-sm rounded-lg h-16 flex items-center p-4 z-10">
+      <nav className="absolute right-2 top-2 myblur h-16 flex items-center p-4 z-10">
         <div className="">
           {temperature && `${temperature}`}
         </div>

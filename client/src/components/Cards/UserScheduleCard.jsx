@@ -26,7 +26,7 @@ function UserScheduleCard({ order }) {
 
   return (
     <li>
-      <div className="card shadow-current-gray shadow-xl">
+      <div className="card">
         {
           order['Trainer.photo']
             ? <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`}></img>

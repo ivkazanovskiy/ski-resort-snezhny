@@ -100,8 +100,8 @@ function EditUserProfileCard(props) {
   if (!role) return (<UnauthorizedCard />)
 
   return (
-    <form className="flex justify-between p-2 w-full flex-col rounded-lg mb-2 mt-8 overflow-y-auto">
-      <div className="backdrop-blur-sm bg-white/30 rounded-lg my-2 p-2">
+    <form className="flex justify-between w-full flex-col rounded-lg overflow-y-auto">
+      <div className="myblur mx-2 rounded-lg my-2 p-2">
         <div className="mb-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
@@ -157,21 +157,21 @@ function EditUserProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue/70 rounded-lg">
+            <Disclosure.Button className="flex justify-center px-4 py-2 mx-2 mb-2 text-base font-medium text-white bg-custom-blue/70 rounded-lg myshadow">
               <span>Изменить пароль </span>
               <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
             </Disclosure.Button>
-            <Disclosure.Panel className="flex flex-col backdrop-blur-sm bg-white/30 rounded-lg my-2 p-2">
+            <Disclosure.Panel className="flex flex-col myblur mx-2 mb-2">
               <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
-              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
-              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] shadow-current-gray shadow-xl ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
+              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={` edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`  edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
             </Disclosure.Panel>
           </>
         )}
       </Disclosure>
-      <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
-      <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-gray font-medium rounded-lg text-base w-full text-center">Выйти</button>
+      <button type="submit" onClick={applyChanges} className="px-4 py-2 mx-2 mb-2 text-white bg-custom-blue font-medium rounded-lg text-base text-center myshadow">Сохранить</button>
+      <button type="click" onClick={logout} className="px-4 py-2 mx-2 text-white bg-custom-gray font-medium rounded-lg text-base text-center myshadow">Выйти</button>
     </form>
   );
 }

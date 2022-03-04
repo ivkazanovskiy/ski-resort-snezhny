@@ -68,7 +68,7 @@ function SkiPassForm(props) {
 
   if (!skiPass) return (
     <>
-      <div className="w-3/4 mt-6 backdrop-blur-sm bg-white/30">Для пополнения Ski-Pass необходимо купить его в кассе Горнолыжного курорта Снежный и добавить в личном кабинете в разделе "Информация"</div>
+      <div className="w-3/4 mt-6 backdrop-blur-sm bg-white/60">Для пополнения Ski-Pass необходимо купить его в кассе Горнолыжного курорта Снежный и добавить в личном кабинете в разделе "Информация"</div>
       <Link to="/profile" type="submit" className="mt-2 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm  px-5 py-2.5 text-center ">Личный кабинет</Link>
     </>
   )
@@ -82,7 +82,7 @@ function SkiPassForm(props) {
   if (chosen) return (
     <>
       <div className="w-full pt-16 grow flex justify-center items-center">
-        <div className="p-4 mb-2 flex flex-col items-center rounded-lg w-60 backdrop-blur-sm bg-white/30">
+        <div className="p-4 mb-2 flex flex-col items-center rounded-lg w-60 myblur">
           <div className="self-end">
             № {skiPass}
           </div>
@@ -95,67 +95,69 @@ function SkiPassForm(props) {
         </div>
       </div>
 
-      <div className="bg-white/30 w-full rounded-lg">
-        <Tab.Group onChange={setType} defaultIndex={type}>
-          <Tab.Panels className="self-stretch">
-            <Tab.Panel className="slider-panel">
-              <Tab.Group onChange={setAmountPasses} defaultIndex={amountPasses} >
-                <Tab.List className="slider-list-skipass rounded-t-lg">
-                  {tableQuery.data.data.filter(obj => obj.type === 'pass').map(pass => <SkiPassButton key={pass.id} data={pass} />)}
-                </Tab.List>
-              </Tab.Group>
-            </Tab.Panel>
-            <Tab.Panel className="slider-panel">
-              <Tab.Group onChange={setAmountHours} defaultIndex={amountHours}>
-                <Tab.List className="slider-list-skipass grow">
-                  {tableQuery.data.data.filter(obj => obj.type === 'hour').map(hour => <SkiPassButton key={hour.id} data={hour} />)}
-                </Tab.List>
-              </Tab.Group>
-            </Tab.Panel>
-          </Tab.Panels>
-          <Tab.List className="slider-list-skipass">
-            <Tab className={({ selected }) => classNames('slider-tab',
-              selected
-                ? 'slider-active'
-                : 'slider-passive'
-            )}
-            >
-              Количество проходов
-            </Tab>
-            <Tab className={({ selected }) => classNames('slider-tab',
-              selected
-                ? 'slider-active'
-                : 'slider-passive'
-            )}
-            >
-              Количество часов
-            </Tab>
-          </Tab.List>
-        </Tab.Group>
-        <Tab.Group onChange={setAge} defaultIndex={age}>
-          <Tab.List className="slider-list-skipass rounded-b-lg">
-            <Tab className={({ selected }) => classNames('slider-tab',
-              selected
-                ? 'slider-active'
-                : 'slider-passive'
-            )}
-            >
-              Взрослый
-            </Tab>
-            <Tab className={({ selected }) => classNames('slider-tab',
-              selected
-                ? 'slider-active'
-                : 'slider-passive'
-            )}
-            >
-              Детский
-            </Tab>
-          </Tab.List>
-        </Tab.Group>
+      <div className="flex flex-col w-full">
+        <div className="mx-2 myblur">
+          <Tab.Group onChange={setType} defaultIndex={type}>
+            <Tab.Panels className="mt-2">
+              <Tab.Panel className="slider-panel-skipass">
+                <Tab.Group onChange={setAmountPasses} defaultIndex={amountPasses} >
+                  <Tab.List className="slider-list-skipass rounded-t-lg">
+                    {tableQuery.data.data.filter(obj => obj.type === 'pass').map(pass => <SkiPassButton key={pass.id} data={pass} />)}
+                  </Tab.List>
+                </Tab.Group>
+              </Tab.Panel>
+              <Tab.Panel className="slider-panel-skipass">
+                <Tab.Group onChange={setAmountHours} defaultIndex={amountHours}>
+                  <Tab.List className="slider-list-skipass  rounded-t-lg">
+                    {tableQuery.data.data.filter(obj => obj.type === 'hour').map(hour => <SkiPassButton key={hour.id} data={hour} />)}
+                  </Tab.List>
+                </Tab.Group>
+              </Tab.Panel>
+            </Tab.Panels>
+            <Tab.List className="slider-list-skipass">
+              <Tab className={({ selected }) => classNames('slider-tab',
+                selected
+                  ? 'slider-active-skipass'
+                  : 'slider-passive-skipass'
+              )}
+              >
+                Количество проходов
+              </Tab>
+              <Tab className={({ selected }) => classNames('slider-tab',
+                selected
+                  ? 'slider-active-skipass'
+                  : 'slider-passive-skipass'
+              )}
+              >
+                Количество часов
+              </Tab>
+            </Tab.List>
+          </Tab.Group>
+          <Tab.Group onChange={setAge} defaultIndex={age}>
+            <Tab.List className="slider-list-skipass mb-2 rounded-b-lg">
+              <Tab className={({ selected }) => classNames('slider-tab',
+                selected
+                  ? 'slider-active-skipass'
+                  : 'slider-passive-skipass'
+              )}
+              >
+                Взрослый
+              </Tab>
+              <Tab className={({ selected }) => classNames('slider-tab',
+                selected
+                  ? 'slider-active-skipass'
+                  : 'slider-passive-skipass'
+              )}
+              >
+                Детский
+              </Tab>
+            </Tab.List>
+          </Tab.Group>
+        </div>
       </div>
-      <div className="flex mt-2 w-full gap-2">
-        <input type="date" className="w-1/2 date-input backdrop-blur-sm bg-white/30" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
-        <button onClick={() => setModal(true)} className="basic-btn  w-1/2">Оплатить</button>
+      <div className="flex mt-2 gap-2 self-stretch mx-2">
+        <input type="date" className="w-1/2 date-input myblur" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
+        <button onClick={() => setModal(true)} className="basic-btn my-shadow w-1/2">Оплатить</button>
         {modal && <ModalBuy setModal={setModal} mutation={save} cost={chosen[keyString]} />}
       </div>
     </>
