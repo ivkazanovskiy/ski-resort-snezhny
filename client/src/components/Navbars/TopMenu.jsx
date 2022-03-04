@@ -29,16 +29,16 @@ function TopMenu() {
         </button>
       </nav>
       {isOpen &&
-        <section className="absolute top-0 left-0 w-full h-full flex  z-10">
+        <section className="absolute top-0 left-0 w-full h-full flex backdrop-blur-md z-10">
           <div onClick={() => toggle()} className="flex w-1/4 justify-center pt-8">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <aside className="w-3/4 h-full p-6 text-custom-navy  bg-white/60 flex items-center" >
+          <aside className="w-3/4 h-full p-6 text-custom-navy  bg-white/70 flex items-center" >
             <ul className="flex flex-col gap-6">
               <li>
-                <Link to="/map" onClick={() => toggle()} className="nav-link">Карта курорта</Link>
+                <Link to="/map" onClick={() => toggle()} className="nav-link">Карта склонов</Link>
               </li>
               <li>
                 <Link to="/" onClick={() => toggle()} className="nav-link">Корпоративный отдых</Link>

@@ -142,12 +142,12 @@ function EditTrainerProfileCard(props) {
   }
 
   return (
-    <form className="flex justify-between p-2 w-full flex-col rounded-lg mb-2 mt-8 overflow-y-auto">
-      <div className="backdrop-blur-sm bg-white/60 rounded-lg my-2 p-2">
-        <div className="mb-2 flex flex-col">
+    <form className="flex justify-between flex-col mt-2 self-stretch rounded-lg overflow-y-auto">
+      <div className="myblur rounded-lg mx-2 mb-2">
+        <div className="my-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="name" className="basis-1/4 edit-label text-center">Имя</label>
-            <input name="name" type="text" id="name" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
+            <input name="name" type="text" id="name" className={`myshadow basis-3/4 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} defaultValue={nameCurrent} ref={name} onChange={checkName} />
           </div>
           <div className="flex flex-row justify-around justify-items-center items-center">
             <span className="basis-1/4"></span>
@@ -157,7 +157,7 @@ function EditTrainerProfileCard(props) {
         <div className="mb-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="surname" className="basis-1/4 edit-label text-center">Фамилия</label>
-            <input name="surname" type="text" id="surname" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
+            <input name="surname" type="text" id="surname" className={`myshadow basis-3/4 edit-input border-[1px] ${isCorrectSurname ? "border-white/0" : "border-red-600"}`} defaultValue={surnameCurrent} ref={surname} onChange={checkSurname} />
           </div>
           <div className="flex flex-row justify-around justify-items-center items-center">
             <span className="basis-1/4"></span>
@@ -167,7 +167,7 @@ function EditTrainerProfileCard(props) {
         <div className="mb-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="phone" className="basis-1/4 edit-label text-center">Телефон</label>
-            <input name="phone" type="tel" id="phone" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
+            <input name="phone" type="tel" id="phone" className={`myshadow basis-3/4 edit-input border-[1px] ${isCorrectPhone ? "border-white/0" : "border-red-600"}`} defaultValue={phoneCurrent} ref={phone} onChange={checkPhone} />
           </div>
           <div className="flex flex-row justify-around justify-items-center items-center">
             <span className="basis-1/4"></span>
@@ -177,7 +177,7 @@ function EditTrainerProfileCard(props) {
         <div className="mb-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="email" className="basis-1/4 edit-label text-center">Email</label>
-            <input name="email" type="email" id="email" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
+            <input name="email" type="email" id="email" className={`myshadow basis-3/4 edit-input border-[1px] ${isCorrectEmail ? "border-white/0" : "border-red-600"}`} defaultValue={emailCurrent} ref={email} onChange={checkEmail} />
           </div>
           <div className="flex flex-row justify-around justify-items-center items-center">
             <span className="basis-1/4"></span>
@@ -187,7 +187,7 @@ function EditTrainerProfileCard(props) {
         <div className="mb-2 flex flex-col">
           <div className="flex flex-row justify-around justify-items-center items-center">
             <label htmlFor="skiPass" className="basis-1/4 edit-label text-center">О себе</label>
-            <input name="skiPass" type="text" id="skiPass" className={`shadow-current-gray shadow-xl basis-3/4 edit-input border-[1px] ${isCorrectAboutMe ? "border-white/0" : "border-red-600"}`} defaultValue={aboutMeCurrent} ref={aboutMe} onChange={checkAboutMe} />
+            <input name="skiPass" type="text" id="skiPass" className={`myshadow basis-3/4 edit-input border-[1px] ${isCorrectAboutMe ? "border-white/0" : "border-red-600"}`} defaultValue={aboutMeCurrent} ref={aboutMe} onChange={checkAboutMe} />
           </div>
           <div className="flex flex-row justify-around justify-items-center items-center">
             <span className="basis-1/4"></span>
@@ -236,45 +236,47 @@ function EditTrainerProfileCard(props) {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
-              <span>Изменить пароль </span>
-              <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
-            </Disclosure.Button>
-            <Disclosure.Panel className="flex flex-col backdrop-blur-sm bg-white/60 rounded-lg my-2 p-2">
+            <Disclosure.Panel className="flex flex-col myblur rounded-lg mb-2 mx-2">
               <span className={`text-sm text-custom-navy m-2`}>*от 3 до 20 цифр и букв верхнего и нижнего регистра</span>
-              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
-              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
-              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`shadow-current-gray shadow-xl edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
+              <input autoComplete="" placeholder="Старый пароль" name="passwordOld" type="password" id="passwordOld" className={`myshadow edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPasswordOld ? "border-white/0" : "border-red-600"}`} ref={passwordOld} onChange={checkPasswordOld} />
+              <input autoComplete="" placeholder="Новый пароль" name="password" type="password" id="password" className={`myshadow edit-input placeholder:text-custom-gray text-custom-navy  mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={password} onChange={() => { checkPasswords(); checkPassword() }} />
+              <input autoComplete="" placeholder="Повторите новый пароль" name="passwordRepeat" type="password" id="passwordRepeat" className={`myshadow edit-input placeholder:text-custom-gray text-custom-navy mb-2 border-[1px] ${isCorrectPassword ? "border-white/0" : "border-red-600"}`} ref={passwordRepeat} onChange={checkPasswords} />
             </Disclosure.Panel>
+            <Disclosure.Button className="flex justify-center mx-2 mb-2 myshadow p-2 text-base font-medium text-white bg-custom-blue rounded-lg">
+              <span>Изменить пароль </span>
+              <ChevronUpIcon className={`${open && 'transform rotate-180'} w-6 h-6 text-white`} />
+            </Disclosure.Button>
+
           </>
         )}
       </Disclosure>
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex justify-center w-full px-4 py-2 mb-4 text-base font-medium text-white bg-custom-blue rounded-lg">
-              <span>Изменить фотографию </span>
-              <ChevronUpIcon className={`${open ? '' : 'transform rotate-180'} w-6 h-6 text-white`} />
-            </Disclosure.Button>
-            <Disclosure.Panel className="flex flex-col backdrop-blur-sm bg-white/60 rounded-lg my-2 p-2">
+
+            <Disclosure.Panel className="flex flex-col myblur rounded-lg mx-2 mb-2">
               <span className={`text-sm text-custom-navy m-2`}>*.jpeg, .jpg, .png</span>
-              <div className="mb-2 flex flex-col">
+              <div className="mb-2 mx-2 flex flex-col">
                 <div className="flex flex-row justify-around justify-items-center items-center">
                   <div className="basis-1/4">
-                    <img className="w-24 h-24 border rounded-lg" src={`/photos/${photo}`}></img>
+                    <img className="w-24 h-24 border rounded-lg myshadow" src={`/photos/${photo}`}></img>
                   </div>
-                  <div className="basis-3/4 col ml-2">
-                    <input onChange={(event) => setAvatar(event.target.files[0])} name="filedata" ref={newPhoto} type="file" id="photo" className="shadow-current-gray shadow-xl block col file-button text-sm"></input>
-                    <button className="py-2 block text-white bg-custom-blue font-medium rounded-lg w-full text-center">Добавить</button>
+                  <div className="basis-3/4 flex flex-col justify-between ml-2">
+                    <input onChange={(event) => setAvatar(event.target.files[0])} name="filedata" ref={newPhoto} type="file" id="photo" className="myshadow rounded-lg block file-button text-sm"></input>
+                    <button className="p-2 block text-white bg-custom-blue font-medium rounded-lg myshadow text-center">Добавить</button>
                   </div>
                 </div>
               </div>
             </Disclosure.Panel>
+            <Disclosure.Button className="flex justify-center mx-2 p-2 mb-2 myshadow text-base font-medium text-white bg-custom-blue rounded-lg">
+              <span>Изменить фотографию </span>
+              <ChevronUpIcon className={`${open && 'transform rotate-180'} w-6 h-6 text-white`} />
+            </Disclosure.Button>
           </>
         )}
       </Disclosure>
-      <button type="submit" onClick={applyChanges} className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Сохранить</button>
-      <button type="click" onClick={logout} className="px-4 py-2 my-2 text-white bg-custom-gray font-medium rounded-lg text-base w-full text-center">Выйти</button>
+      <button type="submit" onClick={applyChanges} className="p-2 mx-2 mb-2 myshadow text-white bg-custom-blue font-medium rounded-lg text-base  text-center">Сохранить</button>
+      <button type="click" onClick={logout} className="p-2 mx-2 mb-2 myshadow text-white bg-custom-gray font-medium rounded-lg text-base  text-center">Выйти</button>
     </form>)
 }
 

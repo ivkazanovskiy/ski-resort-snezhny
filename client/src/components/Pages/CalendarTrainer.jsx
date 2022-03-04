@@ -81,23 +81,23 @@ function CalendarTrainer(props) {
   if (allRecords.isLoading) return ""
 
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 self-stretch ">
       {/* FIXME: сделать смещение, чтобы выходные были в конце */}
-      <div className="grid grid-cols-7 gap-2 w-full bg-white/60 p-2 rounded-lg">
+      <div className="grid grid-cols-7 gap-2 mx-2 myblur p-2 rounded-lg">
         {pseudoArr.map((el, ind) => <div key={`pseudo-${ind}`} className=""></div>)}
         {allRecords.isLoading && <>Загрузка</>}
         {allRecords.isSuccess && daysArray.map((date) => <Day key={`${date}-btn`} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} />)}
       </div>
-      <div className="w-full flex gap-2">
-        <div className="p-2 text-center rounded-lg text-custom-navy bg-white/90">
+      <div className="mx-2 flex gap-2">
+        <div className="p-2 text-center rounded-lg text-custom-navy myblur">
           {`${season.prevYear}/${season.nextYear}`}
         </div>
         <ListboxMonth setMonth={setMonth} months={months} />
       </div>
-      {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn w-full h-12 bg-custom-blue'>Сохранить расписание</button>}
-      {(saveRecords.isLoading || allRecords.isLoading) && <button onClick={() => saveRecords.mutate()} className='  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex h-12'>
+      {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn  h-12 mx-2 mb-2 myshadow bg-custom-blue'>Сохранить расписание</button>}
+      {(saveRecords.isLoading || allRecords.isLoading) && <button className='mx-2 mb-2 myshadow h-12  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex h-12'>
         <img src={spin} className="w-8 top-1/2 animate-spin mx-auto text-white " alt="" /></button>}
-      {(saveRecords.isSuccess) && <button className="basic-btn w-full bg-custom-green h-12">Расписание сохранено</button>}
+      {(saveRecords.isSuccess) && <button className="basic-btn bg-custom-green h-12 mx-2 mb-2 myshadow">Расписание сохранено</button>}
     </div>
   );
 }
