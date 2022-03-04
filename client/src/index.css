@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@font-face{
+  
+}
 
 /* @layer base{
 
@@ -53,7 +55,7 @@
   }
 
   .slider-list-skipass{
-    @apply flex gap-2 p-[3px] self-stretch mx-2 
+    @apply flex gap-2 p-[3px] self-stretch mx-2
   }
 
   .slider-list{

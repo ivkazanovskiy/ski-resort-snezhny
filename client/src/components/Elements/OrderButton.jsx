@@ -10,9 +10,9 @@ function OrderButton({ id, date, isMarked, typeId }) {
   return (
     <>
       {isMarked ?
-        <button onClick={() => setModal(true)} className="w-10 h-10 rounded-lg border bg-custom-blue"></button>
+        <button onClick={() => setModal(true)} className="w-10 h-10 rounded-lg p-2 bg-custom-blue myblur"></button>
         :
-        <button className="w-10 h-10 rounded-lg border bg-white/60" onClick={() => navigate(`/search/${typeId}`)}></button>
+        <button className="w-10 h-10 rounded-lg p-2 myblur bg-white/60" onClick={() => navigate(`/search/${typeId}`)}></button>
       }
       {modal && <ModalOrderInfo date={date} id={id} setModal={setModal} />}
     </>

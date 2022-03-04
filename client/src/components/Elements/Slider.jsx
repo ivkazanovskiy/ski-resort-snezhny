@@ -32,12 +32,13 @@ function Slider({ type }) {
     <div className="flex rounded-lg h-96 w-full overflow-x-auto snap-x snap-mandatory before:shrink-0 before:w-[30vw] after:shrink-0 after:w-[30vw]">
       {
         photos.length ?
-          photos.map(el =>
-            {
+          photos.map(el => {
+            return (
               relativePath
-              ? <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
-              : <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src="https://brilliant24.ru/files/cat/template_01.png" />
-            }
+                ?
+                <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src={`${relativePath}/${el}`} />
+                : <img key={el} alt="" className="shrink-0 snap-center h-full  w-full object-cover" src="https://brilliant24.ru/files/cat/template_01.png" />)
+          }
           )
           :
           <></>
