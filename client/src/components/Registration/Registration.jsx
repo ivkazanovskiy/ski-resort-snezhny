@@ -75,8 +75,8 @@ function Registration(props) {
   }
 
   return (
-    <form onSubmit={registration} className="flex justify-between p-2 w-full flex-col rounded-lg mb-2 mt-8 overflow-y-auto backdrop-blur-sm bg-white/60">
-      <div className="mb-2 flex flex-col">
+    <form onSubmit={registration} className="flex justify-between flex-col rounded-lg mx-2 mb-2 overflow-y-auto backdrop-blur-sm bg-white/60">
+      <div className="my-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="name" className="basis-1/3 edit-label text-center">Имя</label>
           <input name="name" type="text" id="name" className={`basis-2/3 edit-input border-[1px] ${isCorrectName ? "border-white/0" : "border-red-600"}`} ref={name} onChange={checkName} required />
@@ -161,7 +161,7 @@ function Registration(props) {
           </div>
           : <></>
       }
-      <button type="submit" className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Зарегистрироваться</button>
+      <button type="submit" className="p-2 mx-2 mb-2 myshadow text-white bg-custom-blue font-medium rounded-lg text-base text-center">Зарегистрироваться</button>
     </form>
   );
 }
