@@ -20,9 +20,14 @@ function UserScheduleCard({ order }) {
     }
   })
 
+  console.log(order)
+
   return (
     <li>
       <div className="card">
+        <div className="absolute  w-0 h-0">
+        <span className="material-icons text-3xl">{order.sport === 'Сноуборд' ? 'snowboarding' : 'downhill_skiing'}</span>
+        </div>
         {
           order['Trainer.photo']
             ? <img className="card-avatar" src={`/photos/${order['Trainer.photo']}`}></img>
