@@ -10,7 +10,6 @@ function AdminTimetable({ dates, type, grade }) {
   const typeArray = ['standart', 'comfort']
   const rooms = useRef()
   const orders = useRef()
-  console.log(formArray[type], typeArray[grade]);
 
   const { isLoading, isSuccess, data } = useQuery(`adminTableQuery-${type}-${grade}`, () => axios({
     url: '/api/orders',

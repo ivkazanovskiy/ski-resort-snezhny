@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import axios from 'axios';
@@ -14,8 +14,10 @@ import spin from '../css/svg/spin.svg';
 
 
 function CalendarTrainer(props) {
+
   const curYear = new Date().getFullYear();
   const curMonth = new Date().getMonth() + 1;
+
   const season = {
     prevYear: (curMonth < 6) ? curYear - 1 : curYear,
     nextYear: (curMonth < 6) ? curYear : curYear + 1,
@@ -31,6 +33,8 @@ function CalendarTrainer(props) {
     { id: 3, name: 'Март', days: 31 },
     { id: 4, name: 'Апрель', days: 30 },
   ]
+
+  const savedDay = useRef()
   const { id } = useSelector(state => state.userReducer)
   const [month, setMonth] = useState(months.find(month => month.id === curMonth))
 
@@ -44,6 +48,7 @@ function CalendarTrainer(props) {
   }
 
   useEffect(() => {
+    console.log('month refresh');
     saveRecords.reset()
   }, [month])
 
@@ -55,22 +60,24 @@ function CalendarTrainer(props) {
 
   const queryClient = useQueryClient()
   // FIXME: сделать только на выбранный месяц или оставить как есть на весь сезон
-  const allRecords = useQuery(`allRecords-id${id}`, () => axios({ url: '/api/trainerSchedule' }))
+  const allRecords = useQuery(`allRecords-id${id}-month${month.id}`, () => axios({ url: '/api/trainerSchedule' }))
 
   const saveRecords = useMutation(() => axios({
     url: '/api/trainerSchedule',
     method: 'PUT',
     data: { days: workingDays }
   })
-    , { onSuccess: () => queryClient.invalidateQueries('allRecords') })
+    , { onSuccess: () => queryClient.invalidateQueries(`allRecords-id${id}-month${month.id}`) })
+
+
 
   let workingDays;
-  let workingHours;
   if (allRecords.isSuccess) {
     workingDays = getDates(allRecords.data.data.schedule)
-    workingHours = allRecords.data.data.schedule.filter(record => record['User.name'])
   }
+
   const changeDays = (day) => {
+    savedDay.current = (day)
     if (saveRecords.isSuccess) { saveRecords.reset() }
 
     (workingDays.includes(day))
@@ -78,26 +85,31 @@ function CalendarTrainer(props) {
       workingDays = workingDays.filter(el => el !== day)
       :
       workingDays.push(day);
+
   }
+
+  // когда сбрасываем цвет кнопки по нажатию еще одного дня, меняется стейт
+  // поэтому первая кнопка которую нажали теряется из масссива
+  // фиксим это
+  if (savedDay.current && (saveRecords.isIdle)) { changeDays(savedDay.current) }
 
   if (allRecords.isLoading) return ""
 
   return (
     <div className="flex flex-col gap-2 self-stretch ">
-      {/* FIXME: сделать смещение, чтобы выходные были в конце */}
       <div className="grid grid-cols-7 gap-2 mx-2 myblur p-2 rounded-lg">
         {pseudoArr.map((el, ind) => <div key={`pseudo-${ind}`} className=""></div>)}
-        {allRecords.isLoading && <>Загрузка</>}
         {allRecords.isSuccess && daysArray.map((date) => <DayCalendarTrainerButton key={`${date}-btn`} date={date} changeDays={changeDays} isMarked={workingDays.includes(date)} />)}
       </div>
+
       <div className="mx-2 flex gap-2">
         <div className="p-2 text-center rounded-lg text-custom-navy myblur">
           {`${season.prevYear}/${season.nextYear}`}
         </div>
-        <ListboxMonth setMonth={setMonth} months={months} />
+        <ListboxMonth key={`month-${month.id}`} setMonth={setMonth} month={month} months={months} />
       </div>
       {(saveRecords.isIdle) && <button onClick={() => saveRecords.mutate()} className='basic-btn  h-12 mx-2 mb-2 myshadow bg-custom-blue'>Сохранить расписание</button>}
-      {(saveRecords.isLoading || allRecords.isLoading) && <button className='mx-2 mb-2 myshadow h-12  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex h-12'>
+      {(saveRecords.isLoading || allRecords.isLoading) && <button className='mx-2 mb-2 myshadow h-12  font-medium text-lg grow rounded-lg bg-custom-gray p-2 flex'>
         <img src={spin} className="w-8 top-1/2 animate-spin mx-auto text-white " alt="" /></button>}
       {(saveRecords.isSuccess) && <button className="basic-btn bg-custom-green h-12 mx-2 mb-2 myshadow">Расписание сохранено</button>}
     </div>

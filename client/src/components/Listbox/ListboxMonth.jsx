@@ -1,20 +1,14 @@
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 
 
-export default function ListboxMonth({ setMonth, months }) {
-  const curMonthNumber = new Date().getMonth() + 1;
-  const [selected, setSelected] = useState(months.find(month => month.id === curMonthNumber) || months[0])
-
-  useEffect(() => {
-    setMonth(selected)
-  }, [selected, setMonth])
-
+export default function ListboxMonth({ setMonth, month, months }) {
   return (
     <div className="grow">
-      <Listbox value={selected} onChange={setSelected}>
-        <div className="relative ">
+      {/* //TODO: проверить setMonth */}
 
+      <Listbox value={month} onChange={setMonth}>
+        <div className="relative ">
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -37,7 +31,7 @@ export default function ListboxMonth({ setMonth, months }) {
             </Listbox.Options>
           </Transition>
           <Listbox.Button className="relative p-2 rounded-lg w-full text-left myblur">
-            <span className="">{selected.name}</span>
+            <span className="">{month.name}</span>
           </Listbox.Button>
         </div>
       </Listbox>
