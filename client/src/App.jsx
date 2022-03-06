@@ -3,29 +3,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios'
 
-import Login from './components/Login/Login';
-import Admin from './components/Login/Admin';
-import Registration from './components/Registration/Registration';
-import Home from './components/Pages/Home';
+import AdminLogin from './Pages/AdminLogin';
+import RoomOrderList from './Pages/RoomOrderList';
+import CalendarAdmin from './Pages/CalendarAdmin';
+import CalendarTrainer from './Pages/CalendarTrainer';
+import EditAdminProfile from './Pages/EditAdminProfile';
+import EditTrainerProfile from './Pages/EditTrainerProfile';
+import EditUserProfile from './Pages/EditUserProfile';
+import EditRoomInfo from './Pages/EditRoomInfo';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import Map from './Pages/Map';
+import Registration from './Pages/Registration';
+import School from './Pages/School';
+import SearchRoomOrder from './Pages/SearchRoomOrder';
+import SearchRoomTypes from './Pages/SearchRoomTypes';
+import SkiPass from './Pages/SkiPass';
+import TrainerOrders from './Pages/TrainerOrders';
+import UserOrders from './Pages/UserOrders';
+
+
+import BottomMenu from './components/Navbars/BottomMenu';
 import TopMenu from './components/Navbars/TopMenu';
-import UserProfile from './components/Profiles/UserProfile';
-import AdminProfile from './components/Profiles/AdminProfile';
-import TrainerTimetable from './components/Cards/TrainerTimetable';
-import HouseSearchForm from './components/Forms/HouseSearchForm';
-import EditUserProfileCard from './components/Cards/EditUserProfileCard';
-import EditTrainerProfileCard from './components/Cards/EditTrainerProfileCard';
-import EditAdminProfileCard from './components/Cards/EditAdminProfileCard';
-import AdminOrdersForm from './components/Forms/AdminOrdersForm';
-import EditRoomCard from './components/Cards/EditRoomCard';
 
 import { checkUser } from './redux/sagaCreators/userSagaCreators';
-import RoomsSearch from './components/Search/RoomsSearch';
-import BottomMenu from './components/Navbars/BottomMenu';
-import SkiPassForm from './components/Forms/SkiPassForm';
 import { deleteUser } from './redux/actionCreators/userAC';
-import Map from './components/Pages/Map';
-import CalendarTrainer from './components/Pages/CalendarTrainer';
-import AddUserScheduleCard from './components/Cards/AddUserScheduleCard';
+
+
 
 function App() {
   // автоматически в запросе отправляем заголовок с токеном
@@ -58,43 +62,43 @@ function App() {
                 <Route path="/" key="home" element={<Home />} />,
                 <Route path="/map" key="map" element={<Map />} />,
                 <Route path="/login" key="login" element={<Login />} />,
-                <Route path="/admin" key="admin" element={<Admin />} />,
+                <Route path="/admin" key="adminLogin" element={<AdminLogin />} />,
                 <Route path="/registration" key="registration" element={<Registration />} />,
-                <Route path="/skipass" key="userSkiPass" element={<SkiPassForm />} />,
-                <Route path="/search" key="adminSearchRooms" element={<HouseSearchForm />} />,
-                <Route path="/search/:type" key="userSearchRooms" element={<RoomsSearch />} />,
-                <Route path="/school" key="school" element={<AddUserScheduleCard />} />,
-                <Route path="/profile" key="profile" element={<EditUserProfileCard />} />
+                <Route path="/skipass" key="skiPass" element={<SkiPass />} />,
+                <Route path="/search" key="searchRoomTypes" element={<SearchRoomTypes />} />,
+                <Route path="/search/:type" key="searchRoomOrder" element={<SearchRoomOrder />} />,
+                <Route path="/school" key="school" element={<School />} />,
+                <Route path="/profile" key="editUserProfile" element={<EditUserProfile />} />
               ]}
 
               {role === 'user' && [
                 <Route path="/" key="home" element={<Home />} />,
                 <Route path="/map" key="map" element={<Map />} />,
-                <Route path="/skipass" key="userSkiPass" element={<SkiPassForm />} />,
-                <Route path="/school" key="school" element={<AddUserScheduleCard />} />,
-                <Route path="/orders" key="userOrders" element={<UserProfile />} />,
-                <Route path="/search" key="adminSearchRooms" element={<HouseSearchForm />} />,
-                <Route path="/search/:type" key="userSearchRooms" element={<RoomsSearch />} />,
-                <Route path="/profile" key="profile" element={<EditUserProfileCard />} />
+                <Route path="/skipass" key="skiPass" element={<SkiPass />} />,
+                <Route path="/school" key="school" element={<School />} />,
+                <Route path="/orders" key="userOrders" element={<UserOrders />} />,
+                <Route path="/search" key="searchRoomTypes" element={<SearchRoomTypes />} />,
+                <Route path="/search/:type" key="searchRoomOrder" element={<SearchRoomOrder />} />,
+                <Route path="/profile" key="editUserProfile" element={<EditUserProfile />} />
               ]}
 
               {role === "admin" && [
                 <Route path="/" key="home" element={<Home />} />,
                 <Route path="/map" key="map" element={<Map />} />,
-                <Route path="/calendar" key="dminOrdersForm" element={<AdminOrdersForm />} />,
-                <Route path="/profile" key="editAdminProfile" element={<EditAdminProfileCard />} />,
-                <Route path="/orders" key="adminProfile" element={<AdminProfile />} />,
-                <Route path="/search" key="adminSearchRooms" element={<HouseSearchForm />} />,
-                <Route path="/search/:type" key="userSearchRooms" element={<RoomsSearch />} />,
-                <Route path="/edit/:type" key="editRoomCard" element={<EditRoomCard />} />,
+                <Route path="/calendar" key="calendarAdmin" element={<CalendarAdmin />} />,
+                <Route path="/orders" key="adminOrders" element={<RoomOrderList />} />,
+                <Route path="/search" key="searchRoomTypes" element={<SearchRoomTypes />} />,
+                <Route path="/search/:type" key="searchRoomOrder" element={<SearchRoomOrder />} />,
+                <Route path="/edit/:type" key="editRoomInfo" element={<EditRoomInfo />} />,
+                <Route path="/profile" key="editAdminProfile" element={<EditAdminProfile />} />,
               ]}
 
               {role === "trainer" && [
                 <Route path="/" key="home" element={<Home />} />,
                 <Route path="/map" key="map" element={<Map />} />,
-                <Route path="/profile" key="editTrainerProfile" element={<EditTrainerProfileCard />} />,
-                <Route path="/calendar" key="trainerCalendar" element={<CalendarTrainer />} />,
-                <Route path="/orders" key="trainerProfile" element={<TrainerTimetable />} />
+                <Route path="/profile" key="editTrainerProfile" element={<EditTrainerProfile />} />,
+                <Route path="/calendar" key="calendarTrainer" element={<CalendarTrainer />} />,
+                <Route path="/orders" key="trainerOrders" element={<TrainerOrders />} />
               ]}
 
             </Routes>
