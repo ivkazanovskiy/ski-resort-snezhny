@@ -22,7 +22,6 @@ function* workerLogUser(action) {
     navigate('/')
 
   } catch (err) {
-    console.log(err);
     const { status } = err.response
 
     // TODO: переделать вывод информации с алерта на текст около кнопки 
@@ -116,7 +115,7 @@ function* workerCheckUser(action) {
     const { info, role } = response.data
     yield put(initUser(info, role))
   } catch (err) {
-    console.log(err)
+    console.log(err.response.data.error);
   }
 }
 
