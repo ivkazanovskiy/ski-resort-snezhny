@@ -22,22 +22,24 @@ function TrainerTimetable(props) {
   const todayStringDay = addZero(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate())
   const [chosenDate, setChosenDate] = useState(todayStringDay)
 
+
+
   return (
-    <div className="rounded-lg bg-white/60 p-2 w-full overflow-y-auto">
+    <>
       {allRecords.isLoading && <>Загрузка</>}
       {allRecords.isSuccess &&
         <>
-          <div className="w-full">
-            <ul className="flex flex-col gap-2">
-              {workingHours.filter(order => order.date === chosenDate).map(info => <TrainerCustomerCard key={`${info.date}-${info.startTime}`} info={info} />)}
-            </ul>
-          </div>
-          <div className="flex justify-center mt-2 w-full gap-2">
-            <input type="date" className="w-1/2 date-input shadow-current-gray shadow-xl" ref={dateRef} onChange={() => setChosenDate(dateRef.current.value)} defaultValue={todayStringDay} />
-          </div>
+
+          <ul className="flex flex-col h-full self-stretch mb-2 rounded-lg mt-2 grow gap-2 overflow-y-auto">
+            {workingHours.filter(order => order.date === chosenDate).map(info => <TrainerCustomerCard key={`${info.date}-${info.startTime}`} info={info} />)}
+          </ul>
+
+
+          <input type="date" className="date-input p-2 mx-2 mb-2 myshadow" ref={dateRef} onChange={() => setChosenDate(dateRef.current.value)} defaultValue={todayStringDay} />
+
 
         </>}
-    </div>
+    </>
   );
 }
 

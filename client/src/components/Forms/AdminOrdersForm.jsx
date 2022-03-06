@@ -39,7 +39,7 @@ function AdminOrdersForm(props) {
   return (
     <>
       <AdminTableCard dates={arrayDate.current} gap={gap} type={type} grade={grade} />
-      <div className="w-full mt-2 mb-2 rounded-lg bg-white/60">
+      <div className="self-stretch myblur mx-2 mb-2 rounded-lg bg-white/60">
         {type !== 2 &&
           <Tab.Group onChange={setGrade} defaultIndex={grade}>
             <Tab.List className="flex gap-2 p-[3px]  mb-0">
@@ -94,9 +94,9 @@ function AdminOrdersForm(props) {
         </Tab.Group>
       </div>
 
-      <div className="flex w-full gap-2">
-        <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow" />
-        <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow" />
+      <div className="flex self-stretch mx-2 gap-2 mb-2">
+        <input type="date" id="start" defaultValue={startDate} ref={startRef} min={toStringDate(new Date())} onChange={() => setStartDate(startRef.current.value)} className="date-input grow myblur" />
+        <input type="date" id="finish" defaultValue={finishDate} min={nextStringDate(startDate, 1)} ref={finishRef} onChange={() => setGap(countGapValue(startDate, (finishRef.current.value)))} className="date-input grow myblur" />
       </div>
 
     </>

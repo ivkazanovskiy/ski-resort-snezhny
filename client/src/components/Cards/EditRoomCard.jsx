@@ -103,29 +103,29 @@ function EditRoomCard(props) {
   };
 
   return (
-    <div className="bg-white/60 rounded-lg overflow-y-auto">
+    <div className="myblur self-stretch mx-2 mb-2 overflow-y-auto">
       {
         info &&
-        <div className="w-full mb-2 flex flex-col">
-          <div className="w-full flex flex-row p-2">
+        <div className="w-full flex flex-col">
+          <div className="w-full flex flex-row mb-2">
             <label htmlFor="name" className="basis-1/4 edit-label text-center">Заголовок</label>
             <input name="name" type="text" id="name" className="basis-3/4 edit-input text-sm" defaultValue={info.title} ref={titleRef} required />
           </div>
-          <div className="w-full flex flex-row p-2">
+          <div className="w-full flex flex-row mb-2">
             <label htmlFor="description" className="basis-1/4 edit-label text-center">Описание</label>
             <textarea name="description" type="text" id="description" className="basis-3/4 edit-input text-sm h-24" defaultValue={info.description} ref={descriptionRef} required />
           </div>
-          <div className="w-full flex flex-row p-2">
+          <div className="w-full flex flex-row mb-2">
             <label htmlFor="weekdayCost" className="basis-1/4 edit-label text-center">Будни</label>
             <input name="weekdayCost" type="number" id="weekdayCost" className="basis-3/4 edit-input text-sm" defaultValue={info.weekdayCost} ref={weekdayCostRef} required />
           </div>
-          <div className="w-full flex flex-row p-2">
+          <div className="w-full flex flex-row mb-2">
             <label htmlFor="weekendCost" className="basis-1/4 edit-label text-center">Выходные</label>
             <input name="weekendCost" type="number" id="weekendCost" className="basis-3/4 edit-input text-sm" defaultValue={info.weekendCost} ref={weekendCostRef} required />
           </div>
-          <div className="w-full flex flex-row p-2">
+          <div className="w-full flex flex-row ">
             <label htmlFor="photo" className="basis-1/4 edit-label text-center">Фото</label>
-            <div className="basis-3/4 edit-input text-sm rounded-lg w-full p-2 flex flex-col">
+            <div className="basis-3/4 edit-input text-sm rounded-lg w-full flex flex-col">
               <div className="grid grid-cols-2 gap-2">
                 {
                   photos.length ?
@@ -152,10 +152,10 @@ function EditRoomCard(props) {
                 }
               </div>
               <input onChange={(event) => setImage(event.target.files[0])} name="image" type="file" id="image" className="col file-button text-sm"></input>
-              <button className="py-2 text-white bg-custom-blue/70 font-medium rounded-lg w-full text-center" onClick={uploadImage}>Добавить</button>
+              <button className="py-2  text-white bg-custom-blue font-medium rounded-lg w-full text-center" onClick={uploadImage}>Добавить</button>
             </div>
           </div>
-          <button onClick={() => save.mutate()} className="p-2 m-2 text-white text-sm bg-custom-blue font-medium rounded-lg text-center">Сохранить изменения</button>
+          <button onClick={() => save.mutate()} className="p-2 m-2  myshadow text-white text-sm bg-custom-blue font-medium rounded-lg text-center">Сохранить изменения</button>
         </div>
       }
     </div>

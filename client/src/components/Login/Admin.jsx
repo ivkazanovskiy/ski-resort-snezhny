@@ -41,8 +41,8 @@ function Login(props) {
 
 
   return (
-    <form onSubmit={login} className="card flex-col mb-2 mt-8">
-      <div className="mb-2 flex flex-col">
+    <form onSubmit={login} className="flex justify-between self-stretch mx-2 flex-col rounded-lg mb-2 mt-8 overflow-y-auto backdrop-blur-sm bg-white/60">
+      <div className="my-2 flex flex-col">
         <div className="flex flex-row justify-around justify-items-center items-center">
           <label htmlFor="email" className="basis-2/6 edit-label text-center">Email</label>
           <input ref={email} onChange={checkEmail} name="email" type="email" id="email" className="basis-4/6 edit-input border-[1px] border-white/0" required />
@@ -54,7 +54,7 @@ function Login(props) {
           <input ref={password} onChange={checkPassword} name="password" type="password" id="password" className={`basis-4/6 edit-input border-[1px] border-white/0`} required />
         </div>
       </div>
-      <button type="submit" className="px-4 py-2 my-2 text-white bg-custom-blue font-medium rounded-lg text-base w-full text-center">Войти</button>
+      <button type="submit" className="p-2 mx-2 mb-2 text-white bg-custom-blue font-medium rounded-lg text-base myshadow text-center">Войти</button>
     </form>
   );
 }

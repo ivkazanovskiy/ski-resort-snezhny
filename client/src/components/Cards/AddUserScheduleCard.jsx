@@ -61,7 +61,7 @@ function AddUserScheduleCard() {
   if (!role) return (<UnauthorizedCard />)
 
   return (
-    <div className="w-full">
+    <div className="self-stretch mx-2">
 
       {allTrainersQuery.isLoading && 'Загрузка'}
       {allTrainersQuery.isSuccess && (
@@ -70,7 +70,7 @@ function AddUserScheduleCard() {
           <NewScheduleCard allTrainers={allTrainers} date={date} setHours={setHours} selectedTrainer={selectedTrainer} setSelectedTrainer={setSelectedTrainer} />
           // < ListboxTrainers freeTrainers={freeTrainers} />
           :
-          <div className="p-2 text-base rounded-lg w-full bg-white/60">Свободных инструкторов нет</div>
+          <div className="p-2 text-base myblur">Свободных инструкторов нет</div>
       )}
       <Tab.Group onChange={setSportInd} defaultIndex={sportInd}>
         <Tab.List className="slider-list mt-2">
@@ -92,9 +92,9 @@ function AddUserScheduleCard() {
           }>Горные лыжи</Tab>
         </Tab.List>
       </Tab.Group>
-      <div className="flex mt-2 w-full gap-2">
-        <input type="date" className="w-1/2 date-input" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
-        <button onClick={() => saveSchedule.mutate()} className="basic-btn  w-1/2">Записаться</button>
+      <div className="flex mt-2 gap-2 mb-2">
+        <input type="date" className="w-1/2 date-input myblur" ref={dateRef} onChange={() => setDate(dateRef.current.value)} defaultValue={date} />
+        <button onClick={() => saveSchedule.mutate()} className="basic-btn  w-1/2 myshadow">Записаться</button>
       </div>
     </div>
   )

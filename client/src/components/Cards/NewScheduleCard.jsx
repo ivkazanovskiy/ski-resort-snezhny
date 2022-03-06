@@ -41,18 +41,29 @@ function NewScheduleCard({ allTrainers, setHours, selectedTrainer, setSelectedTr
 
   return (
 
-    <div className="w-ful">
-      <div className="w-full grid grid-cols-4 gap-2 p-2">
-        {
-          allTrainers
-            .filter(el => el.id === selectedTrainer.id && !el['Schedules.userId'])
-            .sort((a, b) => +a['Schedules.startTime'] - +b['Schedules.startTime'])
-            .map(el => <PeriodButton key={`${el.id}${el['Schedules.startTime']}`} time={el['Schedules.startTime']} changeHours={setHours} getTrainersName={getTrainersName}></PeriodButton>)
-        }
-      </div>
+    <div className="">
+      {selectedTrainer.name &&
+        (allTrainers
+        .filter(el => el.id === selectedTrainer.id && !el['Schedules.userId'])
+          .sort((a, b) => +a['Schedules.startTime'] - +b['Schedules.startTime'])
+          .length > 0 ?
+          <div className="w-full grid grid-cols-4 gap-2 p-2 myblur mb-2">
+            {
+              allTrainers
+                .filter(el => el.id === selectedTrainer.id && !el['Schedules.userId'])
+                .sort((a, b) => +a['Schedules.startTime'] - +b['Schedules.startTime'])
+                .map(el => <PeriodButton key={`${el.id}${el['Schedules.startTime']}`} time={el['Schedules.startTime']} changeHours={setHours} getTrainersName={getTrainersName}></PeriodButton>)
+            }
+
+          </div>
+          :
+          <div className="myblur p-2 mb-2">Свободных часов нет</div>
+        )
+      }
+
       <Listbox defaultValue={selectedTrainer} onChange={setSelectedTrainer}>
-        <div className="relative">
-          <Listbox.Button className="relative p-2 rounded-lg w-full text-left bg-white/60">
+        <div className="relative myblur">
+          <Listbox.Button className="relative p-2 rounded-lg w-full text-left">
             <span className="block truncate">{`${selectedTrainer.name || 'Выберите инструктора:'} ${selectedTrainer.surname || ''}`}</span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             </span>
@@ -63,14 +74,14 @@ function NewScheduleCard({ allTrainers, setHours, selectedTrainer, setSelectedTr
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute bottom-10 bg-white/60 w-full py-1 mt-1 overflow-auto rounded-lg max-h-60">
+            <Listbox.Options className="absolute bottom-10 w-full bg-white myshadow  overflow-auto rounded-lg max-h-60">
               {
                 currentTrainers.length ?
                   currentTrainers.map((person, personIdx) => (
                     <Listbox.Option
                       key={personIdx}
                       className={({ active }) =>
-                        `cursor-default select-none relative py-2 pl-10 pr-4 ${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'}`
+                        `cursor-default select-none relative p-2`
                       }
                       value={person}
                     >

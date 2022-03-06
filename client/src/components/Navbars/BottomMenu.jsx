@@ -7,9 +7,40 @@ function BottomMenu(props) {
   const { role } = useSelector(state => state.userReducer)
 
   return (
-    <nav className="bg-white/60 rounded-lg h-20 flex justify-around">
+    <nav className="myblur mx-2 mb-2 h-20 flex justify-around">
       {
-        (role === 'user' || role === undefined)
+        role === undefined
+        &&
+        [
+          <NavLink key={"userHome"} to="/" className="botmenu-btn">
+            <span className="material-icons text-current-navy text-4xl">
+              home
+            </span>
+          </NavLink>,
+          <NavLink key={"userRooms"} to="/search" className="botmenu-btn">
+            <span className="material-icons text-current-navy text-4xl">
+              hotel
+            </span>
+          </NavLink>,
+          <NavLink key={"userSkipass"} to="/skipass" className="botmenu-btn">
+            <span className="material-icons text-current-navy text-4xl">
+              style
+            </span>
+          </NavLink>,
+          <NavLink key={"userSchool"} to="/school" className="botmenu-btn">
+            <span className="material-icons text-current-navy text-4xl">
+              downhill_skiing
+            </span>
+          </NavLink>,
+          <NavLink key={"userProfile"} to="/profile" className="botmenu-btn">
+            <span className="material-icons text-current-navy text-4xl">
+              assignment_ind
+            </span>
+          </NavLink>,
+        ]
+      }
+      {
+        role === 'user'
         &&
         [
           <NavLink key={"userHome"} to="/" className="botmenu-btn">

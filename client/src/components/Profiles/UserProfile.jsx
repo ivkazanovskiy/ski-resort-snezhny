@@ -23,19 +23,19 @@ function UserProfile(props) {
   if (!role) return (<UnauthorizedCard />);
 
   return (
-    <div className="w-full">
+    <>
       <Tab.Group>
-        <Tab.Panels className="mt-2 rounded-lg">
+        <Tab.Panels className="mt-2 rounded-lg overflow-y-auto self-stretch">
           <Tab.Panel className={classNames(
             '',
           )}>
 
             {orders &&
-              <ul className="grid grid-col gap-2">
+              <ul className="flex flex-col gap-2 h-fit  ">
                 {orders.length > 0 ?
                   orders.map(order => <UserScheduleCard orders={orders} key={`${order.date}-${order.startTime}-${order['Trainer.id']}`} order={order}></UserScheduleCard>)
                   :
-                  <li className="w-full p-2 rounded-lg text-lg justify-self-center bg-white/80 text-center">Записи к инструктору отсутствуют</li>
+                  <li className="mx-2 p-2 rounded-lg text-lg justify-self-center bg-white/80 text-center">Записи к инструктору отсутствуют</li>
 
                 }
               </ul>
@@ -47,7 +47,7 @@ function UserProfile(props) {
             <AllOrdersCards />
           </Tab.Panel>
         </Tab.Panels>
-        <Tab.List className="slider-list mt-2">
+        <Tab.List className="slider-list m-2 self-stretch">
           <Tab
             className={({ selected }) =>
               classNames(
@@ -69,7 +69,7 @@ function UserProfile(props) {
             } >Бронирования</Tab>
         </Tab.List>
       </Tab.Group>
-    </div>
+    </>
   )
 }
 

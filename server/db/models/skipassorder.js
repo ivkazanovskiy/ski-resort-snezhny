@@ -23,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     skiPass: {
       type: DataTypes.INTEGER,
-      references: {
-        model: 'Users',
-        key: 'skiPass',
-      },
     },
     date: DataTypes.TEXT,
   }, {
