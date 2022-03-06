@@ -27,8 +27,12 @@
     @apply shadow-custom-navy shadow-md
   }
 
- .myblur{
+ /* .myblur{
    @apply backdrop-blur-sm bg-white/60 myshadow rounded-lg
+ } */
+
+  .myblur{
+   @apply bg-white/60 myshadow rounded-lg
  }
 
   .date-input{

@@ -2,8 +2,8 @@ import React from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 
-import Login from '../Login/Login';
-import Registration from '../Registration/Registration';
+import Login from '../../Pages/Login';
+import Registration from '../../Pages/Registration';
 
 function UnauthorizedCard(props) {
 
