@@ -1,0 +1,22 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm i && npm run build",
+    "seed": "cd server && npm i && sequelize db:seed:all",
+    "start": "cd server && npm i && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivkazanovskiy/ski-resort-snezhny.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivkazanovskiy/ski-resort-snezhny/issues"
+  },
+  "homepage": "https://github.com/ivkazanovskiy/ski-resort-snezhny#readme"
+}
