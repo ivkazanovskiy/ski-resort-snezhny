@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "sequelize db:migrate && node app.js",
+    "seed": "npx sequelize db:seed:all && npm start",
     "drop": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && npm run dev"
   },
   "author": "",
