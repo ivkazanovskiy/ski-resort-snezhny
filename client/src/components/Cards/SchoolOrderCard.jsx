@@ -22,9 +22,9 @@ function SchoolOrderCard({ order }) {
 
   return (
     <li>
-      <div className="card">
+      <div className="card relative">
         <div className="absolute  w-0 h-0">
-        <span className="material-icons text-3xl">{order.sport === 'Сноуборд' ? 'snowboarding' : 'downhill_skiing'}</span>
+          <span className="material-icons text-3xl">{order.sport === 'Сноуборд' ? 'snowboarding' : 'downhill_skiing'}</span>
         </div>
         {
           order['Trainer.photo']
