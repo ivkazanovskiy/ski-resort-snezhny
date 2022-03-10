@@ -6,7 +6,7 @@
 Мобильное web-приложение дает возможность:
 <ul>
 <li>
-<small align="justify">оплатить ski-pass (пользователь);</small>
+<p align="justify">оплатить ski-pass (пользователь);</p>
 <img src="./server/src/screenshots/ski-pass.png" height="400" width="auto"/>
 </li>
 <li>
