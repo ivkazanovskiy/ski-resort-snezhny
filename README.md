@@ -2,7 +2,7 @@
 <div>
 <img src="./server/src/screenshots/main.png" height="400" width="auto"/>
 <h3>Описание</h3>
-<p align="justify">
+<p align="justify" font-size="2">
 Мобильное web-приложение дает возможность:
 <ul>
 <li>
