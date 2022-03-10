@@ -19,7 +19,7 @@ function SearchRoomTypes(props) {
   }, []);
 
   return (
-    <ul className="w-full flex flex-col-reverse gap-2 mb-2">
+    <ul className="w-full h-full my-2 overflow-y-auto rounded-lg flex flex-col-reverse gap-2">
       {allTypes.map(el => <RoomTypeCard key={`${el.id}-room`} type={el}></RoomTypeCard>)}
     </ul>
   );

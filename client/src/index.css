@@ -20,7 +20,7 @@
 @layer components{
 
   #root{
-    @apply h-screen w-full relative flex flex-col  bg-main bg-bottom bg-cover text-custom-navy
+    @apply h-screen w-full relative flex flex-col  bg-main bg-bottom bg-cover text-custom-navy max-w-[720px]
   }
 
   .myshadow{
