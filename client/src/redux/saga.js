@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
 import { CHECK_USER, LOG_USER, REG_USER, UPDATE_USER } from './actionTypes/userAT'
 import axios from 'axios'
-import { editUser, initUser } from './actionCreators/userAC'
+import { deleteUser, editUser, initUser } from './actionCreators/userAC'
 
 
 function* workerLogUser(action) {
@@ -61,7 +61,6 @@ function* workerRegUser(action) {
       case 400:
         return window.alert('Некорректеные данные')
       case 501:
-
         if (data.message === 'changeEmail') return window.alert('E-mail уже используется')
         return window.alert('Номер телефона уже используется')
 
@@ -97,6 +96,7 @@ function* workerUpdateUser(action) {
       case 501:
 
         if (data.message === 'changeEmail') return window.alert('E-mail уже используется')
+        if (data.message === 'changeSkiPass') return window.alert('Ski-Pass уже используется')
         return window.alert('Номер телефона уже используется')
 
       default:
@@ -116,6 +116,7 @@ function* workerCheckUser(action) {
     yield put(initUser(info, role))
   } catch (err) {
     console.log(err.response.data.error);
+    yield put(deleteUser())
   }
 }
 

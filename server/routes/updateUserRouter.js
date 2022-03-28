@@ -15,6 +15,8 @@ async function update(person, req, res) {
         return res.status(501).json({ message: 'changePhone' });
       case 'email':
         return res.status(501).json({ message: 'changeEmail' });
+      case 'skiPass':
+        return res.status(501).json({ message: 'changeSkiPass' });
       default:
         return res.status(500).json({ error: err.message });
     }

@@ -71,8 +71,8 @@ function SkiPassForm(props) {
 
   if (!skiPass) return (
     <>
-      <div className="w-3/4 mt-6 backdrop-blur-sm bg-white/60">Для пополнения Ski-Pass необходимо купить его в кассе Горнолыжного курорта Снежный и добавить в личном кабинете в разделе "Информация"</div>
-      <Link to="/profile" type="submit" className="mt-2 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm  px-5 py-2.5 text-center ">Личный кабинет</Link>
+      <div className=" mx-2 p-2 myblur font-medium text-center">Для пополнения Ski-Pass необходимо купить его в кассе Горнолыжного курорта Снежный и добавить в личном кабинете в разделе "Информация"</div>
+      <Link to="/profile" type="submit" className="basic-btn self-stretch text-center myshadow m-2">Личный кабинет</Link>
     </>
   )
 
